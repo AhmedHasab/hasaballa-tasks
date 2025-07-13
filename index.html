@@ -43,15 +43,12 @@
     margin-left: 30px;
   }
 </style>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
-    checkboxes.forEach((checkbox, index) => {
-  <!-- Firebase SDK -->
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
+console.log("✅ Firebase connected & DOM ready");
   const firebaseConfig = {
     apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
     authDomain: "hasaballa-ai.firebaseapp.com",
@@ -93,7 +90,6 @@
   });
 </script>
 
-</script>
 </head>
 <body>
 
