@@ -69,12 +69,12 @@ console.log("✅ Firebase connected & DOM ready");
     firebase.database().ref("tasks").once("value").then(snapshot => {
       const data = snapshot.val() || {};
       checkboxes.forEach((checkbox, index) => {
-        const key = "task_" + index;
+       const key = checkbox.getAttribute("data-id");
 
-        if (data[key] === true) {
-          checkbox.checked = true;
-          checkbox.parentElement.classList.add("completed");
-        }
+       if (data[key] === true) {
+  checkbox.checked = true;
+  checkbox.parentElement.classList.add("completed");  // ✅ ضروري علشان الخط
+}
 
         checkbox.addEventListener("change", () => {
           const checked = checkbox.checked;
