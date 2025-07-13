@@ -64,6 +64,51 @@
     });
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    // تحميل الحالة من Firebase
+    firebase.database().ref("tasks").once("value").then(snapshot => {
+      const data = snapshot.val() || {};
+      checkboxes.forEach((checkbox, index) => {
+        const key = "task_" + index;
+        if (data[key] === true) {
+          checkbox.checked = true;
+          checkbox.parentElement.classList.add("completed");
+        }
+        checkbox.addEventListener("change", () => {
+          const checked = checkbox.checked;
+          firebase.database().ref("tasks/" + key).set(checked);
+          if (checked) {
+            checkbox.parentElement.classList.add("completed");
+          } else {
+            checkbox.parentElement.classList.remove("completed");
+          }
+        });
+      });
+    });
+  });
+</script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
+    authDomain: "hasaballa-ai.firebaseapp.com",
+    databaseURL: "https://hasaballa-ai-default-rtdb.firebaseio.com",
+    projectId: "hasaballa-ai",
+    storageBucket: "hasaballa-ai.appspot.com",
+    messagingSenderId: "786272460405",
+    appId: "1:786272460405:web:b2bc8cdba12407834d623c",
+    measurementId: "G-GVY2TS8MW4"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 </head>
 <body>
 
@@ -177,7 +222,33 @@ Best of luck with the implementation — and many thanks in advance for your gre
 <p style="font-size: 18px; color: #555; margin-top: 20px;">
 — Prepared by: Ahmed Hasaballa
 </p>
-<script src="sync.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    // تحميل الحالة من Firebase
+    firebase.database().ref("tasks").once("value").then(snapshot => {
+      const data = snapshot.val() || {};
+      checkboxes.forEach((checkbox, index) => {
+        const key = "task_" + index;
+        if (data[key] === true) {
+          checkbox.checked = true;
+          checkbox.parentElement.classList.add("completed");
+        }
+        checkbox.addEventListener("change", () => {
+          const checked = checkbox.checked;
+          firebase.database().ref("tasks/" + key).set(checked);
+          if (checked) {
+            checkbox.parentElement.classList.add("completed");
+          } else {
+            checkbox.parentElement.classList.remove("completed");
+          }
+        });
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
