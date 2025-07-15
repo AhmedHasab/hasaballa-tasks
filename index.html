@@ -125,27 +125,25 @@ Quick explanation: it can respond with AI just like ChatGPT or Groq, and in all 
 
 > 🧠 The system must analyze the written script (inside the Chat Window) and decide automatically whether to use the reference voice or not — based on the text.<br>
 
-🎙️ There are two possible voice usage modes:<br>
+🎙️ There are two possible voice usage modes:<br></div>
 
-1. Narration Mode (e.g., storytelling, biography, documentary):<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-e-1"> 4-E-1 🗣️ Narration Mode (e.g., storytelling, biography, documentary):<br>
 
 Only one voice is used (either cloned or generated).<br>
 
 This voice narrates the entire script — no character-specific dialogues.<br>
 
-The system should ignore all reference voices, even if reference images exist.<br>
+The system should ignore all reference voices, even if reference images exist.<br></div>
 
-
-2. Dialogue Mode (e.g., podcast, film, multi-character scenes):<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-e-2"> 4-E-2 👥 Dialogue Mode (e.g., podcast, film, multi-character scenes):<br>
 
 Multiple reference images are used, each linked to a unique reference voice.
 <br>
 Each character/image will “speak” using its assigned voice.<br>
 
-Voice and image must always match (as a Character Pack).<br>
+Voice and image must always match (as a Character Pack).<br></div>   
 
-
-🤖 The system must decide automatically, based on the text:<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-e-3"> 4-E-3 🤖 The system must decide automatically, based on the text:<br>
 
 Example 1: "Soad: Why did I tell all this?" → use Soad’s voice.<br>
 
@@ -155,21 +153,67 @@ Example 3: "The story is narrated entirely by Soad" → use only Soad’s voice,
 ⚙️ Integration:<br>
 Works directly in the Chat Window (during script writing).<br>
 Fully integrates with the Smart Director (automatic & manual modes).<br>
-The system must intelligently select or skip voice usage depending on text meaning. .</div>
-<div class="task subtask"><input type="checkbox"data-id="task4-f"> 4-F Skip This Step Button<br> 
-🆕 Add a clear "⏭️ Skip this step" button to this stage. <br> 
+The system must intelligently select or skip voice usage depending on text meaning.<br></div>  
+
+
+<div class="task subtask"><input type="checkbox"data-id="task4-f"> 4-F 🧠 Lip Sync Activation Logic (via Chat Script Analysis) <br>
+> The Chat Window (Hasaballa GPT) is the primary controller for deciding when and how lip sync is triggered.<br>
+It analyzes the written script and automatically assigns isTalking: true to the correct reference image — based on scene type and text context.<br>
+✅ Until no confusion between speaking and silent characters.<br>
+✅ And there will be natural results in storytelling, podcasts, and films.<br>
+🔄 The system must handle 3 main cases:👇<br></div>
+
+
+
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-1"> 4-F-1 🗣️  Narration Mode.<br>
+🎙️When A single character (e.g., Soad) narrates the story.
+Their lips should move in sync with the narration audio.<br>
+
+Her image = isTalking: true. <br>
+
+All other characters appear visually only, with isTalking: false. <br>
+
+No lip sync for background characters during narration.</div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-2"> 4-F-2 👥 Dialogue Mode (Multi-character conversation).<br>
+🎬 When the script includes multiple characters speaking:<br>
+Each speaking character must have lip-sync based on their lines.<br>
+🧠 Lip sync must only apply to the currently speaking character.<br>
+
+Other characters should remain visually neutral (no lip movement) until their turn.<br></div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-3"> 4-F-3 👪 Mixed Mode (Narration + Side Dialogue).<br>
+
+📝In some scenes, While narration is ongoing, a short side conversation may happen.<br>
+
+During that moment, narration lip sync must pause.<br>
+
+👄Only in the side dialogue speaker’s lips should move.<br>
+
+If it’s the narrator (e.g., Soad) having the side talk, her lips move for the actual spoken line (in the side Dialogue), not the narration.<br>
+
+
+> 📌 After the dialogue ends, narration lip sync resumes.</div>
+
+
+
+
+
+
+<div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G 🔽 Skip This Step Button<br> 
+Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
 - 🚫 Ignore this step during video generation.<br> 
 - ✅ Continue smoothly to the next stage.<br> 
 - ⚠️ Not show any error or interruption in the process.<br> 
 🧠 The Smart Director must later adjust the final timeline accordingly..</div>
-<div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G ⚙️ Works both automatically and manually with Smart Director (from chat window to final video).</div>
+<div class="task subtask"><input type="checkbox"data-id="task4-h"> 4-H ⚙️ Works both automatically and manually with Smart Director (from chat window to final video).</div>
 
-<div class="task"><input type="checkbox"data-id="task5"> 5️⃣ Ultra-realistic image generation 🖼️.
+<div class="task"><input type="checkbox"data-id="task5"> 5️⃣ Ultra-realistic image generation 🖼️.<br>
 (Supported formats: 16:9, 9:16, 1:1)</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-a"> 5-A 🎥 Cinematic lighting.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B 👥 Reference images (for multiple characters, minimum of 5 — all can appear in one video, so identity consistency is critical).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task5-b-a"> 5-B-a 🎙️Each reference image should ideally be linked to a unique reference voice, forming a Character Pack (Image + Voice).<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task5-b-1"> 5-B-1 🎙️Each reference image should ideally be linked to a unique reference voice, forming a Character Pack (Image + Voice).<br>
 This pairing enables the system to use the correct voice for each image during video generation (especially in Dialogue Mode).<br>
 
 🧠 The decision to use the voice or not is made during script writing inside the Chat Window — based on the context and structure of the text (see Task 4-E).<br>
@@ -179,8 +223,8 @@ The Smart Director simply follows this logic during generation (automatic or man
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E 📂 Dropdown list for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F 🏆 Minimum visual quality must match examples in the above video links.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-g"> 5-G 📝 100% correct Arabic text in generated images.</div>
-<div class="task subtask"><input type="checkbox"data-id="task5-h"> 5-H Skip This Step Button<br> 
-🆕 Add a clear "⏭️ Skip this step" button to this stage. <br> 
+<div class="task subtask"><input type="checkbox"data-id="task5-h"> 5-H 🔽 Skip This Step Button<br> 
+Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
 - 🚫 Ignore this step during video generation.<br> 
 - ✅ Continue smoothly to the next stage.<br> 
@@ -192,8 +236,83 @@ The Smart Director simply follows this logic during generation (automatic or man
 <div class="task subtask"><input type="checkbox"data-id="task6-a"> 6-A 🧍‍♀️ Full-body animation (eyes, facial expressions, shoulders, hands, legs, etc.).</div>
 <div class="task subtask"><input type="checkbox"data-id="task6-b"> 6-B 🏙️ Background motion too (e.g. people walking in streets, trees moving, curtains swaying, birds, animals, kids playing).</div>
 <div class="task subtask"><input type="checkbox"data-id="task6-c"> 6-C 👄 Lip sync must be as good as DreamFace or better than the sample reference videos.</div>
-<div class="task subtask"><input type="checkbox"data-id="task6-d"> 6-D Skip This Step Button<br> 
-🆕 Add a clear "⏭️ Skip this step" button to this stage. <br> 
+
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-1"> 6-C-1 🎙️ Narration Mode (Single Character Speaking)<br>
+
+🧠 When one character (e.g., Soad) narrates the entire video:<br>
+
+Their lips should move in sync with the narration audio.<br>
+
+All other characters must stay silent (no talking animation).<br>
+
+📌 Other characters may appear visually, but must not animate lips.<br></div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-2"> 6-C-2 🗣️ Dialogue Mode (Multiple Characters Talking)<br>
+
+🎬 When the script includes multiple characters speaking:<br>
+
+Each speaking character must have lip-sync based on their lines.<br>
+
+🧠 Lip sync must only apply to the currently speaking character.<br>
+
+Other characters should remain visually neutral (no lip movement).<br>
+
+📌 Example:<br>
+Soad: "I’m tired of all this..."<br>
+Rushdy: "You need to rest."<br>
+
+
+💬 (This dialogue will appear in Arabic dialects — English is just for explanation.)<br></div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-3"> 6-C-3 🔄 Mixed Mode (Narration + Occasional Dialogue)<br>
+
+🧠 In some scenes, narration is used generally, but a short real-time dialogue occurs between characters:<br>
+
+⚠️ This dialogue is side-conversation, not part of the main narration.<br>
+
+👄 During this part:<br>
+
+Pause narration-based lip sync.<br>
+
+Activate real lip sync using the reference voice of the speaking character.<br>
+
+Resume narration lip sync after the side dialogue ends.<br>
+
+
+📌 Example:<br>
+(Scene 8: Soad speaks directly to Rushdy)<br>
+Soad: "I’m tired of all this..." (This line will be lip-synced to Soad’s voice)<br>
+
+💬 (This represents a visual moment where characters talk to each other while narration continues separately.)<br></div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-4"> 6-C-4 ⚙️ Technical Flags per Image<br>
+
+Each reference image must carry a dynamic control flag:<br>
+
+isTalking: true / false<br>
+
+Only characters marked as isTalking: true should have animated lips.<br>
+
+Characters without this flag (or set to false) must remain neutral.<br>
+
+🧩 This ensures visual clarity and prevents unwanted animation.<br></div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-5"> 6-C-5 🧩 Clean Visual Output.<br>
+
+🎯 Final result must be:<br>
+
+Smooth and clear scenes that highlight the speaking character only.<br>
+
+
+No lip-sync confusion or animation for silent characters.<br>
+
+✅ Fully supports storytelling, podcasts, and group scenes with multiple characters.<br></div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-6"> 6-C-6 🧠 This feature works with Smart Director’s Auto Mode for intelligent scene processing, and can be manually adjusted in Manual Mode if needed.</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task6-d"> 6-D 🔽 Skip This Step Button<br> 
+Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
 - 🚫 Ignore this step during video generation.<br> 
 - ✅ Continue smoothly to the next stage.<br> 
@@ -216,8 +335,8 @@ The Smart Director simply follows this logic during generation (automatic or man
 <div class="task subtask"><input type="checkbox"data-id="task7-e"> 7-E  🇸🇦 عربي All Arabic dialects must be supported naturally and precisely.</div>
 <div class="task subtask"><input type="checkbox"data-id="task7-f"> 7-F 🗣️ Voice generation (non-cloned) from included voice library.</div> 
 <div class="task subtask"><input type="checkbox"data-id="task7-g"> 7-G 📚 A full voice library in Arabic (all dialects) and English — used when no reference audio is provided.</div> 
-<div class="task subtask"><input type="checkbox"data-id="task7-h"> 7-H Skip This Step Button<br> 
-🆕 Add a clear "⏭️ Skip this step" button to this stage. <br> 
+<div class="task subtask"><input type="checkbox"data-id="task7-h"> 7-H 🔽 Skip This Step Button<br> 
+Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
 - 🚫 Ignore this step during video generation.<br> 
 - ✅ Continue smoothly to the next stage.<br> 
@@ -228,8 +347,8 @@ The Smart Director simply follows this logic during generation (automatic or man
 <div class="task"><input type="checkbox"data-id="task8"> 8️⃣ Integrated sound library + Pixabay search 🎼.</div>
 <div class="task subtask"><input type="checkbox"data-id="task8-a"> 8-A 🎧 Include the most used sound effects/backgrounds directly in the platform.</div>
 <div class="task subtask"><input type="checkbox"data-id="task8-b"> 8-B 🔍 Search Pixabay audio via built-in search button (requires internet).</div>
-<div class="task subtask"><input type="checkbox"data-id="task8-c"> 8-C Skip This Step Button<br> 
-🆕 Add a clear "⏭️ Skip this step" button to this stage. <br> 
+<div class="task subtask"><input type="checkbox"data-id="task8-c"> 8-C 🔽 Skip This Step Button<br> 
+Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
 - 🚫 Ignore this step during video generation.<br> 
 - ✅ Continue smoothly to the next stage.<br> 
@@ -239,10 +358,10 @@ The Smart Director simply follows this logic during generation (automatic or man
 
 <div class="task"><input type="checkbox"data-id="task9"> 9️⃣ Smart Director (Two Buttons) 🎬.</div>
 <div class="task subtask"><input type="checkbox"data-id="task9-a"> 9-A ⚡ Automatic Mode: From writing the script in the chat window (with visual/sound prompts and text-to-image/video prompts) to the final video — all automatically.</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-a"> 9-A-a 🔄 Same button will work with both the Full Video Editor Panel (Task 10-F) and the Smart Edit Layer (Task 11).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-b"> 9-A-b 🕒 For a 7-minute video: total production time from click to final output must not exceed 30 minutes (includes ≈85 images, animation, lip sync, voice, sound, etc.).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-c"> 9-A-c ⏱️ For a 15-minute video: total time from click to final output must not exceed 60 minutes (≈170 images, full production).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-d"> 9-A-d 👣Step-by-Step Skipping Logic<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-1"> 9-A-1 🔄 Same button will work with both the Full Video Editor Panel (Task 10-F) and the Smart Edit Layer (Task 11).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-2"> 9-A-2 🕒 For a 7-minute video: total production time from click to final output must not exceed 30 minutes (includes ≈85 images, animation, lip sync, voice, sound, etc.).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-3"> 9-A-3 ⏱️ For a 15-minute video: total time from click to final output must not exceed 60 minutes (≈170 images, full production).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-4"> 9-A-4 👣Step-by-Step Skipping Logic<br>
 ⏭️ The Smart Director (Auto Mode) must intelligently handle skipping of steps based on the chat instructions or detected scenario.<br>
 
 🧠 Logic & Behavior:<br>
@@ -351,7 +470,6 @@ Works automatically with Smart Director.</div>
 <div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ Backup & Restore Function 🛡️.</div>
 
 <div class="task"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ Full source code ownership (for exclusive platform rights) 🔐.</div>
-
 <hr style="margin-top: 60px;">
 
 <p style="font-size: 20px; margin-top: 40px;">
