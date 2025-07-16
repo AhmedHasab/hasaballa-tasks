@@ -110,6 +110,48 @@ To produce videos matching the examples in the following links, which represent 
   <li><a href="https://www.facebook.com/share/v/19AfGVMDLn/" target="_blank">🔗 Link 5</a></li>
   <li><a href="https://www.facebook.com/share/v/16sRpA7sTf/" target="_blank">🔗 Link 6</a></li>
 </ul>
+<h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
+
+<div style="
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  max-width: 1300px;
+">
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="videos/1.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="videos/2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="videos/3.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="videos/4.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="videos/5.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="videos/6.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
+
+
+
 <h2>✅ 📋 Hasaballa AI Tasks</h2>
 <div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running 💻 Windows 11, with an Intel Core i7 processor, RTX 4060 (8 GB) GPU 🎮, and 64 GB RAM 🧠.</div>
 <div class="task"><input type="checkbox"data-id="task2"> 2️⃣ 🚫 No internet, no cloud, no credits, no subscriptions — completely independent.</div>
@@ -120,6 +162,11 @@ Quick explanation: it can respond with AI just like ChatGPT or Groq, and in all 
 <div class="task subtask"><input type="checkbox"data-id="task4-a"> 4-A 🌐 A button to connect to the internet when needed — to gather, analyze, and refine information and write scripts. </div>
 <div class="task subtask"><input type="checkbox"data-id="task4-b"> 4-B ✍️ You can write the full script in Arabic (all dialects), with its scenes, visual backgrounds, and sound — then the Smart Director starts working.</div>
 <div class="task subtask"><input type="checkbox"data-id="task4-c"> 4-C 🖼️ The chat window also supports converting Arabic (all dialects) /English text into images (can be used as reference images, with a "lock identity" button), then the Smart Director continues.</div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task4-c-1"> 4-C-1 🖼️ Convert Real Photo to AI-Generated Face
+The system must allow users to upload a real photo, and convert it into an AI-generated version (same identity preserved) — to be used for further animation and lip sync.</div>
+
+
 <div class="task subtask"><input type="checkbox"data-id="task4-d"> 4-D 🎞️ The chat window can convert Arabic (all dialects) /English text directly into short video clips — also handled by the Smart Director.</div>
 <div class="task subtask"><input type="checkbox"data-id="task4-e"> 4-E 📝 Intelligent Reference Voice Mapping
 
@@ -156,12 +203,71 @@ Fully integrates with the Smart Director (automatic & manual modes).<br>
 The system must intelligently select or skip voice usage depending on text meaning.<br></div>  
 
 
+
+<div class="task subsubtask"><input type="checkbox"data-id="task4-e-4"> 4-E-4 🎛️ Multilayered Background Audio Detection.<br>
+When the user writes in the Chat Window that multiple background sounds are present in a scene (e.g., music + applause + speech), the system must:<br>
+
+Detect each background sound type individually<br>
+
+Assign each one to a separate audio track in the timeline<br>
+
+Automatically balance all background layers with the main narration<br>
+
+Send these structured instructions to the Smart Director for proper rendering<br>
+
+✍️ Example (written by user in Hasaballa GPT Chat Window):<br>
+
+"Amid patriotic music and audience applause, Nasser gives a speech in the background while the narrator explains what happened."<br>
+
+✅ The system must auto-generate:<br>
+
+🎵 Track 1: Background patriotic music<br>
+
+👏 Track 2: Audience applause<br>
+
+📣 Track 3: Nasser’s speech<br>
+
+🎙️ Main narration (spoken by the narrator)<br>
+🧠 All of them must be blended smoothly in timing and volume.<br>
+</div>  
+
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1000px; border-radius: 10px; background-color: #f9f9f9; text-align: center;">
+  <video width="45%" autoplay muted loop controls>
+    <source src="videos/27.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+<div class="task subsubtask"><input type="checkbox"data-id="task4-e-5"> 4-E-5 🧠 Detect Reference Voices Used as Background Audio.<br> 
+When analyzing the written script, the system must detect when a background audio layer is actually a reference voice (not a generic sound effect). It must:<br> 
+
+◼️ Recognize that the background sound is from a known character<br> 
+◼️ Mark it as a reference voice to be processed properly<br> 
+◼️ Trigger both:<br> 
+
+◉Lip sync activation if the character’s image is present<br> 
+
+◉Retrieval or generation of the correct voice from Section 7<br> 
+◼️ Send this instruction to the Background Audio Engine (Section 8)<br> 
+
+🧠 This task is critical for:<br> 
+
+◉Differentiating real character voices from general ambience<br> 
+
+◉Maintaining consistency between script, voice, and image<br> 
+
+◉Enabling full scene automation without manual intervention<br> </div>  
+
+
 <div class="task subtask"><input type="checkbox"data-id="task4-f"> 4-F 🧠 Lip Sync Activation Logic (via Chat Script Analysis) <br>
 > The Chat Window (Hasaballa GPT) is the primary controller for deciding when and how lip sync is triggered.<br>
 It analyzes the written script and automatically assigns isTalking: true to the correct reference image — based on scene type and text context.<br>
 ✅ Until no confusion between speaking and silent characters.<br>
 ✅ And there will be natural results in storytelling, podcasts, and films.<br>
-🔄 The system must handle 3 main cases:👇<br></div>
+🔄 The system must handle 4 main cases:👇<br></div>
 
 
 
@@ -174,6 +280,36 @@ Her image = isTalking: true. <br>
 All other characters appear visually only, with isTalking: false. <br>
 
 No lip sync for background characters during narration.</div>
+
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1000px; border-radius: 10px; background-color: #f9f9f9;">
+
+  <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+    <video width="45%" autoplay muted loop controls>
+      <source src="videos/12.mp4" type="video/mp4"> 
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+      <source src="videos/14.mp4" type="video/mp4"> 
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 20px;">
+    <video width="45%" autoplay muted loop controls>
+      <source src="videos/17.mp4" type="video/mp4"> 
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+      <source src="videos/24.mp4" type="video/mp4"> 
+    </video>
+  </div>
+
+</div>
+
+
+
 
 <div class="task subsubtask"><input type="checkbox"data-id="task4-f-2"> 4-F-2 👥 Dialogue Mode (Multi-character conversation).<br>
 🎬 When the script includes multiple characters speaking:<br>
@@ -196,7 +332,49 @@ If it’s the narrator (e.g., Soad) having the side talk, her lips move for the 
 > 📌 After the dialogue ends, narration lip sync resumes.</div>
 
 
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
 
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1200px; border-radius: 10px; background-color: #f9f9f9;">
+
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+    <video width="30%" autoplay muted loop controls>
+      <source src="videos/9.mp4" type="video/mp4"> 
+    </video>
+
+    <video width="30%" autoplay muted loop controls>
+      <source src="videos/10.mp4" type="video/mp4"> 
+    </video>
+
+    <video width="30%" autoplay muted loop controls>
+      <source src="videos/11.mp4" type="video/mp4"> 
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+      <source src="videos/15.mp4" type="video/mp4"> 
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+      <source src="videos/22.mp4" type="video/mp4"> 
+    </video>
+  </div>
+
+</div>
+
+
+
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-4"> 4-F-4 🚫 Narration Without Lip Sync
+User must be able to disable lip sync for the reference image that narrates the story — via a clear command in the Chat Window.
+
+Example: “Soad narrates silently without lip movement.”</div>
+
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1000px; border-radius: 10px; background-color: #f9f9f9; text-align: center;">
+  <video width="45%" autoplay muted loop controls>
+    <source src="videos/23.mp4" type="video/mp4">
+  </video>
+</div>
 
 
 
@@ -211,6 +389,10 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 <div class="task"><input type="checkbox"data-id="task5"> 5️⃣ Ultra-realistic image generation 🖼️.<br>
 (Supported formats: 16:9, 9:16, 1:1)</div>
+
+
+
+
 <div class="task subtask"><input type="checkbox"data-id="task5-a"> 5-A 🎥 Cinematic lighting.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B 👥 Reference images (for multiple characters, minimum of 5 — all can appear in one video, so identity consistency is critical).</div>
 <div class="task subsubtask"><input type="checkbox"data-id="task5-b-1"> 5-B-1 🎙️Each reference image should ideally be linked to a unique reference voice, forming a Character Pack (Image + Voice).<br>
@@ -223,6 +405,17 @@ The Smart Director simply follows this logic during generation (automatic or man
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E 📂 Dropdown list for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F 🏆 Minimum visual quality must match examples in the above video links.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-g"> 5-G 📝 100% correct Arabic text in generated images.</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; border-radius: 10px; padding: 15px; margin: 30px auto; background-color: #f9f9f9; width: 45%; text-align: center;">
+  <video width="100%" autoplay muted loop controls>
+    <source src="videos/8.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
 <div class="task subtask"><input type="checkbox"data-id="task5-h"> 5-H 🔽 Skip This Step Button<br> 
 Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
@@ -233,6 +426,51 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 <div class="task subtask"><input type="checkbox"data-id="task5-i"> 5-I ⚙️ Must work in both automatic and manual mode with the Smart Director (from chat window to final video).</div>
 
 <div class="task"><input type="checkbox"data-id="task6"> 6️⃣ Image Animation — must match the quality in reference videos 🎭.</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; border-radius: 10px; padding: 20px; margin: 30px auto; background-color: #f9f9f9; max-width: 1100px;">
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1000px; margin: 0 auto;">
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/7.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/13.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/16.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/18.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/19.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/20.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/21.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/25.mp4" type="video/mp4" />
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="videos/26.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+</div>
+
 <div class="task subtask"><input type="checkbox"data-id="task6-a"> 6-A 🧍‍♀️ Full-body animation (eyes, facial expressions, shoulders, hands, legs, etc.).</div>
 <div class="task subtask"><input type="checkbox"data-id="task6-b"> 6-B 🏙️ Background motion too (e.g. people walking in streets, trees moving, curtains swaying, birds, animals, kids playing).</div>
 <div class="task subtask"><input type="checkbox"data-id="task6-c"> 6-C 👄 Lip sync must be as good as DreamFace or better than the sample reference videos.</div>
@@ -309,7 +547,20 @@ No lip-sync confusion or animation for silent characters.<br>
 
 ✅ Fully supports storytelling, podcasts, and group scenes with multiple characters.<br></div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task6-c-6"> 6-C-6 🧠 This feature works with Smart Director’s Auto Mode for intelligent scene processing, and can be manually adjusted in Manual Mode if needed.</div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-6"> 6-C-6 🧠 Auto Lip Sync for Background Speakers. <br>
+✅ If a background audio track includes a reference voice of a character who is visually present in the scene, the system must automatically:<br>
+
+◼️Trigger lip sync for that character’s reference image<br>
+
+◼️Set isTalking: true only during their audible moments<br>
+
+◼️Maintain correct timing between audio and facial movement<br>
+
+◼️Ignore other non-speaking characters in the same scene<br></div>
+
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-7"> 6-C-7 🧠 This feature works with Smart Director’s Auto Mode for intelligent scene processing, and can be manually adjusted in Manual Mode if needed.</div>
 
 <div class="task subtask"><input type="checkbox"data-id="task6-d"> 6-D 🔽 Skip This Step Button<br> 
 Add a clear "⏭️ Skip this step" button to this stage. <br> 
@@ -335,26 +586,67 @@ The Smart Director simply follows this logic during generation (automatic or man
 <div class="task subtask"><input type="checkbox"data-id="task7-e"> 7-E  🇸🇦 عربي All Arabic dialects must be supported naturally and precisely.</div>
 <div class="task subtask"><input type="checkbox"data-id="task7-f"> 7-F 🗣️ Voice generation (non-cloned) from included voice library.</div> 
 <div class="task subtask"><input type="checkbox"data-id="task7-g"> 7-G 📚 A full voice library in Arabic (all dialects) and English — used when no reference audio is provided.</div> 
-<div class="task subtask"><input type="checkbox"data-id="task7-h"> 7-H 🔽 Skip This Step Button<br> 
+
+<div class="task subtask"><input type="checkbox"data-id="task7-h"> 7-H 🔁 Use Reference Voices in Background Audio Layers:<br>
+When the system detects that a background audio layer (from the Chat Window script) contains a known reference voice, it must:<br>
+
+◼️ Retrieve the correct voice file from the Reference Voice Library<br>
+◼️ Use the cloned/generated voice if the real audio isn’t available<br>
+◼️ Send the voice to the Background Audio Engine to be placed on its own track<br>
+◼️ Maintain identity match with the character's reference image<br>
+◼️ Ensure emotional tone and timing remain consistent with the context of the scene</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task7-i"> 7-I 🔽 Skip This Step Button<br> 
 Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
 - 🚫 Ignore this step during video generation.<br> 
 - ✅ Continue smoothly to the next stage.<br> 
 - ⚠️ Not show any error or interruption in the process.<br> 
 🧠 The Smart Director must later adjust the final timeline accordingly..</div>
-<div class="task subtask"><input type="checkbox"data-id="task7-i"> 7-I ⚙️ Must integrate with the Smart Director both automatically and manually.</div>
+
+
+<div class="task subtask"><input type="checkbox"data-id="task7-j"> 7-J ⚙️ Must integrate with the Smart Director both automatically and manually.</div>
 
 <div class="task"><input type="checkbox"data-id="task8"> 8️⃣ Integrated sound library + Pixabay search 🎼.</div>
 <div class="task subtask"><input type="checkbox"data-id="task8-a"> 8-A 🎧 Include the most used sound effects/backgrounds directly in the platform.</div>
 <div class="task subtask"><input type="checkbox"data-id="task8-b"> 8-B 🔍 Search Pixabay audio via built-in search button (requires internet).</div>
-<div class="task subtask"><input type="checkbox"data-id="task8-c"> 8-C 🔽 Skip This Step Button<br> 
+
+<div class="task subtask"><input type="checkbox"data-id="task8-c"> 8-C 🎛️ Audio Layering Execution (Based on Chat Input).<br> 
+The background audio engine must support multiple overlapping audio tracks (e.g., music + applause + prayer) based on structured commands parsed from the script written in the Chat Window.<br> 
+
+🧠 This includes:<br> 
+
+Pulling relevant audio from internal packs or Pixabay<br> 
+
+Assigning each sound to a separate track<br> 
+
+Balancing all layers smoothly<br> 
+
+Ensuring alignment with the corresponding visual scenes<br> 
+
+✍️ Example Chat Instruction:<br> 
+
+"During this scene, play sad music, faint clapping, and the sheikh’s voice in the background."<br> 
+
+✅ The system must automatically:<br> 
+
+◼️Load 🎵 music + 👏 clapping + 🕌 prayer<br> 
+
+◼️Position them in separate audio tracks<br> 
+
+◼️Blend them with narration<br> 
+
+◼️Sync them with visuals in Smart Director<br> </div>
+
+<div class="task subtask"><input type="checkbox"data-id="task8-d"> 8-D 🔽 Skip This Step Button<br> 
 Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must: <br> 
 - 🚫 Ignore this step during video generation.<br> 
 - ✅ Continue smoothly to the next stage.<br> 
 - ⚠️ Not show any error or interruption in the process.<br> 
 🧠 The Smart Director must later adjust the final timeline accordingly..</div>
-<div class="task subtask"><input type="checkbox"data-id="task8-d"> 8-D ⚙️ Must work seamlessly with the Smart Director (automatic/manual).</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task8-e"> 8-E ⚙️ Must work seamlessly with the Smart Director (automatic/manual).</div>
 
 <div class="task"><input type="checkbox"data-id="task9"> 9️⃣ Smart Director (Two Buttons) 🎬.</div>
 <div class="task subtask"><input type="checkbox"data-id="task9-a"> 9-A ⚡ Automatic Mode: From writing the script in the chat window (with visual/sound prompts and text-to-image/video prompts) to the final video — all automatically.</div>
@@ -470,6 +762,8 @@ Works automatically with Smart Director.</div>
 <div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ Backup & Restore Function 🛡️.</div>
 
 <div class="task"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ Full source code ownership (for exclusive platform rights) 🔐.</div>
+
+
 <hr style="margin-top: 60px;">
 
 <p style="font-size: 20px; margin-top: 40px;">
