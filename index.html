@@ -18,27 +18,39 @@
   h2 {
     margin-top: 50px;
   }
-  .task {
-    margin: 15px 0;
-  }
-  .task input[type="checkbox"] {
-    transform: scale(1.5);
-    margin-right: 10px;
-  }
-  .task.completed {
-    text-decoration: line-through;
-    color: gray;
-  }
-  .subtask {
-    margin-left: 40px;
-    padding-left: 20px;
-    border-left: 2px solid #ccc;
-  }
-  .subsubtask {
-    margin-left: 80px;
-    padding-left: 20px;
-    border-left: 2px solid #aaa;
-  }
+.task {
+  margin: 15px 0;
+}
+.task input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+.task.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Level 1: subtask */
+.subtask {
+  margin-left: 40px;
+  padding-left: 20px;
+  border-left: 2px solid #ccc;
+}
+
+/* Level 2: subsubtask */
+.subsubtask {
+  margin-left: 80px;
+  padding-left: 20px;
+  border-left: 2px solid #aaa;
+}
+
+/* ✅ Level 3: subsubsubtask */
+.subsubsubtask {
+  margin-left: 120px;
+  padding-left: 20px;
+  border-left: 2px solid #888; /* لون أغمق شوية للتمييز */
+}
+
   ul {
     margin-left: 30px;
   }
@@ -295,19 +307,19 @@ Supported capabilities:<br>
 > 🧠 The system must analyze the written script (inside the Chat Window) and decide automatically whether to use the reference voice or not — based on the text.<br>
 🎙️ There are <strong>two</strong> possible voice usage modes:</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-f-3"> 4-F-3 <strong>🗣️ Narration Mode.</strong><br> 
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-f-2-1"> 4-F-2-1 <strong>🗣️ Narration Mode.</strong><br> 
 (e.g., storytelling, biography, documentary):<br>
 Only one voice is used (either cloned or generated).<br>
 This voice narrates the entire script — no character-specific dialogues.<br>
 In this case, The system should ignore all other reference voices, even if reference images exist.</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-F-4"> 4-F-4 <strong>👥 Dialogue Mode.</strong><br>
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-F-2-2"> 4-F-2-2 <strong>👥 Dialogue Mode.</strong><br>
  (e.g., podcast, film, multi-character scenes):<br>
 - Multiple reference images are used, each linked to a unique reference voice.<br>
 - Each character/image will “speak” using its assigned voice.<br>
 - Voice and image must always match (as a Character Pack).</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-f-5"> 4-F-5 <strong>🤖 The system must decide automatically</strong>, based on the text:<br>
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-f-2-3"> 4-F-2-3 <strong>🤖 The system must decide automatically</strong>, based on the text:<br>
 <strong>Example 1</strong>: "Soad: Why did I tell all this?" → use Soad’s voice.<br>
 <strong>Example 2</strong>: "Farid appears in the scene silently." → use the image only, no voice.<br>
 <strong>Example 3</strong>: "The story is narrated entirely by Soad" → use only Soad’s voice, ignore all others.<br>
@@ -316,7 +328,7 @@ In this case, The system should ignore all other reference voices, even if refer
 - Fully integrates with the Smart Director (automatic & manual modes).<br>
 - The system must intelligently select or skip voice usage depending on text meaning.</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-f-6"> 4-F-6 <strong>🎛️ Multilayered Background Audio Detection.</strong><br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-6"> 4-F-3 <strong>🎛️ Multilayered Background Audio Detection.</strong><br>
 When the user writes in the Chat Window that multiple background sounds are present in a scene (e.g., music + applause + speech), the system must:<br>
 - Detect each background sound type individually.
 - Assign each one to a separate audio track in the timeline.
@@ -339,7 +351,7 @@ When the user writes in the Chat Window that multiple background sounds are pres
   </video>
 </div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-f-7"> 4-F-7 <strong>🧠 Detect Reference Voices</strong> Used as Background Audio.<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-4"> 4-F-4 <strong>🧠 Detect Reference Voices</strong> Used as Background Audio.<br>
 When analyzing the written script, the system must detect when a background audio layer is actually a reference voice (not a generic sound effect). It must:<br>
 ◼️ Recognize that the background sound is from a known character.<br>
 ◼️ Mark it as a reference voice to be processed properly.<br>
@@ -352,7 +364,7 @@ When analyzing the written script, the system must detect when a background audi
 ◉Maintaining consistency between script, voice, and image.<br>
 ◉Enabling full scene automation without manual intervention.</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G <strong>🧠 Lip Sync Activation Logic</strong> (via Chat Script Analysis).<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-5"> 4-F-5 <strong>🧠 Lip Sync Activation Logic</strong> (via Chat Script Analysis).<br>
 > The Chat Window <strong>(Hasaballa GPT)</strong> is the primary controller for deciding when and how lip sync is triggered(In the automatic and manual smart output mode).<br>
 - It analyzes the written script and automatically assigns isTalking:<br> 
 true to the correct reference image — based on scene type and text context.<br>
@@ -360,7 +372,7 @@ true to the correct reference image — based on scene type and text context.<br
 ✅ And there will be natural results in storytelling, podcasts, and films.<br>
 🔄 The system must handle <strong>4</strong> main cases:👇</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-g-1"> 4-G-1 <strong>🗣️ Narration Mode.</strong><br>
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-f-5-1"> 4-F-5-1 <strong>🗣️ Narration Mode.</strong><br>
 🎙️When A single character (e.g., Soad) narrates the story.<br> Their lips should move in sync with the narration audio.<br>
 - Her image = <strong>isTalking: true</strong>.<br>
 - All other characters appear visually only, with <strong>isTalking: false</strong>.<br>
@@ -392,7 +404,7 @@ true to the correct reference image — based on scene type and text context.<br
 
 </div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-g-2"> 4-G-2 <strong>👥 Dialogue Mode</strong> (Multi-character conversation).<br>
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-f-5-2"> 4-F-5-2 <strong>👥 Dialogue Mode</strong> (Multi-character conversation).<br>
 🎬 When the script includes multiple characters speaking:<br>
 - Each speaking character must have lip-sync based on their lines.<br>
 - 🧠 Lip sync must only apply to the currently speaking character.<br>
@@ -411,7 +423,7 @@ true to the correct reference image — based on scene type and text context.<br
 
 </div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-g-3"> 4-G-3 <strong>👪 Mixed Mode </strong>(Narration + Side Dialogue).<br>
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-f-5-3"> 4-F-5-3 <strong>👪 Mixed Mode </strong>(Narration + Side Dialogue).<br>
 📝In some scenes, While narration is ongoing, a short side conversation may happen.<br>
 - During that moment, narration lip sync must pause.<br>
 👄Only in the side dialogue speaker’s lips should move.<br>
@@ -446,7 +458,7 @@ true to the correct reference image — based on scene type and text context.<br
 
 </div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-g-4"> 4-G-4 <strong>🚫 Narration Without Lip Sync</strong>.<br> 
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-5-4"> 4-F-5-4 <strong>🚫 Narration Without Lip Sync</strong>.<br> 
 - The user must be able to disable lip sync for the reference image that narrates the story — via a clear command in the Chat Window.<br> 
 <strong>Example</strong>: “Soad narrates silently without lip movement.”</div>
 
@@ -459,10 +471,10 @@ true to the correct reference image — based on scene type and text context.<br
 </div>
 
 
-<div class="task subtask"><input type="checkbox"data-id="task4-h"> 4-H <strong>⬆️ Expand Input Box</strong>.<br>
+<div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G <strong>⬆️ Expand Input Box</strong>.<br>
 🔽 Function: Enlarges the input box for easier writing of long scripts or commands.</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-i"> 4-I <strong>📐 Image or Video Dimensions</strong>.<br>
+<div class="task subtask"><input type="checkbox"data-id="task4-h"> 4-H <strong>📐 Image or Video Dimensions</strong>.<br>
 ⚙️ Function: Choose output dimensions depending on the platform:<br>
 
 🟥 16:9 → YouTube<br>
@@ -471,15 +483,15 @@ true to the correct reference image — based on scene type and text context.<br
 
 🟩 1:1 → Instagram</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-j"> 4-J <strong>⚙️ Works both automatically and manually</strong> with Smart Director.<br>
+<div class="task subtask"><input type="checkbox"data-id="task4-i"> 4-I <strong>⚙️ Works both automatically and manually</strong> with Smart Director.<br>
 (from chat window to final video).<br>
 🎬 Smart Director Buttons:</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-j-1"> 4-J-1 <strong>🧠 Auto Generation Button</strong>.<br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-i-1"> 4-I-1 <strong>🧠 Auto Generation Button</strong>.<br>
 
 📦 Automatically analyzes everything written in the input box, sends it to all the internal tools, and generates the final video + timeline without any user interaction.</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-j-2"> 4-J-2 4-J-2
+<div class="task subsubtask"><input type="checkbox"data-id="task4-i-2"> 4-I-2
 <strong>🛠️ Manual Generation Button</strong>.<br>
 
 Lets the user go step-by-step through each tool manually, with full control over:<br>
@@ -492,7 +504,7 @@ Lets the user go step-by-step through each tool manually, with full control over
 
 - Final assembly</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-k"> 4-K 4-K
+<div class="task subtask"><input type="checkbox"data-id="task4-j"> 4-J
 <strong>📁 Saved Projects Panel</strong>.<br>
 💾 Function: Shows all previously saved projects.<br>
 These are stored automatically and can be reopened later for editing or regenerating parts of the video.</div>
