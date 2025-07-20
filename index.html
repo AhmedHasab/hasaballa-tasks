@@ -215,94 +215,125 @@ To produce videos matching the examples in the following links, which represent 
   <h1>🧠 Hasaballa GPT — Master Control Panel</h1>
 <div>
 <img 
-  src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/Hasaballa%20Gpt.png?raw=true" 
+  src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/Hasballa%20Gpt.jpg?raw=true" 
   style="width:70%; display:block; margin:auto;" >
 </div>
 
-  <div class="section">
-    <h2>🎯 Purpose:</h2>
-    <p>This is the <strong>main control panel</strong> of the entire Hasaballa AI workflow. It allows the user to:</p>
-    <ul>
-      <li>📝 Write the full script</li>
-      <li>🖼️ Attach visual references (images)</li>
-      <li>🎙️ Attach voice references (audio)</li>
-      <li>⚙️ Activate smart features that connect with the <strong>Smart Director</strong></li>
-    </ul>
-    <p>➡️ The system then generates the full video — <strong>automatically or manually</strong>.</p>
-  </div>
+ <section>
+   section {
+  background: #f9f9f9;
+  padding: 15px 25px;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 900px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+section h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+section p, section ul {
+  font-size: 15px;
+  color: #333;
+}
+ul {
+  padding-left: 20px;
+}
 
-  <div class="section">
-    <h2>🖊️ Script Input</h2>
-    <p><strong>"Write your script here."</strong></p>
-    <p>🎯 The script is automatically analyzed to identify:</p>
-    <ul>
-      <li>🟨 The scene type (Narration / Dialogue / Mixed)</li>
-      <li>🧑‍🤝‍🧑 The participating characters</li>
-      <li>🕐 Voice timing and speaker turns</li>
-      <li>🖼️🎧 Visual and audio backgrounds needed for each scene</li>
-    </ul>
-  </div>
+  <h3>🪟 Display Window</h3>
+  <p>📺 Function: This is where the messages between the user and the offline AI model appear.</p>
+  <p>✅ It is essential that the chat window be connected to one of the most powerful fully offline and completely free AI models, such as:</p>
+  <ul>
+    <li>🔹 Nous-Hermes-2 Mistral 7B</li>
+    <li>🔹 Mixtral (Mistral-MoE 12.9B)</li>
+    <li>🔹 Mixtral 8x7B – Q4_K_M</li>
+  </ul>
+  <p>⚠️ This connection is a core requirement for ensuring high-quality, realistic responses, without relying on any online APIs.<br>
+  It shows the full conversation, responses, and logs of the video/script generation process.</p>
+</section>
 
-  <div class="section">
-    <h2>🖼️ Upload Reference Images (min. 8)</h2>
-    <p><strong>Purpose:</strong> Provide visual anchors — character faces, locations, style, era, mood...</p>
-  </div>
+<section>
+  <h3>📤 Send Button</h3>
+  <p>🚀 Function: Sends the text or command written in the input box to the offline AI model (e.g. for chatting, generating images, analyzing scenarios...).</p>
+</section>
 
-  <div class="section">
-    <h2>🎙️ Upload Reference Voices (min. 8)</h2>
-    <p><strong>Purpose:</strong> Clone accurate voice tones — celebrity voices, dialects, or original voices.</p>
-  </div>
+<section>
+  <h3>🎤 Microphone Button</h3>
+  <p>🎙️ Function: Allows the user to input voice commands or narration using speech-to-text.<br>
+  Useful for dictating long scenarios or asking questions hands-free.</p>
+</section>
 
-  <div class="section">
-    <h2>🔧 Smart Feature Toggles</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Emoji</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Identity Lock</strong></td>
-          <td>🧬🔒</td>
-          <td>Locks character appearance across all scenes (face, outfit, body style).</td>
-        </tr>
-        <tr>
-          <td><strong>Lip Sync</strong></td>
-          <td>👄🎙️</td>
-          <td>Activates realistic lip movement based on voice timing and dialogue.</td>
-        </tr>
-        <tr>
-          <td><strong>Background Motion</strong></td>
-          <td>🌳🕺</td>
-          <td>Animates background elements (trees, people, curtains, animals…).</td>
-        </tr>
-        <tr>
-          <td><strong>Cinematic Lighting</strong></td>
-          <td>🎥✨</td>
-          <td>Adds professional visual shading and lighting for a polished, movie-like look.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<section>
+  <h3>🖼️ Insert Reference Images</h3>
+  <p>🧍‍♂️🧍‍♀️ Function: Upload reference images for characters.</p>
+  <ul>
+    <li>Minimum: 8 images</li>
+    <li>Each image represents a character in the video.</li>
+    <li>The system uses these to maintain visual consistency (same identity) across all scenes and shots.</li>
+  </ul>
+</section>
 
-  <div class="section">
-    <h2>🔲 Aspect Ratio Selection</h2>
-    <p>Choose output format:</p>
-    <ul>
-      <li><strong>16:9</strong> → YouTube</li>
-      <li><strong>9:16</strong> → TikTok / Shorts</li>
-      <li><strong>1:1</strong> → Instagram</li>
-    </ul>
-    <p>📌 The visual generator adapts layouts accordingly.</p>
-  </div>
+<section>
+  <h3>🔉 Insert Reference Audio</h3>
+  <p>🗣️ Function: Upload voice reference files for cloning each character’s voice.</p>
+  <ul>
+    <li>Minimum: 8 voice files</li>
+    <li>Each voice will be matched to a character image.</li>
+    <li>Used by the voice cloning tool to synthesize the scenario in the character’s real voice.</li>
+    <li>In <strong>Auto Director Mode</strong>, this is done automatically.</li>
+    <li>In <strong>Manual Mode</strong>, the user can assign and control each voice step-by-step.</li>
+  </ul>
+</section>
 
-  <div class="section">
-    <h2>🌐 Connect to Internet</h2>
-    <p>🔓 Allow optional access to real-time content: Online images, ambient sounds, fresh text info.</p>
-  </div>
+<section>
+  <h3>✍️ Text & Command Input Box</h3>
+  <p>📝 Function:</p>
+  <ul>
+    <li>Write anything here, including:</li>
+    <li>Prompts for images</li>
+    <li>Commands for video generation</li>
+    <li>Full script/scenario with visual/audio descriptions (for all scenes)</li>
+    <li>Text to Image – Text to Video – Image to Image</li>
+    <li>Instructions for lip-sync scenes (Narration Mode / Mixed Mode / Dialogue Mode)</li>
+  </ul>
+  <p>The AI understands and parses the scenario, dividing it into scenes, backgrounds, sounds, and syncing instructions — and passes them to the Smart Director for execution.</p>
+</section>
+
+<section>
+  <h3>⬆️ Expand Input Box</h3>
+  <p>🔽 Function: Enlarges the input box for easier writing of long scripts or commands.</p>
+</section>
+
+<section>
+  <h3>📐 Image or Video Dimensions</h3>
+  <p>⚙️ Function: Choose output dimensions depending on the platform:</p>
+  <ul>
+    <li>🟥 16:9 → YouTube</li>
+    <li>🟪 9:16 → TikTok / Shorts</li>
+    <li>🟩 1:1 → Instagram</li>
+  </ul>
+</section>
+
+<section>
+  <h3>🎬 Smart Director Buttons</h3>
+  <p>🧠 <strong>Auto Generation Button</strong></p>
+  <p>📦 Automatically analyzes everything written in the input box, sends it to all the internal tools, and generates the final video + timeline without any user interaction.</p>
+  <p>🛠️ <strong>Manual Generation Button</strong></p>
+  <p>Lets the user go step-by-step through each tool manually, with full control over:</p>
+  <ul>
+    <li>Image generation</li>
+    <li>Audio selection</li>
+    <li>Lip sync activation</li>
+    <li>Final assembly</li>
+  </ul>
+</section>
+
+<section>
+  <h3>📁 Saved Projects Panel</h3>
+  <p>💾 Function: Shows all previously saved projects.<br>
+  These are stored automatically and can be reopened later for editing or regenerating parts of the video.</p>
+</section>
 
 
 
