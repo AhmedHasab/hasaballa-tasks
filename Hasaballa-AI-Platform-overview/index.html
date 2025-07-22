@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🧠 Hasaballa AI Platform</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.8;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  h1, h2 {
+    font-size: 32px;
+    color: #333;
+  }
+  h2 {
+    margin-top: 50px;
+  }
+.task {
+  margin: 15px 0;
+}
+.task input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+.task.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Level 1: subtask */
+.subtask {
+  margin-left: 40px;
+  padding-left: 20px;
+  border-left: 2px solid #ccc;
+}
+
+/* Level 2: subsubtask */
+.subsubtask {
+  margin-left: 80px;
+  padding-left: 20px;
+  border-left: 2px solid #aaa;
+}
+
+/* ✅ Level 3: subsubsubtask */
+.subsubsubtask {
+  margin-left: 120px;
+  padding-left: 20px;
+  border-left: 2px solid #888; /* لون أغمق شوية للتمييز */
+}
+
+  ul {
+    margin-left: 30px;
+  }
+</style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+console.log("✅ Firebase connected & DOM ready");
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
+    authDomain: "hasaballa-ai.firebaseapp.com",
+    databaseURL: "https://hasaballa-ai-default-rtdb.firebaseio.com",
+    projectId: "hasaballa-ai",
+    storageBucket: "hasaballa-ai.appspot.com",
+    messagingSenderId: "786272460405",
+    appId: "1:786272460405:web:b2bc8cdba12407834d623c",
+    measurementId: "G-GVY2TS8MW4"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    firebase.database().ref("tasks").once("value").then(snapshot => {
+      const data = snapshot.val() || {};
+      checkboxes.forEach((checkbox, index) => {
+       const key = checkbox.getAttribute("data-id");
+
+       if (data[key] === true) {
+  checkbox.checked = true;
+  checkbox.parentElement.classList.add("completed");  // ✅ ضروري علشان الخط
+}
+
+        checkbox.addEventListener("change", () => {
+          const checked = checkbox.checked;
+          firebase.database().ref("tasks/" + key).set(checked);
+          if (checked) {
+            checkbox.parentElement.classList.add("completed");
+          } else {
+            checkbox.parentElement.classList.remove("completed");
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</head>
+🧠 Platform: Hasaballa AI
+🛠️ Description & How it Works
+The Hasaballa AI platform will run fully offline 📴 — even if it’s 100 GB in size 💾. It’s designed to generate full cinematic-quality Arabic storytelling videos from text-based scripts, without needing any internet or external service.
+
+🎯 Platform Goals
+To produce videos matching the examples in the following links, which represent the minimum acceptable quality 👇
+
+<ul>
+  <li><a href="https://www.facebook.com/share/v/16bcprHm7i/" target="_blank">🔗 Link 1 </a></li>
+  <li><a href="https://www.facebook.com/share/v/16nf3biL84/" target="_blank">🔗 Link 2</a></li>
+  <li><a href="https://www.facebook.com/share/v/1FPbPaSuxi/" target="_blank">🔗 Link 3</a></li>
+  <li><a href="https://www.facebook.com/share/v/16sURn3tgo/" target="_blank">🔗 Link 4</a></li>
+  <li><a href="https://www.facebook.com/share/v/19AfGVMDLn/" target="_blank">🔗 Link 5</a></li>
+  <li><a href="https://www.facebook.com/share/v/16sRpA7sTf/" target="_blank">🔗 Link 6</a></li>
+</ul>
+<h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
+
+<div style="
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  max-width: 1300px;
+">
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/1.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/3.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/4.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/5.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/6.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
+🧠 How to Use Hasaballa AI Platform
+🟢 1. Smart Director – Automatic Mode
+The user writes the entire script inside the chat window, then presses a single button to start the automatic process. The system will handle everything — from visual generation to final video output:
+Workflow: 1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor
+
+🟡 2. Smart Director – Manual Mode
+Full hands-on mode for professionals who want total control. The user can control each generation step manually — generate visuals, skip voice, choose animation style, etc. Nothing happens automatically.
+Workflow: 1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor
+✅ Allows complete manual control at every step.
+
+🔵 3. Standalone Mode (Each Tool Individually)
+Use any tool separately (image generator, voice cloner, animation, etc.) without needing to run a full project. Ideal for experiments, assets, or testing workflows.
+
+🧩 How the Platform Flows
+1️⃣ User writes full script in Hasaballa GPT Chat.
+2️⃣ User clicks Auto Smart Director or chooses Manual Mode.
+3️⃣ The system processes the script → generates visuals, voices, animations, and lip sync.
+4️⃣ All assets go into the Timeline Editor.
+5️⃣ User can fine-tune scenes via Smart Edit Layer.
+6️⃣ Final video is exported in high quality (HD, 4K…).
+7️⃣ (Optional) Track views/revenue via YouTube integration.
+✉️ Each developer will receive a separate document with their specific assigned tasks, chosen based on their skill set.
+
+✅ 📋 Hasaballa AI Tasks – 18 Core Components
+1️⃣ System Requirements: 💻 Windows 11 – Intel Core i7 – RTX 4060 🎮 – 64 GB RAM 🧠
+2️⃣ Offline Execution: 🚫 Fully offline – no internet, APIs, or subscriptions required.
+3️⃣ Arabic Interface: 🧩 18 integrated tools with full RTL and Arabic support 🇸🇦
+4️⃣ 💬 Hasaballa GPT Chat: Master control panel to write, analyze, and route scripts to tools.
+5️⃣ 🎬 Smart Director: Orchestrates all tasks — either automatically or manually (as described above).
+6️⃣ ✏️ Smart Edit Layer: Lets users make timecode-based edits using Arabic prompts.
+7️⃣ 🖼️ Image Generation: Create high-quality, consistent character visuals from text prompts.
+8️⃣ 🎭 Image Animation: Lip sync, facial expressions, and ambient motion for characters.
+9️⃣ 🎞️ Timeline Editor: Full drag-and-drop editor to assemble final scenes and transitions.
+🔟 🗣️ Voice Cloning: Multi-character voice synthesis with emotion and pause control.
+1️⃣1️⃣ 🎧 Background Audio: Multi-layered sound design from local library or Pixabay (if available).
+1️⃣2️⃣ 💻 Core System: Self-contained application with no online dependencies.
+1️⃣3️⃣ 📊 YouTube & AdSense: Optional analytics and monetization features (if connected).
+1️⃣4️⃣ 🌐 Arabic RTL Interface: One-page layout with clean UI and full right-to-left support.
+1️⃣5️⃣ 💾 Save & Resume: Auto-save and reopen projects any time.
+1️⃣6️⃣ 📁 Project Folder System: Stores assets locally per project.
+1️⃣7️⃣ 🛡️ Backup & Restore: Save models, projects, and settings for full recovery.
+1️⃣8️⃣ 🔐 Source Code Ownership: 100% owned by the client — no external control.
+⚠️ Additional Note
+❗ I don’t need too many models for image generation, animation, etc. — even a single model per task is fine if its quality is extremely high (the best possible), and it reaches the minimum visual/audio quality shown in the sample videos.
+
+💬 Final Thought
+I know this platform is a massive and demanding project.
+It needs a smart, talented, and hardworking developer to bring it to life.
+But it’s also just the beginning of what I see as a long-term collaboration.
+
+🌱 I have big dreams for this platform — not just to build it, but to turn it into a full creative studio powered by AI.
+
+💵 And I understand it requires a big budget — but I want to take the first serious step with a maximum budget of $6,000 USD.
+🙏 I know this doesn’t reflect the true value of your effort, but it’s what I can afford now.
+
+🙌 Still, I promise:
+Whoever builds this with me will be my go-to developer for everything moving forward.
+Because I’m committed to growing this into something powerful and sustainable.
+
+— Ahmed Hasaballa
+July 2025
