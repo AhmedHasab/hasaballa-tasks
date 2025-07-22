@@ -604,6 +604,13 @@ Best of luck with the implementation — and many thanks in advance for your gre
 — Prepared by: Ahmed Hasaballa
 </p>
 
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.onclick = () => false;
+    });
+  });
+</script>
 
 </body>
 </html>
