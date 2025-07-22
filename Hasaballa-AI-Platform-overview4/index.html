@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🧠 Hasaballa AI Platform</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.8;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  h1, h2 {
+    font-size: 32px;
+    color: #333;
+  }
+  h2 {
+    margin-top: 50px;
+  }
+.task {
+  margin: 15px 0;
+}
+.task input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+.task.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Level 1: subtask */
+.subtask {
+  margin-left: 40px;
+  padding-left: 20px;
+  border-left: 2px solid #ccc;
+}
+
+/* Level 2: subsubtask */
+.subsubtask {
+  margin-left: 80px;
+  padding-left: 20px;
+  border-left: 2px solid #aaa;
+}
+
+/* ✅ Level 3: subsubsubtask */
+.subsubsubtask {
+  margin-left: 120px;
+  padding-left: 20px;
+  border-left: 2px solid #888; /* لون أغمق شوية للتمييز */
+}
+
+  ul {
+    margin-left: 30px;
+  }
+</style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+console.log("✅ Firebase connected & DOM ready");
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
+    authDomain: "hasaballa-ai.firebaseapp.com",
+    databaseURL: "https://hasaballa-ai-default-rtdb.firebaseio.com",
+    projectId: "hasaballa-ai",
+    storageBucket: "hasaballa-ai.appspot.com",
+    messagingSenderId: "786272460405",
+    appId: "1:786272460405:web:b2bc8cdba12407834d623c",
+    measurementId: "G-GVY2TS8MW4"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    firebase.database().ref("tasks").once("value").then(snapshot => {
+      const data = snapshot.val() || {};
+      checkboxes.forEach((checkbox, index) => {
+       const key = checkbox.getAttribute("data-id");
+
+       if (data[key] === true) {
+  checkbox.checked = true;
+  checkbox.parentElement.classList.add("completed");  // ✅ ضروري علشان الخط
+}
+
+        checkbox.addEventListener("change", () => {
+          const checked = checkbox.checked;
+          firebase.database().ref("tasks/" + key).set(checked);
+          if (checked) {
+            checkbox.parentElement.classList.add("completed");
+          } else {
+            checkbox.parentElement.classList.remove("completed");
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</head>
+<body>
+
+
+<section id="platform-overview" style="font-family: 'Segoe UI', sans-serif; direction: ltr; padding: 40px; max-width: 960px; margin: auto; line-height: 1.8; background: #f9f9f9; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+  <h2 style="font-size: 26px; margin-bottom: 15px;">🧠 Platform: Hasaballa AI</h2>
+
+  <p>🛠️ <strong>Description & How it Works</strong><br>
+  The Hasaballa AI platform will run fully offline 📴 — even if it’s 100 GB in size 💾. It’s designed to generate full cinematic-quality Arabic storytelling videos from text-based scripts, without needing any internet or external service.</p>
+
+  <p>🎯 <strong>Platform Goals</strong><br>
+  To produce videos matching the examples in the following links, which represent the minimum acceptable quality 👇</p>
+
+<ul>
+  <li><a href="https://www.facebook.com/share/v/16bcprHm7i/" target="_blank">🔗 Link 1 </a></li>
+  <li><a href="https://www.facebook.com/share/v/16nf3biL84/" target="_blank">🔗 Link 2</a></li>
+  <li><a href="https://www.facebook.com/share/v/1FPbPaSuxi/" target="_blank">🔗 Link 3</a></li>
+  <li><a href="https://www.facebook.com/share/v/16sURn3tgo/" target="_blank">🔗 Link 4</a></li>
+  <li><a href="https://www.facebook.com/share/v/19AfGVMDLn/" target="_blank">🔗 Link 5</a></li>
+  <li><a href="https://www.facebook.com/share/v/16sRpA7sTf/" target="_blank">🔗 Link 6</a></li>
+</ul>
+
+ <h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
+
+<div style="
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  max-width: 1300px;
+">
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/1.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/3.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/4.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/5.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/6.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
+
+  <h3 style="margin-top: 30px;">🧠 How to Use Hasaballa AI Platform</h3>
+
+  <p>🟢 <strong>1. Smart Director – Automatic Mode</strong><br>
+  The user writes the entire script inside the chat window, then presses a single button to start the automatic process. The system will handle everything — from visual generation to final video output:<br>
+  <strong>Workflow:</strong> 1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor</p>
+
+  <p>🟡 <strong>2. Smart Director – Manual Mode</strong><br>
+  Full hands-on mode for professionals who want total control. The user can control each generation step manually — generate visuals, skip voice, choose animation style, etc. Nothing happens automatically.<br>
+  <strong>Workflow:</strong> 1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br>
+  ✅ <em>Allows complete manual control at every step.</em></p>
+
+  <p>🔵 <strong>3. Standalone Mode (Each Tool Individually)</strong><br>
+  Use any tool separately (image generator, voice cloner, animation, etc.) without needing to run a full project. Ideal for experiments, assets, or testing workflows.</p>
+
+  <h3 style="margin-top: 30px;">🧩 How the Platform Flows</h3>
+  <ol style="margin-left: 20px;">
+    <li>1️⃣ User writes full script in Hasaballa GPT Chat.</li>
+    <li>2️⃣ User clicks Auto Smart Director or chooses Manual Mode.</li>
+    <li>3️⃣ The system processes the script → generates visuals, voices, animations, and lip sync.</li>
+    <li>4️⃣ All assets go into the Timeline Editor.</li>
+    <li>5️⃣ User can fine-tune scenes via Smart Edit Layer.</li>
+    <li>6️⃣ Final video is exported in high quality (HD, 4K…).</li>
+    <li>7️⃣ (Optional) Track views/revenue via YouTube integration.</li>
+  </ol>
+
+<h1>According to your skills, these are the tasks required from you:</h1>
+<h3>The task numbers below represent their sequence in the platform.</h3>
+
+
+
+<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>💻 Windows 11, with an Intel Core i7 processor, RTX 4060</strong> (8 GB) GPU 🎮, and 64 GB RAM 🧠.</div>
+<div class="task"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
+<div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
+<div class="task"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
+(Needs buttons to connect to the Internet).</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task12-a"> 12-A 💰 Link to <strong>AdSense</strong> — show revenue from YouTube.</div>
+<div class="task subtask"><input type="checkbox"data-id="task12-b"> 12-B 📊 Link to <strong>YouTube Studio</strong> — track video performance and suggest improvements.</div>
+
+<div class="task"><input type="checkbox"data-id="task13"> 1️⃣3️⃣ <strong>Arabic Interface </strong>(Single Page Layout) 🌐.<br>
+✅ 100% RTL support, 📌 Large buttons — each with a simple label and tooltip.<br>
+(⚠️ The interface shown is in English for demonstration purposes only, but the final platform and all its interfaces must be in Arabic. 🗣️🇸🇦عربي)
+</div>
+ <div>
+<img 
+ src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/29.jpg?raw=true"
+  style="width:70%; display:block; margin:auto;" >
+</div>
+
+<div class="task"><input type="checkbox"data-id="task14"> 1️⃣4️⃣<strong> Auto-Update Button 🔄</strong>.<br>
+(Requires internet) — used to update the platform in future if needed.</div>
+
+<div class="task"><input type="checkbox"data-id="task15"> 1️⃣5️⃣<strong> Save Project & Continue Later 💾</strong>.</div>
+
+<div class="task"><input type="checkbox"data-id="task16"> 1️⃣6️⃣ Project Folder System — <strong>stores all files </strong>(images/audio/etc.) 📁.</div>
+
+<div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ <strong>Backup & Restore Function</strong> 🛡️.</div>
+
+<div class="task"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ <strong>Full source code ownership</strong> (for exclusive platform rights) 🔐.</div>
+
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.onclick = () => false;
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+<hr style="margin-top: 60px;">
+
+<p style="font-size: 20px; margin-top: 40px;">
+🙏 Thank you for your time and effort.<br>
+Best of luck with the implementation — and many thanks in advance for your great work!
+</p>
+
+<p style="font-size: 18px; color: #555; margin-top: 20px;">
+— Prepared by: Ahmed Hasaballa
+</p>
+
+
+</body>
+</html>
+  
