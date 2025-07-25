@@ -275,6 +275,7 @@ To produce videos matching the examples in the following links, which represent 
     </div>
 
   </div>
+
   
 
   <div class="task"><input type="checkbox"data-id="task6"> 6️⃣ <strong>Image Animation</strong> — must match the quality in reference videos 🎭.</div>
@@ -326,7 +327,12 @@ To produce videos matching the examples in the following links, which represent 
 <div class="task subtask"><input type="checkbox"data-id="task6-a"> 6-A <strong>🧍‍♀️ Full-body animation</strong> (eyes, facial expressions, shoulders, hands, legs, etc.).</div>
 <div class="task subtask"><input type="checkbox"data-id="task6-b"> 6-B <strong>🏙️ Background motion</strong> too (e.g. people walking in streets, trees moving, curtains swaying, birds, animals, kids playing).</div>
 <div class="task subtask"><input type="checkbox"data-id="task6-c"> 6-C <strong>👄 Lip sync</strong> must be as good as DreamFace or better than the sample reference videos.</div>
-
+> The Chat Window <strong>(Hasaballa GPT)</strong> is the primary controller for deciding when and how lip sync is triggered(In the automatic and manual smart output mode).<br>
+- It analyzes the written script and automatically assigns isTalking:<br> 
+true to the correct reference image — based on scene type and text context.<br>
+✅ Until no confusion between speaking and silent characters.<br>
+✅ And there will be natural results in storytelling, podcasts, and films.<br>
+🔄 The system must handle <strong>4</strong> main cases:👇</div>
 
 <div class="task subsubtask"><input type="checkbox"data-id="task6-c-1"> 6-C-1 <strong>🎙️ Narration Mode</strong> (Single Character Speaking)<br>
 
@@ -337,6 +343,32 @@ To produce videos matching the examples in the following links, which represent 
 - All other characters must stay silent (no talking animation).<br>
 
 📌 Other characters may appear <strong>visually</strong>, but must not animate lips.<br></div>
+
+  <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1000px; border-radius: 10px; background-color: #f9f9f9;">
+
+  <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+    <video width="45%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/12.mp4" type="video/mp4">
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/14.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 20px;">
+    <video width="45%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/17.mp4" type="video/mp4">
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/24.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
 
 <div class="task subsubtask"><input type="checkbox"data-id="task6-c-2"> 6-C-2 <strong>🗣️ Dialogue Mode</strong> (Multiple Characters Talking)<br>
 
@@ -354,6 +386,19 @@ To produce videos matching the examples in the following links, which represent 
 
 
 💬 (This dialogue will appear in <strong>Arabic dialects</strong> — English is just for explanation.)<br></div>
+
+  <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1200px; border-radius: 10px; background-color: #f9f9f9;">
+
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+    <video width="70%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/28.mp4" type="video/mp4">
+    </video>
+
+  </div>
+
+</div>
 
 <div class="task subsubtask"><input type="checkbox"data-id="task6-c-3"> 6-C-3 <strong>🔄 Mixed Mode</strong> (Narration + Occasional Dialogue)<br>
 
@@ -376,7 +421,47 @@ To produce videos matching the examples in the following links, which represent 
 
 💬 (This represents a visual moment where characters talk to each other while narration continues separately.)<br></div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task6-c-4"> 6-C-4 <strong>⚙️ Technical Flags per Image.</strong><br>
+  <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1200px; border-radius: 10px; background-color: #f9f9f9;">
+
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+    <video width="30%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/9.mp4" type="video/mp4">
+    </video>
+
+    <video width="30%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/10.mp4" type="video/mp4">
+    </video>
+
+    <video width="30%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/11.mp4" type="video/mp4">
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/15.mp4" type="video/mp4">
+    </video>
+
+    <video width="45%" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/22.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
+
+  <div class="task subsubtask"><input type="checkbox"data-id="task6-c-4"> 6-C-4 <strong>🚫 Narration Without Lip Sync</strong>.<br> 
+- The user must be able to disable lip sync for the reference image that narrates the story — via a clear command in the Chat Window.<br> 
+<strong>Example</strong>: “Soad narrates silently without lip movement.”</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1000px; border-radius: 10px; background-color: #f9f9f9; text-align: center;">
+  <video width="45%" autoplay muted loop controls>
+    <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/23.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-5"> 6-C-5 <strong>⚙️ Technical Flags per Image.</strong><br>
 
 Each reference image must carry a dynamic control flag:<br>
 
@@ -388,7 +473,7 @@ Each reference image must carry a dynamic control flag:<br>
 
 🧩 This ensures visual clarity and prevents unwanted animation.<br></div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task6-c-5"> 6-C-5 <strong>🧩 Clean Visual Output.</strong><br>
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-6"> 6-C-6 <strong>🧩 Clean Visual Output.</strong><br>
 
 🎯 Final result must be:<br>
 
@@ -400,7 +485,7 @@ Each reference image must carry a dynamic control flag:<br>
 ✅ Fully supports storytelling, podcasts, and group scenes with multiple characters.<br></div>
 
 
-<div class="task subsubtask"><input type="checkbox"data-id="task6-c-6"> 6-C-6 🧠 Auto Lip Sync for Background Speakers. <br>
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-7"> 6-C-7 🧠 Auto Lip Sync for Background Speakers. <br>
 ✅ If a background audio track includes a <strong>reference voice</strong> of a character who is visually present in the scene, the system must automatically:<br>
 
 ◼️Trigger lip sync for that character’s reference image.<br>
@@ -411,8 +496,16 @@ Each reference image must carry a dynamic control flag:<br>
 
 ◼️<strong>Ignore</strong> other non-speaking characters in the same scene.</div>
 
+  <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task6-c-7"> 6-C-7 🧠 This feature works with <strong>Smart Director’s Auto Mode</strong> for intelligent scene processing, and can be <strong>manually</strong> adjusted in Manual Mode if needed.</div>
+<div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1000px; border-radius: 10px; background-color: #f9f9f9; text-align: center;">
+  <video width="45%" autoplay muted loop controls>
+    <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/27.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+<div class="task subsubtask"><input type="checkbox"data-id="task6-c-8"> 6-C-8 🧠 This feature works with <strong>Smart Director’s Auto Mode</strong> for intelligent scene processing, and can be <strong>manually</strong> adjusted in Manual Mode if needed.</div>
 
 <div class="task subtask"><input type="checkbox"data-id="task6-d"> 6-D <strong>🔽 Skip</strong> This Step Button<br> 
 Add a clear "⏭️ Skip this step" button to this stage. <br> 
