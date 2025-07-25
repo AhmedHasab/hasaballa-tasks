@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🧠 Hasaballa AI Platform</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.8;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  h1, h2 {
+    font-size: 32px;
+    color: #333;
+  }
+  h2 {
+    margin-top: 50px;
+  }
+.task {
+  margin: 15px 0;
+}
+.task input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+.task.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Level 1: subtask */
+.subtask {
+  margin-left: 40px;
+  padding-left: 20px;
+  border-left: 2px solid #ccc;
+}
+
+/* Level 2: subsubtask */
+.subsubtask {
+  margin-left: 80px;
+  padding-left: 20px;
+  border-left: 2px solid #aaa;
+}
+
+/* ✅ Level 3: subsubsubtask */
+.subsubsubtask {
+  margin-left: 120px;
+  padding-left: 20px;
+  border-left: 2px solid #888; /* لون أغمق شوية للتمييز */
+}
+
+  ul {
+    margin-left: 30px;
+  }
+</style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+console.log("✅ Firebase connected & DOM ready");
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
+    authDomain: "hasaballa-ai.firebaseapp.com",
+    databaseURL: "https://hasaballa-ai-default-rtdb.firebaseio.com",
+    projectId: "hasaballa-ai",
+    storageBucket: "hasaballa-ai.appspot.com",
+    messagingSenderId: "786272460405",
+    appId: "1:786272460405:web:b2bc8cdba12407834d623c",
+    measurementId: "G-GVY2TS8MW4"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    firebase.database().ref("tasks").once("value").then(snapshot => {
+      const data = snapshot.val() || {};
+      checkboxes.forEach((checkbox, index) => {
+       const key = checkbox.getAttribute("data-id");
+
+       if (data[key] === true) {
+  checkbox.checked = true;
+  checkbox.parentElement.classList.add("completed");  // ✅ ضروري علشان الخط
+}
+
+        checkbox.addEventListener("change", () => {
+          const checked = checkbox.checked;
+          firebase.database().ref("tasks/" + key).set(checked);
+          if (checked) {
+            checkbox.parentElement.classList.add("completed");
+          } else {
+            checkbox.parentElement.classList.remove("completed");
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</head>
+<body>
+<h1>🧠 Platform: Hasaballa AI</h1>
+
+<h2>🛠️ - Description & How it Works</h2>
+<p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 100 GB in size 💾.</p>
+
+<h2>🎯 Platform Goals</h2>
+<p>
+To produce videos matching the examples in the following links, which represent the minimum acceptable quality 👇<br>
+(Please watch all the links completely — this is the minimum quality required):</p>
+<ul>
+  <li><a href="https://www.facebook.com/share/v/16bcprHm7i/" target="_blank">🔗 Link 1 </a></li>
+  <li><a href="https://www.facebook.com/share/v/16nf3biL84/" target="_blank">🔗 Link 2</a></li>
+  <li><a href="https://www.facebook.com/share/v/1FPbPaSuxi/" target="_blank">🔗 Link 3</a></li>
+  <li><a href="https://www.facebook.com/share/v/16sURn3tgo/" target="_blank">🔗 Link 4</a></li>
+  <li><a href="https://www.facebook.com/share/v/19AfGVMDLn/" target="_blank">🔗 Link 5</a></li>
+  <li><a href="https://www.facebook.com/share/v/16sRpA7sTf/" target="_blank">🔗 Link 6</a></li>
+</ul>
+<h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
+
+<div style="
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  max-width: 1300px;
+">
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/1.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/3.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/4.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/5.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/6.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
+
+
+
+
+<h1>🧠 How to Use Hasaballa AI Platform</h1>
+
+<div class="section">
+  <h2>🟢 1. Smart Director – Automatic Mode (One Click – Full Auto Workflow)</h2>
+  <p>🔹 The user writes the full script in the Hasaballa GPT chat window (scenes, images, voices, animation...).<br>
+  🔹 Then clicks the 🎬 "Smart Director – Auto" button.<br>
+  🔹 The system automatically generates everything based on the script:</p>
+  <ul>
+    <li>🖼️ Image generation</li>
+    <li>🧍‍♂️ Character animation</li>
+    <li>🔊 Voice generation & cloning</li>
+    <li>👄 Lip sync</li>
+    <li>🎧 Background audio</li>
+    <li>🎞️ Final video with full timeline</li>
+  </ul>
+  <p>✅ No manual steps required, but users can review or tweak results afterward.</p>
+</div>
+
+<div class="section">
+  <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
+  <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
+  🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
+  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
+  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  <p>🔹 In each stage, the user decides:</p>
+  <ul>
+    <li>Generate image or skip</li>
+    <li>Generate voice or skip</li>
+    <li>Animate or not</li>
+    <li>Add background audio or skip</li>
+    <li>Activate lip sync or not</li>
+  </ul>
+  <p>🧩 Each generated element is automatically added to the final timeline.</p>
+  <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
+</div>
+
+<div class="section">
+  <h2>🔵 3. Use Each Tool Individually (Standalone Mode)</h2>
+  <p>🔹 Every tool (Generate Image, Clone Voice, Animate, Sync, Add Background Audio...) has its own button.<br>
+  🔹 The user can use any tool individually — for quick tasks or partial content creation.<br>
+  (Example: generate just an image, tweak a voice clip, test background sound...)</p>
+  <p>✅ Ideal for:</p>
+  <ul>
+    <li>Quick experiments</li>
+    <li>Building content step-by-step</li>
+    <li>Podcasts, teasers, visual tests</li>
+  </ul>
+  <p>❌ But in this case, you’ll need to assemble the final video manually — or import the results into the editor or timeline yourself.</p>
+</div>
+
+
+
+
+  
+
+<h2>✅ 📋 Milestone 1 Tasks – Hasaballa AI</h2>
+<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>💻 Windows 11, with an Intel Core i7 processor, RTX 4060</strong> (8 GB) GPU 🎮, and 64 GB RAM 🧠.</div>
+<div class="task"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
+<div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
+
+
+<div class="task"><input type="checkbox"data-id="task5"> 5️⃣ <strong>Ultra-realistic image generation 🖼️.</strong><br>
+(Supported formats: 16:9, 9:16, 1:1)</div>
+
+
+
+
+<div class="task subtask"><input type="checkbox"data-id="task5-a"> 5-A <strong>🎥 Cinematic lighting</strong>.</div>
+<div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B <strong>👥 Reference images</strong> (for multiple characters, minimum of 8 — all can appear in one video, so identity consistency is critical).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task5-b-1"> 5-B-1 🎙️Each reference image should ideally be linked to a unique <strong>reference voice</strong>, forming a Character Pack (Image + Voice).<br>
+- This pairing enables the system to use the correct voice for each image during video generation (especially in <strong>Dialogue Mode</strong>).<br>
+
+- 🧠 The decision to use the voice or not is made during script writing inside the Chat Window — based on the context and structure of the text (<strong>see Task 4-F-2</strong>).<br>
+- The <strong>Smart Director</strong> simply follows this logic during generation (<strong>automatic or manual</strong>).<br></div>
+<div class="task subtask"><input type="checkbox"data-id="task5-c"> 5-C <strong>🔒 Identity lock button.</strong><br> - must match reference image with 99.9% (ideally 100%) accuracy.</div>
+<div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
+<div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E <strong>📂 Dropdown list</strong> for character reference images. </div>
+<div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F <strong>🏆 Minimum visual quality</strong> must match examples in the above video links.</div>
+<div class="task subtask"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 100% correct Arabic text</strong> in generated images.</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; border-radius: 10px; padding: 15px; margin: 30px auto; background-color: #f9f9f9; width: 45%; text-align: center;">
+  <video width="100%" autoplay muted loop controls>
+    <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/8.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+<div class="task subtask"><input type="checkbox"data-id="task5-h"> 5-H <strong>🔽 Skip This Step Button</strong><br> 
+Add a clear "⏭️ Skip this step" button to this stage. <br> 
+🔹 If the user chooses to skip this stage, the system must:<br> 
+- 🚫 Ignore this step during video generation.<br> 
+- ✅ Continue smoothly to the next stage.<br> 
+- ⚠️ Not show any error or interruption in the process.<br> 
+🧠 The <strong>Smart Director</strong> must later adjust the final timeline accordingly..</div>
+<div class="task subtask"><input type="checkbox"data-id="task5-i"> 5-I ⚙️ Must work in both <strong>automatic and manual mode</strong> with the Smart Director (from chat window to final video).</div>
+
+
+
+
+
+
+
+
+<h1>🧠 Image Animation – How It Works</h1>
+
+  <img src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/refs/heads/main/photos/animation.png" style="width:70%; display:block; margin:auto;" >
+
+
+  <div class="section">
+    <h2>🎯 Purpose:</h2>
+    <p>This tool animates still images by detecting faces, assigning voices, and syncing lip/body motion to create realistic video scenes.</p>
+  </div>
+
+  <div class="section">
+    <h2>🛠️ Step-by-Step Guide:</h2>
+
+    <div class="step">
+      <strong>Describe the Animation</strong><br>
+      Type what you want to happen in the scene (e.g., “Woman explains a story, man reacts seriously”).<br>
+      This helps guide the animation logic (especially when voice is not yet uploaded).
+    </div>
+
+    <div class="step">
+      <strong>Animation Modes</strong><br>
+      - <strong>Full Body Animation:</strong> Activates full motion (head + shoulders + arms).<br>
+      - <strong>Background Motion:</strong> Adds subtle ambient movement (trees, curtains, people…).<br>
+      - <strong>Lip Sync:</strong> Synchronizes mouth movement to the assigned audio.
+    </div>
+
+    <div class="step">
+      <strong>Face Detection</strong><br>
+      The tool automatically detects faces from the uploaded image and shows them (Face 1, Face 2…).<br>
+      You can assign voice to each face individually.
+    </div>
+
+    <div class="step">
+      <strong>Voice Assignment</strong><br>
+      Click the 🎤 icon or download arrow under each face to link a voice file (e.g., “soad_voice.wav”).<br>
+      Only the speaking face will have active lip movement during its dialogue part.
+    </div>
+
+    <div class="step">
+      <strong>Skip Option</strong><br>
+      Use the <strong>Skip</strong> button to bypass this step if you don’t need animation for the current scene.
+    </div>
+
+    <div class="step">
+      <strong>Generate</strong><br>
+      Click <strong>Generate Video</strong> to render the animation using the chosen settings and assigned audio.
+    </div>
+
+  </div>
+
+  
