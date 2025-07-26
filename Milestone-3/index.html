@@ -517,54 +517,55 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 <div class="task subtask"><input type="checkbox"data-id="task6-e"> 6-E ⚙️ Works both <strong>automatically and manually with Smart Director</strong> (from chat window to final video).</div>
 
-<div class="task subtask"><input type="checkbox" data-id="task6-f"> 6-F 
-📌 ✅ Quality Evaluation Criteria (Milestone 3)
+<div class="task subtask"><input type="checkbox" data-id="task6-f"> 6-F <br>
+📌 ✅ Quality Evaluation Criteria (Milestone 3)<br><br>
 
-To mark this milestone as complete, the following quality criteria must be strictly met:
+To mark this milestone as complete, the following quality criteria must be strictly met:<br><br>
 
 1. <strong>Full-Body Animation Accuracy</strong><br>
 – Characters must show smooth and expressive movement in head, eyes, shoulders, and arms.<br>
-– Animation must be visually realistic and cinematic, not robotic.
+– Animation must be visually realistic and cinematic, not robotic.<br><br>
 
 2. <strong>Background Motion Presence</strong><br>
 – Visual scenes must include subtle ambient motion (e.g., people walking, trees moving, curtains swaying) when specified.<br>
-– Static backgrounds are not accepted unless clearly disabled in the prompt or script.
+– Static backgrounds are not accepted unless clearly disabled in the prompt or script.<br><br>
 
 3. <strong>Lip Sync Precision (≥ 98%)</strong><br>
 – Lip movements must match speech timing and emotion.<br>
-– Only speaking characters should have lip animation; all others must remain neutral.
+– Only speaking characters should have lip animation; all others must remain neutral.<br><br>
 
 4. <strong>Correct Handling of the 4 Scene Types</strong><br>
 – The system must differentiate and correctly animate the following cases:<br>
-&nbsp;&nbsp;&nbsp;🎙️ Narration (single speaker only)<br>
-&nbsp;&nbsp;&nbsp;🗣️ Dialogue (multi-speaker, accurate switching)<br>
-&nbsp;&nbsp;&nbsp;🔄 Mixed Mode (narration + side conversation)<br>
-&nbsp;&nbsp;&nbsp;🚫 Narration without lip-sync (intentional silence)
+&emsp;🎙️ Narration (single speaker only)<br>
+&emsp;🗣️ Dialogue (multi-speaker, accurate switching)<br>
+&emsp;🔄 Mixed Mode (narration + side conversation)<br>
+&emsp;🚫 Narration without lip-sync (intentional silence)<br><br>
 
 5. <strong>Voice-to-Face Assignment</strong><br>
 – Each face in the scene must be assigned a voice accurately, using either uploaded or cloned voices.<br>
-– Only characters marked as <code>isTalking: true</code> should be animated.
+– Only characters marked as <code>isTalking: true</code> should be animated.<br><br>
 
 6. <strong>Automatic & Manual Mode Functionality</strong><br>
 – The entire animation process must be callable by the Smart Director in both Auto Mode (from full script) and Manual Mode (by user action).<br>
-– No hardcoded triggers — animation must follow the scene logic dynamically.
+– No hardcoded triggers — animation must follow the scene logic dynamically.<br><br>
 
 7. <strong>Skip Logic Stability</strong><br>
 – If the user skips this animation stage, the system must:<br>
-&nbsp;&nbsp;&nbsp;– Not break the video generation pipeline.<br>
-&nbsp;&nbsp;&nbsp;– Remove animation for that scene gracefully.<br>
-&nbsp;&nbsp;&nbsp;– Adjust the timeline and scene flow automatically.
+&emsp;– Not break the video generation pipeline.<br>
+&emsp;– Remove animation for that scene gracefully.<br>
+&emsp;– Adjust the timeline and scene flow automatically.<br><br>
 
 8. <strong>Visual Clarity in Multi-Character Scenes</strong><br>
 – In scenes with multiple characters, only the currently speaking one should animate.<br>
-– No overlapping, confusing, or redundant lip syncs.
+– No overlapping, confusing, or redundant lip syncs.<br><br>
 
 9. <strong>Background Audio Reaction (Optional)</strong><br>
-– If a background speaker is visually present and has a voice track, system must trigger <code>isTalking: true</code> for correct timing — even if not in main dialogue.
+– If a background speaker is visually present and has a voice track, system must trigger <code>isTalking: true</code> for correct timing — even if not in main dialogue.<br><br>
 
 10. <strong>Quality Match with Reference Videos</strong><br>
-– Final output must visually match or exceed the realism level shown in reference videos shared in the project brief (e.g., DreamFace quality or better).
+– Final output must visually match or exceed the realism level shown in reference videos shared in the project brief (e.g., DreamFace quality or better).<br>
 </div>
+
 
   
 
