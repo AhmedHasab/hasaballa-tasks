@@ -1046,8 +1046,47 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 <div class="task subtask"><input type="checkbox"data-id="task8-e"> 8-E ⚙️ Must work seamlessly with the <strong>Smart Director</strong> (automatic/manual).</div>
 
-<div class="task"><input type="checkbox"data-id="task9"> 9️⃣ <strong>Smart Director (Two Buttons) 🎬</strong>.</div>
-<section class="auto-director-flow">
+<div class="task"><input type="checkbox"data-id="task9"> 9️⃣ <strong>Smart Director (Two Buttons) 🎬</strong>.
+
+ <div class="section">
+  <h2>🟢 1. Smart Director – Automatic Mode (One Click – Full Auto Workflow)</h2>
+  <p>🔹 The user writes the full script in the Hasaballa GPT chat window (scenes, images, voices, animation...).<br>
+  🔹 Then clicks the 🎬 "Smart Director – Auto" button.<br>
+  🔹 The system automatically generates everything based on the script:</p>
+  <ul>
+    <li>🖼️ Image generation</li>
+    <li>🧍‍♂️ Character animation</li>
+    <li>🔊 Voice generation & cloning</li>
+    <li>👄 Lip sync</li>
+    <li>🎧 Background audio</li>
+    <li>🎞️ Final video with full timeline</li>
+  </ul>
+  <p>✅ No manual steps required, but users can review or tweak results afterward.</p>
+</div>
+
+<div class="section">
+  <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
+  <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
+  🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
+  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
+  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  <p>🔹 In each stage, the user decides:</p>
+  <ul>
+    <li>Generate image or skip</li>
+    <li>Generate voice or skip</li>
+    <li>Animate or not</li>
+    <li>Add background audio or skip</li>
+    <li>Activate lip sync or not</li>
+  </ul>
+  <p>🧩 Each generated element is automatically added to the final timeline.</p>
+  <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
+</div> 
+
+</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task9-a"> 9-A <strong>⚡ Automatic Mode</strong>:<br> From writing the script in the chat window (with visual/sound prompts and text-to-image/video prompts) to the final video — all automatically.<br>
+
+  <section class="auto-director-flow">
   <h3>🎬 Auto Smart Director – Full Execution Flow</h3>
 
   <div class="flow-step">
@@ -1114,8 +1153,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   </div>
 </section>
 
-
-<div class="task subtask"><input type="checkbox"data-id="task9-a"> 9-A <strong>⚡ Automatic Mode</strong>:<br> From writing the script in the chat window (with visual/sound prompts and text-to-image/video prompts) to the final video — all automatically.</div>
+</div>
 <div class="task subsubtask"><input type="checkbox"data-id="task9-a-1"> 9-A-1 🔄 Same button will work with both the <strong>Full Video Editor Panel (Task 10-F)</strong> and the Smart Edit Layer <strong>(Task 11)</strong>.</div>
 <div class="task subsubtask"><input type="checkbox"data-id="task9-a-2"> 9-A-2 🕒 For a <strong>7-minute video</strong>: total production time from click to final output must not exceed <strong>30 minutes</strong> (includes ≈85 images, animation, lip sync, voice, sound, etc.).</div>
 <div class="task subsubtask"><input type="checkbox"data-id="task9-a-3"> 9-A-3 ⏱️ For a <strong>15-minute video</strong>: total time from click to final output must not exceed <strong>60 minutes</strong> (≈170 images, full production).</div>
@@ -1147,10 +1185,23 @@ Ensure high-quality output even with partial steps.<br>
 → The system should skip animation and voice without asking.<br>
 
 ⚙️<strong> Important</strong>:<br>
-This task only applies in Automatic Mode.<br>
+This task only applies in Automatic Mode.<br></div>
+<div class="task subtask"><input type="checkbox"data-id="task9-b"> 9-B 🛠️ <strong>Manual Mode:</strong><br> Full step-by-step control from chat to images, animation, voice, sound and lip sync — everything manual.
 
-<strong>Manual skipping</strong> is defined separately (see <strong>Task 9-B</strong>).<br></div>
-<div class="task subtask"><input type="checkbox"data-id="task9-b"> 9-B 🛠️ <strong>Manual Mode:</strong><br> Full step-by-step control from chat to images, animation, lip sync, voice, sound — everything manual.</div>
+<strong>Manual skipping</strong> is defined separately (see <strong>Task 9-B</strong>).<br>
+<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+
+Lets the user go step-by-step through each tool manually, with full control over:<br>
+
+- Image generation <br>
+
+- Audio selection <br>
+
+- Lip sync activation <br>
+
+- Final assembly<br>
+  
+</div>
 
   <div class="task subsubtask"><input type="checkbox"data-id="task9-b-1"> 9-B-1 ✅ <strong>Manual Director – Visual Tracker Requirement:</strong>
 The manual Smart Director must include a visual progress bar or step tracker (<strong>Task Timeline</strong>), showing the current tool in use, completed stages, and remaining tasks. This helps the user follow the video generation flow step-by-step.</div>
