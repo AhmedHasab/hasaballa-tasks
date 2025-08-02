@@ -3,14 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <title>🧠 Hasaballa AI Platform</title>
+<link rel="icon" type="image/png" href="photos/31.png">
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    line-height: 1.8;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
+body {
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1.8;
+  padding: 20px;
+  background-color: #f9f9f9;
+  position: relative; /* مهمة علشان الخلفية تشتغل */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('photos/31.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%; /* غيّر النسبة لو حبيت تصغر أو تكبّر الشعار */
+  opacity: 0.08; /* تحكم في درجة الشفافية */
+  z-index: -1; /* ضروري علشان تكون تحت النص */
+  pointer-events: none; /* ما تمنعش التفاعل مع النصوص */
+}
+
   h1, h2 {
     font-size: 32px;
     color: #333;
