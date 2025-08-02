@@ -250,5 +250,12 @@ console.log("✅ Firebase connected & DOM ready");
 
   <p style="margin-top: 20px;"><strong>— Ahmed Hasaballa</strong><br>July 2025</p>
 </section>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.onclick = () => false;
+    });
+  });
+</script>
 </body>
 </html>
