@@ -5,6 +5,15 @@
 <title>🧠 Hasaballa AI Platform</title>
 <link rel="icon" type="image/png" href="photos/31.png">
 <style>
+body {
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1.8;
+  padding: 20px;
+  background-color: #f9f9f9;
+  position: relative; /* مهمة علشان الخلفية تشتغل */
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -14,9 +23,10 @@ body::before {
   background-image: url('photos/31.png');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 60%; /* أو contain */
-  opacity: 0.07; /* تحكم في شفافية الخلفية */
-  z-index: -1;
+  background-size: 50%; /* غيّر النسبة لو حبيت تصغر أو تكبّر الشعار */
+  opacity: 0.08; /* تحكم في درجة الشفافية */
+  z-index: -1; /* ضروري علشان تكون تحت النص */
+  pointer-events: none; /* ما تمنعش التفاعل مع النصوص */
 }
 
 
