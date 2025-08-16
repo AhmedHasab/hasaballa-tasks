@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🧠 Hasaballa AI Platform</title>
+<link rel="icon" type="image/png" href="photos/favicon.png">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  font-size: 26px;
+  line-height: 1.8;
+  padding: 20px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../photos/31.png'); /* ← لاحظ: المسار اختلف */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  opacity: 0.08;
+  z-index: -1;
+  pointer-events: none;
+}
+
+  h1, h2 {
+    font-size: 32px;
+    color: #333;
+  }
+  h2 {
+    margin-top: 50px;
+  }
+.task {
+  margin: 15px 0;
+}
+.task input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+.task.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+  .task-box.shadow-3d {
+  border-left: 6px solid #ff9800;
+  background: linear-gradient(145deg, #fffdf8, #f5e8cc);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+}
+
+.badge {
+  display: inline-block;
+  background-color: #ff9800;
+  color: white;
+  font-size: 14px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.task-box.shadow-3d.lime-green {
+  border-left: 6px solid #8bc34a;
+  background: linear-gradient(145deg, #f5fff0, #e4f7d2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d.lime-green:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.4); /* أخضر ليموني */
+}
+
+  
+/* Level 1: subtask */
+.subtask {
+  margin-left: 40px;
+  padding-left: 20px;
+  border-left: 2px solid #ccc;
+}
+
+/* Level 2: subsubtask */
+.subsubtask {
+  margin-left: 80px;
+  padding-left: 20px;
+  border-left: 2px solid #aaa;
+}
+
+/* ✅ Level 3: subsubsubtask */
+.subsubsubtask {
+  margin-left: 120px;
+  padding-left: 20px;
+  border-left: 2px solid #888; /* لون أغمق شوية للتمييز */
+}
+
+  ul {
+    margin-left: 30px;
+  }
+</style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+console.log("✅ Firebase connected & DOM ready");
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
+    authDomain: "hasaballa-ai.firebaseapp.com",
+    databaseURL: "https://hasaballa-ai-default-rtdb.firebaseio.com",
+    projectId: "hasaballa-ai",
+    storageBucket: "hasaballa-ai.appspot.com",
+    messagingSenderId: "786272460405",
+    appId: "1:786272460405:web:b2bc8cdba12407834d623c",
+    measurementId: "G-GVY2TS8MW4"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    firebase.database().ref("tasks").once("value").then(snapshot => {
+      const data = snapshot.val() || {};
+      checkboxes.forEach((checkbox, index) => {
+       const key = checkbox.getAttribute("data-id");
+
+       if (data[key] === true) {
+  checkbox.checked = true;
+  checkbox.parentElement.classList.add("completed");  // ✅ ضروري علشان الخط
+}
+
+        checkbox.addEventListener("change", () => {
+          const checked = checkbox.checked;
+          firebase.database().ref("tasks/" + key).set(checked);
+          if (checked) {
+            checkbox.parentElement.classList.add("completed");
+          } else {
+            checkbox.parentElement.classList.remove("completed");
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</head>
+<body>
+<h1>🧠 Platform: Hasaballa AI</h1>
+
+<h2>🛠️ - Description & How it Works</h2>
+<p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 200 GB in size 💾.</p>
+
+<h2>🎯 Platform Goals</h2>
+  
+<div class="intro-statement">
+  To produce unlimited videos at high speed — 
+  without any subscriptions, APIs, or internet connection —  
+  <br><br>
+  matching <strong>(at minimum)</strong> the quality shown in the following examples 👇
+  <br>
+  <em>(Please watch all links or preview videos fully — this is the lowest acceptable quality standard.)</em>
+</div>
+
+<ul>
+  <li><a href="https://drive.google.com/file/d/145S95Kgz5H9KZaZq5twCucbSCjbwqZSm/view?usp=sharing" target="_blank">🔗 Link 1 </a></li>
+  <li><a href="https://drive.google.com/file/d/1klPlXWHbzia8IzF7JCTRXzlzwtif6woF/view?usp=sharing" target="_blank">🔗 Link 2</a></li>
+  <li><a href="https://drive.google.com/file/d/1DwNZPoISitNV8PUKz7qbBBedJectcpYV/view?usp=sharing" target="_blank">🔗 Link 3</a></li>
+  <li><a href="https://drive.google.com/file/d/1ZAHGP_oUorGF5gTKxaYcnKQwqRg7Hhx9/view?usp=sharing" target="_blank">🔗 Link 4</a></li>
+  <li><a href="https://drive.google.com/file/d/1c5CoVZ-7lYvpsLZz1TwafGyZCzjReyeR/view?usp=sharing" target="_blank">🔗 Link 5</a></li>
+  <li><a href="https://drive.google.com/file/d/1JIGIl7Jx3YKKXAmszYjOFvh6Zraick7j/view?usp=sharing" target="_blank">🔗 Link 6</a></li>
+</ul>
+<h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
+
+<div style="
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  max-width: 1300px;
+">
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/1.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/3.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/4.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/5.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/6.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
+
+
+
+
+<h1>🧠 How to Use Hasaballa AI Platform</h1>
+
+<div class="section">
+  <h2>🟢 1. Smart Director – Automatic Mode (One Click – Full Auto Workflow)</h2>
+  <p>🔹 The user writes the full script in the Hasaballa GPT chat window (scenes, images, voices, animation...).<br>
+  🔹 Then clicks the 🎬 "Smart Director – Auto" button.<br>
+  🔹 The system automatically generates everything based on the script:</p>
+  <ul>
+    <li>🖼️ Image generation</li>
+    <li>🧍‍♂️ Character animation</li>
+    <li>🔊 Voice generation & cloning</li>
+    <li>👄 Lip sync</li>
+    <li>🎧 Background audio</li>
+    <li>🎞️ Final video with full timeline</li>
+  </ul>
+  <p>✅ No manual steps required, but users can review or tweak results afterward.</p>
+</div>
+
+<div class="section">
+  <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
+  <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
+  🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
+  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
+  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  <p>🔹 In each stage, the user decides:</p>
+  <ul>
+    <li>Generate image or skip</li>
+    <li>Generate voice or skip</li>
+    <li>Animate or not</li>
+    <li>Add background audio or skip</li>
+    <li>Activate lip sync or not</li>
+  </ul>
+  <p>🧩 Each generated element is automatically added to the final timeline.</p>
+  <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
+</div>
+
+<div class="section">
+  <h2>🔵 3. Use Each Tool Individually (Standalone Mode)</h2>
+  <p>🔹 Every tool (Generate Image, Clone Voice, Animate, Sync, Add Background Audio...) has its own button.<br>
+  🔹 The user can use any tool individually — for quick tasks or partial content creation.<br>
+  (Example: generate just an image, tweak a voice clip, test background sound...)</p>
+  <p>✅ Ideal for:</p>
+  <ul>
+    <li>Quick experiments</li>
+    <li>Building content step-by-step</li>
+    <li>Podcasts, teasers, visual tests</li>
+  </ul>
+  <p>❌ But in this case, you’ll need to assemble the final video manually — or import the results into the editor or timeline yourself.</p>
+</div>
+
+
+<div class="task">
+  <h2>⚠️ Platform Design Requirement:</h2><br>
+  The platform must be built in full compatibility with the upcoming <b>Hasaballa Engine</b> update, as outlined in <b>Task 19</b>.<br>
+  All tools, pipelines, and internal logic must be future-proof and designed to integrate seamlessly with Hasaballa Engine once released.
+</div>
+
+
+  
+
+<h2>🚀 Milestone 1 – Required Tasks</h2>
+<p>
+🧠 All tasks must be designed to ensure compatibility with <strong>Task 19 (Hasaballa Engine)</strong> for future upgrades.
+</p>
+
+<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>
+💻 Windows 11 Home 64-bit, with an AMD Ryzen™ 9 9955HX (3.50 GHz, Fire Range), RTX 5090 🎮 (24 GB GDDR7), 64 GB DDR5 RAM 🧠, and 4TB M.2 NVMe SSD ⚡ — plus a 16.0" WQXGA 300Hz display 🖥️.</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task1-a">
+  1-A ✅ Must be architected to fully support <b>Hasaballa Engine</b> integration (see Task 19).<br>
+  All tools, pipelines, and system resources must be designed to connect seamlessly with the upcoming Hasaballa Engine — without needing any structural changes later.<br><br>
+  This includes:<br>
+  - Modular tool design with accessible internal APIs<br>
+  - Background tasks (e.g., image, voice, animation) ready for Engine control<br>
+  - Clear separation of logic to avoid future rework<br><br>
+  🧠 <b>Note:</b> Hasaballa Engine is the platform’s core automation system — future updates depend on this integration being ready from day one.
+</div>
+
+  
+<div class="task"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
+<div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="task"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
+(Needs buttons to connect to the Internet).</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task12-a"> 12-A 💰 Link to <strong>AdSense</strong> — show revenue from YouTube.</div>
+<div class="task subtask"><input type="checkbox"data-id="task12-b"> 12-B 📊 Link to <strong>YouTube Studio</strong> — track video performance and suggest improvements.</div>
+
+<div class="task"><input type="checkbox"data-id="task13"> 1️⃣3️⃣ <strong>Arabic Interface </strong>(Single Page Layout) 🌐.<br>
+✅ 100% RTL support, 📌 Large buttons — each with a simple label and tooltip.<br>
+(⚠️ The interface shown is in English for demonstration purposes only, but the final platform and all its interfaces must be in Arabic. 🗣️🇸🇦عربي)
+</div>
+ <div>
+<img 
+ src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/29.jpg?raw=true"
+  style="width:70%; display:block; margin:auto;" >
+</div>
+
+<div class="task"><input type="checkbox"data-id="task14"> 1️⃣4️⃣<strong> Auto-Update Button 🔄</strong>.<br>
+(Requires internet) — used to update the platform in future if needed.</div>
+
+<div class="task"><input type="checkbox"data-id="task15"> 1️⃣5️⃣<strong> Save Project & Continue Later 💾</strong>.</div>
+
+<div class="task"><input type="checkbox"data-id="task16"> 1️⃣6️⃣ Project Folder System — <strong>stores all files </strong>(images/audio/etc.) 📁.</div>
+
+<div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ <strong>Backup & Restore Function</strong> 🛡️.</div>
+
+<div class="task"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ <strong>Full source code ownership</strong> (for exclusive platform rights) 🔐.</div>
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="task-box task coming-soon shadow-3d">
+  <div class="task-content">
+    <input type="checkbox" data-id="task19" disabled>
+    <strong>1️⃣9️⃣ Hasaballa Engine – The Smart Learning Core 🧠</strong>
+    <span class="badge">🔜 Coming Soon</span><br><br>
+
+    <strong>Hasaballa Engine</strong> is the foundational core that will allow the entire platform to evolve toward a self-improving, AI-driven ecosystem.  
+    It is not just a tool — it is a <strong>shadow model</strong> that silently observes and learns from everything happening inside the platform:<br><br>
+
+    🔹 Tracks the performance of every module (text, image, voice, animation...)<br>
+    🔹 Collects training data from every user interaction and output<br>
+    🔹 Learns from every scenario, image, voice, and animation generated<br><br>
+
+    In the future, the engine will be divided into multiple specialized sub-models:<br>
+    • <strong>Hasaballa Text</strong> – for script understanding and style adaptation<br>
+    • <strong>Hasaballa ImageGen</strong> – to replace image generation models like Stable Diffusion<br>
+    • <strong>Hasaballa Animator</strong> – for lip sync and animation<br>
+    • <strong>Hasaballa Voice</strong> – for voice generation, cloning & enhancement<br><br>
+
+    ✅ The ultimate goal is to <strong>replace external models</strong> like SDXL, SkyReels V2, and Tacotron, once the Hasaballa Engine reaches 90–95% quality.<br>
+    ✅ The engine will continue to improve passively as users create content.<br>
+    ✅ Once matured, it could power the entire platform completely offline.<br><br>
+
+    ⚙️ <strong>Status:</strong> Not active in version 1.0 – scheduled as a major upgrade after 6 months of usage.<br>
+    🧠 <strong>Integration:</strong> Deeply connected with all tools – learns from every step without requiring manual training.<br>
+    📌 <strong>Note:</strong> Sub-models may be released in the future as optional APIs or Pro features.
+  </div>
+</div>
+
+ <hr style="margin-top: 60px;">
+
+<p style="font-size: 20px; margin-top: 40px;">
+🙏 Thank you for your time and effort.<br>
+Best of luck with the implementation — and many thanks in advance for your great work!
+</p>
+
+<p style="font-size: 18px; color: #555; margin-top: 20px;">
+— Prepared by: Ahmed Hasaballa
+</p>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
