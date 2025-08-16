@@ -7,7 +7,7 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1.8;
   padding: 20px;
   background-color: #f9f9f9;
@@ -49,6 +49,49 @@ body::before {
   color: gray;
 }
 
+  .task-box.shadow-3d {
+  border-left: 6px solid #ff9800;
+  background: linear-gradient(145deg, #fffdf8, #f5e8cc);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+}
+
+.badge {
+  display: inline-block;
+  background-color: #ff9800;
+  color: white;
+  font-size: 14px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.task-box.shadow-3d.lime-green {
+  border-left: 6px solid #8bc34a;
+  background: linear-gradient(145deg, #f5fff0, #e4f7d2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d.lime-green:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.4); /* أخضر ليموني */
+}
+
+  
 /* Level 1: subtask */
 .subtask {
   margin-left: 40px;
@@ -126,19 +169,26 @@ console.log("✅ Firebase connected & DOM ready");
 <h1>🧠 Platform: Hasaballa AI</h1>
 
 <h2>🛠️ - Description & How it Works</h2>
-<p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 100 GB in size 💾.</p>
+<p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 200 GB in size 💾.</p>
 
 <h2>🎯 Platform Goals</h2>
-<p>
-To produce videos matching the examples in the following links, which represent the minimum acceptable quality 👇<br>
-(Please watch all the links completely — this is the minimum quality required):</p>
+  
+<div class="intro-statement">
+  To produce unlimited videos at high speed — 
+  without any subscriptions, APIs, or internet connection —  
+  <br><br>
+  matching <strong>(at minimum)</strong> the quality shown in the following examples 👇
+  <br>
+  <em>(Please watch all links or preview videos fully — this is the lowest acceptable quality standard.)</em>
+</div>
+
 <ul>
-  <li><a href="https://www.facebook.com/share/v/16bcprHm7i/" target="_blank">🔗 Link 1 </a></li>
-  <li><a href="https://www.facebook.com/share/v/16nf3biL84/" target="_blank">🔗 Link 2</a></li>
-  <li><a href="https://www.facebook.com/share/v/1FPbPaSuxi/" target="_blank">🔗 Link 3</a></li>
-  <li><a href="https://www.facebook.com/share/v/16sURn3tgo/" target="_blank">🔗 Link 4</a></li>
-  <li><a href="https://www.facebook.com/share/v/19AfGVMDLn/" target="_blank">🔗 Link 5</a></li>
-  <li><a href="https://www.facebook.com/share/v/16sRpA7sTf/" target="_blank">🔗 Link 6</a></li>
+  <li><a href="https://drive.google.com/file/d/145S95Kgz5H9KZaZq5twCucbSCjbwqZSm/view?usp=sharing" target="_blank">🔗 Link 1 </a></li>
+  <li><a href="https://drive.google.com/file/d/1klPlXWHbzia8IzF7JCTRXzlzwtif6woF/view?usp=sharing" target="_blank">🔗 Link 2</a></li>
+  <li><a href="https://drive.google.com/file/d/1DwNZPoISitNV8PUKz7qbBBedJectcpYV/view?usp=sharing" target="_blank">🔗 Link 3</a></li>
+  <li><a href="https://drive.google.com/file/d/1ZAHGP_oUorGF5gTKxaYcnKQwqRg7Hhx9/view?usp=sharing" target="_blank">🔗 Link 4</a></li>
+  <li><a href="https://drive.google.com/file/d/1c5CoVZ-7lYvpsLZz1TwafGyZCzjReyeR/view?usp=sharing" target="_blank">🔗 Link 5</a></li>
+  <li><a href="https://drive.google.com/file/d/1JIGIl7Jx3YKKXAmszYjOFvh6Zraick7j/view?usp=sharing" target="_blank">🔗 Link 6</a></li>
 </ul>
 <h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
 
@@ -234,14 +284,48 @@ To produce videos matching the examples in the following links, which represent 
 </div>
 
 
+<div class="task">
+  <h2>⚠️ Platform Design Requirement:</h2><br>
+  The platform must be built in full compatibility with the upcoming <b>Hasaballa Engine</b> update, as outlined in <b>Task 19</b>.<br>
+  All tools, pipelines, and internal logic must be future-proof and designed to integrate seamlessly with Hasaballa Engine once released.
+</div>
 
 
   
 
-<h2>✅ 📋 Milestone 4 Tasks – Hasaballa AI</h2>
-<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>💻 Windows 11, with an Intel Core i7 processor, RTX 4060</strong> (8 GB) GPU 🎮, and 64 GB RAM 🧠.</div>
+<h2>🚀 Milestone 1 – Required Tasks</h2>
+<p>
+🧠 All tasks must be designed to ensure compatibility with <strong>Task 19 (Hasaballa Engine)</strong> for future upgrades.
+</p>
+
+<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>
+💻 Windows 11 Home 64-bit, with an AMD Ryzen™ 9 9955HX (3.50 GHz, Fire Range), RTX 5090 🎮 (24 GB GDDR7), 64 GB DDR5 RAM 🧠, and 4TB M.2 NVMe SSD ⚡ — plus a 16.0" WQXGA 300Hz display 🖥️.</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task1-a">
+  1-A ✅ Must be architected to fully support <b>Hasaballa Engine</b> integration (see Task 19).<br>
+  All tools, pipelines, and system resources must be designed to connect seamlessly with the upcoming Hasaballa Engine — without needing any structural changes later.<br><br>
+  This includes:<br>
+  - Modular tool design with accessible internal APIs<br>
+  - Background tasks (e.g., image, voice, animation) ready for Engine control<br>
+  - Clear separation of logic to avoid future rework<br><br>
+  🧠 <b>Note:</b> Hasaballa Engine is the platform’s core automation system — future updates depend on this integration being ready from day one.
+</div>
+
+  
 <div class="task"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
 <div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
+
+
+
+
+
+
+
+
+
+
+
 
   <h1>🧠 Hasaballa GPT — Master Control Panel</h1>
 <div>
@@ -249,6 +333,8 @@ To produce videos matching the examples in the following links, which represent 
   src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/Hasballa%20Gpt.jpg?raw=true" 
   style="width:80%; display:block; margin:auto;" >
 </div>
+
+ 
 
 <div class="task"><input type="checkbox"data-id="task4"> 4️⃣ <strong>💬 Chat Window (Hasaballa GPT).</strong><br>
 Quick Explanation:<br> 
@@ -319,6 +405,13 @@ Supported capabilities:<br>
 -🌅 Generate background visuals and ambient sound as specified in the written script.<br>
 
 -👄 Lip-syncing for characters, based on scene instructions.</div>
+
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-f-1-1"> 4-F-1-1 
+ <strong>Hasaballa GPT Chat – Scenario Analysis</strong><br>
+<strong>Performance:</strong><br>
+Capable of analyzing full scripts (≈15 scenes, each with visual and voice requirements) in just <strong>6 to 10 seconds.</strong><br>
+Optimized for rapid parsing, semantic breakdown, and routing tasks across all tools — whether running in Auto or Manual Smart Director modes.
+</div>
 
 <div class="task subsubtask"><input type="checkbox"data-id="task4-f-2"> 4-F-2 <strong>📝 Intelligent Reference Voice Mapping.</strong><br> 
 > 🧠 The system must analyze the written script (inside the Chat Window) and decide automatically whether to use the reference voice or not — based on the text.<br>
@@ -487,7 +580,6 @@ true to the correct reference image — based on scene type and text context.<br
   </video>
 </div>
 
-
   <div class="task subtask"><input type="checkbox"data-id="task4-f-6"> 4-F-6 <strong>📡 Smart Connectivity Control (Optional Internet Access)</strong>.<br> 
 
 In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
@@ -499,7 +591,7 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 
      <div class="task subsubtask"><input type="checkbox"data-id="task4-f-6-2"> 4-F-6-2 <strong>📴 “Disconnect – Return to Offline Mode”</strong>– When clicked, it fully cuts any online lookup attempts and forces the assistant to rely only on internal data/models.<br></div>
     
-
+  
 <div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G <strong>⬆️ Expand Input Box</strong>.<br>
 🔽 Function: Enlarges the input box for easier writing of long scripts or commands.</div>
 
@@ -542,7 +634,20 @@ The manual Smart Director must include a visual progress bar or step tracker (<s
 💾 Function: Shows all previously saved projects.<br>
 These are stored automatically and can be reopened later for editing or regenerating parts of the video.</div>
 
-<div class="task"><input type="checkbox"data-id="task9"> 9️⃣ <strong>Smart Director (Two Buttons) 🎬</strong>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="task"><input type="checkbox"data-id="task9"> 9️⃣ <strong>Smart Director (Two Buttons) 🎬</strong>.
 
  <div class="section">
   <h2>🟢 1. Smart Director – Automatic Mode (One Click – Full Auto Workflow)</h2>
@@ -651,8 +756,8 @@ These are stored automatically and can be reopened later for editing or regenera
 
 </div>
 <div class="task subsubtask"><input type="checkbox"data-id="task9-a-1"> 9-A-1 🔄 Same button will work with both the <strong>Full Video Editor Panel (Task 10-F)</strong> and the Smart Edit Layer <strong>(Task 11)</strong>.</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-2"> 9-A-2 🕒 For a <strong>7-minute video</strong>: total production time from click to final output must not exceed <strong>30 minutes</strong> (includes ≈85 images, animation, lip sync, voice, sound, etc.).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-3"> 9-A-3 ⏱️ For a <strong>15-minute video</strong>: total time from click to final output must not exceed <strong>60 minutes</strong> (≈170 images, full production).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-2"> 9-A-2 🕒 For a <strong>7-minute video</strong>: total production time from click to final output must not exceed <strong>45 minutes</strong> (includes ≈85 images, animation, lip sync, voice, sound, etc.).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-3"> 9-A-3 ⏱️ For a <strong>15-minute video</strong>: total time from click to final output must not exceed <strong>90 minutes</strong> (≈170 images, full production).</div>
 <div class="task subsubtask"><input type="checkbox"data-id="task9-a-4"> 9-A-4 <strong>👣Step-by-Step Skipping Logic</strong><br>
 ⏭️ The Smart Director (Auto Mode) must intelligently handle skipping of steps based on the chat instructions or detected scenario.<br>
 
@@ -703,84 +808,46 @@ Lets the user go step-by-step through each tool manually, with full control over
 The manual Smart Director must include a visual progress bar or step tracker (<strong>Task Timeline</strong>), showing the current tool in use, completed stages, and remaining tasks. This helps the user follow the video generation flow step-by-step.</div>
 
 
+  
 
   
-<div class="task"><input type="checkbox"data-id="task10"> 1️⃣0️⃣ <strong>Final video (1 to 15 mins) 🎞️</strong>.</div>
-
-
-<div class="task subtask"><input type="checkbox"data-id="task10-a"> 10-A 📽️ <strong>Export options</strong>: HD, Full HD, 720p, 1080p, 4K.</div>
-<div class="task subtask"><input type="checkbox"data-id="task10-b"> 10-B 🧱 Output as layered timeline (editable).</div>
-<div class="task subtask"><input type="checkbox"data-id="task10-c"> 10-C 👁️‍🗨️ <strong>Preview support.</strong></div>
-<div class="task subtask"><input type="checkbox"data-id="task10-d"> 10-D 💾<strong> Download support.</strong></div>
-<div class="task subtask"><input type="checkbox"data-id="task10-e"> 10-E 🔲<strong> Aspect ratios</strong>: 16:9, 9:16, 1:1  .</div>
-<div class="task subtask"><input type="checkbox"data-id="task10-f"> 10-F 💻 <strong>Full Video Editor Panel</strong> (CapCut-style Editing)<br> 
 
 
 
-🎛️ Add a complete video editor at the final stage (post-generation), with functionalities like:<br> 
 
--✂️ Trim / split scenes<br> 
 
--➕ Add external content (images, video, audio, text)<br> 
 
--🎞️ Transitions & visual effects<br> 
 
--🎨 Filters & overlays<br> 
+<div class="task-box task coming-soon shadow-3d">
+  <div class="task-content">
+    <input type="checkbox" data-id="task19" disabled>
+    <strong>1️⃣9️⃣ Hasaballa Engine – The Smart Learning Core 🧠</strong>
+    <span class="badge">🔜 Coming Soon</span><br><br>
 
--🎵 Music background / sound FX<br> 
+    <strong>Hasaballa Engine</strong> is the foundational core that will allow the entire platform to evolve toward a self-improving, AI-driven ecosystem.  
+    It is not just a tool — it is a <strong>shadow model</strong> that silently observes and learns from everything happening inside the platform:<br><br>
 
--🔠 Subtitles (manual or AI-generated)<br> 
+    🔹 Tracks the performance of every module (text, image, voice, animation...)<br>
+    🔹 Collects training data from every user interaction and output<br>
+    🔹 Learns from every scenario, image, voice, and animation generated<br><br>
 
--🖼️ Zoom / pan on static images<br> 
+    In the future, the engine will be divided into multiple specialized sub-models:<br>
+    • <strong>Hasaballa Text</strong> – for script understanding and style adaptation<br>
+    • <strong>Hasaballa ImageGen</strong> – to replace image generation models like Stable Diffusion<br>
+    • <strong>Hasaballa Animator</strong> – for lip sync and animation<br>
+    • <strong>Hasaballa Voice</strong> – for voice generation, cloning & enhancement<br><br>
 
--🔉 Volume control / fades<br> 
+    ✅ The ultimate goal is to <strong>replace external models</strong> like SDXL, SkyReels V2, and Tacotron, once the Hasaballa Engine reaches 90–95% quality.<br>
+    ✅ The engine will continue to improve passively as users create content.<br>
+    ✅ Once matured, it could power the entire platform completely offline.<br><br>
 
--🧩 Drag & drop timeline<br> 
-
--💡 Optional AI-suggestions for scene polish<br>
-
- <div>
-<img 
- src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/32.png?raw=true"
-  style="width:70%; display:block; margin:auto;" >
-</div> 
-
-📦<strong> Supports:</strong><br> 
-
-- All generated media from within the platform<br> 
-
-External uploads: JPG, PNG, MP3, WAV, MP4, etc.<br> 
-🧠 Detects skipped steps from Smart Director (Task 9) and adjusts the timeline accordingly — but only removes them if the user chooses.<br> 
-
-📌 This means the system must:<br> 
-
-- Detect which steps (e.g. image, animation, voice...) were skipped.<br> 
-
-Give the user the option to:<br> 
-
--❌ Remove the skipped step entirely (clean timeline).<br> 
-
--⬜ Keep an empty placeholder for manual editing later.<br> 
-
-- Ensure the final video timeline flows correctly either way.<br> 
-
-👉 Works in both automatic and manual <strong>Smart Director modes</strong>.</div>
-<div class="task subtask"><input type="checkbox"data-id="task10-g"> 10-G ⚙️ Works with <strong>Smart Director (auto/manual)</strong>.</div>
-
-<div class="task"><input type="checkbox"data-id="task11"> 1️⃣1️⃣ <strong>Smart Edit Layer ✏️.</strong><br>
-Works automatically with Smart Director.</div>
-
- <div>
-<img 
- src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/33.png?raw=true"
-  style="width:70%; display:block; margin:auto;" >
+    ⚙️ <strong>Status:</strong> Not active in version 1.0 – scheduled as a major upgrade after 6 months of usage.<br>
+    🧠 <strong>Integration:</strong> Deeply connected with all tools – learns from every step without requiring manual training.<br>
+    📌 <strong>Note:</strong> Sub-models may be released in the future as optional APIs or Pro features.
+  </div>
 </div>
 
-
-<div class="task subtask"><input type="checkbox"data-id="task11-a"> 11-A 🕓 Use Arabic prompts (with timecodes) to edit the video — e.g.<br>
-(<strong>For example</strong>)🗣️ “In minute 1:42, replace/remove background visual/sound”
-→ the <strong>Smart Edit Layer</strong> should handle this by automatically generating new image/video/sound from the relevant modules or Pixabay as <strong>Smart Director</strong>.</div>
-<hr style="margin-top: 60px;">
+ <hr style="margin-top: 60px;">
 
 <p style="font-size: 20px; margin-top: 40px;">
 🙏 Thank you for your time and effort.<br>
@@ -794,3 +861,20 @@ Best of luck with the implementation — and many thanks in advance for your gre
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
