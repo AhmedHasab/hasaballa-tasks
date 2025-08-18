@@ -410,7 +410,57 @@ Each voice line (≈10–15 words) takes around <strong>8 to 14 seconds</strong>
 High-definition 48kHz audio output, supporting multiple characters, dialects, and expressive cues.
 </div>
 
-<div class="task subtask"><input type="checkbox"data-id="task7-g"> 7-G <strong>📚 A full voice library</strong> in Arabic (all dialects) and English — used when no reference audio is provided.</div> 
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-f-2"> 7-F-2 🌍 <b>Multilingual Dubbing</b><br>
+  Enable automatic <b>dubbing</b> of generated or cloned voices into the world’s most used languages:<br>
+  <ul>
+    <li><input type="checkbox"> 🇺🇸 English</li>
+    <li><input type="checkbox"> 🇩🇪 German</li>
+    <li><input type="checkbox"> 🇫🇷 French</li>
+    <li><input type="checkbox"> 🇹🇷 Turkish</li>
+    <li><input type="checkbox"> 🇪🇸 Spanish</li>
+    <li><input type="checkbox"> 🇮🇹 Italian</li>
+  </ul>
+  <b>Features:</b><br>
+  - Works with both <b>voice cloning</b> (preserves the original speaker’s identity) and <b>voice generation</b> (uses library voices).<br>
+  - Automatically synchronizes with translated captions from <b>Task 10-F-1, 2</b>.<br>
+  - <b>🎬 Smart Director</b> selects proper timing, emotional tone, and scene consistency.<br>
+  - Outputs studio-quality audio, ready for integration in dialogues or narration.<br>
+</div>
+
+
+<div class="task subtask">
+  <input type="checkbox" id="task7-g">
+  <label for="task7-g">7-G 📚 <b>A full voice library</b> — in Arabic (all dialects) & English — used when no reference audio is provided.</label>
+
+  <ul>
+    <li><input type="checkbox" id="voice-m1"><label for="voice-m1"> 🎙️ Male Deep — Suitable for Modern Standard Arabic / Formal English (Narration, News, Trailer)<br><small>🗣️ Best for: Arabic MSA, Formal tone (not dialectal)</small></label></li>
+
+    <li><input type="checkbox" id="voice-m2"><label for="voice-m2"> 🎬 Male Youthful — Suitable for dialects / casual English (Dialogue, Social Media)<br><small>🗣️ Great for: Egyptian, Levantine, Gulf, Maghrebi dialects — casual, youth content</small></label></li>
+
+    <li><input type="checkbox" id="voice-m3"><label for="voice-m3"> 🧓 Male Senior — Suitable for storytelling / documentaries (Storytelling, History)<br><small>🗣️ Good for: Arabic storytelling tone — can adapt to dialects with tuning</small></label></li>
+
+    <li><input type="checkbox" id="voice-f1"><label for="voice-f1"> ☀️ Female Warm — Suitable for calm Modern Standard Arabic / educational English (Podcast, Explainer)<br><small>🗣️ Best for: Arabic MSA, soft narration — neutral or classic</small></label></li>
+
+    <li><input type="checkbox" id="voice-f2"><label for="voice-f2"> 📣 Female Energetic — Suitable for ads / promo in dialects or English (Promo, Ads)<br><small>🗣️ Great for: Egyptian, Gulf, Levantine — high-energy content</small></label></li>
+
+    <li><input type="checkbox" id="voice-f3"><label for="voice-f3"> 🎭 Female Expressive — Suitable for dramatic dialogues / theatrical performance (Drama, Character)<br><small>🗣️ Versatile for: all dialects depending on emotion — great for dramatization</small></label></li>
+
+    <li><input type="checkbox" id="voice-n1"><label for="voice-n1"> 🧒 Youth Voice — Suitable for content targeting kids or teens in Arabic/English (Cartoons, Games)<br><small>🗣️ Flexible for: all Arabic dialects depending on context (kids, youth)</small></label></li>
+
+    <li><input type="checkbox" id="voice-n2"><label for="voice-n2"> 🏫 Neutral Educator — Suitable for lessons and tutorials (E-Learning, Tutorials)<br><small>🗣️ Best for: Arabic MSA or simplified dialects — formal learning tone</small></label></li>
+
+    <li><input type="checkbox" id="voice-n3"><label for="voice-n3"> 💼 Corporate Neutral — Suitable for formal presentations / corporate training (Corporate, Training)<br><small>🗣️ Ideal for: MSA or Gulf-style formal speech — serious tone</small></label></li>
+
+    <li><input type="checkbox" id="voice-n4"><label for="voice-n4"> 🌄 Storyteller Calm — Suitable for podcasts and stories in both languages (Podcast, Audiobook)<br><small>🗣️ Great for: soft dialectal storytelling (Egyptian, Levantine, etc.)</small></label></li>
+
+    <li><input type="checkbox" id="voice-n5"><label for="voice-n5"> 🎶 Singing-Ready Voice (Male) — Capable of singing in Arabic or English<br><small>🎵 Adaptable to: any dialect for music/dubbing — needs tuning</small></label></li>
+
+    <li><input type="checkbox" id="voice-n6"><label for="voice-n6"> 🎶 Singing-Ready Voice (Female) — Capable of singing in Arabic or English<br><small>🎵 Adaptable to: any dialect for music/dubbing — needs tuning</small></label></li>
+  </ul>
+</div>
+
 
 <div class="task subtask"><input type="checkbox"data-id="task7-h"> 7-H 🔁 Use <strong>Reference Voices</strong> in Background Audio Layers:<br>
 When the system detects that a background audio layer (from the Chat Window script) contains a known <strong>reference voice</strong>, it must:<br>
@@ -435,6 +485,20 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 <div class="task subtask" ><input type="checkbox" data-id="task7-k"> 7-K 🔄<b>Auto-Rotation</b><br>
   ✅ For voice generation, and If there is more than one model, the platform auto decides which model to use depending on whether the input is narration, dialogue, or character-based.<br>
   📦 <b>"Available from the first release, and further enhanced by Hasaballa Engine after the first platform update."</b>
+</div>
+
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task7-l"> 7-L 🎶 <b>Singing Voice Generation</b><br>
+  Transform cloned or generated voices into <b>singing performances</b>:<br>
+  <ul>
+    <li>🎵 Solo singing, choir-style layers, or dramatic performance.</li>
+    <li>🧠 <b>Smart Director</b> adjusts rhythm, pitch, and emotional delivery automatically.</li>
+    <li>🎼 Users can optionally provide lyrics + melody guide (or auto-detected from text).</li>
+    <li>💡 Maintains the <b>identity consistency</b> of cloned voices, even while singing.</li>
+  </ul>
+  <b>Output Quality:</b><br>
+  Studio-grade audio (48kHz), with natural transitions between speech and singing.<br>
 </div>
   
 <div class="task"><input type="checkbox"data-id="task8"> 8️⃣ <strong>Integrated sound library + Pixabay search 🎼</strong>.</div>
