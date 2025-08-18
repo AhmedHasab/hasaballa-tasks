@@ -327,8 +327,7 @@ console.log("✅ Firebase connected & DOM ready");
 
 
 
-  
-<div class="task"><input type="checkbox"data-id="task10"> 1️⃣0️⃣ <strong>Final video (1 to 15 mins) 🎞️</strong>.</div>
+ <div class="task"><input type="checkbox"data-id="task10"> 1️⃣0️⃣ <strong>Final video (1 to 15 mins) 🎞️</strong>.</div>
 
 
 <div class="task subtask"><input type="checkbox"data-id="task10-a"> 10-A 📽️ <strong>Export options</strong>: HD, Full HD, 720p, 1080p, 4K.</div>
@@ -388,7 +387,36 @@ Give the user the option to:<br>
 - Ensure the final video timeline flows correctly either way.<br> 
 
 👉 Works in both automatic and manual <strong>Smart Director modes</strong>.</div>
+
+
+  <div class="task subsubtask">
+  <input type="checkbox" data-id="task10-f-1"> 
+  <label for="task10-f-1">10-F-1 📝 <b>Subtitles & Captions</b></label>
+  <ul>
+    <li><input type="checkbox" id="sub-manual"><label for="sub-manual"> Add subtitles manually or automatically (AI-generated)</label></li>
+    <li><input type="checkbox" id="sub-multi"><label for="sub-multi"> 🌍 Multi-language support (linked with dubbing 7-F-2)</label></li>
+    <li><input type="checkbox" id="sub-sync"><label for="sub-sync"> ⏱️ Automatic synchronization with audio/scene</label></li>
+    <li><input type="checkbox" id="sub-style"><label for="sub-style"> 🎛️ Style options (color, size, position, <b>Karaoke-style highlighting</b>)</label></li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task10-f-2"> 
+  <label for="task10-f-2">10-F-2 🌍 <b>Translation & Multilingual Captions</b></label>
+  <ul>
+    <li><input type="checkbox" id="trans-auto"><label for="trans-auto"> 🔄 Automatic translation of texts into supported languages</label></li>
+    <li><input type="checkbox" id="trans-dub"><label for="trans-dub"> 🎤 Direct link with multilingual dubbing (Task 7-F-2)</label></li>
+    <li><input type="checkbox" id="trans-toggle"><label for="trans-toggle"> 💡 Option to enable/disable subtitles on screen</label></li>
+    <li><input type="checkbox" id="trans-layer"><label for="trans-layer"> 🧩 Save subtitles as an independent editable layer in the timeline</label></li>
+  </ul>
+</div>
+
+
+
+
 <div class="task subtask"><input type="checkbox"data-id="task10-g"> 10-G ⚙️ Works with <strong>Smart Director (auto/manual)</strong>.</div>
+ 
+
 
 
   <p>⚙️ <strong>Note:</strong> The current 1️⃣1️⃣ Smart Editing and Timeline system must be designed to allow future enhancement as described in <strong>Task 20</strong> — including intelligent scene suggestions, smart clip replacement, and AI-powered post-editing workflows. No structural rewrite should be needed when Task 20 is implemented.</p>
