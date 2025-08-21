@@ -153,7 +153,9 @@ input[type="checkbox"]:checked + label {
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
-console.log("✅ Firebase connected & DOM ready");
+  const READ_ONLY = false;
+
+  // 🔌 تهيئة Firebase (نفس بياناتك)
   const firebaseConfig = {
     apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
     authDomain: "hasaballa-ai.firebaseapp.com",
@@ -164,36 +166,58 @@ console.log("✅ Firebase connected & DOM ready");
     appId: "1:786272460405:web:b2bc8cdba12407834d623c",
     measurementId: "G-GVY2TS8MW4"
   };
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+  // 📌 استخرج اسم الميلستون من الرابط
+  const pathParts = window.location.pathname.split("/").filter(Boolean);
+  // مثال: ["hasaballa-tasks", "Milestone-3"]
+  const milestoneName = pathParts[pathParts.length - 1]; 
+  // الناتج = "Milestone-3"
+  
+  // 🗂️ مسار التخزين في Firebase
+  const tasksRef = firebase.database().ref("milestones/" + milestoneName + "/tasks");
+
+  function getKey(cb, i) {
+    return cb.dataset.id || cb.id || cb.name || `cb_${i}`;
+  }
+
+  function applyCompletedVisual(cb, checked) {
+    const container = cb.closest('.task, .subtask, .subsubtask, .subsubsubtask, li');
+    if (container) container.classList.toggle('completed', checked);
+  }
 
   document.addEventListener("DOMContentLoaded", function () {
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+    const checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
+    if (READ_ONLY) checkboxes.forEach(cb => cb.disabled = true);
 
-    firebase.database().ref("tasks").once("value").then(snapshot => {
+    // ⬇️ تحديث Live من Firebase
+    tasksRef.on("value", (snapshot) => {
       const data = snapshot.val() || {};
-      checkboxes.forEach((checkbox, index) => {
-       const key = checkbox.getAttribute("data-id");
-
-       if (data[key] === true) {
-  checkbox.checked = true;
-  checkbox.parentElement.classList.add("completed");  // ✅ ضروري علشان الخط
-}
-
-        checkbox.addEventListener("change", () => {
-          const checked = checkbox.checked;
-          firebase.database().ref("tasks/" + key).set(checked);
-          if (checked) {
-            checkbox.parentElement.classList.add("completed");
-          } else {
-            checkbox.parentElement.classList.remove("completed");
-          }
-        });
+      checkboxes.forEach((cb, i) => {
+        const key = getKey(cb, i);
+        const checked = !!data[key];
+        cb.checked = checked;
+        applyCompletedVisual(cb, checked);
       });
+    });
+
+    // ⬆️ كتابة أي تغيير يحصل
+    checkboxes.forEach((cb, i) => {
+      const key = getKey(cb, i);
+      if (!key) return;
+
+      if (!READ_ONLY) {
+        cb.addEventListener("change", () => {
+          const updateObj = {};
+          updateObj[key] = cb.checked;
+          tasksRef.update(updateObj);
+          applyCompletedVisual(cb, cb.checked);
+        });
+      }
     });
   });
 </script>
+
 
 </head>
 <body>
