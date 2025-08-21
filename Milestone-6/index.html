@@ -116,6 +116,37 @@ body::before {
   ul {
     margin-left: 30px;
   }
+
+
+
+/* يشطب أي label بعد checkbox مباشرة */
+input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+/* نمط عام لأي عنصر تضيف له كلاس completed من الجافاسكريبت */
+.completed {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+/* تغطّي الحالات اللي مافيها label: تشطب الـ container نفسه لو بيحتوي checkbox متعلّم */
+.task:has(> input[type="checkbox"]:checked),
+.subtask:has(> input[type="checkbox"]:checked),
+.subsubtask:has(> input[type="checkbox"]:checked),
+.subsubsubtask:has(> input[type="checkbox"]:checked),
+.task li:has(> input[type="checkbox"]:checked) {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+
+
+  
 </style>
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
