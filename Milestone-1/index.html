@@ -542,7 +542,29 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 - 🧠 The decision to use the voice or not is made during script writing inside the Chat Window — based on the context and structure of the text (<strong>see Task 4-F-2</strong>).<br>
 - The <strong>Smart Director</strong> simply follows this logic during generation (<strong>automatic or manual</strong>).<br></div>
 <div class="task subtask"><input type="checkbox"data-id="task5-c"> 5-C <strong>🔒 Identity lock button.</strong><br> - must match reference image with 99.9% (ideally 100%) accuracy.</div>
-<div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
+
+  <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-1">
+  5-C-1 🧪 <strong>Auto-Quality Guard (Negative + Seed)</strong>
+  <div style="margin-inline-start:1.8em;">
+    - system must automatically use internal negative prompts to avoid defects (hands, eyes, text).<br>
+    - system must lock and reuse seeds to ensure identity consistency across all scenes.<br>
+    - user should not need to enter negatives or seeds manually.<br>
+    <em style="opacity:.8;">(runs silently in the background — no manual prompts or seed input from user)</em>
+  </div>
+</div>
+
+  <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-2">
+  5-C-2 🧷 <strong>Outfit/Style Lock</strong>
+  <div style="margin-inline-start:1.8em;">
+    - lock costume/era/hair/makeup as part of the identity profile.<br>
+    - must remain stable across all generated scenes unless user explicitly changes it.<br>
+    <em style="opacity:.8;">(default: text-driven & runs in background; no need for a visible button)</em>
+  </div>
+</div>
+  
+  <div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E <strong>📂 Dropdown list</strong> for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F <strong>🏆 Minimum visual quality</strong> must match examples in the above video links.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 100% correct Arabic text</strong> in generated images.</div>
