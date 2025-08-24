@@ -692,6 +692,47 @@ These are stored automatically and can be reopened later for editing or regenera
 
 
 
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-k">
+  4-K ✅ <strong>Hasaballa GPT – Acceptance Criteria</strong>
+  <div style="margin-inline-start:1.8em;">
+    <ul style="margin:8px 0 0 0; padding-left:1em; list-style:none;">
+      <li>
+        <input type="checkbox" data-id="task4-k-1" id="task4-k-1">
+        <label for="task4-k-1">📚 Parses full scripts (≥ <b>15,000</b> chars) into scenes / voices / FX with ≥ <b>99%</b> routing correctness.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-2" id="task4-k-2">
+        <label for="task4-k-2">🎲 Deterministic mode: same input ⇒ same tool plan & flags (seeded planning).</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-3" id="task4-k-3">
+        <label for="task4-k-3">⚡ Average parse time ≤ <b>10s</b> per <b>15</b> scenes on target hardware.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-4" id="task4-k-4">
+        <label for="task4-k-4">🧩 Every Auto/Manual decision is encoded in this schema and sent to tools.</label>
+      </li>
+
+      <li>
+        <input type="checkbox" data-id="task4-k-6" id="task4-k-6">
+        <label for="task4-k-6">🧯 Failure handling: if any tool-routing step fails → retry ×2 with backoff; no chat crash.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-7" id="task4-k-7">
+        <label for="task4-k-7">🛡️ Offline-by-default: no external calls.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-8" id="task4-k-8">
+        <label for="task4-k-8">🗣️ Arabic dialect mapping: ≥ <b>98%</b> correct speaker/dialect detection on a 20-script test suite (Egyptian, Sa'idi, Levantine, Gulf, Maghrebi…).</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-9" id="task4-k-9">
+        <label for="task4-k-9">📝 Auto-save: chat + routing schema snapshot every <b>30s</b> and on tool transitions; on reopen show “Resume from Autosave?”.</label>
+      </li>
+    </ul>
+  </div>
+</div>
 
 
 
@@ -867,6 +908,79 @@ The manual Smart Director must include a visual progress bar or step tracker (<s
 
   
 
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task9-c">
+  9-C ✅ <strong>Smart Director – Acceptance Criteria (Auto & Manual)</strong>
+  <div style="margin-inline-start:1.8em;">
+    <ul style="margin:8px 0 0 0; padding-left:1em; list-style:none;">
+      <!-- Planning & Determinism -->
+      <li>
+        <input type="checkbox" data-id="task9-c-1" id="task9-c-1">
+        <label for="task9-c-1">🧭 <b>Plan correctness</b>: routes scenes → (image, voice, bg-audio, animation, lip-sync) with ≥ <b>99%</b> step accuracy vs. the script.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-2" id="task9-c-2">
+        <label for="task9-c-2">🎲 <b>Deterministic planning</b>: same script & settings ⇒ same plan, tool flags, and scene ordering (seeded).</label>
+      </li>
+
+      <!-- Performance -->
+      <li>
+        <input type="checkbox" data-id="task9-c-3" id="task9-c-3">
+        <label for="task9-c-3">⚡ <b>Throughput (Auto Mode)</b>: 7-min video ≤ <b>45m</b>; 15-min video ≤ <b>90m</b> on target hardware (includes image gen, voices, soundscape, animation, lip-sync).</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-4" id="task9-c-4">
+        <label for="task9-c-4">📈 <b>Parallelism</b>: images & voices pipeline run concurrently where possible without UI freeze; progress updates.</label>
+      </li>
+
+      <!-- Skip Logic & Overrides -->
+      <li>
+        <input type="checkbox" data-id="task9-c-5" id="task9-c-5">
+        <label for="task9-c-5">⏭️ <b>Skip honors</b>: per-scene/per-stage skip flags produce no errors or empty gaps; timeline reflows smoothly.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-6" id="task9-c-6">
+        <label for="task9-c-6">🛠️ <b>Manual overrides</b> always take precedence over Auto plan and persist across re-runs.</label>
+      </li>
+
+      <!-- Timeline & Sync Quality -->
+      <li>
+        <input type="checkbox" data-id="task9-c-7" id="task9-c-7">
+        <label for="task9-c-7">🎞️ <b>Timeline assembly</b>: each scene placed with correct timecodes; no overlaps.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-8" id="task9-c-8">
+        <label for="task9-c-8">👄 <b>Lip-sync quality</b>: median A/V offset ≤ <b>80ms</b>, p95 ≤ <b>120ms</b>; exported timings available for inspection.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-9" id="task9-c-9">
+        <label for="task9-c-9">🧍 <b>Identity consistency</b>: when Identity/Outfit Lock is ON, character look stays stable across scenes (no unintended drift).</label>
+      </li>
+ 
+
+      <!-- Reliability & Recovery -->
+      <li>
+        <input type="checkbox" data-id="task9-c-11" id="task9-c-11">
+        <label for="task9-c-11">💾 <b>Auto-save integration</b>: plan + timeline + per-stage status snapshot every <b>30s</b> and on stage transitions.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-12" id="task9-c-12">
+        <label for="task9-c-12">🧯 <b>Crash recovery</b>: on reopen, “Resume from Autosave?” restores pipeline to last stable step; no corrupted states.</label>
+      </li>
+
+      <!-- Resource & Offline Policy -->
+      <li>
+        <input type="checkbox" data-id="task9-c-13" id="task9-c-13">
+        <label for="task9-c-13">🧪 <b>Model auto-rotation</b> (if multiple): chooses best model per scene type without exceeding VRAM; falls back gracefully.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-14" id="task9-c-14">
+        <label for="task9-c-14">📴 <b>Offline-by-default</b>: no internet use.</label>
+      </li>
+    </ul>
+  </div>
+</div>
 
 
 
