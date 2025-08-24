@@ -403,7 +403,24 @@ input[type="checkbox"]:checked + label {
 
 <div class="task"><input type="checkbox"data-id="task15"> 1️⃣5️⃣<strong> Save Project & Continue Later 💾</strong>.</div>
 
-<div class="task"><input type="checkbox"data-id="task16"> 1️⃣6️⃣ Project Folder System — <strong>stores all files </strong>(images/audio/etc.) 📁.</div>
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task15-auto-save">
+  15-A 💾 <strong>Auto-Save Every 30s (Platform-Wide)</strong>
+  <div style="margin-inline-start:1.8em;">
+    <ul style="margin:8px 0 0 0; padding-left:1em;">
+      <li>⏱️ Automatically save the project every <b>30 seconds</b> <i>(only if changes occurred)</i>.</li>
+      <li>🧯 <b>Crash-safe writes</b>: write to a temp file, then <b>atomic rename</b> to prevent corruption.</li>
+      <li>🚀 On reopen: if a newer autosave exists, show <em>“Resume from Autosave?”</em> with a brief change summary.</li>
+      <li>🗄️ Retention: keep the last <b>50</b> autosaves or the last <b>2 hours</b> (whichever is smaller); safely prune older ones.</li>
+      <li>📴 Offline-only: no cloud sync and no internet calls.</li>
+      <li>✅ <b>Acceptance</b>: maximum possible loss of work ≤ <b>30s</b>.</li>
+    </ul>
+  </div>
+</div>
+
+  
+  
+  <div class="task"><input type="checkbox"data-id="task16"> 1️⃣6️⃣ Project Folder System — <strong>stores all files </strong>(images/audio/etc.) 📁.</div>
 
 <div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ <strong>Backup & Restore Function</strong> 🛡️.</div>
 
