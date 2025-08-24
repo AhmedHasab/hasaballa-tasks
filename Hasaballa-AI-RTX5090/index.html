@@ -821,7 +821,48 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 - 🧠 The decision to use the voice or not is made during script writing inside the Chat Window — based on the context and structure of the text (<strong>see Task 4-F-2</strong>).<br>
 - The <strong>Smart Director</strong> simply follows this logic during generation (<strong>automatic or manual</strong>).<br></div>
 <div class="task subtask"><input type="checkbox"data-id="task5-c"> 5-C <strong>🔒 Identity lock button.</strong><br> - must match reference image with 99.9% (ideally 100%) accuracy.</div>
-<div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
+
+    <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-1">
+  5-C-1 🧪 <strong>Auto-Quality Guard (Negative + Seed)</strong>
+  <div style="margin-inline-start:1.8em;">
+    - system must automatically use internal negative prompts to avoid defects (hands, eyes, text).<br>
+    - system must lock and reuse seeds to ensure identity consistency across all scenes.<br>
+    - user should not need to enter negatives or seeds manually.<br>
+    <em style="opacity:.8;">(runs silently in the background — no manual prompts or seed input from user)</em>
+  </div>
+</div>
+
+  <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-2">
+  5-C-2 🧷 <strong>Outfit/Style Lock</strong>
+  <div style="margin-inline-start:1.8em;">
+    - lock costume/era/hair/makeup as part of the identity profile.<br>
+    - must remain stable across all generated scenes unless user explicitly changes it.<br>
+    <em style="opacity:.8;">(default: text-driven & runs in background; no need for a visible button)</em>
+  </div>
+</div>
+
+  <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-3">
+  5-C-3 🗂️ <strong>Save/Export Identity Snapshot</strong>
+  <div style="margin-inline-start:1.8em;">
+    - save the exact look (face + outfit/style/era) of a generated character as a reusable snapshot.<br>
+    - allow exporting this snapshot for use in future scenes/projects without re‑generating the character.
+  </div>
+</div>
+
+<!-- ===== 5-C-4: Reuse Exact Look in New Scenes ===== -->
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-4">
+  5-C-4 ♻️ <strong>Reuse Exact Look in New Scenes</strong>
+  <div style="margin-inline-start:1.8em;">
+    - enable creating new scenes with the same saved look (face + outfit/style) instantly.<br>
+    - user should not need to re‑generate or tweak prompts to keep the identity and outfit stable.
+  </div>
+</div>
+  
+  <div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E <strong>📂 Dropdown list</strong> for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F <strong>🏆 Minimum visual quality</strong> must match examples in the above video links.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 100% correct Arabic text</strong> in generated images.</div>
@@ -1522,6 +1563,17 @@ High-definition 48kHz audio output, supporting multiple characters, dialects, an
   - Outputs studio-quality audio, ready for integration in dialogues or narration.<br>
 </div>
 
+
+<!-- ===== 7-F: Voice Character Packs (Export/Import) ===== -->
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-f-3">
+  7-F-3 📦 <strong>Voice Character Packs (Export/Import)</strong>
+  <div style="margin-inline-start:1.8em;">
+    - allow saving a character’s voice (reference/clone/settings) as a pack linked to that character.<br>
+    - support exporting/importing these voice packs to reuse voices across different projects easily.
+  </div>
+</div>
+  
 
 <div class="task subtask">
   <input type="checkbox" id="task7-g">
