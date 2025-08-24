@@ -779,7 +779,43 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 
 
 <div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B <strong>👥 Reference images</strong> (for multiple characters, minimum of 8 — all can appear in one video, so identity consistency is critical).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task5-b-1"> 5-B-1 🎙️Each reference image should ideally be linked to a unique <strong>reference voice</strong>, forming a Character Pack (Image + Voice).<br>
+
+  <div class="task subsubtask">
+  <label>
+    <input type="checkbox" data-id="task5-b-1">
+    <span>5-B-1 🗂️ <strong>Multi-Reference Per Character</strong></span>
+  </label>
+
+  <ul style="margin:8px 0 0 28px; padding:0; list-style:none;">
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-1">
+        🖼️ Each character can have up to <strong>5 reference images</strong> (for example: childhood, youth, different angles).
+      </label>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-2">
+        ⚖️ The system must allow assigning a <strong>weight/priority</strong> (0–100%) to each image.
+      </label>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-3">
+        🧩 These references combine to form a richer <strong>Character Pack</strong> for more accurate identity persistence across all scenes.
+      </label>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-4">
+        📤📥 Character Packs must be <strong>exportable/importable</strong> (local JSON or similar) for re-use across projects.
+      </label>
+    </li>
+  </ul>
+</div>
+
+  
+  <div class="task subsubtask"><input type="checkbox"data-id="task5-b-2"> 5-B-2 🎙️Each reference image should ideally be linked to a unique <strong>reference voice</strong>, forming a Character Pack (Image + Voice).<br>
 - This pairing enables the system to use the correct voice for each image during video generation (especially in <strong>Dialogue Mode</strong>).<br>
 
 - 🧠 The decision to use the voice or not is made during script writing inside the Chat Window — based on the context and structure of the text (<strong>see Task 4-F-2</strong>).<br>
