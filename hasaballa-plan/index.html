@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hasaballa AI – Developer Questionnaire</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background: #f8f9fa; }
+    h1, h2, h3 { text-align: center; }
+    label { font-weight: bold; display: block; margin-top: 15px; }
+    textarea, input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    .radio-group { margin: 10px 0; }
+    button { margin-top: 20px; padding: 12px 20px; background: #008CBA; color: #fff; border: none; cursor: pointer; font-size: 16px; }
+    button:hover { background: #005f73; }
+  </style>
+</head>
+<body>
+
+  <!-- Title -->
+  <h1>Full Offline AI Media Generation Platform – Hasaballa AI</h1>
+
+  <!-- Description -->
+  <h2>🛠️ Platform: Hasaballa AI – Description & How it Works</h2>
+  <p>The Hasaballa AI platform will run fully offline — even if it’s 200 GB in size.</p>
+
+  <h2>🎯 Platform Goals</h2>
+  <p>Produce unlimited videos at high speed / top quality for Arab creators — without subscriptions, APIs, or internet connection.  
+  Minimum quality must match these reference videos:</p>
+  <ul>
+    <li><a href="https://tinyurl.com/4py6ntv5">Link 1</a></li>
+    <li><a href="https://tinyurl.com/457h6pxb">Link 2</a></li>
+    <li><a href="https://tinyurl.com/kye234sk">Link 3</a></li>
+    <li><a href="https://tinyurl.com/s65thcdc">Link 4</a></li>
+    <li><a href="https://tinyurl.com/mjb7cw8v">Link 5</a></li>
+    <li><a href="https://tinyurl.com/r6b2ndn9">Link 6</a></li>
+  </ul>
+
+  <h2>📂 Documentation</h2>
+  <p>A full detailed document of the platform (all tasks, sub-tasks, and requirements) will be provided to the selected developer/team.</p>
+
+  <h2>📋 Hasaballa AI – 18 Core Components</h2>
+  <p>[List of 18 core tasks … as provided above]</p>
+
+  <h2>💰 Budget & Milestones</h2>
+  <p>Budget: $7,500 divided into 6 milestones + $500–$1,000 bonus upon successful delivery.</p>
+
+  <!-- FORM START -->
+  <form method="POST" action="send.php">
+
+    <!-- Basic Info -->
+    <label>Your Name *</label>
+    <input type="text" name="name" required>
+
+    <label>Company / Team *</label>
+    <input type="text" name="company" required>
+
+    <label>Platform *</label>
+    <select name="platform" required>
+      <option value="">-- Select --</option>
+      <option value="Freelancer">Freelancer</option>
+      <option value="Guru">Guru</option>
+      <option value="Upwork">Upwork</option>
+    </select>
+
+    <!-- General Questions -->
+    <label>Are you a team or a single developer? *</label>
+    <div class="radio-group">
+      <input type="radio" name="team" value="Team" required> Team
+      <input type="radio" name="team" value="Solo" required> Solo
+    </div>
+
+    <label>If Team: List members & roles *</label>
+    <textarea name="team_details" required></textarea>
+
+    <label>Have you worked with AI tools before? *</label>
+    <textarea name="ai_experience" required></textarea>
+
+    <label>Which AI tools do you have strong experience with? *</label>
+    <textarea name="ai_tools" required></textarea>
+
+    <!-- Technical Questions -->
+    <label>Tools for ultra-realistic image generation (text-to-image, image-to-image, reference faces, Arabic text support)? *</label>
+    <textarea name="tools_imagegen" required></textarea>
+
+    <label>Tools to ensure 100% correct Arabic text in generated images? *</label>
+    <textarea name="tools_arabictext" required></textarea>
+
+    <label>Tools for identity lock (99.9% reference face stability)? *</label>
+    <textarea name="tools_identity" required></textarea>
+
+    <label>Tools for audio enhancement (studio quality, noise removal)? *</label>
+    <textarea name="tools_audioenhance" required></textarea>
+
+    <label>Tools for voice cloning (100% match with reference)? *</label>
+    <textarea name="tools_voiceclone" required></textarea>
+
+    <label>Tools to support all 21 Arabic dialects with natural tone, breathing, emotions? *</label>
+    <textarea name="tools_dialects" required></textarea>
+
+    <label>Tools for singing voice generation (natural, non-artificial)? *</label>
+    <textarea name="tools_singing" required></textarea>
+
+    <label>Tools for integrating complete sound library (FX + background audio)? *</label>
+    <textarea name="tools_soundlib" required></textarea>
+
+    <label>Tools for cinematic image animation (body + face)? *</label>
+    <textarea name="tools_animation" required></textarea>
+
+    <label>Have you worked with SkyReels V2 before? What’s your opinion?</label>
+    <textarea name="tools_skyreels"></textarea>
+
+    <label>Tools for lip-sync (narration, side-dialogue, group conversations)? *</label>
+    <textarea name="tools_lipsync" required></textarea>
+
+    <label>Tools for Chat Window analysis (parse 15 scenes in ≤10 seconds)? *</label>
+    <textarea name="tools_chatwindow" required></textarea>
+
+    <label>Tools to integrate all modules (smooth orchestration from Chat → Image → Voice → Animation → Video)? *</label>
+    <textarea name="tools_integration" required></textarea>
+
+    <label>If you face issues with an AI tool, how will you handle replacements/adaptations? *</label>
+    <textarea name="tools_flexibility" required></textarea>
+
+    <!-- Final Questions -->
+    <label>Are you ready to deliver 100% of the required quality? *</label>
+    <div class="radio-group">
+      <input type="radio" name="deliver_quality" value="Yes" required> Yes
+      <input type="radio" name="deliver_quality" value="No" required> No
+    </div>
+
+    <label>Will your outputs match at least the reference videos’ quality? *</label>
+    <div class="radio-group">
+      <input type="radio" name="match_quality" value="Yes" required> Yes
+      <input type="radio" name="match_quality" value="No" required> No
+    </div>
+
+    <!-- Submit -->
+    <button type="submit">Submit Application</button>
+  </form>
+</body>
+</html>
