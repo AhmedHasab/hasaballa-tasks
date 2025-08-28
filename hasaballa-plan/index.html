@@ -58,12 +58,21 @@
 
   <!-- ======== FORM START ======== -->
 
-      <label>Your Name <small class="req">*</small></label><input type="text" name="name" required>
-      <label>Company / Team <small class="req">*</small></label><input type="text" name="company" required>
-      <label>Platform <small class="req">*</small></label>
-      <select name="platform" required>
-        <option value="">-- Select --</option><option value="Freelancer">Freelancer</option><option value="Guru">Guru</option><option value="Upwork">Upwork</option>
-      </select>
+ <!-- ضيف form="devForm" للثلاثة عناصر دول -->
+<label>Your Name <small class="req">*</small></label>
+<input type="text" name="name" required form="devForm">
+
+<label>Company / Team <small class="req">*</small></label>
+<input type="text" name="company" required form="devForm">
+
+<label>Platform</label>
+<select name="platform" form="devForm">   <!-- خليه اختياري لو تحب -->
+  <option value="">-- Select --</option>
+  <option value="Freelancer">Freelancer</option>
+  <option value="Guru">Guru</option>
+  <option value="Upwork">Upwork</option>
+</select>
+
   <form class="card" id="devForm">
     <h3>📜 General Conditions (Required)</h3>
 
