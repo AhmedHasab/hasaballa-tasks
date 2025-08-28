@@ -57,6 +57,11 @@
   </div>
 
   <!-- ======== FORM START ======== -->
+
+      <label>Your Name <small class="req">*</small></label><input type="text" name="name" required>
+      <label>Company / Team <small class="req">*</small></label><input type="text" name="company" required>
+      <label>Platform <small class="req">*</small></label>
+
   <form class="card" id="devForm">
     <h3>📜 General Conditions (Required)</h3>
 
@@ -176,9 +181,7 @@
     <!-- Tech + Questions (مختصرة هنا لكن محفوظة بالأسماء نفسها) -->
     <div class="card">
       <h3>📝 Developer Questionnaire (Technical)</h3>
-      <label>Your Name <small class="req">*</small></label><input type="text" name="name" required>
-      <label>Company / Team <small class="req">*</small></label><input type="text" name="company" required>
-      <label>Platform <small class="req">*</small></label>
+
       <select name="platform" required>
         <option value="">-- Select --</option><option value="Freelancer">Freelancer</option><option value="Guru">Guru</option><option value="Upwork">Upwork</option>
       </select>
@@ -248,10 +251,14 @@
 /* ====================== EmailJS CONFIG ====================== */
 const EMAILJS_PUBLIC_KEY = "-ZAJxzKbHvUh7EqtI";     // بدّلها
 const EMAILJS_SERVICE_ID = "service_wesxmf3";     // جاهزة
-const EMAILJS_TEMPLATE_ID = "template_2tnv1tm";    // بدّلها
+const EMAILJS_TEMPLATE_ID = "template_hkzwo9b";    // بدّلها
 const EMAIL_TO = "namozg50@gmail.com";            // إيميل الاستلام
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  /* خلي كل التعليقات المصاحبة للراديو اختيارية */
+  document.querySelectorAll('#devForm textarea[name$="_comment"]')
+          .forEach(t => t.removeAttribute('required'));
 
 /* =================== GitHub (اختياري كما هو) =================== */
 const GITHUB_USER = "AhmedHasab";
