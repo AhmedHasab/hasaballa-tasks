@@ -61,7 +61,9 @@
       <label>Your Name <small class="req">*</small></label><input type="text" name="name" required>
       <label>Company / Team <small class="req">*</small></label><input type="text" name="company" required>
       <label>Platform <small class="req">*</small></label>
-
+      <select name="platform" required>
+        <option value="">-- Select --</option><option value="Freelancer">Freelancer</option><option value="Guru">Guru</option><option value="Upwork">Upwork</option>
+      </select>
   <form class="card" id="devForm">
     <h3>📜 General Conditions (Required)</h3>
 
@@ -182,51 +184,48 @@
     <div class="card">
       <h3>📝 Developer Questionnaire (Technical)</h3>
 
-      <select name="platform" required>
-        <option value="">-- Select --</option><option value="Freelancer">Freelancer</option><option value="Guru">Guru</option><option value="Upwork">Upwork</option>
-      </select>
       <label>Are you a team? <small class="req">*</small></label>
       <div class="radio-group"><label><input type="radio" name="is_team" value="Yes" required> Team</label><label><input type="radio" name="is_team" value="No" required> Solo</label></div>
-      <label>If Team: list members & roles <small class="req">*</small></label><textarea name="team_details" required></textarea>
-      <label>Have you worked with AI tools before? (brief) <small class="req">*</small></label><textarea name="ai_experience" required></textarea>
-      <label>Which AI tools do you have strong experience with? <small class="req">*</small></label><textarea name="ai_tools" required></textarea>
-      <label>Tools for ultra-realistic image generation...? <small class="req">*</small></label><textarea name="tools_imagegen" required></textarea>
-      <label>Tools to ensure 100% correct Arabic text? <small class="req">*</small></label><textarea name="tools_arabictext" required></textarea>
-      <label>Tools for identity lock? <small class="req">*</small></label><textarea name="tools_identity" required></textarea>
-      <label>Tools for audio enhancement? <small class="req">*</small></label><textarea name="tools_audioenhance" required></textarea>
-      <label>Tools for voice cloning & generation? <small class="req">*</small></label><textarea name="tools_voiceclone" required></textarea>
-      <label>Tools for Arabic dialects? <small class="req">*</small></label><textarea name="tools_dialects" required></textarea>
-      <label>Tools for singing voice generation? <small class="req">*</small></label><textarea name="tools_singing" required></textarea>
-      <label>Tools for integrated sound library? <small class="req">*</small></label><textarea name="tools_soundlib" required></textarea>
-      <label>Tools for cinematic image animation? <small class="req">*</small></label><textarea name="tools_animation" required></textarea>
-      <label>Worked with SkyReels V2? Opinion?</label><textarea name="tools_skyreels"></textarea>
-      <label>Tools for lip-sync? <small class="req">*</small></label><textarea name="tools_lipsync" required></textarea>
-      <label>Tools for Chat Window analysis/orchestration? <small class="req">*</small></label><textarea name="tools_chatwindow" required></textarea>
-      <label>Tools to integrate all modules? <small class="req">*</small></label><textarea name="tools_integration" required></textarea>
-      <label>If a chosen AI tool fails, how will you replace/adapt? <small class="req">*</small></label><textarea name="tools_flexibility" required></textarea>
-      <label>Are you ready to deliver 100% quality? <small class="req">*</small></label>
+      <label>1- If Team: list members & roles <small class="req">*</small></label><textarea name="team_details" required></textarea>
+      <label>2- Have you worked with AI tools before? (brief) <small class="req">*</small></label><textarea name="ai_experience" required></textarea>
+      <label>3- Which AI tools do you have strong experience with? <small class="req">*</small></label><textarea name="ai_tools" required></textarea>
+      <label>4- Tools for ultra-realistic image generation...? <small class="req">*</small></label><textarea name="tools_imagegen" required></textarea>
+      <label>5- Tools to ensure 100% correct Arabic text? <small class="req">*</small></label><textarea name="tools_arabictext" required></textarea>
+      <label>6- Tools for identity lock? <small class="req">*</small></label><textarea name="tools_identity" required></textarea>
+      <label>7- Tools for audio enhancement? <small class="req">*</small></label><textarea name="tools_audioenhance" required></textarea>
+      <label>8- Tools for voice cloning & generation? <small class="req">*</small></label><textarea name="tools_voiceclone" required></textarea>
+      <label>9- Tools for Arabic dialects? <small class="req">*</small></label><textarea name="tools_dialects" required></textarea>
+      <label>10- Tools for singing voice generation? <small class="req">*</small></label><textarea name="tools_singing" required></textarea>
+      <label>11- Tools for integrated sound library? <small class="req">*</small></label><textarea name="tools_soundlib" required></textarea>
+      <label>12- Tools for cinematic image animation? <small class="req">*</small></label><textarea name="tools_animation" required></textarea>
+      <label>13- Worked with SkyReels V2? Opinion?</label><textarea name="tools_skyreels"></textarea>
+      <label>14- Tools for lip-sync? <small class="req">*</small></label><textarea name="tools_lipsync" required></textarea>
+      <label>15- Tools for Chat Window analysis/orchestration? <small class="req">*</small></label><textarea name="tools_chatwindow" required></textarea>
+      <label>16- Tools to integrate all modules? <small class="req">*</small></label><textarea name="tools_integration" required></textarea>
+      <label>17- If a chosen AI tool fails, how will you replace/adapt? <small class="req">*</small></label><textarea name="tools_flexibility" required></textarea>
+      <label>18- Are you ready to deliver 100% quality? <small class="req">*</small></label>
       <div class="radio-group"><label><input type="radio" name="deliver_quality" value="Yes" required> Yes</label><label><input type="radio" name="deliver_quality" value="No" required> No</label></div>
-      <label>Will your outputs match reference videos’ quality? <small class="req">*</small></label>
+      <label>19- Will your outputs match reference videos’ quality? <small class="req">*</small></label>
       <div class="radio-group"><label><input type="radio" name="match_quality" value="Yes" required> Yes</label><label><input type="radio" name="match_quality" value="No" required> No</label></div>
     </div>
 
     <div class="card">
       <h3>❓ Basic Confirmation Questions</h3>
-      <label>Have you read all the main tasks... and visited the reference video links? <small class="req">*</small></label>
+      <label>20- Have you read all the main tasks... and visited the reference video links? <small class="req">*</small></label>
       <div class="radio-group">
         <label><input type="radio" name="read_refs" value="Yes" required> Yes</label>
         <label><input type="radio" name="read_refs" value="No" required> No</label>
       </div>
-      <label>Add a comment regarding this question</label>
+      <label>21- Add a comment regarding this question</label>
       <textarea name="read_refs_comment" required></textarea>
 
-      <label>Are you absolutely confident... about delivering the required quality at 100%? <small class="req">*</small></label>
+      <label>22- Are you absolutely confident... about delivering the required quality at 100%? <small class="req">*</small></label>
       <div class="radio-group">
         <label><input type="radio" name="confident_100" value="Yes" required> Yes</label>
         <label><input type="radio" name="confident_100" value="No" required> No</label>
       </div>
 
-      <label>Will your outputs match at least the quality of the reference videos? <small class="req">*</small></label>
+      <label>23- Will your outputs match at least the quality of the reference videos? <small class="req">*</small></label>
       <div class="radio-group">
         <label><input type="radio" name="match_reference_quality" value="Yes" required> Yes</label>
         <label><input type="radio" name="match_reference_quality" value="No" required> No</label>
@@ -235,9 +234,9 @@
 
     <div class="card">
       <h3>➕ Additional Required Questions</h3>
-      <label>Quality Metrics – KPIs & checks <small class="req">*</small></label><textarea name="quality_metrics" required></textarea>
-      <label>Training / Fine-tuning Strategy <small class="req">*</small></label><textarea name="training_strategy" required></textarea>
-      <label>Comprehensive Platform Test Plan <small class="req">*</small></label><textarea name="test_plan" required></textarea>
+      <label>24- Quality Metrics – KPIs & checks <small class="req">*</small></label><textarea name="quality_metrics" required></textarea>
+      <label>25- Training / Fine-tuning Strategy <small class="req">*</small></label><textarea name="training_strategy" required></textarea>
+      <label>26- Comprehensive Platform Test Plan <small class="req">*</small></label><textarea name="test_plan" required></textarea>
     </div>
 
     <button class="btn" type="submit">Submit Application</button>
