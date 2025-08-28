@@ -1,59 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Hasaballa AI – Developer Questionnaire</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background: #f8f9fa; }
-    h1, h2, h3 { text-align: center; }
-    label { font-weight: bold; display: block; margin-top: 15px; }
-    textarea, input, select { width: 100%; padding: 8px; margin-top: 5px; }
-    .radio-group { margin: 10px 0; }
-    button { margin-top: 20px; padding: 12px 20px; background: #008CBA; color: #fff; border: none; cursor: pointer; font-size: 16px; }
-    button:hover { background: #005f73; }
+    body{font-family:Arial,Helvetica,sans-serif;margin:20px;line-height:1.6;background:#f8f9fa;color:#111}
+    h1,h2,h3{text-align:center;margin:10px 0}
+    .container{max-width:980px;margin:0 auto}
+    .card{background:#fff;border:1px solid #e3e6e9;border-radius:10px;padding:18px;margin:14px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    label{font-weight:bold;display:block;margin-top:14px}
+    textarea,input,select{width:100%;padding:10px;margin-top:6px;border:1px solid #d0d7de;border-radius:8px;background:#fff}
+    .radio-group{display:flex;gap:18px;margin:8px 0}
+    .btn{display:inline-block;margin-top:16px;padding:12px 18px;border:none;border-radius:10px;background:#0d6efd;color:#fff;font-weight:600;cursor:pointer}
+    .btn:hover{background:#0b5ed7}
+    small.req{color:#c00;font-weight:600}
+    ul{margin-top:6px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .muted{color:#6c757d;font-size:.95em}
+    .pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef1f4;margin:2px 4px;font-size:.9em}
+    .ok{color:#1f883d}
+    .warn{color:#b54708}
+    .bad{color:#d1242f}
+    .table{width:100%;border-collapse:collapse;margin-top:8px}
+    .table th,.table td{border:1px solid #e3e6e9;padding:8px}
+    .table th{background:#f1f3f5}
+    .note{background:#fff3cd;border:1px solid #ffe69c;color:#664d03;padding:10px;border-radius:8px}
+    .success{background:#e9fbe9;border:1px solid #c6f6c6;color:#0f5132;padding:10px;border-radius:8px}
+    .danger{background:#fde2e1;border:1px solid #f5c2c7;color:#842029;padding:10px;border-radius:8px}
+    .flex-between{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    code{background:#eef1f4;padding:2px 6px;border-radius:6px}
   </style>
 </head>
 <body>
+<div class="container">
 
-  <!-- Title -->
-  <h1>Full Offline AI Media Generation Platform – Hasaballa AI</h1>
+  <!-- ========= HEADER / STATIC TEXT ========= -->
+  <div class="card">
+    <h1>Full Offline AI Media Generation Platform – Hasaballa AI</h1>
+    <h2>🛠️ Platform: Hasaballa AI – Description & How it Works</h2>
+    <p class="muted">The Hasaballa AI platform will run fully offline — even if it’s 200 GB in size.</p>
 
-  <!-- Description -->
-  <h2>🛠️ Platform: Hasaballa AI – Description & How it Works</h2>
-  <p>The Hasaballa AI platform will run fully offline — even if it’s 200 GB in size.</p>
+    <h2>🎯 Platform Goals</h2>
+    <p>To produce unlimited videos at high speed / top quality for Arab creators — without any subscriptions, APIs, or internet connection — matching (at minimum) the quality shown in:</p>
+    <ul>
+      <li><a href="https://tinyurl.com/4py6ntv5" target="_blank" rel="noopener">Link 1</a></li>
+      <li><a href="https://tinyurl.com/457h6pxb" target="_blank" rel="noopener">Link 2</a></li>
+      <li><a href="https://tinyurl.com/kye234sk" target="_blank" rel="noopener">Link 3</a></li>
+      <li><a href="https://tinyurl.com/s65thcdc" target="_blank" rel="noopener">Link 4</a></li>
+      <li><a href="https://tinyurl.com/mjb7cw8v" target="_blank" rel="noopener">Link 5</a></li>
+      <li><a href="https://tinyurl.com/r6b2ndn9" target="_blank" rel="noopener">Link 6</a></li>
+    </ul>
 
-  <h2>🎯 Platform Goals</h2>
-  <p>Produce unlimited videos at high speed / top quality for Arab creators — without subscriptions, APIs, or internet connection.  
-  Minimum quality must match these reference videos:</p>
-  <ul>
-    <li><a href="https://tinyurl.com/4py6ntv5">Link 1</a></li>
-    <li><a href="https://tinyurl.com/457h6pxb">Link 2</a></li>
-    <li><a href="https://tinyurl.com/kye234sk">Link 3</a></li>
-    <li><a href="https://tinyurl.com/s65thcdc">Link 4</a></li>
-    <li><a href="https://tinyurl.com/mjb7cw8v">Link 5</a></li>
-    <li><a href="https://tinyurl.com/r6b2ndn9">Link 6</a></li>
-  </ul>
+    <h2>📂 Documentation</h2>
+    <p>A full detailed document (tasks, sub-tasks, requirements) will be provided upon award.</p>
 
-  <h2>📂 Documentation</h2>
-  <p>A full detailed document of the platform (all tasks, sub-tasks, and requirements) will be provided to the selected developer/team.</p>
+    <h2>📋 Hasaballa AI – 18 Core Components</h2>
+    <p class="muted">See RFP main page (System Requirements, Offline, Arabic UI, Chat Window, Image Gen, Image Animation, Voice, Background Audio, Smart Director, Timeline Editor, Smart Edit Layer, AdSense/YouTube, Auto-Update, Save/Backup, Source Code, etc.).</p>
+  </div>
 
-  <h2>📋 Hasaballa AI – 18 Core Components</h2>
-  <p>[List of 18 core tasks … as provided above]</p>
+  <!-- ========= LIVE LEADERBOARD (reads JSON) ========= -->
+  <div class="card" id="leaderboardCard">
+    <div class="flex-between">
+      <h3>📊 Current Leaderboard (Top Candidates)</h3>
+      <button class="btn" id="refreshBtn">Refresh</button>
+    </div>
+    <div id="leaderboardNote" class="note">
+      This leaderboard reads from your repo JSON (set config below). It ranks candidates by the computed Recommendation Score.
+    </div>
+    <table class="table" id="leaderboardTable" style="display:none">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name / Company</th>
+          <th>Platform</th>
+          <th>Score %</th>
+          <th>Strengths (summary)</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboardBody"></tbody>
+    </table>
+  </div>
 
-  <h2>💰 Budget & Milestones</h2>
-  <p>Budget: $7,500 divided into 6 milestones + $500–$1,000 bonus upon successful delivery.</p>
-
-  <!-- FORM START -->
-  <form method="POST" action="send.php">
+  <!-- ========= FORM ========= -->
+  <form class="card" id="devForm">
+    <h3>📝 Developer Questionnaire</h3>
 
     <!-- Basic Info -->
-    <label>Your Name *</label>
+    <label>Your Name <small class="req">*</small></label>
     <input type="text" name="name" required>
 
-    <label>Company / Team *</label>
+    <label>Company / Team <small class="req">*</small></label>
     <input type="text" name="company" required>
 
-    <label>Platform *</label>
+    <label>Platform <small class="req">*</small></label>
     <select name="platform" required>
       <option value="">-- Select --</option>
       <option value="Freelancer">Freelancer</option>
@@ -61,80 +101,464 @@
       <option value="Upwork">Upwork</option>
     </select>
 
-    <!-- General Questions -->
-    <label>Are you a team or a single developer? *</label>
+    <!-- Team -->
+    <label>Are you a team? <small class="req">*</small></label>
     <div class="radio-group">
-      <input type="radio" name="team" value="Team" required> Team
-      <input type="radio" name="team" value="Solo" required> Solo
+      <label><input type="radio" name="is_team" value="Yes" required> Yes</label>
+      <label><input type="radio" name="is_team" value="No" required> No</label>
     </div>
 
-    <label>If Team: List members & roles *</label>
-    <textarea name="team_details" required></textarea>
+    <label>If Yes: list members & roles <small class="req">*</small></label>
+    <textarea name="team_details" placeholder="e.g., Ahmed – ML Engineer; Mona – Frontend; ..." required></textarea>
 
-    <label>Have you worked with AI tools before? *</label>
+    <!-- Experience -->
+    <label>Have you worked with AI tools before? (brief) <small class="req">*</small></label>
     <textarea name="ai_experience" required></textarea>
 
-    <label>Which AI tools do you have strong experience with? *</label>
-    <textarea name="ai_tools" required></textarea>
+    <label>Which AI tools do you have strong experience with? <small class="req">*</small></label>
+    <textarea name="ai_tools" placeholder="List tools & stack clearly..." required></textarea>
 
-    <!-- Technical Questions -->
-    <label>Tools for ultra-realistic image generation (text-to-image, image-to-image, reference faces, Arabic text support)? *</label>
+    <!-- Technical (original set) -->
+    <label>Tools for ultra-realistic image generation (text→image, image→image, reference faces, Arabic text support)? <small class="req">*</small></label>
     <textarea name="tools_imagegen" required></textarea>
 
-    <label>Tools to ensure 100% correct Arabic text in generated images? *</label>
+    <label>Tools to ensure 100% correct Arabic text in generated images? <small class="req">*</small></label>
     <textarea name="tools_arabictext" required></textarea>
 
-    <label>Tools for identity lock (99.9% reference face stability)? *</label>
+    <label>Tools for identity lock (reference face stability)? <small class="req">*</small></label>
     <textarea name="tools_identity" required></textarea>
 
-    <label>Tools for audio enhancement (studio quality, noise removal)? *</label>
+    <label>Tools for audio enhancement (studio quality, noise removal)? <small class="req">*</small></label>
     <textarea name="tools_audioenhance" required></textarea>
 
-    <label>Tools for voice cloning (100% match with reference)? *</label>
+    <label>Tools for voice cloning & generation? <small class="req">*</small></label>
     <textarea name="tools_voiceclone" required></textarea>
 
-    <label>Tools to support all 21 Arabic dialects with natural tone, breathing, emotions? *</label>
+    <label>Tools to support all Arabic dialects with natural tone, breathing, emotions? <small class="req">*</small></label>
     <textarea name="tools_dialects" required></textarea>
 
-    <label>Tools for singing voice generation (natural, non-artificial)? *</label>
+    <label>Tools for singing voice generation (natural)? <small class="req">*</small></label>
     <textarea name="tools_singing" required></textarea>
 
-    <label>Tools for integrating complete sound library (FX + background audio)? *</label>
+    <label>Tools for integrating a complete sound FX/background library? <small class="req">*</small></label>
     <textarea name="tools_soundlib" required></textarea>
 
-    <label>Tools for cinematic image animation (body + face)? *</label>
+    <label>Tools for cinematic image animation (body + face)? <small class="req">*</small></label>
     <textarea name="tools_animation" required></textarea>
 
-    <label>Have you worked with SkyReels V2 before? What’s your opinion?</label>
-    <textarea name="tools_skyreels"></textarea>
+    <label>Have you worked with SkyReels V2? What’s your opinion?</label>
+    <textarea name="tools_skyreels" placeholder="Optional"></textarea>
 
-    <label>Tools for lip-sync (narration, side-dialogue, group conversations)? *</label>
+    <label>Tools for lip-sync (narration, side-dialogue, group conversations)? <small class="req">*</small></label>
     <textarea name="tools_lipsync" required></textarea>
 
-    <label>Tools for Chat Window analysis (parse 15 scenes in ≤10 seconds)? *</label>
+    <label>Tools for Chat Window analysis/orchestration (parse full script & route tasks)? <small class="req">*</small></label>
     <textarea name="tools_chatwindow" required></textarea>
 
-    <label>Tools to integrate all modules (smooth orchestration from Chat → Image → Voice → Animation → Video)? *</label>
+    <label>Tools to integrate all modules (smooth orchestration from Chat → Image → Voice → Animation → Video)? <small class="req">*</small></label>
     <textarea name="tools_integration" required></textarea>
 
-    <label>If you face issues with an AI tool, how will you handle replacements/adaptations? *</label>
+    <label>If a chosen AI tool fails, how will you replace/adapt? <small class="req">*</small></label>
     <textarea name="tools_flexibility" required></textarea>
 
-    <!-- Final Questions -->
-    <label>Are you ready to deliver 100% of the required quality? *</label>
+    <!-- Acceptance -->
+    <label>Are you ready to deliver 100% of the required quality? <small class="req">*</small></label>
     <div class="radio-group">
-      <input type="radio" name="deliver_quality" value="Yes" required> Yes
-      <input type="radio" name="deliver_quality" value="No" required> No
+      <label><input type="radio" name="deliver_quality" value="Yes" required> Yes</label>
+      <label><input type="radio" name="deliver_quality" value="No" required> No</label>
     </div>
 
-    <label>Will your outputs match at least the reference videos’ quality? *</label>
+    <label>Will your outputs match at least the reference videos’ quality? <small class="req">*</small></label>
     <div class="radio-group">
-      <input type="radio" name="match_quality" value="Yes" required> Yes
-      <input type="radio" name="match_quality" value="No" required> No
+      <label><input type="radio" name="match_quality" value="Yes" required> Yes</label>
+      <label><input type="radio" name="match_quality" value="No" required> No</label>
     </div>
+
+    <!-- ===== NEW 3 QUESTIONS ===== -->
+    <h3>➕ Additional Required Questions</h3>
+
+    <label>Quality Metrics – how will you measure & enforce quality? (clear KPIs, checks, offline constraints) <small class="req">*</small></label>
+    <textarea name="quality_metrics" placeholder="e.g., face-ID match %, lip-sync offset ms, noise floor dB, Arabic spell/diacritics checks..." required></textarea>
+
+    <label>Training / Fine-tuning Strategy – how will you reach the required quality offline? <small class="req">*</small></label>
+    <textarea name="training_strategy" placeholder="datasets, augmentations, LoRA/embeddings, evaluation loops, reproducible seeds..." required></textarea>
+
+    <label>Comprehensive Platform Test Plan – end-to-end testing before delivery <small class="req">*</small></label>
+    <textarea name="test_plan" placeholder="E2E scenarios, failure handling, autosave recovery, timeline validation, latency/VRAM checks..." required></textarea>
 
     <!-- Submit -->
-    <button type="submit">Submit Application</button>
+    <button class="btn" type="submit">Submit Application</button>
+    <div id="statusBox" style="margin-top:10px;"></div>
   </form>
+
+  <!-- ========= CONFIG CARD ========= -->
+  <div class="card">
+    <h3>⚙️ Minimal Config (set once)</h3>
+    <p class="muted">
+      To store submissions in your <strong>GitHub repo as JSON</strong>, set the variables below inside the code (top of the JS section):
+      <code>GITHUB_USER</code>, <code>GITHUB_REPO</code>, <code>GITHUB_BRANCH</code>, <code>GITHUB_TOKEN</code>.
+      Data will be saved to <code>data/submissions.json</code>.
+    </p>
+    <p class="muted">Email sending uses a no-signup <code>mailto:</code> fallback. (Optional) You may plug EmailJS later by filling its IDs.</p>
+  </div>
+
+</div>
+
+<!-- ========= SINGLE-FILE JS ========= -->
+<script>
+/* =======================
+   SIMPLE CONFIG (EDIT)
+   ======================= */
+
+// 1) GitHub JSON storage (for automatic leaderboard + future reading)
+const GITHUB_USER   = "YOUR_GITHUB_USERNAME"; // مثال: AhmedHasab
+const GITHUB_REPO   = "hasaballa-tasks";      // الريبو اللي عليه الصفحة
+const GITHUB_BRANCH = "main";                  // أو master
+const GITHUB_TOKEN  = ""; // ضع توكن جيت هب هنا (Fine-grained, content: read/write على نفس الريبو). اتركه فارغاً لتعطيل الحفظ على GitHub.
+
+const JSON_PATH     = "data/submissions.json"; // المسار داخل الريبو
+const JSON_API_URL  = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${JSON_PATH}`;
+const RAW_JSON_URL  = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${JSON_PATH}`;
+
+// 2) Email (fallback via mailto)
+const EMAIL_TO = "namozg50@gmail.com";
+
+// (Optional) EmailJS (لو حبيت لاحقًا بدون PHP)
+// const EMAILJS_PUBLIC   = "YOUR_PUBLIC_KEY";
+// const EMAILJS_SERVICE  = "YOUR_SERVICE_ID";
+// const EMAILJS_TEMPLATE = "YOUR_TEMPLATE_ID";
+
+/* =======================
+   SCORING / ANALYTICS
+   ======================= */
+
+// مفاتيح تقييم الأدوات (اذكر أسماء الأدوات بحرّية، هنلتقط الموجود)
+const SCORE_WEIGHTS = {
+  imagegen: {
+    good: [ "stable diffusion", "sdxl", "sd3", "flux", "comfyui", "controlnet", "ip-adapter", "instantid", "lora", "kohya", "roop", "reactor" ],
+    bad:  [ "midjourney", "dalle", "api", "cloud" ]
+  },
+  arabicText: {
+    good: [ "arabic", "harakat", "ocr", "ligature", "font shaping", "text rendering", "pangram", "inpaint", "controlnet tile" ],
+    bad:  [ "api", "cloud" ]
+  },
+  identity: {
+    good: [ "instantid", "ip-adapter faceid", "reactor", "roop", "faceid", "seed lock", "embeddings" ],
+    bad:  [ "api", "cloud" ]
+  },
+  voiceEnhance: {
+    good: [ "ffmpeg", "sox", "demucs", "rx", "rnnoise", "dns", "spleeter", "librosa" ],
+    bad:  [ "api", "cloud" ]
+  },
+  voiceClone: {
+    good: [ "tacotron", "vits", "coqui", "so-vits", "rvc", "fish-speech", "xtts", "tortoise" ],
+    bad:  [ "api", "cloud" ]
+  },
+  dialects: {
+    good: [ "arabic dialect", "msa", "egyptian", "gulf", "levantine", "maghrebi", "sudanese", "yemeni", "phoneme", "grapheme", "g2p", "ipa" ],
+    bad:  [ "api", "cloud" ]
+  },
+  singing: {
+    good: [ "sovits-svc", "rvc", "diff-svc", "vocaloid-like", "pitch tracking", "f0", "mel spectrogram" ],
+    bad:  [ "api", "cloud" ]
+  },
+  soundlib: {
+    good: [ "ffmpeg", "wavpack", "flac", "24bit", "48khz", "audio layering", "loudness", "ebu r128" ],
+    bad:  [ "api", "cloud" ]
+  },
+  animation: {
+    good: [ "skyr eels", "skyreels", "animate diff", "ebsynth", "sad talker", "dreamtalk", "wav2lip", "densepose", "optical flow", "first order motion" ],
+    bad:  [ "api", "cloud" ]
+  },
+  lipsync: {
+    good: [ "wav2lip", "sadtalker", "syncnet", "phoneme align", "ctc", "tts alignment" ],
+    bad:  [ "api", "cloud" ]
+  },
+  chatwindow: {
+    good: [ "mistral", "mixtral", "llama", "llama.cpp", "ollama", "gguf", "router", "parser", "seeded planning" ],
+    bad:  [ "api", "cloud" ]
+  },
+  integration: {
+    good: [ "pytorch", "cuda", "node", "python", "grpc", "message bus", "ffmpeg", "opencv", "async", "pipeline", "timeline" ],
+    bad:  [ "api", "cloud" ]
+  }
+};
+
+// نصائح عامة تُضاف عند وجود كلمات مخاطرة
+const RISK_HINTS = {
+  cloud: "Mentions of API/Cloud conflict with offline requirement.",
+  vague: "Answers are too generic; require specific tool names and workflow details."
+};
+
+// Helper: normalize text
+function norm(t){ return (t||"").toLowerCase(); }
+
+// Compute score & analysis
+function analyzeSubmission(payload){
+  const fields = payload;
+
+  function scoreField(text, map){
+    let s = 0, hitsGood = [], hitsBad = [];
+    const n = norm(text);
+    map.good.forEach(k=>{ if(n.includes(k)){ s += 10; hitsGood.push(k); }});
+    map.bad.forEach(k=>{ if(n.includes(k)){ s -= 8;  hitsBad.push(k); }});
+    return { s, hitsGood, hitsBad };
+  }
+
+  const buckets = {
+    imagegen:      scoreField(fields.tools_imagegen, SCORE_WEIGHTS.imagegen),
+    arabicText:    scoreField(fields.tools_arabictext, SCORE_WEIGHTS.arabicText),
+    identity:      scoreField(fields.tools_identity, SCORE_WEIGHTS.identity),
+    voiceEnhance:  scoreField(fields.tools_audioenhance, SCORE_WEIGHTS.voiceEnhance),
+    voiceClone:    scoreField(fields.tools_voiceclone, SCORE_WEIGHTS.voiceClone),
+    dialects:      scoreField(fields.tools_dialects, SCORE_WEIGHTS.dialects),
+    singing:       scoreField(fields.tools_singing, SCORE_WEIGHTS.singing),
+    soundlib:      scoreField(fields.tools_soundlib, SCORE_WEIGHTS.soundlib),
+    animation:     scoreField(fields.tools_animation, SCORE_WEIGHTS.animation),
+    lipsync:       scoreField(fields.tools_lipsync, SCORE_WEIGHTS.lipsync),
+    chatwindow:    scoreField(fields.tools_chatwindow, SCORE_WEIGHTS.chatwindow),
+    integration:   scoreField(fields.tools_integration, SCORE_WEIGHTS.integration)
+  };
+
+  let total = 0, positives=[], negatives=[], cloudFlag=false;
+  Object.entries(buckets).forEach(([k,v])=>{
+    total += v.s;
+    positives = positives.concat(v.hitsGood.map(x=>`${k}:${x}`));
+    negatives = negatives.concat(v.hitsBad.map(x=>`${k}:${x}`));
+    if(v.hitsBad.some(x=>x==="api"||x==="cloud")) cloudFlag=true;
+  });
+
+  // Bonus for filling Quality/Training/Test with substance (length-based quick check)
+  const qLen = norm(fields.quality_metrics).length +
+               norm(fields.training_strategy).length +
+               norm(fields.test_plan).length;
+  total += Math.min(30, Math.floor(qLen/200)); // up to +30
+
+  // Clamp to 0..100
+  let score = Math.max(0, Math.min(100, Math.round((total/220)*100)));
+
+  // Strengths/Weaknesses synthesis
+  const strengths = [];
+  if(positives.some(p=>p.startsWith("imagegen:"))) strengths.push("Solid image generation stack");
+  if(positives.some(p=>p.startsWith("identity:"))) strengths.push("Identity/face stability tools present");
+  if(positives.some(p=>p.startsWith("lipsync:"))) strengths.push("Dedicated lip-sync solution");
+  if(positives.some(p=>p.startsWith("voiceClone:"))) strengths.push("Voice cloning stack identified");
+  if(positives.some(p=>p.startsWith("chatwindow:"))) strengths.push("Offline LLM & routing mentioned");
+  if(positives.some(p=>p.startsWith("integration:"))) strengths.push("Clear orchestration/tooling pipeline");
+
+  const weaknesses = [];
+  if(negatives.length) weaknesses.push("Potential cloud/API reliance (violates offline rule).");
+  if(qLen < 400) weaknesses.push("Quality/Training/Test answers lack depth.");
+  // Vague detection
+  const longFields = ["ai_tools","tools_imagegen","tools_voiceclone","tools_animation","tools_integration"];
+  let vagueCount = 0;
+  longFields.forEach(f=>{ if(norm(fields[f]).split(/\s+/).length < 5) vagueCount++; });
+  if(vagueCount >= 2) weaknesses.push(RISK_HINTS.vague);
+
+  const isBestTools = weaknesses.length===0 && score>=75 ? "Yes" : "No";
+  const recommendation = score>=85 ? "Highly Recommended"
+                        : score>=70 ? "Recommended"
+                        : score>=55 ? "Borderline"
+                        : "Not Recommended";
+
+  return {
+    score,
+    strengths,
+    weaknesses,
+    positives,
+    negatives,
+    isBestTools,
+    recommendation,
+    cloudFlag
+  };
+}
+
+/* =======================
+   EMAIL (mailto fallback)
+   ======================= */
+function buildEmailBody(payload, analysis){
+  function esc(s){ return (s||"").replace(/\n/g,"%0D%0A"); }
+  const lines = [];
+  lines.push("New Hasaballa AI Developer Submission");
+  lines.push("====================================");
+  lines.push(`Name: ${payload.name}`);
+  lines.push(`Company: ${payload.company}`);
+  lines.push(`Platform: ${payload.platform}`);
+  lines.push(`Team?: ${payload.is_team}`);
+  lines.push(`Team Details: ${payload.team_details}`);
+  lines.push("");
+  lines.push("Answers:");
+  Object.keys(payload).forEach(k=>{
+    if(["name","company","platform","is_team","team_details"].includes(k)) return;
+    lines.push(`- ${k}:`);
+    lines.push(String(payload[k]));
+    lines.push("");
+  });
+  lines.push("----- Analysis -----");
+  lines.push(`Recommendation Score: ${analysis.score}%`);
+  lines.push(`Recommendation: ${analysis.recommendation}`);
+  lines.push(`Best Tools? ${analysis.isBestTools}`);
+  if(analysis.strengths.length){ lines.push("Strengths:"); analysis.strengths.forEach(s=>lines.push("• "+s)); }
+  if(analysis.weaknesses.length){ lines.push("Weaknesses:"); analysis.weaknesses.forEach(s=>lines.push("• "+s)); }
+  return esc(lines.join("\n"));
+}
+
+function sendMailto(payload, analysis){
+  const subject = encodeURIComponent("New Hasaballa AI Developer Submission");
+  const body = buildEmailBody(payload, analysis);
+  const href = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${subject}&body=${body}`;
+  window.location.href = href; // يفتح عميل البريد الافتراضي ويرسل الرسالة بشكل منسق
+}
+
+/* =======================
+   GITHUB JSON STORAGE
+   ======================= */
+async function getCurrentJson(){
+  try{
+    const res = await fetch(RAW_JSON_URL, {cache:"no-store"});
+    if(!res.ok) return [];
+    const data = await res.json().catch(()=>[]);
+    return Array.isArray(data)? data : [];
+  }catch(e){ return []; }
+}
+
+async function getContentSha(){
+  // fetch current file to get sha for update
+  const res = await fetch(JSON_API_URL, {
+    headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: "application/vnd.github+json" }
+  });
+  if(!res.ok) return null;
+  const js = await res.json();
+  return js.sha || null;
+}
+
+async function saveToGithub(allSubmissions){
+  if(!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(allSubmissions,null,2))));
+  const sha = await getContentSha(); // if null, it's a create
+  const method = "PUT";
+  const body = {
+    message: `chore: update ${JSON_PATH} (${new Date().toISOString()})`,
+    content,
+    branch: GITHUB_BRANCH
+  };
+  if(sha) body.sha = sha;
+
+  const res = await fetch(JSON_API_URL, {
+    method,
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  if(!res.ok){
+    const t = await res.text();
+    throw new Error(`GitHub save failed: ${res.status} ${t}`);
+  }
+}
+
+/* =======================
+   LEADERBOARD (READ JSON)
+   ======================= */
+async function refreshLeaderboard(){
+  const note = document.getElementById("leaderboardNote");
+  const table = document.getElementById("leaderboardTable");
+  const tbody = document.getElementById("leaderboardBody");
+  tbody.innerHTML = "";
+  try{
+    const arr = await getCurrentJson();
+    if(!arr.length){
+      note.className="note";
+      note.textContent = "No submissions yet or JSON not found.";
+      table.style.display="none";
+      return;
+    }
+    // sort by score desc
+    arr.sort((a,b)=> (b.analysis?.score||0) - (a.analysis?.score||0));
+    table.style.display="";
+    note.className="success";
+    note.textContent = "Loaded from JSON. Sorted by Recommendation Score.";
+    arr.slice(0,10).forEach((item,idx)=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${idx+1}</td>
+        <td><strong>${item.name||"-"}</strong><br><span class="muted">${item.company||""}</span></td>
+        <td>${item.platform||"-"}</td>
+        <td><strong>${item.analysis?.score??0}%</strong><br><span class="muted">${item.analysis?.recommendation||""}</span></td>
+        <td>${(item.analysis?.strengths||[]).slice(0,3).map(s=>`<span class="pill">${s}</span>`).join(" ")}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }catch(e){
+    note.className="danger";
+    note.textContent = "Failed to load leaderboard JSON.";
+    table.style.display="none";
+  }
+}
+document.getElementById("refreshBtn").addEventListener("click", refreshLeaderboard);
+refreshLeaderboard();
+
+/* =======================
+   FORM SUBMIT HANDLER
+   ======================= */
+document.getElementById("devForm").addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const f = e.target;
+  const formData = new FormData(f);
+  const payload = {};
+  formData.forEach((v,k)=> payload[k]=String(v).trim());
+
+  // Analysis
+  const analysis = analyzeSubmission(payload);
+  const submission = {
+    ...payload,
+    created_at: new Date().toISOString(),
+    analysis
+  };
+
+  const statusBox = document.getElementById("statusBox");
+  statusBox.innerHTML = "";
+  statusBox.className = "";
+
+  // 1) Send email (mailto fallback — يفتح برنامج البريد)
+  sendMailto(payload, analysis);
+
+  // 2) Save to GitHub JSON (if token provided)
+  if(GITHUB_TOKEN){
+    try{
+      const current = await getCurrentJson();
+      current.push(submission);
+      await saveToGithub(current);
+      statusBox.className="success";
+      statusBox.textContent = "Saved to GitHub JSON successfully.";
+      refreshLeaderboard();
+    }catch(err){
+      statusBox.className="danger";
+      statusBox.textContent = "GitHub save failed: " + err.message;
+    }
+  }else{
+    statusBox.className="note";
+    statusBox.innerHTML = 'GitHub save is disabled. Set <code>GITHUB_TOKEN</code> to enable JSON storage.';
+  }
+
+  // 3) Local backup (browser)
+  const local = JSON.parse(localStorage.getItem("hasaballa_submissions")||"[]");
+  local.push(submission);
+  localStorage.setItem("hasaballa_submissions", JSON.stringify(local));
+});
+
+/* =======================
+   TINY UX HELPERS
+   ======================= */
+// تحسين بسيط: لو اختار Solo، نخلي team_details مطلوب لكن بنحط "N/A"
+document.querySelectorAll('input[name="is_team"]').forEach(r=>{
+  r.addEventListener("change",(e)=>{
+    const td = document.querySelector('textarea[name="team_details"]');
+    if(e.target.value==="No" && td.value.trim()==="") td.value="N/A";
+  });
+});
+</script>
 </body>
 </html>
