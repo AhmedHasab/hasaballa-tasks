@@ -242,21 +242,7 @@
   </form>
   <!-- ======== FORM END ======== -->
 
-  <!-- Leaderboard -->
-  <div class="card" id="leaderboardCard">
-    <div class="flex-between"><h3>📊 Current Leaderboard (Top Candidates)</h3><button class="btn" id="refreshBtn">Refresh</button></div>
-    <div id="leaderboardNote" class="note">Reads from data/submissions.json and ranks by score.</div>
-    <table class="table" id="leaderboardTable" style="display:none">
-      <thead><tr><th>#</th><th>Name / Company</th><th>Platform</th><th>Score %</th><th>Strengths</th></tr></thead>
-      <tbody id="leaderboardBody"></tbody>
-    </table>
-  </div>
 
-  <div class="card">
-    <h3>⚙️ Minimal Config</h3>
-    <p class="muted">Set <code>GITHUB_USER/REPO/BRANCH</code>. (Optional) set <code>CLIENT_PAT</code> لعمل ملف داخل <code>queue/</code> تلقائيًا، ثم الـ Workflow يدمجه داخل <code>data/submissions.json</code>.</p>
-  </div>
-</div>
 
 <script>
 /* ====================== EmailJS CONFIG ====================== */
@@ -326,30 +312,7 @@ function analyzeSubmission(fields){
   return {score,strengths,weaknesses,recommendation,isBestTools};
 }
 
-/* ============== Leaderboard (قراءة JSON من GitHub) ============== */
-async function refreshLeaderboard(){
-  const note=document.getElementById("leaderboardNote");
-  const table=document.getElementById("leaderboardTable");
-  const tbody=document.getElementById("leaderboardBody"); tbody.innerHTML="";
-  try{
-    const res=await fetch(RAW_JSON_URL,{cache:"no-store"});
-    if(!res.ok){note.className="note";note.textContent="No submissions yet or JSON not found.";table.style.display="none";return;}
-    const arr=await res.json(); if(!Array.isArray(arr)||!arr.length){note.className="note";note.textContent="Empty submissions.";table.style.display="none";return;}
-    arr.sort((a,b)=>(b.analysis?.score||0)-(a.analysis?.score||0));
-    table.style.display=""; note.className="success"; note.textContent="Loaded from JSON. Sorted by Recommendation Score.";
-    arr.slice(0,10).forEach((it,idx)=>{
-      const tr=document.createElement("tr");
-      tr.innerHTML=`<td>${idx+1}</td>
-        <td><strong>${it.name||"-"}</strong><br><span class="muted">${it.company||""}</span></td>
-        <td>${it.platform||"-"}</td>
-        <td><strong>${it.analysis?.score??0}%</strong><br><span class="muted">${it.analysis?.recommendation||""}</span></td>
-        <td>${(it.analysis?.strengths||[]).slice(0,3).map(s=>`<span class="pill">${s}</span>`).join(" ")}</td>`;
-      tbody.appendChild(tr);
-    });
-  }catch(e){note.className="danger";note.textContent="Failed to load leaderboard.";table.style.display="none";}
-}
-document.getElementById("refreshBtn").addEventListener("click",refreshLeaderboard);
-refreshLeaderboard();
+
 
 /* =================== Submit Handler =================== */
 const statusBox=document.getElementById("statusBox");
