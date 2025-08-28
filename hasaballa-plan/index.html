@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <title>Hasaballa AI – Developer Questionnaire</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <style>
     body{font-family:Arial,Helvetica,sans-serif;margin:20px;line-height:1.6;background:#f8f9fa;color:#111}
     h1,h2,h3{margin:10px 0;text-align:center}
@@ -56,164 +60,120 @@
   <form class="card" id="devForm">
     <h3>📜 General Conditions (Required)</h3>
 
-    <!-- 1..16 -->
+    <!-- 1..16 (نفس الكتل اللي عندك) -->
     <div class="cond-block">
       <label>1) Scope Integration <small class="req">*</small></label>
       <p class="muted">All milestones must be fully compatible and interconnected. Tasks 1 to 3 are mandatory in every milestone.</p>
       <label>Add comment</label><textarea name="cond1_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond1_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond1_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond1_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond1_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>2) Reference Quality Enforcement <small class="req">*</small></label>
       <p class="muted">Each milestone must deliver output equal to or better than the reference videos. Lower quality will be rejected; developer must revise at no extra cost.</p>
       <label>Add comment</label><textarea name="cond2_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond2_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond2_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond2_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond2_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>3) Client Approval Requirement <small class="req">*</small></label>
       <p class="muted">No milestone is approved without client confirmation based on quality and completeness.</p>
       <label>Add comment</label><textarea name="cond3_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond3_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond3_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond3_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond3_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>4) Unlimited Revisions Within Scope <small class="req">*</small></label>
       <p class="muted">Unlimited revisions within scope until desired quality is achieved. Milestone must meet all functional & visual requirements.</p>
       <label>Add comment</label><textarea name="cond4_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond4_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond4_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond4_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond4_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>5) Platform Must Be 100% Offline <small class="req">*</small></label>
       <p class="muted">Runs entirely offline on client device; no paid APIs, cloud, or online services.</p>
       <label>Add comment</label><textarea name="cond5_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond5_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond5_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond5_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond5_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>6) Technology Requirements <small class="req">*</small></label>
       <p class="muted">Build with PyTorch, FFmpeg, (optional) OpenCV, Whisper.cpp, CUDA (offline only). No 3rd-party APIs/cloud/subscriptions.</p>
       <label>Add comment</label><textarea name="cond6_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond6_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond6_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond6_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond6_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>7) Local Device Performance Guarantee <small class="req">*</small></label>
       <p class="muted">Must run smoothly on RTX 5090, 64GB RAM, 4TB SSD without lag/crashes.</p>
       <label>Add comment</label><textarea name="cond7_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond7_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond7_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond7_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond7_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>8) IP Ownership <small class="req">*</small></label>
       <p class="muted">Client retains 100% IP on code/models/assets/outputs after full payment. No reuse/share/sell.</p>
       <label>Add comment</label><textarea name="cond8_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond8_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond8_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond8_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond8_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>9) NDA <small class="req">*</small></label>
       <p class="muted">No disclosure/replication during or after contract.</p>
       <label>Add comment</label><textarea name="cond9_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond9_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond9_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond9_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond9_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>10) Backup Requirement <small class="req">*</small></label>
       <p class="muted">At each milestone end, provide a local backup of code/models/settings.</p>
       <label>Add comment</label><textarea name="cond10_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond10_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond10_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond10_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond10_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>11) Post-Delivery Support <small class="req">*</small></label>
       <p class="muted">2 weeks free support after final milestone for minor bugs.</p>
       <label>Add comment</label><textarea name="cond11_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond11_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond11_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond11_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond11_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>12) Custom Development Requirement <small class="req">*</small></label>
       <p class="muted">All components must be custom-built; no commercial/AIaaS/cloud/licensed services.</p>
       <label>Add comment</label><textarea name="cond12_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond12_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond12_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond12_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond12_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>13) Termination for Quality Breach <small class="req">*</small></label>
       <p class="muted">If minimum quality not met after multiple revisions, client may cancel without penalty; milestone is rejected.</p>
       <label>Add comment</label><textarea name="cond13_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond13_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond13_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond13_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond13_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>14) Milestone Delivery & Integration <small class="req">*</small></label>
       <p class="muted">Delivered in phases, but final delivery must be one integrated system. Standalone tools not accepted.</p>
       <label>Add comment</label><textarea name="cond14_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond14_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond14_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond14_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond14_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>15) Payment & Retention <small class="req">*</small></label>
       <p class="muted">50% on milestone approval; 50% retained until fully integrated platform is delivered and tested on client device.</p>
       <label>Add comment</label><textarea name="cond15_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond15_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond15_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond15_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond15_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
     <div class="cond-block">
       <label>16) Risk Management <small class="req">*</small></label>
       <p class="muted">If the final integrated platform is not delivered, client may retain pending balances and keep delivered code without further payment.</p>
       <label>Add comment</label><textarea name="cond16_comment" required></textarea>
-      <div class="radio-group"><label><input type="radio" name="cond16_agree" value="Agree" required> موافق</label><label><input type="radio" name="cond16_agree" value="Disagree" required> غير موافق</label></div>
+      <div class="radio-group"><label><input type="radio" name="cond16_agree" value="Agree" required> Agree</label><label><input type="radio" name="cond16_agree" value="Disagree" required> Disagree</label></div>
     </div>
 
-    <div class="card" style="margin-top:18px">
-      <h3>⚠️ Clarification – Risk Management</h3>
-      <p class="muted">The goal is the complete, integrated Hasaballa AI platform at the required quality. ❌ No isolated tools. ❌ No low-quality modules. Milestone-based with 50% hold-back.</p>
-    </div>
-
-    <!-- 18 Core Components -->
-    <div class="card">
-      <h3>📋 Hasaballa AI – 18 Core Components</h3>
-      <ul>
-        <li>1️⃣ System Requirements – Runs on Windows 11 (RTX 5090, 64GB RAM, 4TB SSD, WQXGA display). Must be modular and support future Hasaballa Engine integration.</li>
-        <li>2️⃣ Offline Execution – 100% offline: no APIs, no subscriptions, no credits and no internet dependency.</li>
-        <li>3️⃣ Arabic Interface – 100% Arabic RTL, single-page layout with all 18 integrated tools.</li>
-        <li>4️⃣ Chat Window (Hasaballa GPT) – Central hub to write full scripts, analyze scenarios, insert reference images/voices, and control Auto/Manual flow.</li>
-        <li>5️⃣ Image Generation – Ultra-realistic visuals (16:9, 9:16, 1:1), cinematic lighting, identity lock, text-to-image, image-to image Ai and Arabic text support.</li>
-        <li>6️⃣ Image Animation – Full-body + facial animation, lip sync, duration/camera control, optional cinematic effects (Please Test SkyReels V2).</li>
-        <li>7️⃣ Voice Cloning & Generation – Studio-grade voices... (21 dialects) + multilingual.</li>
-        <li>8️⃣ Background Audio – Built-in sound FX + optional Pixabay search.</li>
-        <li>9️⃣ Smart Director – Auto & Manual. 7-min ≤ 45m, 15-min ≤ 90m.</li>
-        <li>🔟 Timeline Editor & Final Video Editor – HD/FHD/4K, CapCut-style, subtitles, translations, placeholders, preview & download.</li>
-        <li>1️⃣1️⃣ Smart Edit Layer – Arabic prompts with timecodes.</li>
-        <li>1️⃣2️⃣ Integration with Google AdSense & YouTube.</li>
-        <li>1️⃣3️⃣ Arabic Interface (Single Page Layout) – RTL, large buttons.</li>
-        <li>1️⃣4️⃣ Auto-Update Button – (Requires internet).</li>
-        <li>1️⃣5️⃣ Save Project & Continue Later – Auto-save every 30s.</li>
-        <li>1️⃣6️⃣ Project Folder System – Local media per project.</li>
-        <li>1️⃣7️⃣ Backup & Restore – Full backup.</li>
-        <li>1️⃣8️⃣ Source Code Ownership – 100% exclusive rights.</li>
-      </ul>
-    </div>
-
-    <!-- 3 Arabic confirmation questions -->
-    <div class="card">
-      <h3>❓ أسئلة تأكيد أساسية</h3>
-      <label>هل انت قرأت جميع المهام الرئيسية... وزرت روابط الفيديوهات المرجعية؟ <small class="req">*</small></label>
-      <div class="radio-group"><label><input type="radio" name="read_refs" value="Yes" required> نعم</label><label><input type="radio" name="read_refs" value="No" required> لا</label></div>
-      <label>أضف تعليقًا بخصوص هذا السؤال</label><textarea name="read_refs_comment" required></textarea>
-
-      <label>هل انت على ثقه تامه... بالجوده المطلوبة بنسبة 100%؟ <small class="req">*</small></label>
-      <div class="radio-group"><label><input type="radio" name="confident_100" value="Yes" required> نعم</label><label><input type="radio" name="confident_100" value="No" required> لا</label></div>
-
-      <label>هل ستكون مخرجاتك مطابقة على الأقل لجودة مقاطع الفيديو المرجعية؟ <small class="req">*</small></label>
-      <div class="radio-group"><label><input type="radio" name="match_reference_quality" value="Yes" required> نعم</label><label><input type="radio" name="match_reference_quality" value="No" required> لا</label></div>
-    </div>
-
-    <!-- Technical section (same as قبل) -->
+    <!-- Tech + Questions (مختصرة هنا لكن محفوظة بالأسماء نفسها) -->
     <div class="card">
       <h3>📝 Developer Questionnaire (Technical)</h3>
       <label>Your Name <small class="req">*</small></label><input type="text" name="name" required>
@@ -247,7 +207,29 @@
       <div class="radio-group"><label><input type="radio" name="match_quality" value="Yes" required> Yes</label><label><input type="radio" name="match_quality" value="No" required> No</label></div>
     </div>
 
-    <!-- NEW 3 detailed questions -->
+    <div class="card">
+      <h3>❓ Basic Confirmation Questions</h3>
+      <label>Have you read all the main tasks... and visited the reference video links? <small class="req">*</small></label>
+      <div class="radio-group">
+        <label><input type="radio" name="read_refs" value="Yes" required> Yes</label>
+        <label><input type="radio" name="read_refs" value="No" required> No</label>
+      </div>
+      <label>Add a comment regarding this question</label>
+      <textarea name="read_refs_comment" required></textarea>
+
+      <label>Are you absolutely confident... about delivering the required quality at 100%? <small class="req">*</small></label>
+      <div class="radio-group">
+        <label><input type="radio" name="confident_100" value="Yes" required> Yes</label>
+        <label><input type="radio" name="confident_100" value="No" required> No</label>
+      </div>
+
+      <label>Will your outputs match at least the quality of the reference videos? <small class="req">*</small></label>
+      <div class="radio-group">
+        <label><input type="radio" name="match_reference_quality" value="Yes" required> Yes</label>
+        <label><input type="radio" name="match_reference_quality" value="No" required> No</label>
+      </div>
+    </div>
+
     <div class="card">
       <h3>➕ Additional Required Questions</h3>
       <label>Quality Metrics – KPIs & checks <small class="req">*</small></label><textarea name="quality_metrics" required></textarea>
@@ -258,6 +240,7 @@
     <button class="btn" type="submit">Submit Application</button>
     <div id="statusBox" style="margin-top:10px;"></div>
   </form>
+  <!-- ======== FORM END ======== -->
 
   <!-- Leaderboard -->
   <div class="card" id="leaderboardCard">
@@ -276,21 +259,24 @@
 </div>
 
 <script>
-// ===== Config =====
-const GITHUB_USER   = "YOUR_GITHUB_USERNAME";   // مثال: AhmedHasab
-const GITHUB_REPO   = "hasaballa-tasks";        // الريبو
-const GITHUB_BRANCH = "main";
-// (اختياري) PAT خفيف لو حابب الصفحة تنشئ ملف queue تلقائيًا.
-// يفضّل جعله Fine-grained بصلاحية Contents: Read/Write على نفس الريبو أو اتركه فاضي وتضيف الملف يدويًا.
-const CLIENT_PAT    = "";
+/* ====================== EmailJS CONFIG ====================== */
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";     // بدّلها
+const EMAILJS_SERVICE_ID = "service_wesxmf3";     // جاهزة
+const EMAILJS_TEMPLATE_ID = "template_xxxxxx";    // بدّلها
+const EMAIL_TO = "namozg50@gmail.com";            // إيميل الاستلام
 
-// API URLs
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+/* =================== GitHub (اختياري كما هو) =================== */
+const GITHUB_USER   = "YOUR_GITHUB_USERNAME";
+const GITHUB_REPO   = "hasaballa-tasks";
+const GITHUB_BRANCH = "main";
+const CLIENT_PAT    = ""; // اختياري
+
 const RAW_JSON_URL  = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/data/submissions.json`;
 const QUEUE_API_URL = (fname)=>`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/queue/${fname}`;
 
-const EMAIL_TO = "namozg50@gmail.com";
-
-// ===== Scoring / Analysis (مختصر كما سبق) =====
+/* =================== Scoring / Analysis =================== */
 const SCORE_WEIGHTS = {
   imagegen:{good:["stable diffusion","sdxl","sd3","flux","comfyui","controlnet","ip-adapter","instantid","lora","kohya","roop","reactor"],bad:["midjourney","dalle","api","cloud"]},
   arabicText:{good:["arabic","harakat","ocr","ligature","font shaping","text rendering","pangram","inpaint","controlnet tile"],bad:["api","cloud"]},
@@ -307,7 +293,7 @@ const SCORE_WEIGHTS = {
 };
 function norm(t){return (t||"").toLowerCase();}
 function analyzeSubmission(fields){
-  function scoreField(text,map){let s=0,hg=[],hb=[];const n=norm(text);map.good.forEach(k=>{if(n.includes(k)){s+=10;hg.push(k);}});map.bad.forEach(k=>{if(n.includes(k)){s-=8;hb.push(k);}});return{s,hg,hb};}
+  function scoreField(text,map){let s=0,hg=[],hb=[];const n=norm(text||"");map.good.forEach(k=>{if(n.includes(k)){s+=10;hg.push(k);}});map.bad.forEach(k=>{if(n.includes(k)){s-=8;hb.push(k);}});return{s,hg,hb};}
   const buckets={
     imagegen:scoreField(fields.tools_imagegen,SCORE_WEIGHTS.imagegen),
     arabicText:scoreField(fields.tools_arabictext,SCORE_WEIGHTS.arabicText),
@@ -322,7 +308,8 @@ function analyzeSubmission(fields){
     chatwindow:scoreField(fields.tools_chatwindow,SCORE_WEIGHTS.chatwindow),
     integration:scoreField(fields.tools_integration,SCORE_WEIGHTS.integration)
   };
-  let total=0, positives=[], negatives=[]; Object.values(buckets).forEach(v=>{total+=v.s;positives=positives.concat(v.hg);negatives=negatives.concat(v.hb);});
+  let total=0, positives=[], negatives=[];
+  Object.values(buckets).forEach(v=>{total+=v.s;positives=positives.concat(v.hg);negatives=negatives.concat(v.hb);});
   const qLen = norm(fields.quality_metrics).length + norm(fields.training_strategy).length + norm(fields.test_plan).length;
   total += Math.min(30, Math.floor(qLen/200));
   const score=Math.max(0, Math.min(100, Math.round((total/220)*100)));
@@ -338,28 +325,8 @@ function analyzeSubmission(fields){
   const isBestTools = (weaknesses.length===0 && score>=75) ? "Yes" : "No";
   return {score,strengths,weaknesses,recommendation,isBestTools};
 }
-function buildEmailBody(payload,analysis){
-  function esc(s){return (s||"").replace(/\n/g,"%0D%0A");}
-  const lines=[];
-  lines.push("New Hasaballa AI Developer Submission");
-  lines.push("====================================");
-  lines.push(`Name: ${payload.name||"-"}`); lines.push(`Company: ${payload.company||"-"}`); lines.push(`Platform: ${payload.platform||"-"}`);
-  lines.push("");
-  lines.push("Answers:");
-  Object.keys(payload).forEach(k=>{if(["name","company","platform"].includes(k))return;lines.push("- "+k+":");lines.push(String(payload[k]||""));lines.push("");});
-  lines.push("----- Analysis -----"); lines.push(`Recommendation Score: ${payload.analysis.score}%`);
-  lines.push(`Recommendation: ${payload.analysis.recommendation}`); lines.push(`Best Tools? ${payload.analysis.isBestTools}`);
-  if(payload.analysis.strengths?.length){lines.push("Strengths:");payload.analysis.strengths.forEach(s=>lines.push("• "+s));}
-  if(payload.analysis.weaknesses?.length){lines.push("Weaknesses:");payload.analysis.weaknesses.forEach(s=>lines.push("• "+s));}
-  return esc(lines.join("\n"));
-}
-function sendMailto(payload){
-  const subject=encodeURIComponent("New Hasaballa AI Developer Submission");
-  const body=buildEmailBody(payload,payload);
-  const href=`mailto:${encodeURIComponent(EMAIL_TO)}?subject=${subject}&body=${body}`; window.location.href=href;
-}
 
-// Read leaderboard
+/* ============== Leaderboard (قراءة JSON من GitHub) ============== */
 async function refreshLeaderboard(){
   const note=document.getElementById("leaderboardNote");
   const table=document.getElementById("leaderboardTable");
@@ -372,7 +339,11 @@ async function refreshLeaderboard(){
     table.style.display=""; note.className="success"; note.textContent="Loaded from JSON. Sorted by Recommendation Score.";
     arr.slice(0,10).forEach((it,idx)=>{
       const tr=document.createElement("tr");
-      tr.innerHTML=`<td>${idx+1}</td><td><strong>${it.name||"-"}</strong><br><span class="muted">${it.company||""}</span></td><td>${it.platform||"-"}</td><td><strong>${it.analysis?.score??0}%</strong><br><span class="muted">${it.analysis?.recommendation||""}</span></td><td>${(it.analysis?.strengths||[]).slice(0,3).map(s=>`<span class="pill">${s}</span>`).join(" ")}</td>`;
+      tr.innerHTML=`<td>${idx+1}</td>
+        <td><strong>${it.name||"-"}</strong><br><span class="muted">${it.company||""}</span></td>
+        <td>${it.platform||"-"}</td>
+        <td><strong>${it.analysis?.score??0}%</strong><br><span class="muted">${it.analysis?.recommendation||""}</span></td>
+        <td>${(it.analysis?.strengths||[]).slice(0,3).map(s=>`<span class="pill">${s}</span>`).join(" ")}</td>`;
       tbody.appendChild(tr);
     });
   }catch(e){note.className="danger";note.textContent="Failed to load leaderboard.";table.style.display="none";}
@@ -380,20 +351,55 @@ async function refreshLeaderboard(){
 document.getElementById("refreshBtn").addEventListener("click",refreshLeaderboard);
 refreshLeaderboard();
 
-// Submit
+/* =================== Submit Handler =================== */
+const statusBox=document.getElementById("statusBox");
 document.getElementById("devForm").addEventListener("submit", async (e)=>{
   e.preventDefault();
-  const f=e.target; const fd=new FormData(f); const payload={};
+  statusBox.className=""; statusBox.textContent="";
+
+  // جمع كل الحقول تلقائيًا
+  const fd = new FormData(e.target);
+  const payload = {};
   fd.forEach((v,k)=>payload[k]=String(v).trim());
-  payload.analysis = analyzeSubmission(payload);
+
+  // تحليل وتاريخ
+  payload.analysis   = analyzeSubmission(payload);
   payload.created_at = new Date().toISOString();
 
-  const statusBox=document.getElementById("statusBox"); statusBox.innerHTML=""; statusBox.className="";
+  // نص الإيميل (ملخص + JSON مختصر)
+  const subject = "New Hasaballa AI Developer Submission";
+  const summaryLines = [
+    `Name: ${payload.name||"-"}`,
+    `Company: ${payload.company||"-"}`,
+    `Platform: ${payload.platform||"-"}`,
+    "",
+    `Recommendation Score: ${payload.analysis.score}%`,
+    `Recommendation: ${payload.analysis.recommendation}`,
+    `Best Tools? ${payload.analysis.isBestTools}`,
+    payload.analysis.strengths?.length ? ("Strengths: " + payload.analysis.strengths.join(", ")) : "",
+    payload.analysis.weaknesses?.length ? ("Weaknesses: " + payload.analysis.weaknesses.join(", ")) : "",
+    "",
+    "Raw JSON (truncated at 20k chars):"
+  ].join("\n");
 
-  // 1) Email
-  sendMailto(payload);
+  const rawJson = JSON.stringify(payload, null, 2);
+  const message = (summaryLines + "\n" + rawJson).slice(0,20000);
 
-  // 2) Queue file to repo (optional if CLIENT_PAT provided)
+  // إرسال EmailJS مباشرة — بدون أي نوافذ
+  try{
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: EMAIL_TO,
+      subject,
+      message
+    });
+    statusBox.className="success";
+    statusBox.textContent="✅ Email sent successfully.";
+  }catch(err){
+    statusBox.className="danger";
+    statusBox.textContent="❌ Email send failed: " + (err?.text || err?.message || String(err));
+  }
+
+  // (اختياري) رفع نسخة للـ queue/ على GitHub لو CLIENT_PAT موجود
   if(CLIENT_PAT){
     try{
       const fname=`submission-${Date.now()}.json`;
@@ -403,18 +409,19 @@ document.getElementById("devForm").addEventListener("submit", async (e)=>{
         headers:{Authorization:`Bearer ${CLIENT_PAT}`,"Content-Type":"application/json","Accept":"application/vnd.github+json"},
         body:JSON.stringify({message:`queue: ${fname}`,content,branch:GITHUB_BRANCH})
       });
-      if(!res.ok){throw new Error(await res.text());}
-      statusBox.className="success"; statusBox.textContent="Queued to repo. Action will ingest shortly.";
+      if(!res.ok) throw new Error(await res.text());
+      statusBox.className="success";
+      statusBox.textContent += "  • Queued to repo.";
     }catch(err){
-      statusBox.className="danger"; statusBox.textContent="Queue push failed: "+err.message;
+      statusBox.className = (statusBox.className||"") + " note";
+      statusBox.textContent += "  • Queue push failed (optional): " + err.message;
     }
   }else{
-    statusBox.className="note"; statusBox.innerHTML='Queue push disabled (no <code>CLIENT_PAT</code>). You can add the JSON manually to <code>queue/</code>.';
+    // حفظ محلي كـ fallback
+    const local=JSON.parse(localStorage.getItem("hasaballa_submissions")||"[]"); 
+    local.push(payload);
+    localStorage.setItem("hasaballa_submissions",JSON.stringify(local));
   }
-
-  // 3) Local backup
-  const local=JSON.parse(localStorage.getItem("hasaballa_submissions")||"[]"); local.push(payload);
-  localStorage.setItem("hasaballa_submissions",JSON.stringify(local));
 });
 </script>
 </body>
