@@ -1583,6 +1583,81 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   - background motion natural without artifacts.<br>
 </div>
 
+
+<div class="task subtask"><input type="checkbox" data-id="task6-i">
+  6-I 🕰️ <strong>Era-Based Simple Motion</strong><br>
+  - Backend applies a light motion style that matches the era and outfit (no user action needed).<br>
+  - Examples:<br>
+  &nbsp;&nbsp;• Traditional wear (jalabiya/abaya/turban): calmer hands, smaller torso sway.<br>
+  &nbsp;&nbsp;• Armor / sword era: firmer stance, broader shoulders, steady head.<br>
+  &nbsp;&nbsp;• 1950s scenes: modest hand gestures, classic posture.<br>
+  &nbsp;&nbsp;• Modern 2000–2025: natural casual micro-movements.<br>
+  - Motion stays subtle and never distorts identity or outfit (works with Outfit/Style Lock).
+</div>
+
+
+  <div class="task subtask"><input type="checkbox" data-id="task6-j">
+  6-J 🗣️ <strong>Accurate Lip-Sync</strong><br>
+  - If the Voice tool provides timing data (timestamps for words/phonemes), use it directly for perfect alignment.<br>
+  - If not, the system must auto-align lips internally to match the voice.<br>
+  - Lip movement must be smooth, with no sudden jumps.<br>
+  - Natural transitions between sounds (co-articulation) and subtle jaw/cheek/teeth movement must be included for realism.
+</div>
+
+<div class="task subtask"><input type="checkbox" data-id="task6-k">
+  6-K 👀 <strong>Gaze & Micro-Expressions</strong><br>
+  - Natural blinks, eye saccades, and gaze targets (speaker/listener/camera) synchronized with speech beats.<br>
+  - Subtle brows/cheek cues to match emotion (ties into 7-P “Dialogue Context Effects” if used).
+</div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task6-l">
+  6-L 🧣 <strong>Light Garment/Hair Response</strong><br>
+  - Minimal secondary motion for hair, beards, scarves, robes consistent with movement/wind presets (no heavy sim—backend only).<br>
+  - Avoid interpenetration with face/shoulders; preserve outfit silhouette from Image Generation.
+</div>
+
+<div class="task subtask"><input type="checkbox" data-id="task6-m">
+  6-M 🥾 <strong>Action Hooks & Footstep Markers</strong><br>
+  - Body motion (walk/run/jump/crawl) must generate precise step/impact markers for Smart Director → auto-triggers matching FX from the Sound Library.<br>
+  - Camera-shake micro-bursts tied to these impacts must also integrate with 6-A-5 <b>Action Effects Layer</b> (explosions, gunfire, falls).<br>
+  - Shake is optional: can be toggled ON/OFF per scene, or auto-enabled in action scenes by Smart Director.<br>
+</div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task6-n">
+  6-N 🧼 <strong>Automatic Clean-up (Backend)</strong><br>
+  - Auto-fix common animation defects:<br>
+    • Teeth/mouth glitches.<br>
+    • Lips moving outside the face.<br>
+    • Edge flicker around head/hair.<br>
+    • Background tearing or cut-out lines.<br>
+  - Keep the character’s face identity stable during fast actions or head turns.<br>
+  - Runs silently in backend — no user action required.
+</div>
+
+<div class="task subtask"><input type="checkbox" data-id="task6-o">
+  6-O 🗺️ <strong>Depth-Aware Parallax</strong><br>
+  - This is different from 6-B Background Motion.<br>
+  - 6-B = animating real objects in the scene (people, trees, curtains, birds, etc.).<br>
+  - 6-O = adding a very light parallax effect: background layer moves slightly slower/faster than foreground layer, to give a 3D depth feel.<br>
+  - Uses depth/segmentation info (if available from Image Generation).<br>
+  - Effect must be subtle and safe: never distort the locked character’s identity.<br>
+  - Runs automatically in backend — no manual setup required.<br>
+</div>
+
+  
+  <div class="task subtask"><input type="checkbox" data-id="task6-p">
+  6-P 🧪 <strong>Animation Auto-Quality Guard</strong><br>
+  - Backend automatically checks animation output for issues:<br>
+    • Jitter or shaking motion.<br>
+    • Sudden frame jumps.<br>
+    • Lip-sync drift > 40ms.<br>
+    • Extreme face/body warps.<br>
+  - If an issue is found, the system re-generates only the affected frames (e.g. 0.5–1 sec of animation),<br>
+    then replaces them inside the scene timeline — instead of re-rendering the entire scene.<br>
+  - Runs silently in backend — no user action required.
+</div>
+
+
   
 <div class="task"><input type="checkbox"data-id="task7"> 7️⃣ <strong>Reference voices / voice enhancement / Voice cloning / voice generation 🔊</strong>.</div>
 
@@ -1805,6 +1880,42 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   - Volume level is normalized automatically (not too low/high).<br>
   - Output is ready for direct integration into video without manual cleaning.
 </div>
+
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task7-p"> 7-P 🎙️ <strong>Dialogue Context Effects</strong><br>
+  - <b>Must be implemented in backend.</b><br>
+  - Effects apply only when selected by the user or auto-detected from Chat Window script tags.<br>
+  - By default, generated voices remain clean unless a context effect is explicitly triggered.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-1"> 7-P-1 🚪 <b>Closed Room</b><br>
+  - Subtle short-room reverb for indoor/closed spaces (corridor, small room, vehicle cabin).
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-2"> 7-P-2 💨 <b>High-Wind Interaction</b><br>
+  - Wind-resistant speech filter + optional wind rush underlay for parachute/freefall/outdoor gusts.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-3"> 7-P-3 🫁 <b>Exertion / Movement</b><br>
+  - Add natural panting/breath intensity and slight strain for running/crawling/combat while speaking.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-4"> 7-P-4 📢 <b>Shout / Whisper</b><br>
+  - Quick preset to push voice into shout (higher intensity) or whisper (low, airy) when scene demands.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-5"> 7-P-5 🤖 <b>Control</b><br>
+  - Can be <b>auto-inferred</b> from Chat Window script tags (e.g., "wind", "running", "whisper") or toggled per line manually.<br>
+  - Non-destructive: original clean voice is kept for fallback.
+</div>
+
+
   
 <div class="task"><input type="checkbox"data-id="task8"> 8️⃣ <strong>Integrated sound library + Pixabay search 🎼</strong>.</div>
 <div class="task subtask"><input type="checkbox"data-id="task8-a"> 8-A 🎧 Include <strong>the most used sound</strong> effects/backgrounds directly in the platform.</div>
@@ -1824,6 +1935,19 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   <div class="subsubtask"><input type="checkbox" data-id="task8-a11"> 8-A-11 🚓 <strong>Chase scenes</strong> – cars, tires screeching, running footsteps, engine revs.</div>
   <div class="subsubtask"><input type="checkbox" data-id="task8-a12"> 8-A-12 🐎⚔️ <strong>Horses / Swords / Ancient weapons</strong> – galloping, sword clashes, arrow shots.</div>
   <div class="subsubtask"><input type="checkbox" data-id="task8-a13"> 8-A-13 🎥 <strong>Spy / Interrogation / Surveillance</strong> – camera clicks, secret recording sounds, subtle tension hits.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a14"> 8-A-14 🌍 <strong>Arab Cultural FX</strong> — Arabic market vendors (regional calls), regional chants, authentic Arab street/crowd ambience.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a15"> 8-A-15 🕰️ <strong>Era Ambiences</strong> — curated ambience FX per era:
+  <ul>
+    <li>Pharaonic Egypt: Nile shore, papyrus craft, chariots, temple crowds, stone carving.</li>
+    <li>Early/Medieval Islamic: souk bustle, caravans, calligraphy workshop, courtyard fountains.</li>
+    <li>Ottoman/Levantine: hammam, coffeehouse, bazaar merchants, caravanserai yard.</li>
+    <li>1950s–1970s: streetcars, vintage cars, café radios, newsroom teletype.</li>
+    <li>Modern 2000–2025: metro, malls, office AC, traffic lights, modern citybeds.</li>
+   </ul>
+  </div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a16">8-A-16 🥾 <strong>Foley</strong> — detailed footsteps (ground/sand/stone/wood), cloth/gear rustle, harness snaps (parachute), body falls.</div>
+
+
   
   <div class="task subtask"><input type="checkbox"data-id="task8-b"> 8-B <strong>🔍 Search Pixabay audio</strong> via built-in search button (requires internet).</div>
 
@@ -1882,10 +2006,11 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 </div>
 
 
-  <div class="task subtask">
-  <input type="checkbox" data-id="task8-f">
+<!-- مزج ومستوى صوت موحّد -->
+<div class="task subtask"><input type="checkbox" data-id="task8-f">
   8-F 🎚️ <strong>Mixing & Loudness</strong><br>
   - auto duck background tracks under dialogue/narration.<br>
+  - normalize all FX/music to consistent loudness (target −14 LUFS; true-peak ≤ −1.0 dBTP).
 </div>
 
 
@@ -1894,6 +2019,44 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   8-G 🔁 <strong>Seamless Loops</strong><br>
   - support seamless looping for ambience/music beds with auto crossfade at loop points.
 </div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task8-h">
+  8-H ✅ <strong>Royalty-Free Guarantee</strong><br>
+  - All integrated/Pixabay sounds must be 100% copyright-safe for YouTube/Facebook monetization.
+</div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task8-i">
+  8-I 🏛️ <strong>Environmental Reverb Profiles (Background FX only)</strong><br>
+  - Background FX/ambience/music automatically adapt reverb/EQ to match the scene location/era.<br>
+  - Examples: stone echo in temples, wet reverb in hammam, vintage radio tone in 1950s cafés, clean modern rooms.<br>
+  - <b>Applies only to background layers</b> — does <u>not</u> affect generated/cloned dialogue voices.<br>
+  - Runs automatically in backend when scene/era tags are present.
+</div>
+
+
+  <!-- ميتاداتا للفلترة الذكية -->
+<div class="task subtask"><input type="checkbox" data-id="task8-j">
+  8-J 🏷️ <strong>Era & Region Tagging</strong><br>
+  - Every FX/music item carries tags: era (Pharaonic/Ottoman/1950s/Modern), region (Egypt/Levant/Gulf/Maghreb), mood (sad/tense/crowd).<br>
+  - Smart Director uses tags to auto-pick correct layers.
+</div>
+
+
+<!-- توافق ديني -->
+<div class="task subtask"><input type="checkbox" data-id="task8-k">
+  8-K 🕌 <strong>Religious Compliance Toggle</strong><br>
+  - When enabled, prevent placing music under Quran recitation or Adhan; use ambience-only beds.<br>
+  - Ensure all religious FX are culturally respectful.
+</div>
+
+
+  <div class="task subtask"><input type="checkbox" data-id="task8-l">
+  8-L 🔒 <strong>Offline Packs & Caching</strong><br>
+  - The platform must always include a built-in offline library of the most important FX (street, nature, prayer, crowds, etc.).<br>
+  - If internet is available, extra sounds can be fetched from Pixabay only when needed (not downloaded all at once).<br>
+  - Any FX/music used in a project must be cached locally, so if the same sound is needed again it loads instantly without re-searching or re-downloading.
+ </div>
+
   
   
 <div class="task"><input type="checkbox"data-id="task9"> 9️⃣ <strong>Smart Director (Two Buttons) 🎬</strong>.
@@ -2235,6 +2398,14 @@ Works automatically with Smart Director.</div>
 (<strong>For example</strong>)🗣️ “In minute 1:42, replace/remove background visual/sound”
 → the <strong>Smart Edit Layer</strong> should handle this by automatically generating new image/video/sound from the relevant modules or Pixabay as <strong>Smart Director</strong>.</div>
 
+<div class="task subtask"><input type="checkbox"data-id="task11-b">
+  11-B 🛡️ <strong>Integration with Quality Guards</strong><br>
+  - Smart Edit Layer works after the video is generated.<br>
+  - Quality Guards (Image/Voice/Animation) prevent errors during generation.<br>
+  - Smart Edit Layer provides the second protection layer: fixing or replacing defective clips post-generation (based on user timecode prompts).<br>
+</div>
+
+  
 <div class="task"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
 (Needs buttons to connect to the Internet).</div>
 
