@@ -251,6 +251,22 @@ While I recognize that this project demands a substantial investment, I'm prepar
 
   <p style="margin-top: 20px;"><strong>— Ahmed Hasaballa</strong><br>July 2025</p>
 
+<div id="lock-overlay" style="position:fixed;inset:0;background:#0b0b0f;display:flex;align-items:center;justify-content:center;z-index:99999;">
+  <div style="background:#111;border:1px solid #333;border-radius:14px;padding:20px;max-width:360px;width:90%;color:#fff;font-family:Arial,Helvetica,sans-serif">
+    <h3 style="margin:0 0 10px">Protected</h3>
+    <p style="margin:0 0 12px;color:#bbb">Enter password to continue</p>
+    <input id="pw" type="password" placeholder="Password" style="width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#0e0e12;color:#fff">
+    <label style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+      <input id="remember" type="checkbox" checked>
+      <span style="color:#bbb;font-size:12px;">Remember me (30 days)</span>
+    </label>
+    <button id="unlockBtn" style="margin-top:12px;width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#1e1e27;color:#fff;cursor:pointer">Unlock</button>
+    <p id="msg" style="color:#f66;font-size:12px;min-height:16px;margin-top:8px"></p>
+    <button id="lockBtn" style="margin-top:6px;width:100%;padding:8px;border-radius:10px;border:1px solid #444;background:#191922;color:#ddd;cursor:pointer">Lock (Logout)</button>
+  </div>
+</div>
+
+  
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
@@ -258,5 +274,49 @@ While I recognize that this project demands a substantial investment, I'm prepar
     });
   });
 </script>
+
+<script>
+const PASSWORD_HASH_HEX = "3f6a5b6e60e97eb1d0f26f7c370b0b3961e2f29a22a62e7cb8d36e260a5b2f09";
+const REMEMBER_DAYS = 30;
+const REMEMBER_KEY  = "hasaballa_gate_until";
+
+try {
+  const until = parseInt(localStorage.getItem(REMEMBER_KEY) || "0", 10);
+  if (Date.now() < until) {
+    document.getElementById('lock-overlay').style.display='none';
+  }
+} catch(e){}
+
+async function sha256Hex(text) {
+  const enc = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function tryUnlock() {
+  const pw  = document.getElementById('pw').value;
+  const msg = document.getElementById('msg');
+  const rem = document.getElementById('remember').checked;
+  msg.textContent = '…checking';
+  try {
+    const hex = await sha256Hex(pw);
+    if (hex === PASSWORD_HASH_HEX) {
+      if (rem) {
+        const until = Date.now() + REMEMBER_DAYS*24*60*60*1000;
+        localStorage.setItem(REMEMBER_KEY, String(until));
+      }
+      document.getElementById('lock-overlay').style.display='none';
+      msg.textContent = '';
+    } else {
+      msg.textContent = 'Wrong password';
+    }
+  } catch(e){ msg.textContent = 'Error'; }
+}
+
+document.getElementById('unlockBtn').onclick = tryUnlock;
+document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='Enter') tryUnlock(); });
+document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REMEMBER_KEY); location.reload(); };
+</script>
+
 </body>
 </html>
