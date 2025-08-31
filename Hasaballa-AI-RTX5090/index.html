@@ -2543,6 +2543,22 @@ Ahmed Hasaballa<br>
 July 2025<br>
 </p>
 
+<div id="lock-overlay" style="position:fixed;inset:0;background:#0b0b0f;display:flex;align-items:center;justify-content:center;z-index:99999;">
+  <div style="background:#111;border:1px solid #333;border-radius:14px;padding:20px;max-width:360px;width:90%;color:#fff;font-family:Arial,Helvetica,sans-serif">
+    <h3 style="margin:0 0 10px">Protected</h3>
+    <p style="margin:0 0 12px;color:#bbb">Enter password to continue</p>
+    <input id="pw" type="password" placeholder="Password" style="width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#0e0e12;color:#fff">
+    <label style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+      <input id="remember" type="checkbox" checked>
+      <span style="color:#bbb;font-size:12px;">Remember me (30 days)</span>
+    </label>
+    <button id="unlockBtn" style="margin-top:12px;width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#1e1e27;color:#fff;cursor:pointer">Unlock</button>
+    <p id="msg" style="color:#f66;font-size:12px;min-height:16px;margin-top:8px"></p>
+    <button id="lockBtn" style="margin-top:6px;width:100%;padding:8px;border-radius:10px;border:1px solid #444;background:#191922;color:#ddd;cursor:pointer">Lock (Logout)</button>
+  </div>
+</div>
+
+  
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
