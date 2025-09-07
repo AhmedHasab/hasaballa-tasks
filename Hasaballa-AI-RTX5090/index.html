@@ -380,27 +380,38 @@ It shows the full conversation, responses, and logs of the video/script generati
 🎙️ Function: Allows the user to input voice commands or narration using speech-to-text.
 Useful for dictating long scenarios or asking questions hands-free.</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-d"> 4-D <strong>🖼️ Insert Reference Images.</strong><br>
-🧍‍♂️🧍‍♀️ Function: Upload reference images for characters.<br>
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-d">
+  4-D <strong>🖼️ Insert Reference Images.</strong><br>
+  <b>Function:</b> Upload reference images for characters. The system uses them to maintain identity consistency across scenes.<br><br>
 
-- Minimum: 8 images<br>
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Minimum:</b> 8 total images (≥ 8 characters recommended).</li>
+    <li><b>Per Character:</b> up to <b>5</b> reference images covering different ages/angles (e.g., childhood, youth, profile).</li>
+    <li><b>Weighting:</b> each reference image has a <b>priority weight (0–100%)</b>. Weights are normalized per character.</li>
+    <li><b>Character Pack:</b> images + (linked) reference voice(s) are grouped as a reusable <b>Character Pack</b>.</li>
+    <li><b>Import/Export:</b> Character Packs must be importable/exportable (local JSON file) for reuse across projects.</li>
+  </ul>
+</div>
 
-- Each image represents a character in the video.<br>
 
-- The system uses these to maintain visual consistency (same identity) across all scenes and shots.</div>
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-e">
+  4-E <strong>🔉 Insert Reference Audio.</strong><br>
+  🗣️ <b>Function:</b> Upload voice reference files for cloning each character’s voice.<br><br>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-e"> 4-E <strong>🔉 Insert Reference Audio.</strong><br>
-🗣️ Function: Upload voice reference files for cloning each character’s voice.<br>
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Minimum:</b> 1 reference voice per character (mandatory).</li>
+    <li><b>Optional:</b> up to 5 reference voices per character (e.g., childhood, youth, adult), but not required.</li>
+    <li><b>Image↔Voice Linking:</b> each reference image <i>may</i> be linked to a specific reference voice. If no unique voice is linked, the system falls back to the character’s main voice.</li>
+    <li><b>Weights:</b> optional weight (0–100%) can be assigned per image/voice pair, normalized per character.</li>
+    <li><b>Usage:</b> voices are used by the cloning tool to synthesize the character’s real voice during generation.</li>
+    <li><b>Auto Mode:</b> in <strong>Auto Director Mode</strong>, the system automatically maps the correct voice to each scene based on script analysis (see 4-F-2).</li>
+    <li><b>Manual Mode:</b> in <strong>Manual Director Mode</strong>, the user can assign and control each voice step-by-step.</li>
+    <li><b>Export/Import:</b> Character Packs (images + voices + weights) must be exportable/importable as local <b>JSON</b> for reuse across projects.</li>
+  </ul>
+</div>
 
-- Minimum: 8 voice files.<br>
-
-- Each voice will be matched to a character image.<br>
-
-- Used by the voice cloning tool to synthesize the scenario in the character’s real voice.<br>
-
-- In <strong>Auto Director Mode</strong>, this is done automatically.<br>
-
-- In <strong>Manual Mode</strong>, the user can assign and control each voice step-by-step.</div>
 
 <div class="task subtask"><input type="checkbox"data-id="task4-f"> 4-F <strong>✍️ Text & Command Input Box.</strong><br>
 (The number of characters allowed to be entered in the field must not be less than 15,000 characters).<br>
@@ -636,6 +647,24 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 
 🎬 Smart Director Buttons:<br></div>
 <strong>1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-i-0">
+  4-I-0 <strong>🎚️ Voice-First Planning</strong><br>
+  • The system must always generate/import the scene audio first (narration or dialogue).<br>
+  • Based on the effective audio duration (after silence removal), the system automatically decides the number of images/visuals needed for the scene.<br>
+  • Formula: <code>images_per_scene = ceil( voice_duration_sec / seconds_per_image )</code>, default = 5s per image.<br>
+  • Adequacy Check: If images are too many or too few (±20% tolerance), the system shows warnings and offers:<br>
+    – 🔧 Auto-Fix (adjust automatically)<br>
+    – ✍️ Override (user manually increases/decreases)<br>
+  • Timeline Preview must show:<br>
+    – Voice waveform<br>
+    – Beat markers (every 5s)<br>
+    – Thumbnails aligned with beats<br>
+  • This guarantees visuals match the pacing of the narration.<br>
+</div>
+
+  
 <div class="task subsubtask"><input type="checkbox"data-id="task4-i-1"> 4-I-1 <strong>🧠 Auto Generation Button</strong>.<br>
 📦 Automatically analyzes everything written in the input box, sends it to all the internal tools, and generates the final video + timeline without any user interaction.</div>
 <strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
