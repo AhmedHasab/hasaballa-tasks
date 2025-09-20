@@ -629,6 +629,19 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 
      <div class="task subsubtask"><input type="checkbox"data-id="task4-f-6-2"> 4-F-6-2 <strong>📴 “Disconnect – Return to Offline Mode”</strong>– When clicked, it fully cuts any online lookup attempts and forces the assistant to rely only on internal data/models.<br></div>
     
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-f-7"> 4-F-7 🎚 <strong>Inline Voice Speed Command (Prompt-Based)</strong><br>
+  <b>Function:</b> The scenario text can include a strict command that sets narration/dialogue speed for generation/cloning (routes to <b>7-Q</b>).
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Syntax:</b> <code>[[voice.speed=1.25]]</code> (valid 0.50–2.00, default 1.00)</li>
+    <li><b>Scope:</b> place at the top of a scene block to apply to that scene; place before a line to apply to that line only.</li>
+    <li><b>Behavior:</b> formant-preserving time-stretch; auto viseme/phoneme re-alignment; timeline length updates.</li>
+    <li><b>Acceptance:</b> ≥99% correct parsing & routing to 7-Q.</li>
+  </ul>
+</div>
+
+
   
 <div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G <strong>⬆️ Expand Input Box</strong>.<br>
 🔽 Function: Enlarges the input box for easier writing of long scripts or commands.</div>
@@ -1888,6 +1901,44 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   Studio-grade audio (48kHz), with natural transitions between speech and singing.<br>
 </div>
 
+<!-- 7-L-1..4: Singing word/phoneme fixes -->
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-1"> 7-L-1 📝 <b>Word/Phoneme Editor</b> (Singing)
+  <ul>
+    <li>Allow direct editing of the singing output at <b>word level</b> or <b>phoneme level</b>.</li>
+    <li>User can click on specific words (e.g., 10 out of 40) and adjust their pronunciation individually.</li>
+    <li><b>Partial Re-Synthesis:</b> only the modified words/phonemes are re-rendered; the rest of the audio stays untouched.</li>
+    <li>Provide simple controls for <b>pitch</b> (note curve), <b>duration</b> (stretch/shorten), and <b>expression</b> (attack/legato) per word.</li>
+    <li>Display a clear <b>piano-roll style timeline</b> with words/phonemes marked for precise editing.</li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-2"> 7-L-2 🎯 <b>Selective Re-Render</b>
+  <ul>
+    <li>Only the edited sections are re-synthesized, not the entire clip.</li>
+    <li>Ensure the cloned singer’s <b>voice identity</b> (tone/timbre) remains consistent across the whole performance.</li>
+    <li>Keep global mix/EQ/compression settings unchanged to avoid differences in sound quality.</li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-3"> 7-L-3 🔄 <b>Timing & Lip-Sync</b>
+  <ul>
+    <li>Automatically update phoneme timing and lip-sync (visemes) after each edit.</li>
+    <li>Support <b>Undo/Redo</b> and <b>A/B comparison</b> (Before vs After editing).</li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-4"> 7-L-4 📤 <b>Export/Import Phoneme Map</b>
+  <ul>
+    <li>Allow exporting and importing of phoneme timing/pronunciation data as a <b>JSON file</b>.</li>
+    <li>Integrate with <b>7-M Voice Character Packs</b> so that custom pronunciation settings can be saved and reused for each character.</li>
+  </ul>
+</div>
+
+
 
       <!-- ===== 7-M: Voice Character Packs (Export/Import) ===== -->
 <div class="task subtask" style="margin-inline-start:2em;">
@@ -1950,6 +2001,39 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   - Can be <b>auto-inferred</b> from Chat Window script tags (e.g., "wind", "running", "whisper") or toggled per line manually.<br>
   - Non-destructive: original clean voice is kept for fallback.
 </div>
+
+<!-- 7-Q: Voice Speed Control (Formant-Preserving) -->
+<div class="task subtask">
+  <input type="checkbox" data-id="task7-q"> 7-Q ⚡ <strong>Voice Speed Control</strong> (Formant-Preserving)
+  <ul>
+    <li>Adjust the speed of any generated or cloned voice without changing pitch (formant-preserving time-stretch).</li>
+    <li>Default range: <b>0.75x → 1.25x</b>. Custom numeric input is supported (e.g., 1.12x).</li>
+    <li><b>Auto Lip-Sync Retiming:</b> visemes/phonemes are re-aligned to the new duration.</li>
+    <li><b>Non-Destructive (Safe Draft):</b> changes produce a separate preview take while the original stays intact.</li>
+    <li>Apply per line / per scene / per project, with a <b>Reset</b> button.</li>
+  </ul>
+
+  <div class="task subsubtask">
+    <input type="checkbox" data-id="task7-q-1"> 7-Q-1 🎛️ <b>UI Controls</b>
+    <ul>
+      <li>Slider + live numeric readout (0.50x → 2.00x).</li>
+      <li>Quick presets: 0.85x / 1.00x / 1.10x / 1.20x.</li>
+      <li><b>Preview</b> button and <b>Apply to All Lines in Scene</b>.</li>
+    </ul>
+  </div>
+
+  <div class="task subsubtask">
+    <input type="checkbox" data-id="task7-q-2"> 7-Q-2 🧠 <b>Smart Director Integration</b>
+    <ul>
+      <li>Adapts to scene tempo (calm/fast) while respecting breathing/pauses (7-D).</li>
+      <li>Auto-updates clip durations and timeline alignment.</li>
+    </ul>
+  </div>
+</div>
+
+
+
+
 
 
   
@@ -2440,6 +2524,32 @@ Works automatically with Smart Director.</div>
   - Quality Guards (Image/Voice/Animation) prevent errors during generation.<br>
   - Smart Edit Layer provides the second protection layer: fixing or replacing defective clips post-generation (based on user timecode prompts).<br>
 </div>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task11-c"> 11-C ✏️ <strong>Timecoded Voice Speed Edit</strong><br>
+  <b>Function:</b> Post-generation speed changes via timecoded prompts. Non-destructive preview → Commit replaces original. Integrates with <b>7-Q</b>.
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Example:</b> “At <code>00:01:42</code>, set narrator speed to <code>1.12x</code> without altering pitch.”</li>
+    <li><b>Range:</b> 0.50–2.00 (default 1.00)</li>
+    <li><b>Tools:</b> Undo/Redo, A/B Compare (Before/After), Preview/Commit flow</li>
+    <li><b>Acceptance:</b> ≥99% correct timecode targeting; no audible artifacts at edit boundaries; <u>lip-sync must always be re-synchronized after speed edits</u>.</li>
+  </ul>
+</div>
+
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task11-d"> 11-D 🎵 <strong>Timecoded Singing Pronunciation Fix (Word/Phoneme)</strong><br>
+  <b>Function:</b> Fix mispronounced words/phonemes inside generated singing <u>after</u> it exists. Selective re-synthesis only on edited parts. Non-destructive preview → Commit. Integrates with <b>7-L</b>.
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Example:</b> “From <code>00:00:18</code> to <code>00:00:23</code>, correct the pronunciation of <code>'...'</code> and set note duration to <code>1.05x</code>.”</li>
+    <li><b>Controls:</b> word/phoneme-level fix; optional pitch curve & duration tweaks for the targeted word only</li>
+    <li><b>Seamless:</b> keep global mix/EQ/comp unchanged; seamless joins with surrounding audio</li>
+    <li><b>Sync:</b> <u>every pronunciation/duration edit must re-synchronize lip-sync (visemes) and update timeline placement automatically</u></li>
+    <li><b>Acceptance:</b> no audible seams; cloned voice identity preserved; Undo/Redo + A/B Compare available</li>
+  </ul>
+</div>
+
+
 
   
 <div class="task"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
