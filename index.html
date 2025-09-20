@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <title>🧠 Hasaballa AI Platform</title>
-<link rel="icon" type="image/png" href="photos/31.png">
+<link rel="icon" type="image/png" href="photos/favicon.png">
 <style>
 body {
   font-family: Arial, sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1.8;
   padding: 20px;
   background-color: #f9f9f9;
-  position: relative; /* مهمة علشان الخلفية تشتغل */
+  position: relative;
 }
 
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('photos/31.png');
+  background-image: url('../photos/31.png'); /* ← لاحظ: المسار اختلف */
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 50%; /* غيّر النسبة لو حبيت تصغر أو تكبّر الشعار */
-  opacity: 0.08; /* تحكم في درجة الشفافية */
-  z-index: -1; /* ضروري علشان تكون تحت النص */
-  pointer-events: none; /* ما تمنعش التفاعل مع النصوص */
+  background-size: 50%;
+  opacity: 0.08;
+  z-index: -1;
+  pointer-events: none;
 }
-
 
   h1, h2 {
     font-size: 32px;
@@ -49,6 +49,49 @@ body::before {
   color: gray;
 }
 
+  .task-box.shadow-3d {
+  border-left: 6px solid #ff9800;
+  background: linear-gradient(145deg, #fffdf8, #f5e8cc);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+}
+
+.badge {
+  display: inline-block;
+  background-color: #ff9800;
+  color: white;
+  font-size: 14px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.task-box.shadow-3d.lime-green {
+  border-left: 6px solid #8bc34a;
+  background: linear-gradient(145deg, #f5fff0, #e4f7d2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d.lime-green:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.4); /* أخضر ليموني */
+}
+
+  
 /* Level 1: subtask */
 .subtask {
   margin-left: 40px;
@@ -73,6 +116,37 @@ body::before {
   ul {
     margin-left: 30px;
   }
+
+
+
+/* يشطب أي label بعد checkbox مباشرة */
+input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+/* نمط عام لأي عنصر تضيف له كلاس completed من الجافاسكريبت */
+.completed {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+/* تغطّي الحالات اللي مافيها label: تشطب الـ container نفسه لو بيحتوي checkbox متعلّم */
+.task:has(> input[type="checkbox"]:checked),
+.subtask:has(> input[type="checkbox"]:checked),
+.subsubtask:has(> input[type="checkbox"]:checked),
+.subsubsubtask:has(> input[type="checkbox"]:checked),
+.task li:has(> input[type="checkbox"]:checked) {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+  
+
+  
 </style>
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -126,19 +200,27 @@ console.log("✅ Firebase connected & DOM ready");
 <h1>🧠 Platform: Hasaballa AI</h1>
 
 <h2>🛠️ - Description & How it Works</h2>
-<p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 100 GB in size 💾.</p>
+<p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 1 TB in size 💾, without negatively affecting the platform’s speed or efficiency.</p>
 
 <h2>🎯 Platform Goals</h2>
-<p>
-To produce videos matching the examples in the following links, which represent the minimum acceptable quality 👇<br>
-(Please watch all the links completely — this is the minimum quality required):</p>
+  
+<div class="intro-statement">
+  To produce unlimited videos at high speed — 
+  without any subscriptions, APIs, or internet connection —  
+  <br><br>
+  matching <strong>(at minimum)</strong> the quality shown in the following examples 👇
+  <br>
+  <em>(Please watch all links or preview videos fully — this is the lowest acceptable quality standard.)</em>
+</div>
+
 <ul>
-  <li><a href="https://www.facebook.com/share/v/16bcprHm7i/" target="_blank">🔗 Link 1 </a></li>
-  <li><a href="https://www.facebook.com/share/v/16nf3biL84/" target="_blank">🔗 Link 2</a></li>
-  <li><a href="https://www.facebook.com/share/v/1FPbPaSuxi/" target="_blank">🔗 Link 3</a></li>
-  <li><a href="https://www.facebook.com/share/v/16sURn3tgo/" target="_blank">🔗 Link 4</a></li>
-  <li><a href="https://www.facebook.com/share/v/19AfGVMDLn/" target="_blank">🔗 Link 5</a></li>
-  <li><a href="https://www.facebook.com/share/v/16sRpA7sTf/" target="_blank">🔗 Link 6</a></li>
+   <li><a href="https://tinyurl.com/yc467zpc " target="_blank">🔗 Link 1 </a></li>
+  <li><a href="https://drive.google.com/file/d/145S95Kgz5H9KZaZq5twCucbSCjbwqZSm/view?usp=sharing" target="_blank">🔗 Link 2 </a></li>
+  <li><a href="https://drive.google.com/file/d/1klPlXWHbzia8IzF7JCTRXzlzwtif6woF/view?usp=sharing" target="_blank">🔗 Link 3</a></li>
+  <li><a href="https://drive.google.com/file/d/1DwNZPoISitNV8PUKz7qbBBedJectcpYV/view?usp=sharing" target="_blank">🔗 Link 4</a></li>
+  <li><a href="https://drive.google.com/file/d/1ZAHGP_oUorGF5gTKxaYcnKQwqRg7Hhx9/view?usp=sharing" target="_blank">🔗 Link 5</a></li>
+  <li><a href="https://drive.google.com/file/d/1c5CoVZ-7lYvpsLZz1TwafGyZCzjReyeR/view?usp=sharing" target="_blank">🔗 Link 6</a></li>
+  <li><a href="https://drive.google.com/file/d/1JIGIl7Jx3YKKXAmszYjOFvh6Zraick7j/view?usp=sharing" target="_blank">🔗 Link 7</a></li>
 </ul>
 <h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
 
@@ -150,6 +232,12 @@ To produce videos matching the examples in the following links, which represent 
   background-color: #f9f9f9;
   max-width: 1300px;
 ">
+
+    <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="700" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/103.mp4" type="video/mp4">
+    </video>
+    </div>
 
   <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
     <video width="400" autoplay muted loop playsinline controls>
@@ -234,12 +322,31 @@ To produce videos matching the examples in the following links, which represent 
 </div>
 
 
+<div class="task">
+  <h2>⚠️ Platform Design Requirement:</h2><br>
+  The platform must be built in full compatibility with the upcoming <b>Hasaballa Engine</b> update, as outlined in <b>Task 19</b>.<br>
+  All tools, pipelines, and internal logic must be future-proof and designed to integrate seamlessly with Hasaballa Engine once released.
+</div>
 
 
   
 
 <h2>✅ 📋 Hasaballa AI Tasks</h2>
-<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>💻 Windows 11, with an Intel Core i7 processor, RTX 4060</strong> (8 GB) GPU 🎮, and 64 GB RAM 🧠.</div>
+<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>
+💻 Windows 11 Home 64-bit, with an AMD Ryzen™ 9 9955HX (3.50 GHz, Fire Range), RTX 5090 🎮 (24 GB GDDR7), 64 GB DDR5 RAM 🧠, and 4TB M.2 NVMe SSD ⚡ — plus a 16.0" WQXGA 300Hz display 🖥️.</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task1-a">
+  1-A ✅ Must be architected to fully support <b>Hasaballa Engine</b> integration (see Task 19).<br>
+  All tools, pipelines, and system resources must be designed to connect seamlessly with the upcoming Hasaballa Engine — without needing any structural changes later.<br><br>
+  This includes:<br>
+  - Modular tool design with accessible internal APIs<br>
+  - Background tasks (e.g., image, voice, animation) ready for Engine control<br>
+  - Clear separation of logic to avoid future rework<br><br>
+  🧠 <b>Note:</b> Hasaballa Engine is the platform’s core automation system — future updates depend on this integration being ready from day one.
+</div>
+
+  
 <div class="task"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
 <div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
 
@@ -273,27 +380,38 @@ It shows the full conversation, responses, and logs of the video/script generati
 🎙️ Function: Allows the user to input voice commands or narration using speech-to-text.
 Useful for dictating long scenarios or asking questions hands-free.</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-d"> 4-D <strong>🖼️ Insert Reference Images.</strong><br>
-🧍‍♂️🧍‍♀️ Function: Upload reference images for characters.<br>
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-d">
+  4-D <strong>🖼️ Insert Reference Images.</strong><br>
+  <b>Function:</b> Upload reference images for characters. The system uses them to maintain identity consistency across scenes.<br><br>
 
-- Minimum: 8 images<br>
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Minimum:</b> 8 total images (≥ 8 characters recommended).</li>
+    <li><b>Per Character:</b> up to <b>5</b> reference images covering different ages/angles (e.g., childhood, youth, profile).</li>
+    <li><b>Weighting:</b> each reference image has a <b>priority weight (0–100%)</b>. Weights are normalized per character.</li>
+    <li><b>Character Pack:</b> images + (linked) reference voice(s) are grouped as a reusable <b>Character Pack</b>.</li>
+    <li><b>Import/Export:</b> Character Packs must be importable/exportable (local JSON file) for reuse across projects.</li>
+  </ul>
+</div>
 
-- Each image represents a character in the video.<br>
 
-- The system uses these to maintain visual consistency (same identity) across all scenes and shots.</div>
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-e">
+  4-E <strong>🔉 Insert Reference Audio.</strong><br>
+  🗣️ <b>Function:</b> Upload voice reference files for cloning each character’s voice.<br><br>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-e"> 4-E <strong>🔉 Insert Reference Audio.</strong><br>
-🗣️ Function: Upload voice reference files for cloning each character’s voice.<br>
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Minimum:</b> 1 reference voice per character (mandatory).</li>
+    <li><b>Optional:</b> up to 5 reference voices per character (e.g., childhood, youth, adult), but not required.</li>
+    <li><b>Image↔Voice Linking:</b> each reference image <i>may</i> be linked to a specific reference voice. If no unique voice is linked, the system falls back to the character’s main voice.</li>
+    <li><b>Weights:</b> optional weight (0–100%) can be assigned per image/voice pair, normalized per character.</li>
+    <li><b>Usage:</b> voices are used by the cloning tool to synthesize the character’s real voice during generation.</li>
+    <li><b>Auto Mode:</b> in <strong>Auto Director Mode</strong>, the system automatically maps the correct voice to each scene based on script analysis (see 4-F-2).</li>
+    <li><b>Manual Mode:</b> in <strong>Manual Director Mode</strong>, the user can assign and control each voice step-by-step.</li>
+    <li><b>Export/Import:</b> Character Packs (images + voices + weights) must be exportable/importable as local <b>JSON</b> for reuse across projects.</li>
+  </ul>
+</div>
 
-- Minimum: 8 voice files.<br>
-
-- Each voice will be matched to a character image.<br>
-
-- Used by the voice cloning tool to synthesize the scenario in the character’s real voice.<br>
-
-- In <strong>Auto Director Mode</strong>, this is done automatically.<br>
-
-- In <strong>Manual Mode</strong>, the user can assign and control each voice step-by-step.</div>
 
 <div class="task subtask"><input type="checkbox"data-id="task4-f"> 4-F <strong>✍️ Text & Command Input Box.</strong><br>
 (The number of characters allowed to be entered in the field must not be less than 15,000 characters).<br>
@@ -321,6 +439,13 @@ Supported capabilities:<br>
 -🌅 Generate background visuals and ambient sound as specified in the written script.<br>
 
 -👄 Lip-syncing for characters, based on scene instructions.</div>
+
+<div class="task subsubsubtask"><input type="checkbox"data-id="task4-f-1-1"> 4-F-1-1 
+ <strong>Hasaballa GPT Chat – Scenario Analysis</strong><br>
+<strong>Performance:</strong><br>
+Capable of analyzing full scripts (≈15 scenes, each with visual and voice requirements) in just <strong>6 to 10 seconds.</strong><br>
+Optimized for rapid parsing, semantic breakdown, and routing tasks across all tools — whether running in Auto or Manual Smart Director modes.
+</div>
 
 <div class="task subsubtask"><input type="checkbox"data-id="task4-f-2"> 4-F-2 <strong>📝 Intelligent Reference Voice Mapping.</strong><br> 
 > 🧠 The system must analyze the written script (inside the Chat Window) and decide automatically whether to use the reference voice or not — based on the text.<br>
@@ -434,8 +559,12 @@ true to the correct reference image — based on scene type and text context.<br
 <div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1200px; border-radius: 10px; background-color: #f9f9f9;">
 
   <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-    <video width="70%" autoplay muted loop controls>
+    <video width="65%" autoplay muted loop controls>
       <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/28.mp4" type="video/mp4">
+    </video>
+
+     <video width="65%" autoplay muted loop controls >
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/50.mp4" type="video/mp4">
     </video>
 
   </div>
@@ -501,6 +630,19 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
      <div class="task subsubtask"><input type="checkbox"data-id="task4-f-6-2"> 4-F-6-2 <strong>📴 “Disconnect – Return to Offline Mode”</strong>– When clicked, it fully cuts any online lookup attempts and forces the assistant to rely only on internal data/models.<br></div>
     
 
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-f-7"> 4-F-7 🎚 <strong>Inline Voice Speed Command (Prompt-Based)</strong><br>
+  <b>Function:</b> The scenario text can include a strict command that sets narration/dialogue speed for generation/cloning (routes to <b>7-Q</b>).
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Syntax:</b> <code>[[voice.speed=1.25]]</code> (valid 0.50–2.00, default 1.00)</li>
+    <li><b>Scope:</b> place at the top of a scene block to apply to that scene; place before a line to apply to that line only.</li>
+    <li><b>Behavior:</b> formant-preserving time-stretch; auto viseme/phoneme re-alignment; timeline length updates.</li>
+    <li><b>Acceptance:</b> ≥99% correct parsing & routing to 7-Q.</li>
+  </ul>
+</div>
+
+
+  
 <div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G <strong>⬆️ Expand Input Box</strong>.<br>
 🔽 Function: Enlarges the input box for easier writing of long scripts or commands.</div>
 
@@ -518,6 +660,24 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 
 🎬 Smart Director Buttons:<br></div>
 <strong>1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-i-0">
+  4-I-0 <strong>🎚️ Voice-First Planning</strong><br>
+  • The system must always generate/import the scene audio first (narration or dialogue).<br>
+  • Based on the effective audio duration (after silence removal), the system automatically decides the number of images/visuals needed for the scene.<br>
+  • Formula: <code>images_per_scene = ceil( voice_duration_sec / seconds_per_image )</code>, default = 5s per image.<br>
+  • Adequacy Check: If images are too many or too few (±20% tolerance), the system shows warnings and offers:<br>
+    – 🔧 Auto-Fix (adjust automatically)<br>
+    – ✍️ Override (user manually increases/decreases)<br>
+  • Timeline Preview must show:<br>
+    – Voice waveform<br>
+    – Beat markers (every 5s)<br>
+    – Thumbnails aligned with beats<br>
+  • This guarantees visuals match the pacing of the narration.<br>
+</div>
+
+  
 <div class="task subsubtask"><input type="checkbox"data-id="task4-i-1"> 4-I-1 <strong>🧠 Auto Generation Button</strong>.<br>
 📦 Automatically analyzes everything written in the input box, sends it to all the internal tools, and generates the final video + timeline without any user interaction.</div>
 <strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
@@ -547,7 +707,47 @@ These are stored automatically and can be reopened later for editing or regenera
 
 
 
+<div class="task subtask">
+  <input type="checkbox" data-id="task4-k">
+  4-K ✅ <strong>Hasaballa GPT – Acceptance Criteria</strong>
+  <div style="margin-inline-start:1.8em;">
+    <ul style="margin:8px 0 0 0; padding-left:1em; list-style:none;">
+      <li>
+        <input type="checkbox" data-id="task4-k-1" id="task4-k-1">
+        <label for="task4-k-1">📚 Parses full scripts (≥ <b>15,000</b> chars) into scenes / voices / FX with ≥ <b>99%</b> routing correctness.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-2" id="task4-k-2">
+        <label for="task4-k-2">🎲 Deterministic mode: same input ⇒ same tool plan & flags (seeded planning).</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-3" id="task4-k-3">
+        <label for="task4-k-3">⚡ Average parse time ≤ <b>10s</b> per <b>15</b> scenes on target hardware.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-4" id="task4-k-4">
+        <label for="task4-k-4">🧩 Every Auto/Manual decision is encoded in this schema and sent to tools.</label>
+      </li>
 
+      <li>
+        <input type="checkbox" data-id="task4-k-6" id="task4-k-6">
+        <label for="task4-k-6">🧯 Failure handling: if any tool-routing step fails → retry ×2 with backoff; no chat crash.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-7" id="task4-k-7">
+        <label for="task4-k-7">🛡️ Offline-by-default: no external calls.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-8" id="task4-k-8">
+        <label for="task4-k-8">🗣️ Arabic dialect mapping: ≥ <b>98%</b> correct speaker/dialect detection on a 20-script test suite (Egyptian, Sa'idi, Levantine, Gulf, Maghrebi…).</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task4-k-9" id="task4-k-9">
+        <label for="task4-k-9">📝 Auto-save: chat + routing schema snapshot every <b>30s</b> and on tool transitions; on reopen show “Resume from Autosave?”.</label>
+      </li>
+    </ul>
+  </div>
+</div>
   
 
 
@@ -647,14 +847,97 @@ These are stored automatically and can be reopened later for editing or regenera
 
 
 <div class="task subtask"><input type="checkbox"data-id="task5-a"> 5-A <strong>🎥 Cinematic lighting</strong>.</div>
+
+<div class="task subsubtask"><input type="checkbox"data-id="task5-a-1"> 5-A-1 
+<strong>🖼️ Image Generation Tool – High-Quality Visual Output</strong><br>
+<strong>Performance:</strong><br>
+Generates <strong>high-resolution character visuals</strong> and cinematic scenes using advanced image diffusion techniques.<br>
+Each image (at highest quality) is generated in approximately <strong>10 to 18 seconds</strong>, depending on complexity and number of characters per scene.<br>
+
+<strong>Output Quality:</strong><br>
+Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. Ideal for dramatic facial expressions, period-accurate costumes, and realistic lighting.
+</div>
+
+  <div class="task subsubtask"><input type="checkbox" data-id="task5-a-2"> 5-A-2  
+<strong>🖼️ Text to Image.</strong>
+</div>
+
+<div class="task subsubtask"><input type="checkbox" data-id="task5-a-3"> 5-A-3  
+<strong>🎨 Real image to Image (AI)</strong>
+</div>
+
+<div class="task subsubtask"><input type="checkbox" data-id="task5-a-4"> 5-A-4  
+<strong>🧬 Generate visuals and audio based on 🖼️ reference images and 🔊 reference voices</strong>
+</div>
+
+
 <div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B <strong>👥 Reference images</strong> (for multiple characters, minimum of 8 — all can appear in one video, so identity consistency is critical).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task5-b-1"> 5-B-1 🎙️Each reference image should ideally be linked to a unique <strong>reference voice</strong>, forming a Character Pack (Image + Voice).<br>
+
+  <div class="task subsubtask">
+  <label>
+    <input type="checkbox" data-id="task5-b-1">
+    <span>5-B-1 🗂️ <strong>Multi-Reference Per Character</strong></span>
+  </label>
+
+  <ul style="margin:8px 0 0 28px; padding:0; list-style:none;">
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-1">
+        🖼️ Each character can have up to <strong>5 reference images</strong> (for example: childhood, youth, different angles).
+      </label>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-2">
+        ⚖️ The system must allow assigning a <strong>weight/priority</strong> (0–100%) to each image.
+      </label>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-3">
+        🧩 These references combine to form a richer <strong>Character Pack</strong> for more accurate identity persistence across all scenes.
+      </label>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" data-id="task5-b-2-4">
+        📤📥 Character Packs must be <strong>exportable/importable</strong> (local JSON or similar) for re-use across projects.
+      </label>
+    </li>
+  </ul>
+</div>
+
+  
+  <div class="task subsubtask"><input type="checkbox"data-id="task5-b-2"> 5-B-2 🎙️Each reference image should ideally be linked to a unique <strong>reference voice</strong>, forming a Character Pack (Image + Voice).<br>
 - This pairing enables the system to use the correct voice for each image during video generation (especially in <strong>Dialogue Mode</strong>).<br>
 
 - 🧠 The decision to use the voice or not is made during script writing inside the Chat Window — based on the context and structure of the text (<strong>see Task 4-F-2</strong>).<br>
 - The <strong>Smart Director</strong> simply follows this logic during generation (<strong>automatic or manual</strong>).<br></div>
 <div class="task subtask"><input type="checkbox"data-id="task5-c"> 5-C <strong>🔒 Identity lock button.</strong><br> - must match reference image with 99.9% (ideally 100%) accuracy.</div>
-<div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
+
+    <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-1">
+  5-C-1 🧪 <strong>Auto-Quality Guard (Negative + Seed)</strong>
+  <div style="margin-inline-start:1.8em;">
+    - system must automatically use internal negative prompts to avoid defects (hands, eyes, text).<br>
+    - system must lock and reuse seeds to ensure identity consistency across all scenes.<br>
+    - user should not need to enter negatives or seeds manually.<br>
+    <em style="opacity:.8;">(runs silently in the background — no manual prompts or seed input from user)</em>
+  </div>
+</div>
+
+  <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-2">
+  5-C-2 🧷 <strong>Outfit/Style Lock</strong>
+  <div style="margin-inline-start:1.8em;">
+    - lock costume/era/hair/makeup as part of the identity profile.<br>
+    - must remain stable across all generated scenes unless user explicitly changes it.<br>
+    <em style="opacity:.8;">(default: text-driven & runs in background; no need for a visible button)</em>
+  </div>
+</div>
+
+  
+  <div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E <strong>📂 Dropdown list</strong> for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F <strong>🏆 Minimum visual quality</strong> must match examples in the above video links.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 100% correct Arabic text</strong> in generated images.</div>
@@ -676,8 +959,27 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 - ✅ Continue smoothly to the next stage.<br> 
 - ⚠️ Not show any error or interruption in the process.<br> 
 🧠 The <strong>Smart Director</strong> must later adjust the final timeline accordingly..</div>
-<div class="task subtask"><input type="checkbox"data-id="task5-i"> 5-I ⚙️ Must work in both <strong>automatic and manual mode</strong> with the Smart Director (from chat window to final video).</div>
-<div class="task subtask"><input type="checkbox"data-id="task5-j"> 5-J 🎯 <strong>Evaluation Conditions for Task 5</strong>:<br>
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task5-i"> 5-I <strong>⚙️How to Use the Image Generation</strong>   
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task5-i-1"> 5-I-1 🔄 Must work in both modes with the Smart Director:<br>  
+   - 🟢 <strong>Automatic Mode</strong>: Full pipeline from chat window → <b>images</b> → voices → animation → lip sync → final video.<br>  
+   - 🟡 <strong>Manual Mode</strong>: Step-by-step control for each production stage.  
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task5-i-2"> 5-I-2 🖼️ This tool must also be usable <strong>independently</strong> (standalone mode):  
+   - <b>Example</b>: If the user only needs <strong>Image Generation</strong>, the tool should work fully on its own.<br>  
+   - ✅ All tools (Image, Voice, Animation, Lip-Sync, etc.) must support both usages at the same time:  
+        1. Working together with Smart Director (Auto & Manual).  
+        2. Working separately as standalone tools, completely independent from Smart Director.  
+</div>
+
+  
+  <div class="task subtask"><input type="checkbox"data-id="task5-j"> 5-J 🎯 <strong>Evaluation Conditions for Task 5</strong>:<br>
 
 ✅ The following four conditions must be strictly met:<br>
 1. 🧍‍♂️ Identity Persistence Across Scenes  <br>
@@ -693,9 +995,87 @@ Each image must be inserted into the video timeline at the correct moment, or sk
 Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text precision, and realism.<br>
 </div>
 
+<div class="task subtask" >
+  <input type="checkbox" data-id="task5-k"> 5-K 🔄<b>Auto-Rotation</b><br>
+  ✅ If multiple image generation models are available, the platform <b>automatically selects</b> the best one based on the prompt content.<br>
+  📦 <b>Available from the first release, and further enhanced by Hasaballa Engine after the first platform update.</b>
+</div>
 
 
+      <div class="task subtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-l">
+  5-L 🗂️ <strong>Save/Export Identity Snapshot</strong>
+  <div style="margin-inline-start:1.8em;">
+    - save the exact look (face + outfit/style/era) of a generated character as a reusable snapshot.<br>
+    - allow exporting this snapshot for use in future scenes/projects without re‑generating the character.
+  </div>
+</div>
 
+  
+<!-- ===== 5-l-1: Reuse Exact Look in New Scenes ===== -->
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-l-1">
+  5-L-1 ♻️ <strong>Reuse Exact Look in New Scenes</strong>
+  <div style="margin-inline-start:1.8em;">
+    - enable creating new scenes with the same saved look (face + outfit/style) instantly.<br>
+    - user should not need to re‑generate or tweak prompts to keep the identity and outfit stable.
+  </div>
+</div>
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task5-m"> 5-M 🌍 <strong>Cultural & Historical Accuracy Extension</strong><br>
+  The Image Generation tool must authentically represent Arab and Middle Eastern life across different eras — from 
+  <strong>Pharaonic Egypt (7000 BC)</strong> through <strong>Islamic dynasties (Umayyad, Abbasid, Mamluk, Ottoman)</strong>,
+  to the <strong>20th century (1950s–1970s)</strong>, and finally the <strong>modern era (2000–2025)</strong>.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-1">
+  5-M-1 🧬 <strong>Era-specific LoRAs/Embeddings</strong><br>
+  - Fine-tuned models for clothing, architecture, and environments of each era.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-2">
+  5-M-2 🖼️ <strong>Historical Reference Packs</strong><br>
+  - Integrated offline library of Arab houses, markets, streets, and daily life across centuries.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-3">
+  5-M-3 📜 <strong>Prompt Presets per Era</strong><br>
+  - Ready-made presets: "Pharaonic Egypt", "Ottoman Cairo", "1950s Beirut", "Modern Arab City 2025".
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-4">
+  5-M-4 👤 <strong>Authentic Arab Features</strong><br>
+  - Identity lock ensures Arab/Middle Eastern facial traits (skin tone, hair, eyes, face shape).
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-5">
+  5-M-5 👗 <strong>Outfit/Style Lock Extension</strong><br>
+  - Support for era-accurate clothing (pharaonic robes, Islamic abayas, Ottoman caftans, 1960s dresses, modern Arab fashion).
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-6">
+  5-M-6 🏛️ <strong>Environment & Architecture</strong><br>
+  - ControlNet-driven generation for Arab marketplaces, Islamic architecture, and modern skylines.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-7">
+  5-M-7 🔤 <strong>Arabic Text Guarantee</strong><br>
+  - All text inside images (signs, newspapers, posters) must be 100% correct Arabic, with an optional manual correction step.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-m-8">
+  5-M-8 🏆 <strong>Expanded Evaluation Criteria</strong><br>
+  - Review outputs for: cultural/era accuracy, Arab identity ≥99%, correct Arabic text, lighting, and realism.
+</div>
 
 
 
@@ -790,7 +1170,7 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/25.mp4" type="video/mp4">
     </video>
 
-    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+    <video width="320" autoplay muted loop controls >
       <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/26.mp4" type="video/mp4">
     </video>
   </div>
@@ -798,8 +1178,226 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
 </div>
 
 <div class="task subtask"><input type="checkbox"data-id="task6-a"> 6-A <strong>🧍‍♀️ Full-body animation</strong> (eyes, facial expressions, shoulders, hands, legs, etc.).</div>
+
+
+  <div class="task subsubtask">
+  <input type="checkbox" data-id="task6-a-1"> 6-A-1 🏃‍♂️ <b>Full-Body Dynamic and Realistic Motion</b>  <br>
+   - Supports complex and realistic <b>whole-body movement</b>: running, walking, fighting, escaping, cinematic battle actions.  <br>
+   - Includes synchronization of: <br> 
+     • Arms and shoulders (punching, defensive moves) <br> 
+     • Legs and steps (running, walking, directional changes)  <br>
+     • Upper body twists and tilts (action poses, reactions)<br>  
+   - Must integrate seamlessly with facial animation and lip sync. <br> 
+   - 🎯 Target: Achieve realistic body motion suitable for war, drama, and action movie scenes. <br> 
+   - 🔄 Fully controlled by Smart Director timeline (automatic + manual).  
+</div>
+
+  <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1000px; margin: 0 auto;">
+    <video width="320" autoplay muted loop controls >
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/31.mp4" type="video/mp4">
+    </video></div>
+
+
+  
+  <div class="task subsubtask"><input type="checkbox"data-id="task6-a-2"> 6-A-2 
+🎭 <strong>Image Animation & Lip Sync Tool – Realistic Motion</strong><br>
+<strong>Performance:</strong><br>
+Delivers <strong>high-fidelity face and lip animation</strong>, synced to the generated voice, with realistic eye and ambient motion.<br>
+Each image is animated in <strong>12 to 20 seconds</strong>, ensuring expressive and natural delivery.<br>
+
+<strong>Output Quality:</strong><br>
+Seamless lip sync and cinematic animation style, compatible with any background or scene type.
+</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+ <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1000px; margin: 0 auto;">
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/32.mp4" type="video/mp4">
+    </video>
+
+ <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/33.mp4" type="video/mp4">
+    </video></div>
+
+
+  <div class="task subsubsubtask"><input type="checkbox"data-id="task6-a-2-1"> 6-A-2-1
+🖼️ <b>Image-To-Video</b>
+</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1000px; margin: 0 auto;">
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/41.mp4" type="video/mp4">
+    </video>
+
+   <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/42.mp4" type="video/mp4">
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/43.mp4" type="video/mp4">
+    </video>
+
+   <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/44.mp4" type="video/mp4">
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/45.mp4" type="video/mp4">
+    </video>
+
+   <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/46.mp4" type="video/mp4">
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/47.mp4" type="video/mp4">
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/48.mp4" type="video/mp4">
+    </video>
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/49.mp4" type="video/mp4">
+    </video></div>
+
+
+  <div class="task subsubsubtask"><input type="checkbox"data-id="task6-a-2-2"> 6-A-2-2
+📝 <b>Text-To-Video</b>
+</div>
+
+  <!-- 6-A-3: Animation Duration Control -->
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task6-a-3">
+  <label for="task6-a-3">6-A-3 ⏱️ <b>Animation Duration Control</b></label>
+  <ul>
+    <li><input type="checkbox" id="anim-default"><label for="anim-default"> 🕒 Default range: 3–5 seconds per static image</label></li>
+    <li><input type="checkbox" id="anim-manual"><label for="anim-manual"> ✏️ Manual adjustment from 1–15 seconds (per image or per scene)</label></li>
+    <li><input type="checkbox" id="anim-auto"><label for="anim-auto"> 🔄 Automatic duration based on scene length and voice timing</label></li>
+    <li><input type="checkbox" id="anim-loop"><label for="anim-loop"> 🔁 Optional loop until scene voice ends (for longer scenes)</label></li>
+    <li><input type="checkbox" id="anim-sync"><label for="anim-sync"> 🎯 Sync with Smart Director for consistent pacing</label></li>
+  </ul>
+</div>
+
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task6-a-4">
+  <label for="task6-a-4">6-A-4 🎥 <b>Camera Motion Control</b></label>
+  <ul>
+    <li><input type="checkbox" id="cam-zoom"><label for="cam-zoom"> 🎚️ Zoom In / Zoom Out (slow, medium, fast)</label></li>
+    <li><input type="checkbox" id="cam-pan"><label for="cam-pan"> 🎚️ Pan (left, right, up, down)</label></li>
+    <li><input type="checkbox" id="cam-tilt"><label for="cam-tilt"> 🎚️ Tilt / Rotate (subtle cinematic angle shifts)</label></li>
+    <li><input type="checkbox" id="cam-combine"><label for="cam-combine"> 🎬 Combine multiple motions for dynamic shots</label></li>
+    <li><input type="checkbox" id="cam-layer"><label for="cam-layer"> ⚡ Applied as a post-animation layer for cinematic effect</label></li>
+    <li><input type="checkbox" id="cam-sync"><label for="cam-sync"> 🔄 Fully synced with Smart Director timeline</label></li>
+    <li>🎯 Ensures professional "cinematic camera feel" without manual editing</li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task6-a-5"> 6-A-5 💥 <b>Action Effects Layer</b> (Cinematic Add-ons)<br>
+   - Add cinematic <b>action effects</b> synced with animation and Smart Director timeline:<br>
+ <ul style="list-style: none; padding-left: 20px; margin-top: 10px;">
+    <li><input type="checkbox" data-id="effect-1"> Explosions, smoke, dust overlays 🌪️💥</li>
+    <li><input type="checkbox" data-id="effect-2"> Camera Shake 📸 (explosion, hit, fall)</li>
+    <li><input type="checkbox" data-id="effect-3"> Flash / Gunfire ⚡🔫 (bullets, bombs, rockets)</li>
+    <li><input type="checkbox" data-id="effect-4"> Sound FX 🔊 (steps, gunshots, screams, collisions)</li>
+    <li><input type="checkbox" data-id="effect-5"> Slow Motion 🕒 (dramatic falls, jumps, punches)</li>
+    <li><input type="checkbox" data-id="effect-6"> Camera blends 🎬 (fast zooms + shakes for chase/fight scenes)</li>
+  </ul>
+   - Supports <b>imaginative cinematic effects</b> for extreme scenarios:<br>
+     • Example: character falling from a plane with fire trails 🔥<br>
+     • Example: mid-air hit by a rocket 🚀💥<br>
+   - 🎯 Goal: deliver <b>realistic + imaginative war/action/escape sequences</b> with maximum cinematic feel.<br>
+   - 🔘 These effects must be <b>optional and toggleable per scene</b>, with full control available both via the Smart Director buttons (Auto/Manual) and through the Animation Tool independently.<br>
+   - 🎬 All action effects must be fully <b>compatible and blendable</b> with Camera Motion Control (Zoom / Pan / Tilt / Rotate) to ensure a smooth, cinematic layer.<br>
+</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; border-radius: 10px; padding: 20px; margin: 30px auto; background-color: #f9f9f9; max-width: 1100px;">
+
+ <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1000px; margin: 0 auto;">
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/31.mp4" type="video/mp4">
+    </video>
+
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/35.mp4" type="video/mp4">
+    </video>
+
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/36.mp4" type="video/mp4">
+    </video>
+
+ 
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/37.mp4" type="video/mp4">
+    </video>
+
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/38.mp4" type="video/mp4">
+    </video>
+
+ 
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/39.mp4" type="video/mp4">
+    </video>
+
+
+    <video width="320" autoplay muted loop controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/40.mp4" type="video/mp4">
+    </video></div>
+
+  
 <div class="task subtask"><input type="checkbox"data-id="task6-b"> 6-B <strong>🏙️ Background motion</strong> too (e.g. people walking in streets, trees moving, curtains swaying, birds, animals, kids playing).</div>
-<div class="task subtask"><input type="checkbox"data-id="task6-c"> 6-C <strong>👄 Lip sync</strong> must be as good as DreamFace or better than the sample reference videos.</div>
+
+<h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
+
+<div style="border: 2px solid #ccc; border-radius: 10px; padding: 20px; margin: 30px auto; background-color: #f9f9f9; max-width: 1100px;">
+
+ <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1000px; margin: 0 auto;">
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/18.mp4" type="video/mp4">
+    </video>
+
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/2.mp4" type="video/mp4">
+    </video>
+
+
+    <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/22.mp4" type="video/mp4">
+    </video>
+ 
+ <video width="320" autoplay muted loop controls style="flex: 1 1 30%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/25.mp4" type="video/mp4">
+    </video>
+
+ <video width="320" autoplay muted loop center controls style="flex: 1 1 70%;">
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/50.mp4" type="video/mp4">
+    </video></div></div>
+
+  <div class="task subsubtask"><input type="checkbox"data-id="task6-b-1"> 6-B-1 🖥️ <b>Animate video within screen/TV</b> inside the background image.</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 40px;">
+  <h3 style="text-align: center;">📽️ For example: preview scenes</h3>
+  <video width="320" autoplay muted loop controls>
+    <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/16.mp4" type="video/mp4">
+  </video>
+</div>
+
+  
+  <div class="task subtask"><input type="checkbox"data-id="task6-c"> 6-C <strong>👄 Lip sync</strong> must be as good as DreamFace or better than the sample reference videos.</div>
 > The Chat Window <strong>(Hasaballa GPT)</strong> is the primary controller for deciding when and how lip sync is triggered(In the automatic and manual smart output mode).<br>
 - It analyzes the written script and automatically assigns isTalking:<br> 
 true to the correct reference image — based on scene type and text context.<br>
@@ -865,8 +1463,12 @@ true to the correct reference image — based on scene type and text context.<br
 <div style="border: 2px solid #ccc; padding: 20px; margin: 30px auto; max-width: 1200px; border-radius: 10px; background-color: #f9f9f9;">
 
   <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-    <video width="70%" autoplay muted loop controls>
+    <video width="65%" autoplay muted loop controls>
       <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/28.mp4" type="video/mp4">
+    </video>
+
+     <video width="65%" autoplay muted loop controls >
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/50.mp4" type="video/mp4">
     </video>
 
   </div>
@@ -988,9 +1590,124 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 - ⚠️ Not show any error or interruption in the process.<br> 
 <strong>🧠 The Smart Director</strong> must later adjust the final timeline accordingly..</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task6-e"> 6-E ⚙️ Works both <strong>automatically and manually with Smart Director</strong> (from chat window to final video).</div>
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task6-e"> 6-E <strong>⚙️How to Use The Image Animation & Lip Sync Tools</strong>   
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task6-e-1"> 6-E-1 🔄 Must work in both modes with the Smart Director: <br> 
+   - 🟢 <strong>Automatic Mode</strong>: Full pipeline from chat window → images → voices → <b>animation</b> → <b>lip sync</b> → final video. <br> 
+   - 🟡 <strong>Manual Mode</strong>: Step-by-step control for each production stage.  
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task6-e-2"> 6-E-2 🔊 This tool must also be usable <strong>independently</strong> (standalone mode):  
+   - <b>Example</b>: If the user only needs <strong>Use The Image Animation & Lip Sync Tools</strong>, the tools should work fully on its own.<br>  
+   - ✅ All tools (Image, Voice, Animation, Lip-Sync, etc.) must support both usages at the same time:  
+        1. Working together with Smart Director (Auto & Manual).  
+        2. Working separately as standalone tools, completely independent from Smart Director.  
+</div>
+
+  
+<div class="task subtask">
+  <input type="checkbox" data-id="task6-f"> 6-F 🔄<b>Auto-Rotation</b><br>
+  ✅ When animating images, and If there is more than one model, the system analyzes the scene type and auto-selects the best animation model.<br>
+📦 <b>"Available from the first release, and further enhanced by Hasaballa Engine after the first platform update."</b>
+</div>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task6-g">
+  6-G 🔒 <strong>Identity Consistency in Animation</strong><br>
+  - animated characters must perfectly match their reference identity (face, outfit, style) without distortion.<br>
+  - must be consistent across all animation modes (lip sync, body, background).<br>
+</div>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task6-h">
+  6-H ✅ <strong>Animation Acceptance Criteria</strong><br>
+  - lips perfectly synced with audio (no lag/jump).<br>
+  - face identity stable across frames.<br>
+  - body motion smooth and cinematic.<br>
+  - background motion natural without artifacts.<br>
+</div>
 
 
+<div class="task subtask"><input type="checkbox" data-id="task6-i">
+  6-I 🕰️ <strong>Era-Based Simple Motion</strong><br>
+  - Backend applies a light motion style that matches the era and outfit (no user action needed).<br>
+  - Examples:<br>
+  &nbsp;&nbsp;• Traditional wear (jalabiya/abaya/turban): calmer hands, smaller torso sway.<br>
+  &nbsp;&nbsp;• Armor / sword era: firmer stance, broader shoulders, steady head.<br>
+  &nbsp;&nbsp;• 1950s scenes: modest hand gestures, classic posture.<br>
+  &nbsp;&nbsp;• Modern 2000–2025: natural casual micro-movements.<br>
+  - Motion stays subtle and never distorts identity or outfit (works with Outfit/Style Lock).
+</div>
+
+
+  <div class="task subtask"><input type="checkbox" data-id="task6-j">
+  6-J 🗣️ <strong>Accurate Lip-Sync</strong><br>
+  - If the Voice tool provides timing data (timestamps for words/phonemes), use it directly for perfect alignment.<br>
+  - If not, the system must auto-align lips internally to match the voice.<br>
+  - Lip movement must be smooth, with no sudden jumps.<br>
+  - Natural transitions between sounds (co-articulation) and subtle jaw/cheek/teeth movement must be included for realism.
+</div>
+
+<div class="task subtask"><input type="checkbox" data-id="task6-k">
+  6-K 👀 <strong>Gaze & Micro-Expressions</strong><br>
+  - Natural blinks, eye saccades, and gaze targets (speaker/listener/camera) synchronized with speech beats.<br>
+  - Subtle brows/cheek cues to match emotion (ties into 7-P “Dialogue Context Effects” if used).
+</div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task6-l">
+  6-L 🧣 <strong>Light Garment/Hair Response</strong><br>
+  - Minimal secondary motion for hair, beards, scarves, robes consistent with movement/wind presets (no heavy sim—backend only).<br>
+  - Avoid interpenetration with face/shoulders; preserve outfit silhouette from Image Generation.
+</div>
+
+<div class="task subtask"><input type="checkbox" data-id="task6-m">
+  6-M 🥾 <strong>Action Hooks & Footstep Markers</strong><br>
+  - Body motion (walk/run/jump/crawl) must generate precise step/impact markers for Smart Director → auto-triggers matching FX from the Sound Library.<br>
+  - Camera-shake micro-bursts tied to these impacts must also integrate with 6-A-5 <b>Action Effects Layer</b> (explosions, gunfire, falls).<br>
+  - Shake is optional: can be toggled ON/OFF per scene, or auto-enabled in action scenes by Smart Director.<br>
+</div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task6-n">
+  6-N 🧼 <strong>Automatic Clean-up (Backend)</strong><br>
+  - Auto-fix common animation defects:<br>
+    • Teeth/mouth glitches.<br>
+    • Lips moving outside the face.<br>
+    • Edge flicker around head/hair.<br>
+    • Background tearing or cut-out lines.<br>
+  - Keep the character’s face identity stable during fast actions or head turns.<br>
+  - Runs silently in backend — no user action required.
+</div>
+
+<div class="task subtask"><input type="checkbox" data-id="task6-o">
+  6-O 🗺️ <strong>Depth-Aware Parallax</strong><br>
+  - This is different from 6-B Background Motion.<br>
+  - 6-B = animating real objects in the scene (people, trees, curtains, birds, etc.).<br>
+  - 6-O = adding a very light parallax effect: background layer moves slightly slower/faster than foreground layer, to give a 3D depth feel.<br>
+  - Uses depth/segmentation info (if available from Image Generation).<br>
+  - Effect must be subtle and safe: never distort the locked character’s identity.<br>
+  - Runs automatically in backend — no manual setup required.<br>
+</div>
+
+  
+  <div class="task subtask"><input type="checkbox" data-id="task6-p">
+  6-P 🧪 <strong>Animation Auto-Quality Guard</strong><br>
+  - Backend automatically checks animation output for issues:<br>
+    • Jitter or shaking motion.<br>
+    • Sudden frame jumps.<br>
+    • Lip-sync drift > 40ms.<br>
+    • Extreme face/body warps.<br>
+  - If an issue is found, the system re-generates only the affected frames (e.g. 0.5–1 sec of animation),<br>
+    then replaces them inside the scene timeline — instead of re-rendering the entire scene.<br>
+  - Runs silently in backend — no user action required.
+</div>
+
+
+  
 <div class="task"><input type="checkbox"data-id="task7"> 7️⃣ <strong>Reference voices / voice enhancement / Voice cloning / voice generation 🔊</strong>.</div>
 
  <div>
@@ -1010,10 +1727,123 @@ Support adding <strong>reference voices</strong> for multiple characters (<stron
 - <strong>The Smart Director</strong> simply follows this logic during generation (<strong>automatic or manual</strong>).<br></div>
 <div class="task subtask"><input type="checkbox"data-id="task7-b"> 7-B <strong>🎙️ Studio-like audio enhancement</strong> (remove noise, increase clarity).</div>
 <div class="task subtask"><input type="checkbox"data-id="task7-c"> 7-C <strong>🧬 Voice cloning</strong> — must match reference audio 100%.</div> 
-<div class="task subtask"><input type="checkbox"data-id="task7-d"> 7-D <strong>😮‍💨 Natural breathing</strong>, pauses, emotional tone shifts.</div> 
-<div class="task subtask"><input type="checkbox"data-id="task7-e"> 7-E  <strong>🇸🇦 عربي All Arabic dialects</strong> must be supported naturally and precisely.</div>
+  
+  <div class="task subtask"><input type="checkbox"data-id="task7-d"> 7-D <strong>😮‍💨 Natural breathing</strong>, pauses, emotional tone shifts.
+  The system must support:
+  <ul>
+    <li>🎭 Emotional tones: sadness, anger, joy, hesitation, fear, determination…</li>
+    <li>🫁 Natural breathing sounds between lines and during pauses.</li>
+    <li>⏸️ Realistic pauses and cadence, adapting to scene intensity.</li>
+    <li>🧠 These should be automatically added to both cloned and generated voices.</li>
+  </ul>
+</div> 
+
+  <div class="task subsubtask"><input type="checkbox" data-id="task7-d-1"> 7-D-1 🎙️ <b>Mic / Speaker Effects</b> on Narration Voice  
+Apply optional effects to simulate:<br>
+- Microphone narration (e.g., indoor echo, metallic tone)<br>
+- Old radio broadcast feel (AM radio filter, grain)<br>  
+- Public announcement system echo<br>  
+These effects must be:<br>
+- Fully optional and applied per scene/dialogue via Smart Chat instructions <br> 
+- Layered without affecting clarity or pronunciation <br> 
+🧠 <b>Example</b> Chat Instruction:<br>  
+"Make this part sound like it’s being said through a mic on stage."  
+</div>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task7-e"> 7-E <strong>🇸🇦 عربي All Arabic dialects</strong> must be supported naturally and precisely.<br>
+  The platform must fully support voice generation and cloning in the following dialects:
+  <ul>
+    <li><input type="checkbox" data-id="task7-e-1"> 🇪🇬 Egyptian</li>
+    <li><input type="checkbox" data-id="task7-e-2"> 🌾 Egyptian Rural / Farmers</li>
+    <li><input type="checkbox" data-id="task7-e-3"> 🌍 Nubian Arabic (Egypt/Sudan)</li>
+    <li><input type="checkbox" data-id="task7-e-4"> 🏖️ Alexandrian / Bahary (Egyptian coastal dialect)</li>
+    <li><input type="checkbox" data-id="task7-e-5"> ⛰️ Upper Egyptian (Sa'idi)</li>
+    <li><input type="checkbox" data-id="task7-e-6"> 🧔 Egyptian-Broken (e.g. foreigner speaking Egyptian)</li>
+    <li><input type="checkbox" data-id="task7-e-7"> 🇹🇳 Tunisian</li>
+    <li><input type="checkbox" data-id="task7-e-8"> 🇸🇾 Syrian</li>
+    <li><input type="checkbox" data-id="task7-e-9"> 🇱🇧 Lebanese</li>
+    <li><input type="checkbox" data-id="task7-e-10"> 🇸🇦 Saudi</li>
+    <li><input type="checkbox" data-id="task7-e-11"> 🇱🇾 Libyan</li>
+    <li><input type="checkbox" data-id="task7-e-12"> 🇲🇦 Moroccan</li>
+    <li><input type="checkbox" data-id="task7-e-13"> 🇮🇶 Iraqi</li>
+    <li><input type="checkbox" data-id="task7-e-14"> 🇵🇸 Palestinian</li>
+    <li><input type="checkbox" data-id="task7-e-15"> 🇩🇿 Algerian</li>
+    <li><input type="checkbox" data-id="task7-e-16"> 🇯🇴 Jordanian</li>
+    <li><input type="checkbox" data-id="task7-e-17"> 🇰🇼 Gulf (general)</li>
+    <li><input type="checkbox" data-id="task7-e-18"> 🇸🇩 Sudanese</li>
+    <li><input type="checkbox" data-id="task7-e-19"> 🏜️ Bedouin</li>
+    <li><input type="checkbox" data-id="task7-e-20"> 🇾🇪 Yemeni Arabic</li>
+    <li><input type="checkbox" data-id="task7-e-21"> 📖 Standard Arabic (Fus-ha) — must be pronounced 100% correctly (even if not diacritized).</li>
+  </ul>
+  <strong>🧠 Notes:</strong><br>
+  - Dialects must reflect correct pronunciation, intonation, emotional rhythm, and cultural expressions.<br>
+  - The Smart Director should choose the correct dialect automatically based on script or manual selection.
+</div>
+
 <div class="task subtask"><input type="checkbox"data-id="task7-f"> 7-F <strong>🗣️ Voice generation</strong> (non-cloned) from included voice library.</div> 
-<div class="task subtask"><input type="checkbox"data-id="task7-g"> 7-G <strong>📚 A full voice library</strong> in Arabic (all dialects) and English — used when no reference audio is provided.</div> 
+
+<div class="task subsubtask"><input type="checkbox"data-id="task7-f-1"> 7-F-1 
+🗣️<strong> Voice Generation & Cloning Tool – Studio-Grade Audio</strong><br>
+<strong>Performance:</strong><br>
+Generates and clones human-like Arabic voices with emotional depth, including breath, pauses, and natural cadence.<br>
+Each voice line (≈10–15 words) takes around <strong>8 to 14 seconds</strong> to synthesize and enhance.<br>
+
+<strong>Output Quality:</strong><br>
+High-definition 48kHz audio output, supporting multiple characters, dialects, and expressive cues.
+</div>
+
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-f-2"> 7-F-2 🌍 <b>Multilingual Dubbing</b><br>
+  Enable automatic <b>dubbing</b> of generated or cloned voices into the world’s most used languages:<br>
+  <ul>
+    <li><input type="checkbox"> 🇺🇸 English</li>
+    <li><input type="checkbox"> 🇩🇪 German</li>
+    <li><input type="checkbox"> 🇫🇷 French</li>
+    <li><input type="checkbox"> 🇹🇷 Turkish</li>
+    <li><input type="checkbox"> 🇪🇸 Spanish</li>
+    <li><input type="checkbox"> 🇮🇹 Italian</li>
+  </ul>
+  <b>Features:</b><br>
+  - Works with both <b>voice cloning</b> (preserves the original speaker’s identity) and <b>voice generation</b> (uses library voices).<br>
+  - Automatically synchronizes with translated captions from <b>Task 10-F-1, 2</b>.<br>
+  - <b>🎬 Smart Director</b> selects proper timing, emotional tone, and scene consistency.<br>
+  - Outputs studio-quality audio, ready for integration in dialogues or narration.<br>
+</div>
+
+
+<div class="task subtask">
+  <input type="checkbox" id="task7-g">
+  <label for="task7-g">7-G 📚 <b>A full voice library</b> — in Arabic (all dialects) & English — used when no reference audio is provided.</label>
+
+  <ul>
+    <li><input type="checkbox" id="voice-m1"><label for="voice-m1"> 🎙️ Male Deep — Suitable for Modern Standard Arabic / Formal English (Narration, News, Trailer)<br><small>🗣️ Best for: Arabic MSA, Formal tone (not dialectal)</small></label></li>
+
+    <li><input type="checkbox" id="voice-m2"><label for="voice-m2"> 🎬 Male Youthful — Suitable for dialects / casual English (Dialogue, Social Media)<br><small>🗣️ Great for: Egyptian, Levantine, Gulf, Maghrebi dialects — casual, youth content</small></label></li>
+
+    <li><input type="checkbox" id="voice-m3"><label for="voice-m3"> 🧓 Male Senior — Suitable for storytelling / documentaries (Storytelling, History)<br><small>🗣️ Good for: Arabic storytelling tone — can adapt to dialects with tuning</small></label></li>
+
+    <li><input type="checkbox" id="voice-f1"><label for="voice-f1"> ☀️ Female Warm — Suitable for calm Modern Standard Arabic / educational English (Podcast, Explainer)<br><small>🗣️ Best for: Arabic MSA, soft narration — neutral or classic</small></label></li>
+
+    <li><input type="checkbox" id="voice-f2"><label for="voice-f2"> 📣 Female Energetic — Suitable for ads / promo in dialects or English (Promo, Ads)<br><small>🗣️ Great for: Egyptian, Gulf, Levantine — high-energy content</small></label></li>
+
+    <li><input type="checkbox" id="voice-f3"><label for="voice-f3"> 🎭 Female Expressive — Suitable for dramatic dialogues / theatrical performance (Drama, Character)<br><small>🗣️ Versatile for: all dialects depending on emotion — great for dramatization</small></label></li>
+
+    <li><input type="checkbox" id="voice-n1"><label for="voice-n1"> 🧒 Youth Voice — Suitable for content targeting kids or teens in Arabic/English (Cartoons, Games)<br><small>🗣️ Flexible for: all Arabic dialects depending on context (kids, youth)</small></label></li>
+
+    <li><input type="checkbox" id="voice-n2"><label for="voice-n2"> 🏫 Neutral Educator — Suitable for lessons and tutorials (E-Learning, Tutorials)<br><small>🗣️ Best for: Arabic MSA or simplified dialects — formal learning tone</small></label></li>
+
+    <li><input type="checkbox" id="voice-n3"><label for="voice-n3"> 💼 Corporate Neutral — Suitable for formal presentations / corporate training (Corporate, Training)<br><small>🗣️ Ideal for: MSA or Gulf-style formal speech — serious tone</small></label></li>
+
+    <li><input type="checkbox" id="voice-n4"><label for="voice-n4"> 🌄 Storyteller Calm — Suitable for podcasts and stories in both languages (Podcast, Audiobook)<br><small>🗣️ Great for: soft dialectal storytelling (Egyptian, Levantine, etc.)</small></label></li>
+
+    <li><input type="checkbox" id="voice-n5"><label for="voice-n5"> 🎶 Singing-Ready Voice (Male) — Capable of singing in Arabic or English<br><small>🎵 Adaptable to: any dialect for music/dubbing — needs tuning</small></label></li>
+
+    <li><input type="checkbox" id="voice-n6"><label for="voice-n6"> 🎶 Singing-Ready Voice (Female) — Capable of singing in Arabic or English<br><small>🎵 Adaptable to: any dialect for music/dubbing — needs tuning</small></label></li>
+  </ul>
+</div>
+
 
 <div class="task subtask"><input type="checkbox"data-id="task7-h"> 7-H 🔁 Use <strong>Reference Voices</strong> in Background Audio Layers:<br>
 When the system detects that a background audio layer (from the Chat Window script) contains a known <strong>reference voice</strong>, it must:<br>
@@ -1033,11 +1863,213 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 🧠 The <strong>Smart Director</strong> must later adjust the final timeline accordingly..</div>
 
 
-<div class="task subtask"><input type="checkbox"data-id="task7-j"> 7-J ⚙️ Must integrate with the <strong>Smart Director</strong> both automatically and manually.</div>
+<div class="task subtask">
+  <input type="checkbox" data-id="task7-j"> 7-J <strong>⚙️How to Use the voice enhancement / Voice cloning / voice generation</strong>   
+</div>
 
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-j-1"> 7-J-1 🔄 Must work in both modes with the Smart Director:<br>  
+   - 🟢 <strong>Automatic Mode</strong>: Full pipeline from chat window → images → <b>voices</b> → animation → lip sync → final video. <br> 
+   - 🟡 <strong>Manual Mode</strong>: Step-by-step control for each production stage.  
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-j-2"> 7-J-2 🔊 This tool must also be usable <strong>independently</strong> (standalone mode):  
+   - <b>Example</b>: If the user only needs <strong>voice enhancement / Voice cloning / voice generation</strong>, the tool should work fully on its own.  
+   - ✅ All tools (Image, Voice, Animation, Lip-Sync, etc.) must support both usages at the same time:  
+        1. Working together with Smart Director (Auto & Manual).  
+        2. Working separately as standalone tools, completely independent from Smart Director.  
+</div>
+
+  
+<div class="task subtask" ><input type="checkbox" data-id="task7-k"> 7-K 🔄<b>Auto-Rotation</b><br>
+  ✅ For voice generation, and If there is more than one model, the platform auto decides which model to use depending on whether the input is narration, dialogue, or character-based.<br>
+  📦 <b>"Available from the first release, and further enhanced by Hasaballa Engine after the first platform update."</b>
+</div>
+
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task7-l"> 7-L 🎶 <b>Singing Voice Generation</b><br>
+  Transform cloned or generated voices into <b>singing performances</b>:<br>
+  <ul>
+    <li>🎵 Solo singing, choir-style layers, or dramatic performance.</li>
+    <li>🧠 <b>Smart Director</b> adjusts rhythm, pitch, and emotional delivery automatically.</li>
+    <li>🎼 Users can optionally provide lyrics + melody guide (or auto-detected from text).</li>
+    <li>💡 Maintains the <b>identity consistency</b> of cloned voices, even while singing.</li>
+  </ul>
+  <b>Output Quality:</b><br>
+  Studio-grade audio (48kHz), with natural transitions between speech and singing.<br>
+</div>
+
+<!-- 7-L-1..4: Singing word/phoneme fixes -->
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-1"> 7-L-1 📝 <b>Word/Phoneme Editor</b> (Singing)
+  <ul>
+    <li>Allow direct editing of the singing output at <b>word level</b> or <b>phoneme level</b>.</li>
+    <li>User can click on specific words (e.g., 10 out of 40) and adjust their pronunciation individually.</li>
+    <li><b>Partial Re-Synthesis:</b> only the modified words/phonemes are re-rendered; the rest of the audio stays untouched.</li>
+    <li>Provide simple controls for <b>pitch</b> (note curve), <b>duration</b> (stretch/shorten), and <b>expression</b> (attack/legato) per word.</li>
+    <li>Display a clear <b>piano-roll style timeline</b> with words/phonemes marked for precise editing.</li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-2"> 7-L-2 🎯 <b>Selective Re-Render</b>
+  <ul>
+    <li>Only the edited sections are re-synthesized, not the entire clip.</li>
+    <li>Ensure the cloned singer’s <b>voice identity</b> (tone/timbre) remains consistent across the whole performance.</li>
+    <li>Keep global mix/EQ/compression settings unchanged to avoid differences in sound quality.</li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-3"> 7-L-3 🔄 <b>Timing & Lip-Sync</b>
+  <ul>
+    <li>Automatically update phoneme timing and lip-sync (visemes) after each edit.</li>
+    <li>Support <b>Undo/Redo</b> and <b>A/B comparison</b> (Before vs After editing).</li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task7-l-4"> 7-L-4 📤 <b>Export/Import Phoneme Map</b>
+  <ul>
+    <li>Allow exporting and importing of phoneme timing/pronunciation data as a <b>JSON file</b>.</li>
+    <li>Integrate with <b>7-M Voice Character Packs</b> so that custom pronunciation settings can be saved and reused for each character.</li>
+  </ul>
+</div>
+
+
+
+      <!-- ===== 7-M: Voice Character Packs (Export/Import) ===== -->
+<div class="task subtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-m">
+  7-M 📦 <strong>Voice Character Packs (Export/Import)</strong>
+  <div style="margin-inline-start:1.8em;">
+    - allow saving a character’s voice (reference/clone/settings) as a pack linked to that character.<br>
+    - support exporting/importing these voice packs to reuse voices across different projects easily.
+  </div>
+</div>
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task7-n">
+  7-N ✅ <strong>Voice Acceptance Criteria</strong><br>
+  - dialect accuracy & pronunciation (per listed dialects).<br>
+  - emotional delivery (breathing, pauses) matches script cues.<br>
+  - noise floor and clarity meet studio quality; no artifacts.<br>
+  - cloned voices must match the reference voice with ≥99% similarity in tone, timbre, and speaking style.<br>
+  - lip-sync alignment passes visual inspection with exported timings.
+</div>
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task7-o"> 7-O ✅ <strong>Automatic Voice Quality Assurance</strong><br>
+  - Runs silently in the backend; user does not need to configure anything.<br>
+  - Ensures final audio is clean and clear, free from background hiss, buzzing, or digital artifacts.<br>
+  - Volume level is normalized automatically (not too low/high).<br>
+  - Output is ready for direct integration into video without manual cleaning.
+</div>
+
+
+  <div class="task subtask">
+  <input type="checkbox" data-id="task7-p"> 7-P 🎙️ <strong>Dialogue Context Effects</strong><br>
+  - <b>Must be implemented in backend.</b><br>
+  - Effects apply only when selected by the user or auto-detected from Chat Window script tags.<br>
+  - By default, generated voices remain clean unless a context effect is explicitly triggered.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-1"> 7-P-1 🚪 <b>Closed Room</b><br>
+  - Subtle short-room reverb for indoor/closed spaces (corridor, small room, vehicle cabin).
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-2"> 7-P-2 💨 <b>High-Wind Interaction</b><br>
+  - Wind-resistant speech filter + optional wind rush underlay for parachute/freefall/outdoor gusts.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-3"> 7-P-3 🫁 <b>Exertion / Movement</b><br>
+  - Add natural panting/breath intensity and slight strain for running/crawling/combat while speaking.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-4"> 7-P-4 📢 <b>Shout / Whisper</b><br>
+  - Quick preset to push voice into shout (higher intensity) or whisper (low, airy) when scene demands.
+</div>
+
+<div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task7-p-5"> 7-P-5 🤖 <b>Control</b><br>
+  - Can be <b>auto-inferred</b> from Chat Window script tags (e.g., "wind", "running", "whisper") or toggled per line manually.<br>
+  - Non-destructive: original clean voice is kept for fallback.
+</div>
+
+<!-- 7-Q: Voice Speed Control (Formant-Preserving) -->
+<div class="task subtask">
+  <input type="checkbox" data-id="task7-q"> 7-Q ⚡ <strong>Voice Speed Control</strong> (Formant-Preserving)
+  <ul>
+    <li>Adjust the speed of any generated or cloned voice without changing pitch (formant-preserving time-stretch).</li>
+    <li>Default range: <b>0.75x → 1.25x</b>. Custom numeric input is supported (e.g., 1.12x).</li>
+    <li><b>Auto Lip-Sync Retiming:</b> visemes/phonemes are re-aligned to the new duration.</li>
+    <li><b>Non-Destructive (Safe Draft):</b> changes produce a separate preview take while the original stays intact.</li>
+    <li>Apply per line / per scene / per project, with a <b>Reset</b> button.</li>
+  </ul>
+
+  <div class="task subsubtask">
+    <input type="checkbox" data-id="task7-q-1"> 7-Q-1 🎛️ <b>UI Controls</b>
+    <ul>
+      <li>Slider + live numeric readout (0.50x → 2.00x).</li>
+      <li>Quick presets: 0.85x / 1.00x / 1.10x / 1.20x.</li>
+      <li><b>Preview</b> button and <b>Apply to All Lines in Scene</b>.</li>
+    </ul>
+  </div>
+
+  <div class="task subsubtask">
+    <input type="checkbox" data-id="task7-q-2"> 7-Q-2 🧠 <b>Smart Director Integration</b>
+    <ul>
+      <li>Adapts to scene tempo (calm/fast) while respecting breathing/pauses (7-D).</li>
+      <li>Auto-updates clip durations and timeline alignment.</li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+
+  
 <div class="task"><input type="checkbox"data-id="task8"> 8️⃣ <strong>Integrated sound library + Pixabay search 🎼</strong>.</div>
 <div class="task subtask"><input type="checkbox"data-id="task8-a"> 8-A 🎧 Include <strong>the most used sound</strong> effects/backgrounds directly in the platform.</div>
-<div class="task subtask"><input type="checkbox"data-id="task8-b"> 8-B <strong>🔍 Search Pixabay audio</strong> via built-in search button (requires internet).</div>
+
+<p><strong>Each category includes all the sound effects used in its respective scenes.</strong></p>
+
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a1"> 8-A-1 😢 <strong>Emotional / Sad FX</strong> – sighs, crying, heartbreak, dramatic echoes.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a2"> 8-A-2 💣 <strong>Military / Combat FX</strong> – explosions, gunfire, grenades, helicopters, tanks.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a3"> 8-A-3 🔕 <strong>Silence Tension FX</strong> – heartbeat, tinnitus, eerie silence.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a4"> 8-A-4 🚪 <strong>Room Ambience FX </strong>– door creaks, footsteps, fabrics.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a5"> 8-A-5 🌆 <strong>City / Street FX</strong> – traffic, crowd, Arabic vendors, sirens.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a6"> 8-A-6 🌄 <strong>Nature & Outdoor FX </strong>– rain, wind, birds, rivers.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a7"> 8-A-7 👥 <strong>Crowd / Human FX</strong> – applause, laughter, murmurs.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a8"> 8-A-8 🎙️ <strong>Broadcast & Phone FX</strong> – old radio, phone line noise.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a9"> 8-A-9 📞 <strong>Spy / Surveillance FX</strong> – Morse code, scrambling, tapping.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a10"> 8-A-10 🕌 <strong>Religious / Spiritual FX</strong> – athan, church bells, prayers.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a11"> 8-A-11 🚓 <strong>Chase scenes</strong> – cars, tires screeching, running footsteps, engine revs.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a12"> 8-A-12 🐎⚔️ <strong>Horses / Swords / Ancient weapons</strong> – galloping, sword clashes, arrow shots.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a13"> 8-A-13 🎥 <strong>Spy / Interrogation / Surveillance</strong> – camera clicks, secret recording sounds, subtle tension hits.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a14"> 8-A-14 🌍 <strong>Arab Cultural FX</strong> — Arabic market vendors (regional calls), regional chants, authentic Arab street/crowd ambience.</div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a15"> 8-A-15 🕰️ <strong>Era Ambiences</strong> — curated ambience FX per era:
+  <ul>
+    <li>Pharaonic Egypt: Nile shore, papyrus craft, chariots, temple crowds, stone carving.</li>
+    <li>Early/Medieval Islamic: souk bustle, caravans, calligraphy workshop, courtyard fountains.</li>
+    <li>Ottoman/Levantine: hammam, coffeehouse, bazaar merchants, caravanserai yard.</li>
+    <li>1950s–1970s: streetcars, vintage cars, café radios, newsroom teletype.</li>
+    <li>Modern 2000–2025: metro, malls, office AC, traffic lights, modern citybeds.</li>
+   </ul>
+  </div>
+  <div class="subsubtask"><input type="checkbox" data-id="task8-a16">8-A-16 🥾 <strong>Foley</strong> — detailed footsteps (ground/sand/stone/wood), cloth/gear rustle, harness snaps (parachute), body falls.</div>
+
+
+  
+  <div class="task subtask"><input type="checkbox"data-id="task8-b"> 8-B <strong>🔍 Search Pixabay audio</strong> via built-in search button (requires internet).</div>
 
 <div class="task subtask"><input type="checkbox"data-id="task8-c"> 8-C <strong>🎛️ Audio Layering Execution</strong> (Based on Chat Input).<br> 
 The background audio engine must support multiple overlapping audio tracks (e.g., music + applause + prayer) based on structured commands parsed from the script written in the Chat Window.<br> 
@@ -1074,8 +2106,79 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 - ⚠️ Not show any error or interruption in the process.<br> 
 🧠 The Smart Director must later adjust the final timeline accordingly..</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task8-e"> 8-E ⚙️ Must work seamlessly with the <strong>Smart Director</strong> (automatic/manual).</div>
 
+<div class="task subtask">
+  <input type="checkbox" data-id="task8-e"> 8-E <strong>⚙️How to Use the Integrated sound library + Pixabay search</strong>   
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task8-e-1"> 8-E-1 🔄 Must work in both modes with the Smart Director: <br> 
+   - 🟢 <strong>Automatic Mode</strong>: Full pipeline from chat window → images → <b>voices</b> → animation → lip sync → final video. <br> 
+   - 🟡 <strong>Manual Mode</strong>: Step-by-step control for each production stage.  
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task8-e-2"> 8-E-2 🔊 This tool must also be usable <strong>independently</strong> (standalone mode):  
+   - <b>Example</b>: If the user only needs <strong>Add one or more from Integrated sound library + Pixabay search</strong>, the tool should work fully on its own.  
+   - ✅ All tools (Image, Voice, Animation, Lip-Sync, etc.) must support both usages at the same time:  
+        1. Working together with Smart Director (Auto & Manual).  
+        2. Working separately as standalone tools, completely independent from Smart Director.  
+</div>
+
+
+<!-- مزج ومستوى صوت موحّد -->
+<div class="task subtask"><input type="checkbox" data-id="task8-f">
+  8-F 🎚️ <strong>Mixing & Loudness</strong><br>
+  - auto duck background tracks under dialogue/narration.<br>
+  - normalize all FX/music to consistent loudness (target −14 LUFS; true-peak ≤ −1.0 dBTP).
+</div>
+
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task8-g">
+  8-G 🔁 <strong>Seamless Loops</strong><br>
+  - support seamless looping for ambience/music beds with auto crossfade at loop points.
+</div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task8-h">
+  8-H ✅ <strong>Royalty-Free Guarantee</strong><br>
+  - All integrated/Pixabay sounds must be 100% copyright-safe for YouTube/Facebook monetization.
+</div>
+
+  <div class="task subtask"><input type="checkbox" data-id="task8-i">
+  8-I 🏛️ <strong>Environmental Reverb Profiles (Background FX only)</strong><br>
+  - Background FX/ambience/music automatically adapt reverb/EQ to match the scene location/era.<br>
+  - Examples: stone echo in temples, wet reverb in hammam, vintage radio tone in 1950s cafés, clean modern rooms.<br>
+  - <b>Applies only to background layers</b> — does <u>not</u> affect generated/cloned dialogue voices.<br>
+  - Runs automatically in backend when scene/era tags are present.
+</div>
+
+
+  <!-- ميتاداتا للفلترة الذكية -->
+<div class="task subtask"><input type="checkbox" data-id="task8-j">
+  8-J 🏷️ <strong>Era & Region Tagging</strong><br>
+  - Every FX/music item carries tags: era (Pharaonic/Ottoman/1950s/Modern), region (Egypt/Levant/Gulf/Maghreb), mood (sad/tense/crowd).<br>
+  - Smart Director uses tags to auto-pick correct layers.
+</div>
+
+
+<!-- توافق ديني -->
+<div class="task subtask"><input type="checkbox" data-id="task8-k">
+  8-K 🕌 <strong>Religious Compliance Toggle</strong><br>
+  - When enabled, prevent placing music under Quran recitation or Adhan; use ambience-only beds.<br>
+  - Ensure all religious FX are culturally respectful.
+</div>
+
+
+  <div class="task subtask"><input type="checkbox" data-id="task8-l">
+  8-L 🔒 <strong>Offline Packs & Caching</strong><br>
+  - The platform must always include a built-in offline library of the most important FX (street, nature, prayer, crowds, etc.).<br>
+  - If internet is available, extra sounds can be fetched from Pixabay only when needed (not downloaded all at once).<br>
+  - Any FX/music used in a project must be cached locally, so if the same sound is needed again it loads instantly without re-searching or re-downloading.
+ </div>
+
+  
+  
 <div class="task"><input type="checkbox"data-id="task9"> 9️⃣ <strong>Smart Director (Two Buttons) 🎬</strong>.
 
  <div class="section">
@@ -1185,8 +2288,8 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 </div>
 <div class="task subsubtask"><input type="checkbox"data-id="task9-a-1"> 9-A-1 🔄 Same button will work with both the <strong>Full Video Editor Panel (Task 10-F)</strong> and the Smart Edit Layer <strong>(Task 11)</strong>.</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-2"> 9-A-2 🕒 For a <strong>7-minute video</strong>: total production time from click to final output must not exceed <strong>30 minutes</strong> (includes ≈85 images, animation, lip sync, voice, sound, etc.).</div>
-<div class="task subsubtask"><input type="checkbox"data-id="task9-a-3"> 9-A-3 ⏱️ For a <strong>15-minute video</strong>: total time from click to final output must not exceed <strong>60 minutes</strong> (≈170 images, full production).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-2"> 9-A-2 🕒 For a <strong>7-minute video</strong>: total production time from click to final output must not exceed <strong>45 minutes</strong> (includes ≈85 images, animation, lip sync, voice, sound, etc.).</div>
+<div class="task subsubtask"><input type="checkbox"data-id="task9-a-3"> 9-A-3 ⏱️ For a <strong>15-minute video</strong>: total time from click to final output must not exceed <strong>90 minutes</strong> (≈170 images, full production).</div>
 <div class="task subsubtask"><input type="checkbox"data-id="task9-a-4"> 9-A-4 <strong>👣Step-by-Step Skipping Logic</strong><br>
 ⏭️ The Smart Director (Auto Mode) must intelligently handle skipping of steps based on the chat instructions or detected scenario.<br>
 
@@ -1236,7 +2339,79 @@ Lets the user go step-by-step through each tool manually, with full control over
   <div class="task subsubtask"><input type="checkbox"data-id="task9-b-1"> 9-B-1 ✅ <strong>Manual Director – Visual Tracker Requirement:</strong>
 The manual Smart Director must include a visual progress bar or step tracker (<strong>Task Timeline</strong>), showing the current tool in use, completed stages, and remaining tasks. This helps the user follow the video generation flow step-by-step.</div>
 
+  
+<div class="task subtask">
+  <input type="checkbox" data-id="task9-c">
+  9-C ✅ <strong>Smart Director – Acceptance Criteria (Auto & Manual)</strong>
+  <div style="margin-inline-start:1.8em;">
+    <ul style="margin:8px 0 0 0; padding-left:1em; list-style:none;">
+      <!-- Planning & Determinism -->
+      <li>
+        <input type="checkbox" data-id="task9-c-1" id="task9-c-1">
+        <label for="task9-c-1">🧭 <b>Plan correctness</b>: routes scenes → (image, voice, bg-audio, animation, lip-sync) with ≥ <b>99%</b> step accuracy vs. the script.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-2" id="task9-c-2">
+        <label for="task9-c-2">🎲 <b>Deterministic planning</b>: same script & settings ⇒ same plan, tool flags, and scene ordering (seeded).</label>
+      </li>
 
+      <!-- Performance -->
+      <li>
+        <input type="checkbox" data-id="task9-c-3" id="task9-c-3">
+        <label for="task9-c-3">⚡ <b>Throughput (Auto Mode)</b>: 7-min video ≤ <b>45m</b>; 15-min video ≤ <b>90m</b> on target hardware (includes image gen, voices, soundscape, animation, lip-sync).</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-4" id="task9-c-4">
+        <label for="task9-c-4">📈 <b>Parallelism</b>: images & voices pipeline run concurrently where possible without UI freeze; progress updates.</label>
+      </li>
+
+      <!-- Skip Logic & Overrides -->
+      <li>
+        <input type="checkbox" data-id="task9-c-5" id="task9-c-5">
+        <label for="task9-c-5">⏭️ <b>Skip honors</b>: per-scene/per-stage skip flags produce no errors or empty gaps; timeline reflows smoothly.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-6" id="task9-c-6">
+        <label for="task9-c-6">🛠️ <b>Manual overrides</b> always take precedence over Auto plan and persist across re-runs.</label>
+      </li>
+
+      <!-- Timeline & Sync Quality -->
+      <li>
+        <input type="checkbox" data-id="task9-c-7" id="task9-c-7">
+        <label for="task9-c-7">🎞️ <b>Timeline assembly</b>: each scene placed with correct timecodes; no overlaps.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-8" id="task9-c-8">
+        <label for="task9-c-8">👄 <b>Lip-sync quality</b>: median A/V offset ≤ <b>80ms</b>, p95 ≤ <b>120ms</b>; exported timings available for inspection.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-9" id="task9-c-9">
+        <label for="task9-c-9">🧍 <b>Identity consistency</b>: when Identity/Outfit Lock is ON, character look stays stable across scenes (no unintended drift).</label>
+      </li>
+ 
+
+      <!-- Reliability & Recovery -->
+      <li>
+        <input type="checkbox" data-id="task9-c-11" id="task9-c-11">
+        <label for="task9-c-11">💾 <b>Auto-save integration</b>: plan + timeline + per-stage status snapshot every <b>30s</b> and on stage transitions.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-12" id="task9-c-12">
+        <label for="task9-c-12">🧯 <b>Crash recovery</b>: on reopen, “Resume from Autosave?” restores pipeline to last stable step; no corrupted states.</label>
+      </li>
+
+      <!-- Resource & Offline Policy -->
+      <li>
+        <input type="checkbox" data-id="task9-c-13" id="task9-c-13">
+        <label for="task9-c-13">🧪 <b>Model auto-rotation</b> (if multiple): chooses best model per scene type without exceeding VRAM; falls back gracefully.</label>
+      </li>
+      <li>
+        <input type="checkbox" data-id="task9-c-14" id="task9-c-14">
+        <label for="task9-c-14">📴 <b>Offline-by-default</b>: no internet use.</label>
+      </li>
+    </ul>
+  </div>
+</div>
 
   
 <div class="task"><input type="checkbox"data-id="task10"> 1️⃣0️⃣ <strong>Final video (1 to 15 mins) 🎞️</strong>.</div>
@@ -1299,8 +2474,36 @@ Give the user the option to:<br>
 - Ensure the final video timeline flows correctly either way.<br> 
 
 👉 Works in both automatic and manual <strong>Smart Director modes</strong>.</div>
+
+
+  <div class="task subsubtask">
+  <input type="checkbox" data-id="task10-f-1"> 
+  <label for="task10-f-1">10-F-1 📝 <b>Subtitles & Captions</b></label>
+  <ul>
+    <li><input type="checkbox" id="sub-manual"><label for="sub-manual"> Add subtitles manually or automatically (AI-generated)</label></li>
+    <li><input type="checkbox" id="sub-multi"><label for="sub-multi"> 🌍 Multi-language support (linked with dubbing 7-F-2)</label></li>
+    <li><input type="checkbox" id="sub-sync"><label for="sub-sync"> ⏱️ Automatic synchronization with audio/scene</label></li>
+    <li><input type="checkbox" id="sub-style"><label for="sub-style"> 🎛️ Style options (color, size, position, <b>Karaoke-style highlighting</b>)</label></li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task10-f-2"> 
+  <label for="task10-f-2">10-F-2 🌍 <b>Translation & Multilingual Captions</b></label>
+  <ul>
+    <li><input type="checkbox" id="trans-auto"><label for="trans-auto"> 🔄 Automatic translation of texts into supported languages</label></li>
+    <li><input type="checkbox" id="trans-dub"><label for="trans-dub"> 🎤 Direct link with multilingual dubbing (Task 7-F-2)</label></li>
+    <li><input type="checkbox" id="trans-toggle"><label for="trans-toggle"> 💡 Option to enable/disable subtitles on screen</label></li>
+    <li><input type="checkbox" id="trans-layer"><label for="trans-layer"> 🧩 Save subtitles as an independent editable layer in the timeline</label></li>
+  </ul>
+</div>
+
+
+
+
 <div class="task subtask"><input type="checkbox"data-id="task10-g"> 10-G ⚙️ Works with <strong>Smart Director (auto/manual)</strong>.</div>
 
+    <p>⚙️ <strong>Note:</strong> The current 1️⃣1️⃣ Smart Editing and Timeline system must be designed to allow future enhancement as described in <strong>Task 20</strong> — including intelligent scene suggestions, smart clip replacement, and AI-powered post-editing workflows. No structural rewrite should be needed when Task 20 is implemented.</p>
 <div class="task"><input type="checkbox"data-id="task11"> 1️⃣1️⃣ <strong>Smart Edit Layer ✏️.</strong><br>
 Works automatically with Smart Director.</div>
 
@@ -1315,6 +2518,40 @@ Works automatically with Smart Director.</div>
 (<strong>For example</strong>)🗣️ “In minute 1:42, replace/remove background visual/sound”
 → the <strong>Smart Edit Layer</strong> should handle this by automatically generating new image/video/sound from the relevant modules or Pixabay as <strong>Smart Director</strong>.</div>
 
+<div class="task subtask"><input type="checkbox"data-id="task11-b">
+  11-B 🛡️ <strong>Integration with Quality Guards</strong><br>
+  - Smart Edit Layer works after the video is generated.<br>
+  - Quality Guards (Image/Voice/Animation) prevent errors during generation.<br>
+  - Smart Edit Layer provides the second protection layer: fixing or replacing defective clips post-generation (based on user timecode prompts).<br>
+</div>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task11-c"> 11-C ✏️ <strong>Timecoded Voice Speed Edit</strong><br>
+  <b>Function:</b> Post-generation speed changes via timecoded prompts. Non-destructive preview → Commit replaces original. Integrates with <b>7-Q</b>.
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Example:</b> “At <code>00:01:42</code>, set narrator speed to <code>1.12x</code> without altering pitch.”</li>
+    <li><b>Range:</b> 0.50–2.00 (default 1.00)</li>
+    <li><b>Tools:</b> Undo/Redo, A/B Compare (Before/After), Preview/Commit flow</li>
+    <li><b>Acceptance:</b> ≥99% correct timecode targeting; no audible artifacts at edit boundaries; <u>lip-sync must always be re-synchronized after speed edits</u>.</li>
+  </ul>
+</div>
+
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task11-d"> 11-D 🎵 <strong>Timecoded Singing Pronunciation Fix (Word/Phoneme)</strong><br>
+  <b>Function:</b> Fix mispronounced words/phonemes inside generated singing <u>after</u> it exists. Selective re-synthesis only on edited parts. Non-destructive preview → Commit. Integrates with <b>7-L</b>.
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Example:</b> “From <code>00:00:18</code> to <code>00:00:23</code>, correct the pronunciation of <code>'...'</code> and set note duration to <code>1.05x</code>.”</li>
+    <li><b>Controls:</b> word/phoneme-level fix; optional pitch curve & duration tweaks for the targeted word only</li>
+    <li><b>Seamless:</b> keep global mix/EQ/comp unchanged; seamless joins with surrounding audio</li>
+    <li><b>Sync:</b> <u>every pronunciation/duration edit must re-synchronize lip-sync (visemes) and update timeline placement automatically</u></li>
+    <li><b>Acceptance:</b> no audible seams; cloned voice identity preserved; Undo/Redo + A/B Compare available</li>
+  </ul>
+</div>
+
+
+
+  
 <div class="task"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
 (Needs buttons to connect to the Internet).</div>
 
@@ -1336,23 +2573,188 @@ Works automatically with Smart Director.</div>
 
 <div class="task"><input type="checkbox"data-id="task15"> 1️⃣5️⃣<strong> Save Project & Continue Later 💾</strong>.</div>
 
-<div class="task"><input type="checkbox"data-id="task16"> 1️⃣6️⃣ Project Folder System — <strong>stores all files </strong>(images/audio/etc.) 📁.</div>
+
+ <div class="task subsubtask">
+  <input type="checkbox" data-id="task15-auto-save">
+  15-A 💾 <strong>Auto-Save Every 30s (Platform-Wide)</strong>
+  <div style="margin-inline-start:1.8em;">
+    <ul style="margin:8px 0 0 0; padding-left:1em;">
+      <li>⏱️ Automatically save the project every <b>30 seconds</b> <i>(only if changes occurred)</i>.</li>
+      <li>🧯 <b>Crash-safe writes</b>: write to a temp file, then <b>atomic rename</b> to prevent corruption.</li>
+      <li>🚀 On reopen: if a newer autosave exists, show <em>“Resume from Autosave?”</em> with a brief change summary.</li>
+      <li>🗄️ Retention: keep the last <b>50</b> autosaves or the last <b>2 hours</b> (whichever is smaller); safely prune older ones.</li>
+      <li>📴 Offline-only: no cloud sync and no internet calls.</li>
+      <li>✅ <b>Acceptance</b>: maximum possible loss of work ≤ <b>30s</b>.</li>
+    </ul>
+  </div>
+</div> 
+  
+  
+  <div class="task"><input type="checkbox"data-id="task16"> 1️⃣6️⃣ Project Folder System — <strong>stores all files </strong>(images/audio/etc.) 📁.</div>
 
 <div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ <strong>Backup & Restore Function</strong> 🛡️.</div>
 
 <div class="task"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ <strong>Full source code ownership</strong> (for exclusive platform rights) 🔐.</div>
 
+<div class="task-box task coming-soon shadow-3d">
+  <div class="task-content">
+    <input type="checkbox" data-id="task19" disabled>
+    <strong>1️⃣9️⃣ Hasaballa Engine – The Smart Learning Core 🧠</strong>
+    <span class="badge">🔜 Coming Soon</span><br><br>
+
+    <strong>Hasaballa Engine</strong> is the foundational core that will allow the entire platform to evolve toward a self-improving, AI-driven ecosystem.  
+    It is not just a tool — it is a <strong>shadow model</strong> that silently observes and learns from everything happening inside the platform:<br><br>
+
+    🔹 Tracks the performance of every module (text, image, voice, animation...)<br>
+    🔹 Collects training data from every user interaction and output<br>
+    🔹 Learns from every scenario, image, voice, and animation generated<br><br>
+
+    In the future, the engine will be divided into multiple specialized sub-models:<br>
+    • <strong>Hasaballa Text</strong> – for script understanding and style adaptation<br>
+    • <strong>Hasaballa ImageGen</strong> – to replace image generation models like Stable Diffusion<br>
+    • <strong>Hasaballa Animator</strong> – for lip sync and animation<br>
+    • <strong>Hasaballa Voice</strong> – for voice generation, cloning & enhancement<br><br>
+
+    ✅ The ultimate goal is to <strong>replace external models</strong> like SDXL, SkyReels V2, and Tacotron, once the Hasaballa Engine reaches 90–95% quality.<br>
+    ✅ The engine will continue to improve passively as users create content.<br>
+    ✅ Once matured, it could power the entire platform completely offline.<br><br>
+
+    ⚙️ <strong>Status:</strong> Not active in version 1.0 – scheduled as a major upgrade after 6 months of usage.<br>
+    🧠 <strong>Integration:</strong> Deeply connected with all tools – learns from every step without requiring manual training.<br>
+    📌 <strong>Note:</strong> Sub-models may be released in the future as optional APIs or Pro features.
+  </div>
+</div>
+
+
+  <div class="task-box task coming-soon shadow-3d lime-green">
+  <div class="task-content">
+    <input type="checkbox" data-id="task20" disabled>
+    <strong>2️⃣0️⃣ Auto Smart Fix ⚡ – Intelligent Post-Generation Analysis</strong>
+    <span class="badge">🔜 Coming Soon</span><br><br>
+
+    <strong>Auto Smart Fix</strong> is a post-processing tool designed to automatically analyze each generated video or scene and detect quality issues such as:<br><br>
+
+    🔤 Text errors in Arabic or English (in signs, papers, newspapers...)<br>
+    👤 Inconsistent or incorrect face matching (vs reference images)<br>
+    🎨 Lighting, color tone, or saturation issues<br>
+    🪞 Distorted, glitched, or visually broken elements<br><br>
+
+    Once detected, the system presents a list of identified problems and lets the user:<br>
+    ✅ Instantly auto-fix the issues with one click<br>
+    🚫 Ignore specific problems if the output is already acceptable<br><br>
+
+ <div>
+<img 
+ src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/35.png?raw=true"
+  style="width:70%; display:block; margin:auto;" >
+</div>
+    
+    ⚙️ <strong>Status:</strong> Will be activated in the first update after 6 months.<br>
+    🧠 <strong>Powered by:</strong> The Hasaballa Engine (Task 19)<br>
+    🔄 <strong>Priority:</strong> This feature runs <strong>before</strong> the Selective Smart Edit tool (Task 11) and can be used together for perfect results.
+  </div>
+</div>
+
+
 
 <hr style="margin-top: 60px;">
 
 <p style="font-size: 20px; margin-top: 40px;">
-🙏 Thank you for your time and effort.<br>
-Best of luck with the implementation — and many thanks in advance for your great work!
+<h1>⚠️ Additional Note</h1>
+
+❗ I don’t need too <strong>many models</strong> for image generation, animation, etc. 
+— even a single model per task is fine if its quality is extremely high
+(<strong>the best possible</strong>), and it reaches the minimum visual/audio quality
+shown in the sample videos.<br> 
+
+<h1>💬 Final Thought</h1>
+
+I know this platform is a massive and demanding project.<br> 
+It needs a <strong>smart, talented, and hardworking developer</strong> to bring it to
+life.<br> 
+But it’s also just the beginning of what I see as a long-term
+collaboration.<br> 
+🌱 I have big dreams for this platform — not just to build it, but to turn
+it into a full creative studio powered by AI.<br> 
+💵And I understand it requires a big budget — but I want to take the
+first serious step with a maximum budget of <strong>$8,000 USD</strong>.<br> 
+🙏 I know this doesn’t reflect the true value of your effort, but it’s what
+I can afford now.<br> 
+🙌 Still, <strong>I promise</strong>:<br> 
+Whoever builds this with me will be my go-to developer for everything
+moving forward.<br> 
+Because I’m committed to <strong>growing</strong> this into something powerful and
+sustainable.<br> 
+Ahmed Hasaballa<br> 
+July 2025<br>
 </p>
 
-<p style="font-size: 18px; color: #555; margin-top: 20px;">
-— Prepared by: Ahmed Hasaballa
-</p>
+<div id="lock-overlay" style="position:fixed;inset:0;background:#0b0b0f;display:flex;align-items:center;justify-content:center;z-index:99999;">
+  <div style="background:#111;border:1px solid #333;border-radius:14px;padding:20px;max-width:360px;width:90%;color:#fff;font-family:Arial,Helvetica,sans-serif">
+    <h3 style="margin:0 0 10px">Protected</h3>
+    <p style="margin:0 0 12px;color:#bbb">Enter password to continue</p>
+    <input id="pw" type="password" placeholder="Password" style="width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#0e0e12;color:#fff">
+    <label style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+      <input id="remember" type="checkbox" checked>
+      <span style="color:#bbb;font-size:12px;">Remember me (30 days)</span>
+    </label>
+    <button id="unlockBtn" style="margin-top:12px;width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#1e1e27;color:#fff;cursor:pointer">Unlock</button>
+    <p id="msg" style="color:#f66;font-size:12px;min-height:16px;margin-top:8px"></p>
+    <button id="lockBtn" style="margin-top:6px;width:100%;padding:8px;border-radius:10px;border:1px solid #444;background:#191922;color:#ddd;cursor:pointer">Lock (Logout)</button>
+  </div>
+</div>
+
+  
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.onclick = () => false;
+    });
+  });
+</script>
+
+<script>
+const PASSWORD_HASH_HEX = "7eb59c7b0a3460bd12b8821d37d2a40a065bbaebf7c87effc3329ebf105a6aff";
+const REMEMBER_DAYS = 30;
+const REMEMBER_KEY  = "hasaballa_gate_until";
+
+try {
+  const until = parseInt(localStorage.getItem(REMEMBER_KEY) || "0", 10);
+  if (Date.now() < until) {
+    document.getElementById('lock-overlay').style.display='none';
+  }
+} catch(e){}
+
+async function sha256Hex(text) {
+  const enc = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function tryUnlock() {
+  const pw  = document.getElementById('pw').value;
+  const msg = document.getElementById('msg');
+  const rem = document.getElementById('remember').checked;
+  msg.textContent = '…checking';
+  try {
+    const hex = await sha256Hex(pw);
+    if (hex === PASSWORD_HASH_HEX) {
+      if (rem) {
+        const until = Date.now() + REMEMBER_DAYS*24*60*60*1000;
+        localStorage.setItem(REMEMBER_KEY, String(until));
+      }
+      document.getElementById('lock-overlay').style.display='none';
+      msg.textContent = '';
+    } else {
+      msg.textContent = 'Wrong password';
+    }
+  } catch(e){ msg.textContent = 'Error'; }
+}
+
+document.getElementById('unlockBtn').onclick = tryUnlock;
+document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='Enter') tryUnlock(); });
+document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REMEMBER_KEY); location.reload(); };
+</script>
 
 
 </body>
