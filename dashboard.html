@@ -16,7 +16,6 @@
   .yellow{color:orange;font-weight:bold;}
   .gray{color:gray;font-weight:bold;}
   .muted{font-size:12px;color:#666}
-  code.small{font-size:11px}
 </style>
 </head>
 <body>
@@ -26,7 +25,7 @@
 <div class="row" style="margin-bottom:6px">
   <label>رابط السكربت:
     <input id="scriptUrl" style="width:52rem"
-      value="https://script.google.com/macros/s/AKfycbwvFxhma8qQhJdMhXKGbRv3zP8D6w8LwH-rE_0vz8_mbip5R7ngnk9J9ihXpCpzOdKP/exec">
+      value="https://script.google.com/macros/s/AKfycby09sNFy_vMxIuCViDHcUfdSZWslKPDB4LAhS3D7Eca-UeLKQQVDKle_s6Da5za1wGt/exec">
   </label>
 </div>
 
@@ -49,7 +48,7 @@
     <tr>
       <th>تحكم</th>
       <th>الحالة</th>
-      <th>IP / بلد</th>
+      <th>IP / بلد / مدينة</th>
       <th>UserAgent</th>
       <th>من</th>
       <th>إلى</th>
@@ -68,10 +67,11 @@ const $ = (id)=> document.getElementById(id);
 const fmt = (ms)=> ms ? new Date(Number(ms)).toLocaleString() : '-';
 const fmtDur = (ms)=> {
   ms = Math.max(0, Number(ms||0));
-  const s = Math.floor(ms/1000)%60;
-  const m = Math.floor(ms/60000)%60;
-  const h = Math.floor(ms/3600000);
-  return `${h}h ${m}m ${s}s`;
+  const s = Math.floor(ms/1000);
+  const m = Math.floor(s/60);
+  const h = Math.floor(m/60);
+  const ss = s % 60, mm = m % 60;
+  return `${h}h ${mm}m ${ss}s`;
 };
 
 async function post(params){
@@ -84,8 +84,9 @@ async function post(params){
 function renderRows(rows){
   const tb = document.querySelector('#tbl tbody');
   tb.innerHTML = '';
+  const now = Date.now();
   rows.forEach(r=>{
-    const end = r.closedAt ? r.closedAt : (r.status==='gray' ? r.lastSeen : Date.now());
+    const end = r.closedAt ? r.closedAt : (r.status==='gray' ? r.lastSeen : now);
     const ipCountry = `${r.ip||'-'}${(r.country||r.city)?' / ':''}${(r.country||'')}${r.city?(' - '+r.city):''}`;
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -105,7 +106,7 @@ function renderRows(rows){
     tb.appendChild(tr);
   });
 
-  // تحكم
+  // تحكم: إلغاء
   document.querySelectorAll('.revoke').forEach(b=>{
     b.onclick = async ()=>{
       const adminKey = $('adminKey').value.trim();
@@ -117,6 +118,7 @@ function renderRows(rows){
       await listSessions();
     };
   });
+  // تحكم: حذف
   document.querySelectorAll('.delete').forEach(b=>{
     b.onclick = async ()=>{
       const adminKey = $('adminKey').value.trim();
@@ -147,9 +149,7 @@ function startLive(){
   LIVE_TIMER = setInterval(tick, ms);
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{
-  startLive(); // تشغيل اللايف تلقائيًا
-});
+document.addEventListener('DOMContentLoaded', startLive);
 $('intervalSel').addEventListener('change', startLive);
 </script>
 
