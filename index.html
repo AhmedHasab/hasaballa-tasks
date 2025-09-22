@@ -2748,6 +2748,48 @@ document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='En
 document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REMEMBER_KEY); location.reload(); };
 </script>
 
+<script>
+(async ()=>{
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJZxut0NSY3hOJmpQVdxM5VLfhHLOLEprx4ffHlujm6F1YldFppAZGo3QL5KUhrwZi/exec";
+
+  // دالة POST للسكربت
+  async function post(params){
+    const body = new URLSearchParams(params);
+    return fetch(SCRIPT_URL,{method:'POST',body}).then(r=>r.json());
+  }
+
+  // تسجل جلسة أول ما الزائر يدخل
+  async function initSession(){
+    const r = await post({
+      action:'init',
+      siteId: location.pathname,       // اسم الموقع / الصفحة
+      ua: navigator.userAgent          // معلومات المتصفح
+    });
+    if(r.ok && r.id){
+      localStorage.setItem('session_id', r.id);
+      // ابدأ تكرار الـ ping
+      setInterval(()=>ping(), 25000); // كل 25 ثانية
+      window.addEventListener('click', ()=>active());
+    }
+  }
+
+  // Ping = الزائر لسه فاتح
+  async function ping(){
+    const id = localStorage.getItem('session_id');
+    if(id) await post({action:'ping', id});
+  }
+
+  // Active = الزائر بيعمل حركة (كليك/نشاط)
+  async function active(){
+    const id = localStorage.getItem('session_id');
+    if(id) await post({action:'active', id});
+  }
+
+  // تشغيل أول مرة
+  initSession();
+})();
+</script>
+
 
 </body>
 </html>
