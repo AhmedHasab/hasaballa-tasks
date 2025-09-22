@@ -2,31 +2,57 @@
 <html lang="ar">
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>لوحة التحكم - Hasaballa</title>
 <style>
   body{font-family:Arial, sans-serif; direction:rtl; padding:20px;}
-  h1{margin-bottom:10px;}
-  table{width:100%;border-collapse:collapse;margin-top:10px}
+  h1{margin:0 0 10px}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  input,button,select{padding:6px 10px}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
   th,td{border:1px solid #ccc;padding:8px;text-align:right}
   th{background:#eee}
   .green{color:green;font-weight:bold;}
   .yellow{color:orange;font-weight:bold;}
   .gray{color:gray;font-weight:bold;}
-  button{padding:5px 10px;margin:2px;}
+  .fade-in{animation:flash 0.7s ease}
+  @keyframes flash { from{background:#fff9c4} to{background:transparent} }
+  .muted{font-size:12px;color:#666}
 </style>
 </head>
 <body>
 
-<h1>لوحة التحكم - Hasaballa</h1>
+<h1>Hasaballa - لوحة التحكم</h1>
 
-<label>رابط السكربت: 
-  <input id="scriptUrl" style="width:70%" 
-   value="https://script.google.com/macros/s/AKfycbxJZxut0NSY3hOJmpQVdxM5VLfhHLOLEprx4ffHlujm6F1YldFppAZGo3QL5KUhrwZi/exec">
-</label><br><br>
+<div class="row" style="margin-bottom:6px">
+  <label>رابط السكربت:
+    <input id="scriptUrl" style="width:52rem"
+      value="https://script.google.com/macros/s/AKfycbxJZxut0NSY3hOJmpQVdxM5VLfhHLOLEprx4ffHlujm6F1YldFppAZGo3QL5KUhrwZi/exec">
+  </label>
+</div>
 
-<label>Admin Key: <input id="adminKey" style="width:50%"></label>
-<button onclick="listSessions()">عرض الجلسات</button>
-<button onclick="rotateSessions()">تسجيل خروج الكل</button>
+<div class="row" style="margin-bottom:6px">
+  <label>Admin Key:
+    <input id="adminKey" style="width:30rem">
+  </label>
+  <button id="btnList">عرض الجلسات</button>
+  <button id="btnRotate">تسجيل خروج الكل</button>
+</div>
+
+<div class="row" style="margin-bottom:10px">
+  <button id="btnLive">تشغيل اللايف</button>
+  <label>كل
+    <select id="intervalSel">
+      <option value="2000">2 ث</option>
+      <option value="3000" selected>3 ث</option>
+      <option value="5000">5 ث</option>
+      <option value="8000">8 ث</option>
+      <option value="10000">10 ث</option>
+    </select>
+    تحديث
+  </label>
+  <span class="muted" id="status">— غير نشط</span>
+</div>
 
 <table id="tbl">
   <thead>
@@ -39,54 +65,98 @@
 </table>
 
 <script>
+let LIVE_TIMER = null;
+let LAST_IDS = new Set(); // لمقارنة الجديد/المحذوف
+
+function $(id){ return document.getElementById(id); }
+
 async function post(params){
-  const url = document.getElementById('scriptUrl').value.trim();
+  const url = $('scriptUrl').value.trim();
   const body = new URLSearchParams(params);
   const res = await fetch(url, {method:'POST', body});
   return res.json();
 }
 
+function fmt(ms){ return ms ? new Date(Number(ms)).toLocaleString() : '-'; }
+
 function renderRows(rows){
   const tbody = document.querySelector('#tbl tbody');
+  const currentIds = new Set(rows.map(r=>r.id));
   tbody.innerHTML = '';
+
   rows.forEach(r=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td>${r.id}</td>
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><code>${r.id}</code></td>
       <td>${r.ip||'-'}</td>
-      <td>${r.ua||'-'}</td>
-      <td>${new Date(r.lastSeen).toLocaleString()}</td>
-      <td>${new Date(r.lastActive).toLocaleString()}</td>
+      <td style="max-width:420px;word-break:break-word">${r.ua||'-'}</td>
+      <td>${fmt(r.lastSeen)}</td>
+      <td>${fmt(r.lastActive)}</td>
       <td class="${r.status}">${r.status}</td>
       <td>
-        <button onclick="revoke('${r.id}')">إلغاء</button>
+        <button data-id="${r.id}" class="revoke">إلغاء</button>
       </td>
     `;
+    // لو ده ID جديد مش كان موجود في LAST_IDS نعمل وميض بسيط
+    if(!LAST_IDS.has(r.id)) tr.classList.add('fade-in');
     tbody.appendChild(tr);
+  });
+
+  // حدّث الذاكرة
+  LAST_IDS = currentIds;
+
+  // اربط أزرار الإلغاء
+  document.querySelectorAll('.revoke').forEach(b=>{
+    b.onclick = async ()=>{
+      const adminKey = $('adminKey').value.trim();
+      const id = b.getAttribute('data-id');
+      if(!adminKey) return alert('اكتب الـ Admin Key أولاً');
+      if(!confirm('إلغاء الجلسة '+id+' ؟')) return;
+      const r = await post({ action:'revoke', adminKey, id });
+      if(!r.ok){ alert(r.msg||'خطأ'); return; }
+      await listSessions(); // تحدّث فورًا
+    };
   });
 }
 
 async function listSessions(){
-  const adminKey=document.getElementById('adminKey').value.trim();
-  const r=await post({action:'list',adminKey});
-  if(r.ok) renderRows(r.rows);
-  else alert(r.msg||'خطأ');
+  const adminKey = $('adminKey').value.trim();
+  if(!adminKey){ alert('اكتب الـ Admin Key'); return; }
+  const r = await post({ action:'list', adminKey });
+  if(!r.ok){ $('status').textContent = '— خطأ في الجلب'; return; }
+  renderRows(r.rows||[]);
+  $('status').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString();
 }
 
-async function revoke(id){
-  const adminKey=document.getElementById('adminKey').value.trim();
-  if(!confirm("إلغاء الجلسة "+id+" ؟")) return;
-  const r=await post({action:'revoke',adminKey,id});
-  if(r.ok){ alert('تم الإلغاء'); listSessions(); }
-}
+$('btnList').onclick = listSessions;
 
-async function rotateSessions(){
-  const adminKey=document.getElementById('adminKey').value.trim();
-  if(!confirm("تسجيل خروج جميع الجلسات؟")) return;
-  const r=await post({action:'rotate',adminKey});
-  if(r.ok){ alert('تمت العملية'); listSessions(); }
-}
+$('btnRotate').onclick = async ()=>{
+  const adminKey = $('adminKey').value.trim();
+  if(!adminKey) return alert('اكتب الـ Admin Key');
+  if(!confirm('تسجيل خروج جميع الجلسات؟')) return;
+  const r = await post({ action:'rotate', adminKey });
+  if(!r.ok){ alert(r.msg||'خطأ'); return; }
+  await listSessions();
+};
+
+// تشغيل/إيقاف اللايف
+$('btnLive').onclick = ()=>{
+  if(LIVE_TIMER){
+    clearInterval(LIVE_TIMER);
+    LIVE_TIMER = null;
+    $('btnLive').textContent = 'تشغيل اللايف';
+    $('status').textContent = '— غير نشط';
+  }else{
+    const ms = Number($('intervalSel').value||3000);
+    const tick = async ()=>{
+      try{ await listSessions(); }
+      catch(e){ $('status').textContent = '— خطأ مؤقت، سيُعاد المحاولة'; }
+    };
+    tick(); // أول تحديث فوري
+    LIVE_TIMER = setInterval(tick, ms);
+    $('btnLive').textContent = 'إيقاف اللايف';
+  }
+};
 </script>
-
 </body>
 </html>
