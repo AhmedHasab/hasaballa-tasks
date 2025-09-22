@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<title>لوحة التحكم - Hasaballa</title>
+<style>
+  body{font-family:Arial, sans-serif; direction:rtl; padding:20px;}
+  h1{margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-top:10px}
+  th,td{border:1px solid #ccc;padding:8px;text-align:right}
+  th{background:#eee}
+  .green{color:green;font-weight:bold;}
+  .yellow{color:orange;font-weight:bold;}
+  .gray{color:gray;font-weight:bold;}
+  button{padding:5px 10px;margin:2px;}
+</style>
+</head>
+<body>
+
+<h1>لوحة التحكم - Hasaballa</h1>
+
+<label>رابط السكربت: 
+  <input id="scriptUrl" style="width:70%" 
+   value="https://script.google.com/macros/s/AKfycbxJZxut0NSY3hOJmpQVdxM5VLfhHLOLEprx4ffHlujm6F1YldFppAZGo3QL5KUhrwZi/exec">
+</label><br><br>
+
+<label>Admin Key: <input id="adminKey" style="width:50%"></label>
+<button onclick="listSessions()">عرض الجلسات</button>
+<button onclick="rotateSessions()">تسجيل خروج الكل</button>
+
+<table id="tbl">
+  <thead>
+    <tr>
+      <th>ID</th><th>IP</th><th>UserAgent</th>
+      <th>آخر مشاهدة</th><th>آخر نشاط</th><th>الحالة</th><th>تحكم</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+async function post(params){
+  const url = document.getElementById('scriptUrl').value.trim();
+  const body = new URLSearchParams(params);
+  const res = await fetch(url, {method:'POST', body});
+  return res.json();
+}
+
+function renderRows(rows){
+  const tbody = document.querySelector('#tbl tbody');
+  tbody.innerHTML = '';
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${r.id}</td>
+      <td>${r.ip||'-'}</td>
+      <td>${r.ua||'-'}</td>
+      <td>${new Date(r.lastSeen).toLocaleString()}</td>
+      <td>${new Date(r.lastActive).toLocaleString()}</td>
+      <td class="${r.status}">${r.status}</td>
+      <td>
+        <button onclick="revoke('${r.id}')">إلغاء</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+async function listSessions(){
+  const adminKey=document.getElementById('adminKey').value.trim();
+  const r=await post({action:'list',adminKey});
+  if(r.ok) renderRows(r.rows);
+  else alert(r.msg||'خطأ');
+}
+
+async function revoke(id){
+  const adminKey=document.getElementById('adminKey').value.trim();
+  if(!confirm("إلغاء الجلسة "+id+" ؟")) return;
+  const r=await post({action:'revoke',adminKey,id});
+  if(r.ok){ alert('تم الإلغاء'); listSessions(); }
+}
+
+async function rotateSessions(){
+  const adminKey=document.getElementById('adminKey').value.trim();
+  if(!confirm("تسجيل خروج جميع الجلسات؟")) return;
+  const r=await post({action:'rotate',adminKey});
+  if(r.ok){ alert('تمت العملية'); listSessions(); }
+}
+</script>
+
+</body>
+</html>
