@@ -2792,31 +2792,33 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 
 <script>
 (async ()=>{
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxJZxut0NSY3hOJmpQVdxM5VLfhHLOLEprx4ffHlujm6F1YldFppAZGo3QL5KUhrwZi/exec";
-
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA0azt7hMa2eGspBkP0G7VVl-MIA4gRm1YdVZa6duXFqc7nE5ulHU5C4Xi9aPJbJzh/exec";
   async function post(params){
     const body = new URLSearchParams(params);
-    const r = await fetch(SCRIPT_URL,{method:'POST',body});
-    return r.json();
+    return fetch(SCRIPT_URL,{method:'POST',body}).then(r=>r.json());
   }
-
-  // فحص السماح للجلسة الحالية
+  async function initSession(){
+    const r = await post({ action:'init', siteId: location.pathname, ua: navigator.userAgent });
+    if(r.ok && r.id){
+      localStorage.setItem('session_id', r.id);
+      setInterval(()=>ping(), 25000);
+      window.addEventListener('click', ()=>active());
+    }
+  }
+  async function ping(){ const id = localStorage.getItem('session_id'); if(id) await post({action:'ping', id}); }
+  async function active(){ const id = localStorage.getItem('session_id'); if(id) await post({action:'active', id}); }
   async function checkAllow(){
-    const id = localStorage.getItem('session_id');
-    if(!id) return;
+    const id = localStorage.getItem('session_id'); if(!id) return;
     try{
-      const r = await post({action:'check', id});
+      const r = await post({ action:'check', id });
       if(r.ok && r.allow === false){
-        // اتقفلت من لوحة التحكم
-        try { localStorage.removeItem('session_id'); } catch(e){}
-        try { localStorage.removeItem('hasaballa_gate_until'); } catch(e){}
-        // رجّع قفل الباسورد لو عندك أو اعمل ريلود بسيط
-        location.reload(); // أو اعرض الـ overlay
+        localStorage.removeItem('session_id');
+        localStorage.removeItem('hasaballa_gate_until');
+        location.reload();
       }
     }catch(e){}
   }
-
-  // شغّل فحص السماح كل 5 ثواني
+  initSession();
   setInterval(checkAllow, 5000);
 })();
 </script>
