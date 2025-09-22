@@ -2758,91 +2758,156 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 
 
 <script>
-(async ()=>{
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwT6CZB9wBtwsALiT3jObYIoigVUSwvCcPvV18YIU2XbU5bEO-Bq5kDeEmHie79IAwg/exec";
+/** ========= الإعدادات ========= */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwT6CZB9wBtwsALiT3jObYIoigVUSwvCcPvV18YIU2XbU5bEO-Bq5kDeEmHie79IAwg/exec";
 
-  async function post(params){
-    const body = new URLSearchParams(params);
-    return fetch(SCRIPT_URL,{method:'POST',body}).then(r=>r.json());
-  }
+/** (اختياري) أزمنة ألوان الحالة — لو رجّعها السيرفر */
+const ACTIVE_MS = 20 * 1000; // أخضر لو آخر تفاعل ≤ 20s
+const OPEN_MS   = 30 * 1000; // أصفر لو آخر مشاهدة ≤ 30s
 
-  // ثروتل للـ active كل 1s
-  let lastActive = 0;
-  const ACTIVE_THROTTLE_MS = 1000;
-  const canSendActive = ()=> (Date.now()-lastActive)>=ACTIVE_THROTTLE_MS ? (lastActive=Date.now(), true) : false;
+/** ========= مساعدات ========= */
+async function post(params){
+  const body = new URLSearchParams(params);
+  const r = await fetch(SCRIPT_URL,{method:'POST',body});
+  return r.json();
+}
 
-  async function initSession(){
-    // اجلب IP + بلد + مدينة مرة واحدة
-    let ip='', country='', city='';
-    try{
-      const g = await fetch('https://ipapi.co/json/').then(r=>r.json());
-      ip = g.ip || ''; country = (g.country_name || g.country || ''); city = g.city || '';
-    }catch(e){}
+/** ========= جلسة التتبع (زي اللي عندك + بدون تغيير السلوك) ========= */
+let lastActive = 0;
+const ACTIVE_THROTTLE_MS = 1000;
+const canSendActive = ()=> (Date.now()-lastActive)>=ACTIVE_THROTTLE_MS ? (lastActive=Date.now(), true) : false;
 
-    const r = await post({
-      action:'init', siteId: location.pathname, ua: navigator.userAgent,
-      ip, country, city
+async function initSession(){
+  // IP/البلد/المدينة مرة واحدة (اختياري)
+  let ip='', country='', city='';
+  try{
+    const g = await fetch('https://ipapi.co/json/').then(r=>r.json());
+    ip = g.ip || ''; country = (g.country_name || g.country || ''); city = g.city || '';
+  }catch(e){}
+
+  const r = await post({
+    action:'init', siteId: location.pathname, ua: navigator.userAgent,
+    ip, country, city
+  });
+  if(r.ok && r.id){
+    localStorage.setItem('session_id', r.id);
+
+    // ping كل 2s *لو الصفحة مرئية ومركّزة*
+    setInterval(()=>{ 
+      if(document.visibilityState==='visible' && document.hasFocus()) ping(); 
+    }, 2000);
+
+    const activeIfVisible = ()=>{ 
+      if(document.visibilityState==='visible' && document.hasFocus()) active(); 
+    };
+
+    ['mousemove','pointermove','mousedown','click','wheel','scroll',
+     'touchstart','touchmove','keydown','keyup','resize'].forEach(evt=>{
+      window.addEventListener(evt, activeIfVisible, {passive:true});
     });
-    if(r.ok && r.id){
-      localStorage.setItem('session_id', r.id);
 
-      // ping كل 2s *فقط لو الصفحة مرئية*
-      setInterval(()=>{ 
-        if(document.visibilityState==='visible' && document.hasFocus()) ping(); 
-      }, 2000);
-
-      const activeIfVisible = ()=>{ 
-        if(document.visibilityState==='visible' && document.hasFocus()) active(); 
-      };
-
-      // أحداث النشاط
-      ['mousemove','pointermove','mousedown','click','wheel','scroll',
-       'touchstart','touchmove','keydown','keyup','resize'].forEach(evt=>{
-        window.addEventListener(evt, activeIfVisible, {passive:true});
-      });
-
-      // تغيير الرؤية/التركيز
-      document.addEventListener('visibilitychange', ()=>{
-        if(document.visibilityState==='hidden'){
-          // لو الصفحة راحت في الخلفية → ابعت Ping أخير فقط
-          ping();
-        }
-      });
-      window.addEventListener('blur', ()=>{ ping(); });
-      window.addEventListener('focus', ()=>{ active(); });
-    }
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.visibilityState==='hidden'){ ping(); }
+    });
+    window.addEventListener('blur',  ()=>{ ping(); });
+    window.addEventListener('focus', ()=>{ active(); });
   }
+}
 
-  async function ping(){
-    const id = localStorage.getItem('session_id');
-    if(id) await post({action:'ping', id});
+async function ping(){
+  const id = localStorage.getItem('session_id');
+  if(id) await post({action:'ping', id});
+}
+
+async function active(){
+  const id = localStorage.getItem('session_id');
+  if(!id || !canSendActive()) return;
+  await post({action:'active', id});
+}
+
+/** ========= (اختياري) تلوين الحالة لو السيرفر رجّع status ========= */
+function applyStatus(status) {
+  const dot  = document.getElementById('statusDot');
+  const text = document.getElementById('statusText');
+  if (dot) {
+    dot.classList.remove('green','yellow','gray');
+    dot.classList.add(status || 'gray');
   }
-
-  async function active(){
-    const id = localStorage.getItem('session_id');
-    if(!id || !canSendActive()) return;
-    await post({action:'active', id});
+  if (text) {
+    text.textContent = status==='green' ? 'نشط الآن'
+                     : status==='yellow'? 'مفتوح بدون تفاعل'
+                     : 'غير متصل/في الخلفية';
   }
+}
 
-  async function checkAllow(){
-    const id = localStorage.getItem('session_id');
-    if(!id) return;
-    try{
-      const r = await post({ action:'check', id });
-      if(r.ok && r.allow === false){
+async function checkAllow(){
+  const id = localStorage.getItem('session_id');
+  if(!id) return;
+  try{
+    const r = await post({ action:'check', id });
+    if(r && r.ok){
+      if (r.allow === false){
         localStorage.removeItem('session_id');
         localStorage.removeItem('hasaballa_gate_until');
         location.reload();
+        return;
       }
-    }catch(e){}
-  }
+      // لو السيرفر بيحسب اللون، هيوصله هنا:
+      if (r.status) applyStatus(r.status);
+    }
+  }catch(e){}
+}
 
+/** ========= مزامنة الشيك بوكس لحظيًا ========= */
+// مفتاح كل شيك بوكس
+function keyOfCheckbox(cb){
+  return cb.name || cb.id || cb.getAttribute('data-key') || '';
+}
+
+// 1) إرسال أي تغيير يحصل محليًا → للسيرفر
+function wireCheckboxSender(){
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener('change', async ()=>{
+      const key = keyOfCheckbox(cb);
+      if (!key) return;
+      try { await post({ action:'tick', key, value: cb.checked ? 1 : 0 }); }
+      catch(e){}
+    });
+  });
+}
+
+// 2) استقبال التغييرات من السيرفر وتطبيقها محليًا
+let lastRev = Number(localStorage.getItem('cb_rev') || '0');
+
+async function pullStates(){
+  try{
+    const r = await post({ action:'state', since: String(lastRev) });
+    if(r && r.ok){
+      if (Array.isArray(r.items)){
+        r.items.forEach(({key, value})=>{
+          const el = document.querySelector(`input[type="checkbox"][name="${key}"]`)
+                 || document.getElementById(key)
+                 || document.querySelector(`input[type="checkbox"][data-key="${key}"]`);
+          if (el) el.checked = !!Number(value);
+        });
+      }
+      if (typeof r.rev !== 'undefined'){
+        lastRev = Number(r.rev) || lastRev;
+        localStorage.setItem('cb_rev', String(lastRev));
+      }
+    }
+  }catch(e){}
+}
+
+/** ========= تشغيل ========= */
+window.addEventListener('DOMContentLoaded', ()=>{
   initSession();
-  setInterval(checkAllow, 2000);
-})();
+  wireCheckboxSender();   // إرسال تغييراتك للسيرفر
+  pullStates();           // سحب أولي
+  setInterval(()=>{ if(document.visibilityState==='visible') pullStates(); }, 1000); // تحديث كل ثانية
+  setInterval(checkAllow, 2000); // السماح + (اختياري) لون الحالة
+});
 </script>
-
-
 
 
 
