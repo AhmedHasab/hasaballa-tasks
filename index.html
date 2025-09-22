@@ -2862,11 +2862,19 @@ function wireCheckboxSender(){
     cb.addEventListener('change', async ()=>{
       const key = keyOfCheckbox(cb);
       if (!key) return;
-      try { await post({ action:'tick', key, value: cb.checked ? 1 : 0 }); }
-      catch(e){}
+      try {
+        const r = await post({ action:'tick', key, value: cb.checked ? 1 : 0 });
+        if (r && r.ok) {
+          // بعد ما السيرفر يستقبل التغيير → اسحب آخر الحالات فورًا
+          await pullStates();
+        }
+      } catch(e){
+        console.error('tick error', e);
+      }
     });
   });
 }
+
 
 // 2) استقبال التغييرات من السيرفر وتطبيقها محليًا
 let lastRev = Number(localStorage.getItem('cb_rev') || '0');
