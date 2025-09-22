@@ -10,24 +10,23 @@
   .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   input,button,select{padding:6px 10px}
   table{width:100%;border-collapse:collapse;margin-top:12px}
-  th,td{border:1px solid #ccc;padding:8px;text-align:right}
+  th,td{border:1px solid #ccc;padding:8px;text-align:right;vertical-align:top}
   th{background:#eee}
   .green{color:green;font-weight:bold;}
   .yellow{color:orange;font-weight:bold;}
   .gray{color:gray;font-weight:bold;}
-  .fade-in{animation:flash 0.7s ease}
-  @keyframes flash { from{background:#fff9c4} to{background:transparent} }
   .muted{font-size:12px;color:#666}
+  code.small{font-size:11px}
 </style>
 </head>
 <body>
 
-<h1>Hasaballa - لوحة التحكم</h1>
+<h1>لوحة التحكم - Hasaballa</h1>
 
 <div class="row" style="margin-bottom:6px">
   <label>رابط السكربت:
     <input id="scriptUrl" style="width:52rem"
-      value="https://script.google.com/macros/s/AKfycbzA0azt7hMa2eGspBkP0G7VVl-MIA4gRm1YdVZa6duXFqc7nE5ulHU5C4Xi9aPJbJzh/exec">
+      value="https://script.google.com/macros/s/AKfycbwvFxhma8qQhJdMhXKGbRv3zP8D6w8LwH-rE_0vz8_mbip5R7ngnk9J9ihXpCpzOdKP/exec">
   </label>
 </div>
 
@@ -35,32 +34,28 @@
   <label>Admin Key:
     <input id="adminKey" style="width:30rem" value="HasaballaAdmin!2025">
   </label>
-  <button id="btnList">عرض الجلسات</button>
-  <button id="btnRotate">تسجيل خروج الكل</button>
-</div>
-
-<div class="row" style="margin-bottom:10px">
-  <button id="btnLive">تشغيل اللايف</button>
-  <label>كل
-<select id="intervalSel">
-  <option value="1000" selected>1 ث</option>
-  <option value="2000">2 ث</option>
-  <option value="3000">3 ث</option>
-  <option value="5000">5 ث</option>
-  <option value="8000">8 ث</option>
-  <option value="10000">10 ث</option>
-</select>
-
-    تحديث
+  <span class="muted" id="status">— جاري التشغيل…</span>
+  <label>تحديث كل
+    <select id="intervalSel">
+      <option value="1000" selected>1 ث</option>
+      <option value="2000">2 ث</option>
+      <option value="3000">3 ث</option>
+    </select>
   </label>
-  <span class="muted" id="status">— غير نشط</span>
 </div>
 
 <table id="tbl">
   <thead>
     <tr>
-      <th>ID</th><th>IP</th><th>UserAgent</th>
-      <th>آخر مشاهدة</th><th>آخر نشاط</th><th>الحالة</th><th>تحكم</th>
+      <th>تحكم</th>
+      <th>الحالة</th>
+      <th>IP / بلد</th>
+      <th>UserAgent</th>
+      <th>من</th>
+      <th>إلى</th>
+      <th>المدة</th>
+      <th>آخر مشاهدة</th>
+      <th>آخر نشاط</th>
     </tr>
   </thead>
   <tbody></tbody>
@@ -69,7 +64,15 @@
 <script>
 let LIVE_TIMER = null;
 
-function $(id){ return document.getElementById(id); }
+const $ = (id)=> document.getElementById(id);
+const fmt = (ms)=> ms ? new Date(Number(ms)).toLocaleString() : '-';
+const fmtDur = (ms)=> {
+  ms = Math.max(0, Number(ms||0));
+  const s = Math.floor(ms/1000)%60;
+  const m = Math.floor(ms/60000)%60;
+  const h = Math.floor(ms/3600000);
+  return `${h}h ${m}m ${s}s`;
+};
 
 async function post(params){
   const url = $('scriptUrl').value.trim();
@@ -78,34 +81,50 @@ async function post(params){
   return res.json();
 }
 
-function fmt(ms){ return ms ? new Date(Number(ms)).toLocaleString() : '-'; }
-
 function renderRows(rows){
-  const tbody = document.querySelector('#tbl tbody');
-  const currentIds = new Set(rows.map(r=>r.id));
-  tbody.innerHTML = '';
+  const tb = document.querySelector('#tbl tbody');
+  tb.innerHTML = '';
   rows.forEach(r=>{
+    const end = r.closedAt ? r.closedAt : (r.status==='gray' ? r.lastSeen : Date.now());
+    const ipCountry = `${r.ip||'-'}${(r.country||r.city)?' / ':''}${(r.country||'')}${r.city?(' - '+r.city):''}`;
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><code>${r.id}</code></td>
-      <td>${r.ip||'-'}</td>
+      <td>
+        <button data-id="${r.id}" class="revoke">إلغاء</button>
+        <button data-id="${r.id}" class="delete">حذف</button>
+      </td>
+      <td class="${r.status}">${r.status}</td>
+      <td title="ID: ${r.id}">${ipCountry}</td>
       <td style="max-width:420px;word-break:break-word">${r.ua||'-'}</td>
+      <td>${fmt(r.createdAt)}</td>
+      <td>${fmt(r.closedAt || (r.status==='gray'? r.lastSeen : 0))}</td>
+      <td>${fmtDur(r.durationMs)}</td>
       <td>${fmt(r.lastSeen)}</td>
       <td>${fmt(r.lastActive)}</td>
-      <td class="${r.status}">${r.status}</td>
-      <td><button data-id="${r.id}" class="revoke">إلغاء</button></td>
     `;
-    tbody.appendChild(tr);
+    tb.appendChild(tr);
   });
-  // ربط أزرار الإلغاء
+
+  // تحكم
   document.querySelectorAll('.revoke').forEach(b=>{
     b.onclick = async ()=>{
       const adminKey = $('adminKey').value.trim();
       const id = b.getAttribute('data-id');
-      if(!adminKey) return alert('اكتب الـ Admin Key أولاً');
+      if(!adminKey) return alert('اكتب الـ Admin Key');
       if(!confirm('إلغاء الجلسة '+id+' ؟')) return;
-      const r = await post({ action:'revoke', adminKey, id });
-      if(!r.ok){ alert(r.msg||'خطأ'); return; }
+      const r = await post({action:'revoke', adminKey, id});
+      if(!r.ok) return alert(r.msg||'خطأ');
+      await listSessions();
+    };
+  });
+  document.querySelectorAll('.delete').forEach(b=>{
+    b.onclick = async ()=>{
+      const adminKey = $('adminKey').value.trim();
+      const id = b.getAttribute('data-id');
+      if(!adminKey) return alert('اكتب الـ Admin Key');
+      if(!confirm('حذف الجلسة نهائيًا '+id+' ؟')) return;
+      const r = await post({action:'delete', adminKey, id});
+      if(!r.ok) return alert(r.msg||'خطأ');
       await listSessions();
     };
   });
@@ -120,41 +139,18 @@ async function listSessions(){
   $('status').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString();
 }
 
-$('btnList').onclick = listSessions;
+function startLive(){
+  if (LIVE_TIMER) clearInterval(LIVE_TIMER);
+  const tick = async ()=>{ try{ await listSessions(); } catch(e){ $('status').textContent='— خطأ مؤقت'; } };
+  tick();
+  const ms = Number($('intervalSel').value||1000);
+  LIVE_TIMER = setInterval(tick, ms);
+}
 
-$('btnRotate').onclick = async ()=>{
-  const adminKey = $('adminKey').value.trim();
-  if(!adminKey) return alert('اكتب الـ Admin Key');
-  if(!confirm('تسجيل خروج جميع الجلسات؟')) return;
-  const r = await post({ action:'rotate', adminKey });
-  if(!r.ok){ alert(r.msg||'خطأ'); return; }
-  await listSessions();
-};
-
-// تشغيل/إيقاف اللايف
-$('btnLive').onclick = ()=>{
-  if(LIVE_TIMER){
-    clearInterval(LIVE_TIMER);
-    LIVE_TIMER = null;
-    $('btnLive').textContent = 'تشغيل اللايف';
-    $('status').textContent = '— غير نشط';
-  }else{
-    const tick = async ()=>{ try{ await listSessions(); } catch(e){ $('status').textContent='— خطأ مؤقت'; } };
-    tick(); // أول تحديث فوري
-    const ms = Number($('intervalSel').value||1000); // افتراضي 1 ثانية
-    LIVE_TIMER = setInterval(tick, ms);
-    $('btnLive').textContent = 'إيقاف اللايف';
-  }
-};
-
-// تشغيل اللايف تلقائيًا عند فتح الصفحة
 document.addEventListener('DOMContentLoaded', ()=>{
-  if(!$('adminKey').value.trim()){
-    $('status').textContent='— اكتب الـ Admin Key ثم اضغط تشغيل اللايف';
-  }else{
-    $('btnLive').click(); // تشغيل تلقائي
-  }
+  startLive(); // تشغيل اللايف تلقائيًا
 });
+$('intervalSel').addEventListener('change', startLive);
 </script>
 
 </body>
