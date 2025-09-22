@@ -25,7 +25,7 @@
 <div class="row" style="margin-bottom:6px">
   <label>رابط السكربت:
     <input id="scriptUrl" style="width:52rem"
-      value="https://script.google.com/macros/s/AKfycby09sNFy_vMxIuCViDHcUfdSZWslKPDB4LAhS3D7Eca-UeLKQQVDKle_s6Da5za1wGt/exec">
+      value="https://script.google.com/macros/s/AKfycbwvFxhma8qQhJdMhXKGbRv3zP8D6w8LwH-rE_0vz8_mbip5R7ngnk9J9ihXpCpzOdKP/exec">
   </label>
 </div>
 
@@ -84,10 +84,9 @@ async function post(params){
 function renderRows(rows){
   const tb = document.querySelector('#tbl tbody');
   tb.innerHTML = '';
-  const now = Date.now();
   rows.forEach(r=>{
-    const end = r.closedAt ? r.closedAt : (r.status==='gray' ? r.lastSeen : now);
     const ipCountry = `${r.ip||'-'}${(r.country||r.city)?' / ':''}${(r.country||'')}${r.city?(' - '+r.city):''}`;
+    const toDisplay = r.closedAt ? r.closedAt : (r.status==='gray' ? r.lastSeen : 0);
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>
@@ -98,7 +97,7 @@ function renderRows(rows){
       <td title="ID: ${r.id}">${ipCountry}</td>
       <td style="max-width:420px;word-break:break-word">${r.ua||'-'}</td>
       <td>${fmt(r.createdAt)}</td>
-      <td>${fmt(r.closedAt || (r.status==='gray'? r.lastSeen : 0))}</td>
+      <td>${fmt(toDisplay)}</td>
       <td>${fmtDur(r.durationMs)}</td>
       <td>${fmt(r.lastSeen)}</td>
       <td>${fmt(r.lastActive)}</td>
@@ -118,6 +117,7 @@ function renderRows(rows){
       await listSessions();
     };
   });
+
   // تحكم: حذف
   document.querySelectorAll('.delete').forEach(b=>{
     b.onclick = async ()=>{
