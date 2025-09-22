@@ -2865,7 +2865,7 @@ function wireCheckboxSender(){
       try {
         const r = await post({ action:'tick', key, value: cb.checked ? 1 : 0 });
         if (r && r.ok) {
-          // بعد ما السيرفر يستقبل التغيير → اسحب آخر الحالات فورًا
+          // بعد أي تغيير ناجح → اسحب آخر الحالات فورًا
           await pullStates();
         }
       } catch(e){
@@ -2874,6 +2874,7 @@ function wireCheckboxSender(){
     });
   });
 }
+
 
 
 // 2) استقبال التغييرات من السيرفر وتطبيقها محليًا
@@ -2904,7 +2905,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
   initSession();
   wireCheckboxSender();   // إرسال تغييراتك للسيرفر
   pullStates();           // سحب أولي
-  setInterval(()=>{ if(document.visibilityState==='visible') pullStates(); }, 1000); // تحديث كل ثانية
+  // تحديث أسرع (كل 200ms ≈ خمس مرات في الثانية)
+setInterval(()=>{ if(document.visibilityState==='visible') pullStates(); }, 200);
   setInterval(checkAllow, 2000); // السماح + (اختياري) لون الحالة
 });
 </script>
