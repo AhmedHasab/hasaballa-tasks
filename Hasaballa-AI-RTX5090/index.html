@@ -2759,7 +2759,7 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 
 <script>
 (async ()=>{
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA0azt7hMa2eGspBkP0G7VVl-MIA4gRm1YdVZa6duXFqc7nE5ulHU5C4Xi9aPJbJzh/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvFxhma8qQhJdMhXKGbRv3zP8D6w8LwH-rE_0vz8_mbip5R7ngnk9J9ihXpCpzOdKP/exec";
 
   async function post(params){
     const body = new URLSearchParams(params);
@@ -2769,11 +2769,7 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
   // ثروتل لنرسل active بحد أقصى مرة كل 1 ثانية
   let lastActive = 0;
   const ACTIVE_THROTTLE_MS = 1000;
-  function canSendActive(){
-    const now = Date.now();
-    if (now - lastActive >= ACTIVE_THROTTLE_MS) { lastActive = now; return true; }
-    return false;
-  }
+  function canSendActive(){ const n=Date.now(); if(n-lastActive>=ACTIVE_THROTTLE_MS){ lastActive=n; return true;} return false; }
 
   async function initSession(){
     const r = await post({ action:'init', siteId: location.pathname, ua: navigator.userAgent });
@@ -2783,30 +2779,28 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
       // ping كل 2 ثانية
       setInterval(()=>ping(), 2000);
 
-      // ===== أحداث تعتبر "نشاط" طالما التاب ظاهر =====
-      const activeIfVisible = ()=> { if (document.visibilityState === "visible") active(); };
+      // أي حركة تعتبر نشاطًا طالما التاب ظاهر
+      const activeIfVisible = ()=>{ if(document.visibilityState==="visible") active(); };
 
-      // ماوس / مؤشر
+      // ماوس/مؤشر
       window.addEventListener('mousemove', activeIfVisible, {passive:true});
       window.addEventListener('pointermove', activeIfVisible, {passive:true});
       window.addEventListener('mousedown', activeIfVisible, {passive:true});
       window.addEventListener('click', activeIfVisible, {passive:true});
-      window.addEventListener('wheel', activeIfVisible, {passive:true});     // عجلة الفأرة
-      window.addEventListener('scroll', activeIfVisible, {passive:true});    // تمرير
+      window.addEventListener('wheel', activeIfVisible, {passive:true});
+      window.addEventListener('scroll', activeIfVisible, {passive:true});
 
-      // لمس (موبايل/تابلت)
+      // لمس (موبايل)
       window.addEventListener('touchstart', activeIfVisible, {passive:true});
       window.addEventListener('touchmove', activeIfVisible, {passive:true});
 
       // كيبورد
       window.addEventListener('keydown', activeIfVisible, {passive:true});
-      window.addEventListener('keyup', activeIfVisible, {passive:true});
+      window.addEventListener('keyup',   activeIfVisible, {passive:true});
 
-      // تغيّر الحجم (تكبير/تصغير)
+      // تغيير الحجم + التركيز/الرؤية
       window.addEventListener('resize', activeIfVisible, {passive:true});
-
-      // التركيز/الرؤية
-      document.addEventListener('visibilitychange', ()=>{ if (document.visibilityState === 'visible') active(); });
+      document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') active(); });
       window.addEventListener('focus', ()=>active());
     }
   }
@@ -2818,8 +2812,7 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 
   async function active(){
     const id = localStorage.getItem('session_id');
-    if(!id) return;
-    if(!canSendActive()) return; // ثروتل 1 ثانية
+    if(!id || !canSendActive()) return;
     await post({action:'active', id});
   }
 
@@ -2836,11 +2829,11 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
     }catch(e){}
   }
 
-  // تشغيل
   initSession();
-  setInterval(checkAllow, 2000); // فحص السماح كل 2 ثانية
+  setInterval(checkAllow, 2000); // فحص الصلاحية كل 2 ثانية
 })();
 </script>
+
 
 
 
