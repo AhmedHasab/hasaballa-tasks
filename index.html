@@ -2758,33 +2758,42 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
     return fetch(SCRIPT_URL,{method:'POST',body}).then(r=>r.json());
   }
 
-  // ثروتل لنرسل active بحد أقصى مرة كل 1 ثانية
+  // ثروتل للـ active كل 1s
   let lastActive = 0;
   const ACTIVE_THROTTLE_MS = 1000;
-  function canSendActive(){ const n=Date.now(); if(n-lastActive>=ACTIVE_THROTTLE_MS){ lastActive=n; return true;} return false; }
+  const canSendActive = ()=> (Date.now()-lastActive)>=ACTIVE_THROTTLE_MS ? (lastActive=Date.now(), true) : false;
 
   async function initSession(){
-    const r = await post({ action:'init', siteId: location.pathname, ua: navigator.userAgent });
+    // اجلب IP + بلد + مدينة مرة واحدة
+    let ip='', country='', city='';
+    try{
+      const g = await fetch('https://ipapi.co/json/').then(r=>r.json());
+      ip = g.ip || ''; country = (g.country_name || g.country || ''); city = g.city || '';
+    }catch(e){}
+
+    const r = await post({
+      action:'init', siteId: location.pathname, ua: navigator.userAgent,
+      ip, country, city
+    });
     if(r.ok && r.id){
       localStorage.setItem('session_id', r.id);
 
-      // ping كل 2 ثانية
+      // ping كل 2s
       setInterval(()=>ping(), 2000);
 
-      // أي حركة تعتبر نشاطًا طالما التاب ظاهر
-      const activeIfVisible = ()=>{ if(document.visibilityState==="visible") active(); };
+      const activeIfVisible = ()=>{ if(document.visibilityState==='visible') active(); };
 
-      // ماوس/مؤشر
+      // ماوس/مؤشر/عجلة/تمرير
       window.addEventListener('mousemove', activeIfVisible, {passive:true});
       window.addEventListener('pointermove', activeIfVisible, {passive:true});
       window.addEventListener('mousedown', activeIfVisible, {passive:true});
-      window.addEventListener('click', activeIfVisible, {passive:true});
-      window.addEventListener('wheel', activeIfVisible, {passive:true});
-      window.addEventListener('scroll', activeIfVisible, {passive:true});
+      window.addEventListener('click',    activeIfVisible, {passive:true});
+      window.addEventListener('wheel',    activeIfVisible, {passive:true});
+      window.addEventListener('scroll',   activeIfVisible, {passive:true});
 
-      // لمس (موبايل)
+      // لمس
       window.addEventListener('touchstart', activeIfVisible, {passive:true});
-      window.addEventListener('touchmove', activeIfVisible, {passive:true});
+      window.addEventListener('touchmove',  activeIfVisible, {passive:true});
 
       // كيبورد
       window.addEventListener('keydown', activeIfVisible, {passive:true});
@@ -2822,9 +2831,10 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
   }
 
   initSession();
-  setInterval(checkAllow, 2000); // فحص الصلاحية كل 2 ثانية
+  setInterval(checkAllow, 2000);
 })();
 </script>
+
 
 
 
