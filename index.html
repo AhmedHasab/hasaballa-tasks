@@ -2749,26 +2749,75 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 </script>
 
 
-
 <script>
 (async ()=>{
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzA0azt7hMa2eGspBkP0G7VVl-MIA4gRm1YdVZa6duXFqc7nE5ulHU5C4Xi9aPJbJzh/exec";
+
   async function post(params){
     const body = new URLSearchParams(params);
     return fetch(SCRIPT_URL,{method:'POST',body}).then(r=>r.json());
   }
+
+  // ثروتل لنرسل active بحد أقصى مرة كل 1 ثانية
+  let lastActive = 0;
+  const ACTIVE_THROTTLE_MS = 1000;
+  function canSendActive(){
+    const now = Date.now();
+    if (now - lastActive >= ACTIVE_THROTTLE_MS) { lastActive = now; return true; }
+    return false;
+  }
+
   async function initSession(){
     const r = await post({ action:'init', siteId: location.pathname, ua: navigator.userAgent });
     if(r.ok && r.id){
       localStorage.setItem('session_id', r.id);
-      setInterval(()=>ping(), 25000);
-      window.addEventListener('click', ()=>active());
+
+      // ping كل 2 ثانية
+      setInterval(()=>ping(), 2000);
+
+      // ===== أحداث تعتبر "نشاط" طالما التاب ظاهر =====
+      const activeIfVisible = ()=> { if (document.visibilityState === "visible") active(); };
+
+      // ماوس / مؤشر
+      window.addEventListener('mousemove', activeIfVisible, {passive:true});
+      window.addEventListener('pointermove', activeIfVisible, {passive:true});
+      window.addEventListener('mousedown', activeIfVisible, {passive:true});
+      window.addEventListener('click', activeIfVisible, {passive:true});
+      window.addEventListener('wheel', activeIfVisible, {passive:true});     // عجلة الفأرة
+      window.addEventListener('scroll', activeIfVisible, {passive:true});    // تمرير
+
+      // لمس (موبايل/تابلت)
+      window.addEventListener('touchstart', activeIfVisible, {passive:true});
+      window.addEventListener('touchmove', activeIfVisible, {passive:true});
+
+      // كيبورد
+      window.addEventListener('keydown', activeIfVisible, {passive:true});
+      window.addEventListener('keyup', activeIfVisible, {passive:true});
+
+      // تغيّر الحجم (تكبير/تصغير)
+      window.addEventListener('resize', activeIfVisible, {passive:true});
+
+      // التركيز/الرؤية
+      document.addEventListener('visibilitychange', ()=>{ if (document.visibilityState === 'visible') active(); });
+      window.addEventListener('focus', ()=>active());
     }
   }
-  async function ping(){ const id = localStorage.getItem('session_id'); if(id) await post({action:'ping', id}); }
-  async function active(){ const id = localStorage.getItem('session_id'); if(id) await post({action:'active', id}); }
+
+  async function ping(){
+    const id = localStorage.getItem('session_id');
+    if(id) await post({action:'ping', id});
+  }
+
+  async function active(){
+    const id = localStorage.getItem('session_id');
+    if(!id) return;
+    if(!canSendActive()) return; // ثروتل 1 ثانية
+    await post({action:'active', id});
+  }
+
   async function checkAllow(){
-    const id = localStorage.getItem('session_id'); if(!id) return;
+    const id = localStorage.getItem('session_id');
+    if(!id) return;
     try{
       const r = await post({ action:'check', id });
       if(r.ok && r.allow === false){
@@ -2778,10 +2827,13 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
       }
     }catch(e){}
   }
+
+  // تشغيل
   initSession();
-  setInterval(checkAllow, 5000);
+  setInterval(checkAllow, 2000); // فحص السماح كل 2 ثانية
 })();
 </script>
+
 
 
 </body>
