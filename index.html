@@ -2751,7 +2751,7 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 
 <script>
 (async ()=>{
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzCYRsrTOcenUsYHibIc233P-jMe-JzZRUCPFVgKYEzTgJJU1w37evD3eAXoGOOaQ7-/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9vbw7yRA5lK9gFguHDjgDvKr3OKRwpi4_p8CUYYaNlNzcB-QFacuPlYUk2RW685VF/exec";
 
   async function post(params){
     const body = new URLSearchParams(params);
@@ -2778,31 +2778,30 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
     if(r.ok && r.id){
       localStorage.setItem('session_id', r.id);
 
-      // ping كل 2s
-      setInterval(()=>ping(), 2000);
+      // ping كل 2s *فقط لو الصفحة مرئية*
+      setInterval(()=>{ 
+        if(document.visibilityState==='visible' && document.hasFocus()) ping(); 
+      }, 2000);
 
-      const activeIfVisible = ()=>{ if(document.visibilityState==='visible') active(); };
+      const activeIfVisible = ()=>{ 
+        if(document.visibilityState==='visible' && document.hasFocus()) active(); 
+      };
 
-      // ماوس/مؤشر/عجلة/تمرير
-      window.addEventListener('mousemove', activeIfVisible, {passive:true});
-      window.addEventListener('pointermove', activeIfVisible, {passive:true});
-      window.addEventListener('mousedown', activeIfVisible, {passive:true});
-      window.addEventListener('click',    activeIfVisible, {passive:true});
-      window.addEventListener('wheel',    activeIfVisible, {passive:true});
-      window.addEventListener('scroll',   activeIfVisible, {passive:true});
+      // أحداث النشاط
+      ['mousemove','pointermove','mousedown','click','wheel','scroll',
+       'touchstart','touchmove','keydown','keyup','resize'].forEach(evt=>{
+        window.addEventListener(evt, activeIfVisible, {passive:true});
+      });
 
-      // لمس
-      window.addEventListener('touchstart', activeIfVisible, {passive:true});
-      window.addEventListener('touchmove',  activeIfVisible, {passive:true});
-
-      // كيبورد
-      window.addEventListener('keydown', activeIfVisible, {passive:true});
-      window.addEventListener('keyup',   activeIfVisible, {passive:true});
-
-      // تغيير الحجم + التركيز/الرؤية
-      window.addEventListener('resize', activeIfVisible, {passive:true});
-      document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible') active(); });
-      window.addEventListener('focus', ()=>active());
+      // تغيير الرؤية/التركيز
+      document.addEventListener('visibilitychange', ()=>{
+        if(document.visibilityState==='hidden'){
+          // لو الصفحة راحت في الخلفية → ابعت Ping أخير فقط
+          ping();
+        }
+      });
+      window.addEventListener('blur', ()=>{ ping(); });
+      window.addEventListener('focus', ()=>{ active(); });
     }
   }
 
@@ -2834,6 +2833,7 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
   setInterval(checkAllow, 2000);
 })();
 </script>
+
 
 
 
