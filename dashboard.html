@@ -27,13 +27,13 @@
 <div class="row" style="margin-bottom:6px">
   <label>رابط السكربت:
     <input id="scriptUrl" style="width:52rem"
-      value="https://script.google.com/macros/s/AKfycbxJZxut0NSY3hOJmpQVdxM5VLfhHLOLEprx4ffHlujm6F1YldFppAZGo3QL5KUhrwZi/exec">
+      value="https://script.google.com/macros/s/AKfycbzA0azt7hMa2eGspBkP0G7VVl-MIA4gRm1YdVZa6duXFqc7nE5ulHU5C4Xi9aPJbJzh/exec">
   </label>
 </div>
 
 <div class="row" style="margin-bottom:6px">
   <label>Admin Key:
-    <input id="adminKey" style="width:30rem">
+    <input id="adminKey" style="width:30rem" value="HasaballaAdmin!2025">
   </label>
   <button id="btnList">عرض الجلسات</button>
   <button id="btnRotate">تسجيل خروج الكل</button>
@@ -66,24 +66,19 @@
 
 <script>
 let LIVE_TIMER = null;
-let LAST_IDS = new Set(); // لمقارنة الجديد/المحذوف
-
+let LAST_IDS = new Set();
 function $(id){ return document.getElementById(id); }
-
 async function post(params){
   const url = $('scriptUrl').value.trim();
   const body = new URLSearchParams(params);
   const res = await fetch(url, {method:'POST', body});
   return res.json();
 }
-
 function fmt(ms){ return ms ? new Date(Number(ms)).toLocaleString() : '-'; }
-
 function renderRows(rows){
   const tbody = document.querySelector('#tbl tbody');
   const currentIds = new Set(rows.map(r=>r.id));
   tbody.innerHTML = '';
-
   rows.forEach(r=>{
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -97,15 +92,10 @@ function renderRows(rows){
         <button data-id="${r.id}" class="revoke">إلغاء</button>
       </td>
     `;
-    // لو ده ID جديد مش كان موجود في LAST_IDS نعمل وميض بسيط
     if(!LAST_IDS.has(r.id)) tr.classList.add('fade-in');
     tbody.appendChild(tr);
   });
-
-  // حدّث الذاكرة
   LAST_IDS = currentIds;
-
-  // اربط أزرار الإلغاء
   document.querySelectorAll('.revoke').forEach(b=>{
     b.onclick = async ()=>{
       const adminKey = $('adminKey').value.trim();
@@ -114,11 +104,10 @@ function renderRows(rows){
       if(!confirm('إلغاء الجلسة '+id+' ؟')) return;
       const r = await post({ action:'revoke', adminKey, id });
       if(!r.ok){ alert(r.msg||'خطأ'); return; }
-      await listSessions(); // تحدّث فورًا
+      await listSessions();
     };
   });
 }
-
 async function listSessions(){
   const adminKey = $('adminKey').value.trim();
   if(!adminKey){ alert('اكتب الـ Admin Key'); return; }
@@ -127,9 +116,7 @@ async function listSessions(){
   renderRows(r.rows||[]);
   $('status').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString();
 }
-
 $('btnList').onclick = listSessions;
-
 $('btnRotate').onclick = async ()=>{
   const adminKey = $('adminKey').value.trim();
   if(!adminKey) return alert('اكتب الـ Admin Key');
@@ -138,8 +125,6 @@ $('btnRotate').onclick = async ()=>{
   if(!r.ok){ alert(r.msg||'خطأ'); return; }
   await listSessions();
 };
-
-// تشغيل/إيقاف اللايف
 $('btnLive').onclick = ()=>{
   if(LIVE_TIMER){
     clearInterval(LIVE_TIMER);
@@ -148,11 +133,8 @@ $('btnLive').onclick = ()=>{
     $('status').textContent = '— غير نشط';
   }else{
     const ms = Number($('intervalSel').value||3000);
-    const tick = async ()=>{
-      try{ await listSessions(); }
-      catch(e){ $('status').textContent = '— خطأ مؤقت، سيُعاد المحاولة'; }
-    };
-    tick(); // أول تحديث فوري
+    const tick = async ()=>{ try{ await listSessions(); } catch(e){ $('status').textContent = '— خطأ مؤقت'; } };
+    tick();
     LIVE_TIMER = setInterval(tick, ms);
     $('btnLive').textContent = 'إيقاف اللايف';
   }
