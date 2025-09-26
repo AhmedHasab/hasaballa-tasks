@@ -2752,59 +2752,90 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 <script>
 /** ==================== الإعدادات ==================== */
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKcb_D2cfLucuutmvjFO788J3ofh0gHSDJC-rEeIw3OJpS9Orluf5LI7ghiDj5gTXC/exec"; // GAS Web App (/exec)
-const SID_KEY    = "session_id";               // مفتاح تخزين الـ Session
-const SITE_ID    = "prod/";                    // ثبّت SiteId ليتطابق مع الداشبورد
-const IDLE_AFTER_MS = 60000;                   // عتبة السكون: 60 ثانية (مُستحسن)
+const SID_KEY    = "session_id";       // مفتاح تخزين الـ Session
+const SITE_ID    = "prod/";            // ثابت ليتطابق مع الداشبورد
+const IDLE_AFTER_MS = 60000;           // عتبة السكون: 60 ثانية
 
 /** (اختياري) أزمنة تلوين الحالة لو السيرفر بيرجع status */
-const ACTIVE_MS = 20 * 1000; // أخضر لو آخر تفاعل ≤ 20s
-const OPEN_MS   = 30 * 1000; // أصفر لو آخر مشاهدة ≤ 30s
+const ACTIVE_MS = 20 * 1000;
+const OPEN_MS   = 30 * 1000;
 
-/** ==================== مساعدات طلبات ==================== */
-async function post(params){
-  const body = new URLSearchParams(params);
-  const r = await fetch(SCRIPT_URL,{method:'POST', body});
-  return r.json();
-}
+/** ==================== Helpers ==================== */
 function getSid(){ return localStorage.getItem(SID_KEY) || ""; }
 function setSid(id){ localStorage.setItem(SID_KEY, id); }
+function clearSid(){ localStorage.removeItem(SID_KEY); }
 
-/** ==================== لوج النشاط (جديد) ==================== */
-let idleState = false, idleTimer = null, lastActTs = 0;
+/** شبكة مع كشف أخطاء */
+async function postRaw(params){
+  const res = await fetch(SCRIPT_URL, { method:'POST', body:new URLSearchParams(params) });
+  const ct  = (res.headers.get('content-type')||'').toLowerCase();
+  if (!res.ok) {
+    const txt = await res.text().catch(()=> '');
+    console.error('HTTP_FAIL', res.status, txt.slice(0,200));
+    throw new Error('HTTP_'+res.status);
+  }
+  if (!ct.includes('application/json')) {
+    const txt = await res.text().catch(()=> '');
+    console.error('NON_JSON', txt.slice(0,300));
+    throw new Error('NON_JSON');
+  }
+  return res.json();
+}
 
-async function ensureSid(){
+/** إعادة محاولة تلقائية لو الـ SID بايظ */
+async function post(params){
+  try{
+    const r = await postRaw(params);
+    if (r && r.error === 'not_found') throw Object.assign(new Error('SID_NOT_FOUND'), {code:'SID_NOT_FOUND'});
+    return r;
+  }catch(e){
+    if (e && e.code === 'SID_NOT_FOUND') {
+      // امسح الـ SID وحاول تهيّئ من جديد ثم أعد المحاولة مرة واحدة
+      clearSid();
+      await ensureSid(true);
+      return postRaw(params);
+    }
+    throw e;
+  }
+}
+
+/** ==================== تهيئة Session مع تحقق من الصحة ==================== */
+async function ensureSid(forceReinit=false){
   let id = getSid();
-  if (id) return id;
 
-  // (اختياري) جلب IP/الموقع مرة واحدة
+  // لو عندنا SID قديم، نتحقق إنه صالح
+  if (id && !forceReinit){
+    try{
+      const chk = await postRaw({ action:'check', id });
+      if (chk && chk.ok && chk.allow !== false) return id; // صالح
+      // مرفوض/محذوف → نرميه وننشئ جديد
+      clearSid();
+    }catch(_){
+      // لو الرد 'not_found' أو فشل JSON… هنرميه ونرجّع ننشئ جديد
+      clearSid();
+    }
+  }
+
+  // أنشئ جلسة جديدة
   let ip='', country='', city='';
-  try {
+  try{
     const g = await fetch('https://ipapi.co/json/').then(r=>r.json());
-    ip = g.ip || ''; country = (g.country_name || g.country || ''); city = g.city || '';
-  } catch(e){}
-
+    ip = g.ip || ''; country = g.country_name || g.country || ''; city = g.city || '';
+  }catch(_){}
   const ua = navigator.userAgent || '';
-  const res = await post({ action:'init', ua, ip, country, city, siteId: SITE_ID });
-  if (res.ok && res.id){ setSid(res.id); return res.id; }
+
+  const res = await postRaw({ action:'init', ua, ip, country, city, siteId: SITE_ID });
+  if (res && res.ok && res.id){
+    setSid(res.id);
+    console.log('INIT_OK', res.id);
+    return res.id;
+  }
+  console.error('INIT_BAD', res);
   throw new Error('init_failed');
 }
 
-async function sendLog(evt, meta, extra){
-  const id = await ensureSid();
-  const p = new URLSearchParams({
-    action: 'log',
-    id,
-    evt,
-    meta: meta || '',
-    visible: (document.visibilityState === 'visible') ? '1' : '0',
-    focused: (document.hasFocus() ? '1' : '0'),
-    idle: idleState ? '1' : '0'
-  });
-  if (extra) Object.entries(extra).forEach(([k,v]) => p.append(k, String(v)));
-  fetch(SCRIPT_URL, { method:'POST', body:p }); // fire-and-forget
-}
-
-/** ==================== جلسة + Ping/Active ==================== */
+/** ==================== لوج ونبض الجلسة ==================== */
+let idleState = false, idleTimer = null, lastActTs = 0;
 let lastActiveSend = 0;
 const ACTIVE_THROTTLE_MS = 1000;
 function canSendActive(){ const n=Date.now(); if (n-lastActiveSend>=ACTIVE_THROTTLE_MS){ lastActiveSend=n; return true; } return false; }
@@ -2812,21 +2843,28 @@ function canSendActive(){ const n=Date.now(); if (n-lastActiveSend>=ACTIVE_THROT
 async function ping(){
   const id = getSid();
   if(!id) return;
-  post({ action:'ping', id });
+  try{ await post({ action:'ping', id }); }catch(e){ console.warn('ping fail', e.message); }
 }
 async function active(){
   const id = getSid();
   if(!id || !canSendActive()) return;
-  post({ action:'active', id });
+  try{ await post({ action:'active', id }); }catch(e){ console.warn('active fail', e.message); }
+}
+
+async function sendLog(evt, meta, extra){
+  const id = getSid() || await ensureSid();
+  const p = { action:'log', id, evt, meta: meta || '',
+              visible: document.visibilityState === 'visible' ? '1':'0',
+              focused: document.hasFocus() ? '1':'0',
+              idle: idleState ? '1':'0' };
+  if (extra) Object.entries(extra).forEach(([k,v])=> p[k]=String(v));
+  try{ await post(p); }catch(e){ console.warn('log fail', evt, e.message); }
 }
 
 /** ==================== كشف النشاط/السكون ==================== */
 function markActivity(kind){
   const n = Date.now();
-  if (n - lastActTs > 1000){ // ثروتل 1s للّوج
-    sendLog('activity', kind);
-    lastActTs = n;
-  }
+  if (n - lastActTs > 1000){ sendLog('activity', kind); lastActTs = n; }
   if (idleState){ idleState=false; sendLog('idle_end'); }
   resetIdleTimer();
   active();
@@ -2837,103 +2875,48 @@ function resetIdleTimer(){
 }
 
 /** ==================== رؤية الصفحة والتركيز ==================== */
-document.addEventListener('visibilitychange', ()=> {
-  sendLog(document.visibilityState === 'visible' ? 'visible' : 'hidden');
-  // لما يختفي/يرجع بنعمل ping سريع
-  ping();
-});
-window.addEventListener('focus',  ()=> { sendLog('focus');  active(); });
-window.addEventListener('blur',   ()=> { sendLog('blur');   ping();   });
+document.addEventListener('visibilitychange', ()=>{ sendLog(document.visibilityState==='visible'?'visible':'hidden'); ping(); });
+window.addEventListener('focus',  ()=>{ sendLog('focus'); active(); });
+window.addEventListener('blur',   ()=>{ sendLog('blur');  ping();   });
 
-/** أحداث واجهة المستخدم */
-['mousemove','pointermove','mousedown','click','wheel','scroll',
- 'touchstart','touchmove','keydown','keyup','resize']
-.forEach(evt => window.addEventListener(evt, ()=>markActivity(evt), {passive:true}));
+['mousemove','pointermove','mousedown','click','wheel','scroll','touchstart','touchmove','keydown','keyup','resize']
+  .forEach(evt => window.addEventListener(evt, ()=>markActivity(evt), {passive:true}));
 
-/** Ping دوري يبقي الجلسة حية — حتى في الخلفية */
-setInterval(()=> { ping(); }, 5000);
+/** Ping دوري حتى في الخلفية */
+setInterval(()=>{ ping(); }, 5000);
 
-/** ==================== لون الحالة من السيرفر (اختياري) ==================== */
-function applyStatus(status) {
-  const dot  = document.getElementById('statusDot');
-  const text = document.getElementById('statusText');
-  if (dot) {
-    dot.classList.remove('green','yellow','gray');
-    dot.classList.add(status || 'gray');
-  }
-  if (text) {
-    text.textContent = status==='green' ? 'نشط الآن'
-                 : status==='yellow'? 'مفتوح بدون تفاعل'
-                 : 'غير متصل/في الخلفية';
-  }
+/** اختيارى: لون الحالة */
+function applyStatus(status){
+  const dot=document.getElementById('statusDot'), text=document.getElementById('statusText');
+  if (dot){ dot.classList.remove('green','yellow','gray'); dot.classList.add(status||'gray'); }
+  if (text){ text.textContent = status==='green'?'نشط الآن': status==='yellow'?'مفتوح بدون تفاعل':'غير متصل/في الخلفية'; }
 }
 async function checkAllow(){
-  const id = getSid();
-  if(!id) return;
+  const id = getSid(); if(!id) return;
   try{
     const r = await post({ action:'check', id });
-    if(r && r.ok){
-      if (r.allow === false){
-        localStorage.removeItem(SID_KEY);
-        localStorage.removeItem('hasaballa_gate_until');
-        location.reload();
-        return;
-      }
+    if (r && r.ok){
+      if (r.allow === false){ clearSid(); location.reload(); return; }
       if (r.status) applyStatus(r.status);
     }
-  }catch(e){}
-}
-
-/** ==================== مزامنة الشيك بوكس كما هي (اختياري) ==================== */
-function keyOfCheckbox(cb){
-  return cb.name || cb.id || cb.getAttribute('data-key') || '';
-}
-function wireCheckboxSender(){
-  document.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
-    cb.addEventListener('change', async ()=>{
-      const key = keyOfCheckbox(cb);
-      if (!key) return;
-      try {
-        const r = await post({ action:'tick', key, value: cb.checked ? 1 : 0 });
-        if (r && r.ok) await pullStates();
-      } catch(e){}
-    });
-  });
-}
-let lastRev = Number(localStorage.getItem('cb_rev') || '0');
-async function pullStates(){
-  try{
-    const r = await post({ action:'state', since: String(lastRev) });
-    if(r && r.ok){
-      if (Array.isArray(r.items)){
-        r.items.forEach(({key, value})=>{
-          const el = document.querySelector(`input[type="checkbox"][name="${key}"]`)
-                 || document.getElementById(key)
-                 || document.querySelector(`input[type="checkbox"][data-key="${key}"]`);
-          if (el) el.checked = !!Number(value);
-        });
-      }
-      if (typeof r.rev !== 'undefined'){
-        lastRev = Number(r.rev) || lastRev;
-        localStorage.setItem('cb_rev', String(lastRev));
-      }
-    }
-  }catch(e){}
+  }catch(_){}
 }
 
 /** ==================== تشغيل ==================== */
 window.addEventListener('DOMContentLoaded', async ()=>{
   try {
-    await ensureSid();                 // يهيّئ الجلسة
-    sendLog('page_open');              // يسجل فتح الصفحة
-    resetIdleTimer();                  // يبدأ مؤقت السكون
-  } catch(e){}
-  wireCheckboxSender();
-  pullStates();                        // سحب أولي لحالات الشيك بوكس
-  setInterval(()=>{ if(document.visibilityState==='visible') pullStates(); }, 200); // تحديث سريع
-  setInterval(checkAllow, 2000);       // السماح + لون الحالة (اختياري)
+    await ensureSid();         // يضمن وجود جلسة صالحة (ويعيد إنشائها لو كانت مفقودة)
+    sendLog('page_open');
+    resetIdleTimer();
+  } catch(e){
+    console.error('SESSION_INIT_ERROR', e);
+    alert('Tracking init failed — افتح Console للتفاصيل.');
+  }
+  setInterval(()=>{ if(document.visibilityState==='visible') try{post({action:'state',since:'0'})}catch(_){ } }, 200); // نفس سلوكك القديم (اختياري)
+  setInterval(checkAllow, 2000);
 });
 </script>
+
 
 
 
