@@ -2758,74 +2758,113 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 
 
 <script>
-/** ========= الإعدادات ========= */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQ70ry-gSzaCaG3w3dIvN4y8iLYdUjBeivzHAAPu_xpeBOxN2EVeVQH-Pgo5CzW1fO/exec";
+/** ==================== الإعدادات ==================== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwThEMFFwyN34Na-JukwuJ02nYcjTuib3Itl9O8gp0T9-oYBAb6g1D5K85y5lZ0E9sG/exec"; // رابط Web App (/exec) من GAS
+const SID_KEY    = "session_id";             // مفتاح تخزين الـ Session
+// عتبة السكون: كم ثانية بدون تفاعل نعتبرها Idle
+const IDLE_AFTER_MS = 20000;
 
-/** (اختياري) أزمنة ألوان الحالة — لو رجّعها السيرفر */
+/** (اختياري) أزمنة تلوين الحالة لو السيرفر بيرجع status */
 const ACTIVE_MS = 20 * 1000; // أخضر لو آخر تفاعل ≤ 20s
 const OPEN_MS   = 30 * 1000; // أصفر لو آخر مشاهدة ≤ 30s
 
-/** ========= مساعدات ========= */
+/** ==================== مساعدات طلبات ==================== */
 async function post(params){
   const body = new URLSearchParams(params);
-  const r = await fetch(SCRIPT_URL,{method:'POST',body});
+  const r = await fetch(SCRIPT_URL,{method:'POST', body});
   return r.json();
 }
+function getSid(){ return localStorage.getItem(SID_KEY) || ""; }
+function setSid(id){ localStorage.setItem(SID_KEY, id); }
 
-/** ========= جلسة التتبع (زي اللي عندك + بدون تغيير السلوك) ========= */
-let lastActive = 0;
-const ACTIVE_THROTTLE_MS = 1000;
-const canSendActive = ()=> (Date.now()-lastActive)>=ACTIVE_THROTTLE_MS ? (lastActive=Date.now(), true) : false;
+/** ==================== لوج النشاط (جديد) ==================== */
+let idleState = false, idleTimer = null, lastActTs = 0;
 
-async function initSession(){
-  // IP/البلد/المدينة مرة واحدة (اختياري)
+async function ensureSid(){
+  let id = getSid();
+  if (id) return id;
+
+  // (اختياري) جلب IP/الموقع مرة واحدة
   let ip='', country='', city='';
-  try{
+  try {
     const g = await fetch('https://ipapi.co/json/').then(r=>r.json());
     ip = g.ip || ''; country = (g.country_name || g.country || ''); city = g.city || '';
-  }catch(e){}
+  } catch(e){}
 
-  const r = await post({
-    action:'init', siteId: location.pathname, ua: navigator.userAgent,
-    ip, country, city
-  });
-  if(r.ok && r.id){
-    localStorage.setItem('session_id', r.id);
-
-    // ping كل 2s *لو الصفحة مرئية ومركّزة*
-    setInterval(()=>{ 
-      if(document.visibilityState==='visible' && document.hasFocus()) ping(); 
-    }, 2000);
-
-    const activeIfVisible = ()=>{ 
-      if(document.visibilityState==='visible' && document.hasFocus()) active(); 
-    };
-
-    ['mousemove','pointermove','mousedown','click','wheel','scroll',
-     'touchstart','touchmove','keydown','keyup','resize'].forEach(evt=>{
-      window.addEventListener(evt, activeIfVisible, {passive:true});
-    });
-
-    document.addEventListener('visibilitychange', ()=>{
-      if(document.visibilityState==='hidden'){ ping(); }
-    });
-    window.addEventListener('blur',  ()=>{ ping(); });
-    window.addEventListener('focus', ()=>{ active(); });
-  }
+  const ua = navigator.userAgent || '';
+  const res = await post({ action:'init', ua, ip, country, city, siteId: location.pathname });
+  if (res.ok && res.id){ setSid(res.id); return res.id; }
+  throw new Error('init_failed');
 }
+
+async function sendLog(evt, meta, extra){
+  const id = await ensureSid();
+  const p = new URLSearchParams({
+    action: 'log',
+    id,
+    evt,
+    meta: meta || '',
+    visible: (document.visibilityState === 'visible') ? '1' : '0',
+    focused: (document.hasFocus() ? '1' : '0'),
+    idle: idleState ? '1' : '0'
+  });
+  if (extra) Object.entries(extra).forEach(([k,v]) => p.append(k, String(v)));
+  // fire-and-forget
+  fetch(SCRIPT_URL, { method:'POST', body:p });
+}
+
+/** ==================== جلسة + Ping/Active ==================== */
+let lastActiveSend = 0;
+const ACTIVE_THROTTLE_MS = 1000;
+function canSendActive(){ const n=Date.now(); if (n-lastActiveSend>=ACTIVE_THROTTLE_MS){ lastActiveSend=n; return true; } return false; }
 
 async function ping(){
-  const id = localStorage.getItem('session_id');
-  if(id) await post({action:'ping', id});
+  const id = getSid();
+  if(!id) return;
+  post({ action:'ping', id });
 }
-
 async function active(){
-  const id = localStorage.getItem('session_id');
+  const id = getSid();
   if(!id || !canSendActive()) return;
-  await post({action:'active', id});
+  post({ action:'active', id });
 }
 
-/** ========= (اختياري) تلوين الحالة لو السيرفر رجّع status ========= */
+/** ==================== كشف النشاط/السكون ==================== */
+function markActivity(kind){
+  const n = Date.now();
+  if (n - lastActTs > 1000){ // ثروتل 1s للّوج
+    sendLog('activity', kind);
+    lastActTs = n;
+  }
+  if (idleState){ idleState=false; sendLog('idle_end'); }
+  resetIdleTimer();
+  active();
+}
+function resetIdleTimer(){
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(()=>{ idleState = true; sendLog('idle_start'); }, IDLE_AFTER_MS);
+}
+
+/** ==================== رؤية الصفحة والتركيز ==================== */
+document.addEventListener('visibilitychange', ()=> {
+  sendLog(document.visibilityState === 'visible' ? 'visible' : 'hidden');
+  // لما يختفي/يرجع بنعمل ping سريع
+  ping();
+});
+window.addEventListener('focus',  ()=> { sendLog('focus');  active(); });
+window.addEventListener('blur',   ()=> { sendLog('blur');   ping();   });
+
+/** أحداث واجهة المستخدم */
+['mousemove','pointermove','mousedown','click','wheel','scroll',
+ 'touchstart','touchmove','keydown','keyup','resize']
+.forEach(evt => window.addEventListener(evt, ()=>markActivity(evt), {passive:true}));
+
+/** Ping دوري يبقي الجلسة حية */
+setInterval(()=> {
+  if (document.visibilityState === 'visible') ping();
+}, 5000);
+
+/** ==================== لون الحالة من السيرفر (اختياري) ==================== */
 function applyStatus(status) {
   const dot  = document.getElementById('statusDot');
   const text = document.getElementById('statusText');
@@ -2835,50 +2874,46 @@ function applyStatus(status) {
   }
   if (text) {
     text.textContent = status==='green' ? 'نشط الآن'
-                     : status==='yellow'? 'مفتوح بدون تفاعل'
-                     : 'غير متصل/في الخلفية';
+                 : status==='yellow'? 'مفتوح بدون تفاعل'
+                 : 'غير متصل/في الخلفية';
   }
 }
-
 async function checkAllow(){
-  const id = localStorage.getItem('session_id');
+  const id = getSid();
   if(!id) return;
   try{
     const r = await post({ action:'check', id });
     if(r && r.ok){
       if (r.allow === false){
-        localStorage.removeItem('session_id');
+        localStorage.removeItem(SID_KEY);
         localStorage.removeItem('hasaballa_gate_until');
         location.reload();
         return;
       }
-      // لو السيرفر بيحسب اللون، هيوصله هنا:
       if (r.status) applyStatus(r.status);
     }
   }catch(e){}
 }
 
-/** ========= مزامنة الشيك بوكس لحظيًا ========= */
-// مفتاح كل شيك بوكس
+/** ==================== مزامنة الشيك بوكس كما هي ==================== */
 function keyOfCheckbox(cb){
   return cb.name || cb.id || cb.getAttribute('data-key') || '';
 }
-
-// 1) إرسال أي تغيير يحصل محليًا → للسيرفر
+// إرسال أي تغيير
 function wireCheckboxSender(){
   document.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
     cb.addEventListener('change', async ()=>{
       const key = keyOfCheckbox(cb);
       if (!key) return;
-      try { await post({ action:'tick', key, value: cb.checked ? 1 : 0 }); }
-      catch(e){}
+      try {
+        const r = await post({ action:'tick', key, value: cb.checked ? 1 : 0 });
+        if (r && r.ok) await pullStates(); // بعد أي تغيير ناجح اسحب آخر الحالات
+      } catch(e){}
     });
   });
 }
-
-// 2) استقبال التغييرات من السيرفر وتطبيقها محليًا
+// استقبال التغييرات
 let lastRev = Number(localStorage.getItem('cb_rev') || '0');
-
 async function pullStates(){
   try{
     const r = await post({ action:'state', since: String(lastRev) });
@@ -2899,15 +2934,20 @@ async function pullStates(){
   }catch(e){}
 }
 
-/** ========= تشغيل ========= */
-window.addEventListener('DOMContentLoaded', ()=>{
-  initSession();
-  wireCheckboxSender();   // إرسال تغييراتك للسيرفر
-  pullStates();           // سحب أولي
-  setInterval(()=>{ if(document.visibilityState==='visible') pullStates(); }, 1000); // تحديث كل ثانية
-  setInterval(checkAllow, 2000); // السماح + (اختياري) لون الحالة
+/** ==================== تشغيل ==================== */
+window.addEventListener('DOMContentLoaded', async ()=>{
+  try {
+    await ensureSid();                 // يهيّئ الجلسة
+    sendLog('page_open');              // يسجل فتح الصفحة
+    resetIdleTimer();                  // يبدأ مؤقت السكون
+  } catch(e){}
+  wireCheckboxSender();
+  pullStates();                        // سحب أولي لحالات الشيك بوكس
+  setInterval(()=>{ if(document.visibilityState==='visible') pullStates(); }, 200); // تحديث سريع
+  setInterval(checkAllow, 2000);       // السماح + لون الحالة (اختياري)
 });
 </script>
+
 
 
 
