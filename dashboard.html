@@ -11,7 +11,7 @@
   h1{margin:0 0 10px}
   .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
   input,button,select{padding:8px 10px;font-size:14px}
-  input[type="text"]{min-width:24rem}
+  input[type="text"]{min-width:28rem}
   table{width:100%;border-collapse:collapse;margin-top:10px}
   th,td{border:1px solid var(--b);padding:8px;text-align:right;vertical-align:top}
   th{background:#f3f4f6}
@@ -23,10 +23,8 @@
   .nowrap{white-space:nowrap}
   .ua{max-width:420px;word-break:break-word}
   .btn{cursor:pointer}
-  .btn.primary{background:#111;color:#fff;border:1px solid #111}
   .btn.light{background:#fff;border:1px solid var(--b)}
   .spacer{flex:1}
-  .count{font-weight:600}
   .liveWrap{display:flex;align-items:center;gap:8px}
   .liveDot{width:10px;height:10px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.7);animation:pulse 1.5s infinite}
   @keyframes pulse {0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
@@ -35,17 +33,15 @@
   .card h3{margin:0 0 10px}
   .timeline{font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap}
   .kbd{font-family:ui-monospace,Consolas,monospace;background:#f3f4f6;border:1px solid var(--b);padding:0 6px;border-radius:4px}
-  .foot{margin-top:6px;display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
 
 <h1>لوحة التحكم - Hasaballa</h1>
 
-<!-- الشريط العلوي -->
 <div class="row">
   <label>رابط السكربت:
-    <!-- تأكد من /exec بدون سلاش أخير -->
+    <!-- يقبل /exec أو /macros/echo?user_content_key=... -->
     <input id="scriptUrl" type="text"
            value="https://script.google.com/macros/s/AKfycbwKcb_D2cfLucuutmvjFO788J3ofh0gHSDJC-rEeIw3OJpS9Orluf5LI7ghiDj5gTXC/exec">
   </label>
@@ -64,7 +60,6 @@
   <button class="btn light" id="toggleLive">إيقاف التحديث</button>
   <div class="spacer"></div>
 
-  <!-- ساعة لايف -->
   <div class="liveWrap">
     <span class="liveDot" title="LIVE"></span>
     <span class="muted">الوقت الآن:</span>
@@ -78,7 +73,6 @@
   <span class="muted" id="status">— لم يبدأ بعد</span>
 </div>
 
-<!-- الجدول -->
 <table id="tbl">
   <thead>
     <tr>
@@ -99,7 +93,6 @@
   <tbody></tbody>
 </table>
 
-<!-- نافذة الخط الزمني -->
 <div class="modal" id="modal">
   <div class="card">
     <div class="row" style="margin-bottom:6px">
@@ -117,7 +110,7 @@
       <button class="btn light" id="refreshTimeline">تحديث</button>
     </div>
     <div id="mBody" class="timeline">...</div>
-    <div class="foot muted">
+    <div class="muted">
       تلميح: يتم تقدير فترات <span class="kbd">Active / Idle / Background</span> تلقائيًا بين الأحداث.
     </div>
   </div>
@@ -134,7 +127,7 @@ function tag(t){ return `<span class="tag">${t}</span>`; }
 function lsGet(k,d=''){ try{ return localStorage.getItem(k) ?? d; }catch(_){ return d; } }
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(_){} }
 
-/* ==================== ساعة لايف ==================== */
+/* ساعة لايف */
 (function startClocks(){
   const nowClock = $('nowClock');
   const elapsed  = $('elapsed');
@@ -147,47 +140,66 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(_){} }
     const s = Math.floor(diff/1000), h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
     elapsed.textContent = `${pad2(h)}:${pad2(m)}:${pad2(sec)}`;
   }
-  draw();
-  setInterval(draw, 1000);
+  draw(); setInterval(draw, 1000);
 })();
 
-/* ==================== تواصل مع السيرفر (مع تشخيص الأخطاء) ==================== */
-async function post(params){
-  const url = $('scriptUrl').value.trim() || lsGet('dash_script_url','');
-  if (!url) return { ok:false, error:'missing_script_url' };
+/* ==================== API ذكي: يدعم /exec (POST) و /echo (GET) ==================== */
+function normUrl(u){
+  u = (u||'').trim();
+  if (!u) return '';
+  // اشيل السلاشات الأخيرة
+  return u.replace(/\/+$/,'');
+}
+function isEcho(u){ return /script\.googleusercontent\.com\/macros\/echo/i.test(u); }
+async function callApi(params){
+  const base = normUrl($('scriptUrl').value) || normUrl(lsGet('dash_script_url',''));
+  if (!base) return { ok:false, error:'missing_script_url' };
 
-  const body = new URLSearchParams(params);
   const ctrl = new AbortController();
   const t = setTimeout(()=>ctrl.abort(), 10000); // 10s timeout
+
+  let url = base, opts = { signal: ctrl.signal };
   try{
-    const res = await fetch(url, { method:'POST', body, signal: ctrl.signal });
+    if (isEcho(base)){
+      // GET مع بارامترات في الرابط
+      const u = new URL(base);
+      Object.entries(params||{}).forEach(([k,v])=>u.searchParams.append(k,String(v)));
+      url = u.toString();
+      opts.method = 'GET';
+    }else{
+      // ‎/exec → POST
+      const body = new URLSearchParams(params||{});
+      opts.method = 'POST';
+      opts.body   = body;
+    }
+
+    const res = await fetch(url, opts);
     clearTimeout(t);
-    if (!res.ok) return { ok:false, error:`http_${res.status}` };
-    try { return await res.json(); }
-    catch { return { ok:false, error:'bad_json' }; }
+
+    if (!res.ok){
+      // 403 بيطلع رسالة CORS في الكونسول—هنا نظهرها نصًا للشرح
+      return { ok:false, error:`http_${res.status}` };
+    }
+    try{ return await res.json(); }
+    catch{ return { ok:false, error:'bad_json' }; }
+
   }catch(e){
     clearTimeout(t);
-    const name = (e && e.name) || '';
-    return { ok:false, error: name === 'AbortError' ? 'timeout' : 'network_error' };
+    return { ok:false, error: (e && e.name)==='AbortError' ? 'timeout' : 'network_error' };
   }
 }
 
-/* ==================== عرض حالة النشاط ==================== */
+/* ==================== بناء الجدول ==================== */
 function nowActivityLabel(lastEvent){
   if (!lastEvent) return '—';
   if (lastEvent.idle) return 'سكون';
   if (lastEvent.evt === 'hidden')  return 'خلفية';
   if (lastEvent.evt === 'visible') return 'واجهة';
-  const map = {
-    mousemove:'ماوس', pointermove:'ماوس', mousedown:'ضغط', click:'نقرة',
-    wheel:'عجلة', scroll:'سكرول', keydown:'كيبورد', keyup:'كيبورد',
-    resize:'تغيير حجم', focus:'تركيز', blur:'فقدان تركيز',
-    activity:'نشاط', page_open:'فتح صفحة', idle_start:'سكون', idle_end:'نشط'
-  };
+  const map = {mousemove:'ماوس', pointermove:'ماوس', mousedown:'ضغط', click:'نقرة', wheel:'عجلة', scroll:'سكرول',
+               keydown:'كيبورد', keyup:'كيبورد', resize:'تغيير حجم', focus:'تركيز', blur:'فقدان تركيز',
+               activity:'نشاط', page_open:'فتح صفحة', idle_start:'سكون', idle_end:'نشط'};
   return (map[lastEvent.evt] || lastEvent.evt) + (lastEvent.visible===0?' (خلفية)':'');
 }
-
-/* ==================== بناء الجدول ==================== */
 function renderRows(rows){
   const tb = document.querySelector('#tbl tbody');
   tb.innerHTML = '';
@@ -196,7 +208,6 @@ function renderRows(rows){
     const toDisplay = r.closedAt ? r.closedAt : (r.status==='gray' ? r.lastSeen : 0);
     const curAct = nowActivityLabel(r.lastEvent);
     const curActTime = r.lastEvent ? new Date(r.lastEvent.ts).toLocaleTimeString() : '';
-
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td class="nowrap">
@@ -220,52 +231,48 @@ function renderRows(rows){
 
   document.querySelectorAll('.revoke').forEach(b=>{
     b.onclick = async ()=>{
-      const id = b.dataset.id;
-      const adminKey = $('adminKey').value.trim();
+      const id = b.dataset.id, adminKey = $('adminKey').value.trim();
       if(!adminKey) return alert('اكتب الـ Admin Key');
       if(!confirm('إلغاء الجلسة '+id+' ؟')) return;
-      const r = await post({ action:'revoke', adminKey, id });
+      const r = await callApi({ action:'revoke', adminKey, id });
       if(!r.ok) return alert(r.msg||r.error||'خطأ'); await listSessions();
     };
   });
   document.querySelectorAll('.delete').forEach(b=>{
     b.onclick = async ()=>{
-      const id = b.dataset.id;
-      const adminKey = $('adminKey').value.trim();
+      const id = b.dataset.id, adminKey = $('adminKey').value.trim();
       if(!adminKey) return alert('اكتب الـ Admin Key');
       if(!confirm('حذف الجلسة نهائيًا '+id+' ؟')) return;
-      const r = await post({ action:'delete', adminKey, id });
+      const r = await callApi({ action:'delete', adminKey, id });
       if(!r.ok) return alert(r.msg||r.error||'خطأ'); await listSessions();
     };
   });
-  document.querySelectorAll('.timelineBtn').forEach(b=>{
-    b.onclick = ()=> openTimeline(b.dataset.id);
-  });
+  document.querySelectorAll('.timelineBtn').forEach(b=> b.onclick = ()=> openTimeline(b.dataset.id));
 }
 
-/* ==================== جلب قائمة الجلسات ==================== */
+/* ==================== جلب الجلسات ==================== */
 async function listSessions(){
   const adminKey = $('adminKey').value.trim();
-  if(!adminKey){ $('status').textContent = '— اكتب الـ Admin Key'; return; }
+  if(!adminKey){ $('status').textContent='— اكتب الـ Admin Key'; return; }
 
-  const r = await post({ action:'list', adminKey });
+  const r = await callApi({ action:'list', adminKey });
   if(!r.ok){
     const msg =
       r.error === 'missing_script_url' ? 'أدخل رابط السكربت واضغط "حفظ"' :
       r.error === 'timeout'             ? 'انتهت المهلة (Timeout)' :
       r.error === 'network_error'       ? 'مشكلة شبكة' :
       r.error === 'bad_json'            ? 'ردّ غير صالح (bad_json)' :
+      r.error === 'http_403'            ? 'HTTP 403 (CORS/Forbidden)' :
       (r.error && r.error.startsWith('http_')) ? ('HTTP ' + r.error.slice(5)) :
       r.error || 'خطأ في الجلب';
     $('status').textContent = '— ' + msg;
     return;
   }
-
   renderRows(r.rows||[]);
   $('status').textContent = `آخر تحديث: ${new Date().toLocaleTimeString()} — عدد الجلسات: ${(r.rows||[]).length}`;
 }
 
-/* ==================== تشغيل/إيقاف التحديث الدوري ==================== */
+/* تشغيل/إيقاف التحديث */
 let liveOn = true;
 function startLive(){
   if (LIVE_TIMER) clearInterval(LIVE_TIMER);
@@ -274,12 +281,9 @@ function startLive(){
   const ms = Number($('intervalSel').value||2000);
   LIVE_TIMER = setInterval(()=>{ if(liveOn) tick(); }, ms);
 }
-$('toggleLive').onclick = ()=>{
-  liveOn = !liveOn;
-  $('toggleLive').textContent = liveOn ? 'إيقاف التحديث' : 'استئناف التحديث';
-};
+$('toggleLive').onclick = ()=>{ liveOn = !liveOn; $('toggleLive').textContent = liveOn ? 'إيقاف التحديث' : 'استئناف التحديث'; };
 
-/* ==================== نافذة الخط الزمني ==================== */
+/* الخط الزمني */
 async function openTimeline(id){
   $('mTitle').textContent = 'سجل النشاط — ' + id;
   $('mBody').textContent = '...';
@@ -289,11 +293,10 @@ async function openTimeline(id){
 async function loadTimeline(id){
   try{
     const limit = Number($('limitSel').value||500);
-    const r = await post({ action:'events', id, limit });
+    const r = await callApi({ action:'events', id, limit });
     if(!r.ok) throw new Error(r.error||'fetch_error');
     const lines = [];
     let lastState = null, lastTs = null;
-
     r.items.forEach(ev=>{
       const t = new Date(ev.ts).toLocaleString();
       const label = nowActivityLabel(ev);
@@ -303,20 +306,13 @@ async function loadTimeline(id){
         ev.idle ? 'سكون' : null
       ].filter(Boolean).join(' | ');
       lines.push(`${t} — ${label}${flags? ' — ['+flags+']':''}${ev.meta? ' — '+ev.meta:''}`);
-
       const state = ev.idle ? 'Idle' : (ev.evt==='hidden' ? 'Background' : 'Active');
       if (lastState===null){ lastState=state; lastTs=ev.ts; }
-      else if (state!==lastState){
-        lines.push(`  ↳ فترة ${lastState} ≈ ${fmtDur(ev.ts - lastTs)}`);
-        lastState=state; lastTs=ev.ts;
-      }
+      else if (state!==lastState){ lines.push(`  ↳ فترة ${lastState} ≈ ${fmtDur(ev.ts - lastTs)}`); lastState=state; lastTs=ev.ts; }
     });
     if (lastState && r.items.length) lines.push(`  ↳ فترة ${lastState} (جارية) ≈ ${fmtDur(Date.now() - lastTs)}`);
-
     $('mBody').textContent = lines.join('\n');
-  }catch(e){
-    $('mBody').textContent = 'فشل تحميل السجل.';
-  }
+  }catch(e){ $('mBody').textContent = 'فشل تحميل السجل.'; }
 }
 $('mClose').onclick = ()=> $('modal').style.display='none';
 $('refreshTimeline').onclick = ()=>{
@@ -325,25 +321,24 @@ $('refreshTimeline').onclick = ()=>{
   if (id) loadTimeline(id);
 };
 
-/* ==================== فحص الصحة ==================== */
+/* فحص الصحة */
 $('healthBtn').onclick = async ()=>{
-  const r = await post({ action:'health' });
-  if (r && r.ok) alert('✅ السيرفر يعمل. ts=' + (r.ts||''));
-  else {
+  const r = await callApi({ action:'health' });
+  if (r && r.ok) alert('✅ السيرفر يعمل. ts='+(r.ts||'')); else {
     const msg =
       r && r.error === 'missing_script_url' ? 'أدخل رابط السكربت واضغط "حفظ"' :
       r && r.error === 'timeout'             ? 'انتهت المهلة (Timeout)' :
       r && r.error === 'network_error'       ? 'مشكلة شبكة' :
+      r && r.error === 'http_403'            ? 'HTTP 403 (CORS/Forbidden)' :
       r && r.error ? r.error : 'فشل فحص الصحة';
     alert('❌ ' + msg);
   }
 };
 
-/* ==================== حفظ/استعادة الإعدادات ==================== */
+/* تفضيلات */
 function loadPrefs(){
-  // أول تشغيل: خزّن قيمة الحقل كرابط افتراضي
-  if (!lsGet('dash_script_url','')) {
-    const v = $('scriptUrl').value.trim();
+  if (!lsGet('dash_script_url','')){
+    const v = normUrl($('scriptUrl').value);
     if (v) lsSet('dash_script_url', v);
   }
   $('scriptUrl').value = lsGet('dash_script_url', $('scriptUrl').value);
@@ -351,7 +346,7 @@ function loadPrefs(){
   $('intervalSel').value = lsGet('dash_interval', $('intervalSel').value || '2000');
 }
 $('saveBtn').onclick = ()=>{
-  const url = $('scriptUrl').value.trim();
+  const url = normUrl($('scriptUrl').value);
   if (!url) { alert('أدخل رابط السكربت'); return; }
   lsSet('dash_script_url', url);
   lsSet('dash_admin_key',  $('adminKey').value.trim());
@@ -359,7 +354,7 @@ $('saveBtn').onclick = ()=>{
   startLive();
 };
 
-/* ==================== تشغيل ==================== */
+/* تشغيل */
 document.addEventListener('DOMContentLoaded', ()=>{
   loadPrefs();
   startLive();
