@@ -2751,10 +2751,10 @@ document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REM
 
 <script>
 /** ==================== الإعدادات ==================== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKcb_D2cfLucuutmvjFO788J3ofh0gHSDJC-rEeIw3OJpS9Orluf5LI7ghiDj5gTXC/exec"; // رابط Web App (/exec) من GAS
-const SID_KEY    = "session_id";             // مفتاح تخزين الـ Session
-// عتبة السكون: كم ثانية بدون تفاعل نعتبرها Idle
-const IDLE_AFTER_MS = 20000;
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKcb_D2cfLucuutmvjFO788J3ofh0gHSDJC-rEeIw3OJpS9Orluf5LI7ghiDj5gTXC/exec"; // GAS Web App (/exec)
+const SID_KEY    = "session_id";               // مفتاح تخزين الـ Session
+const SITE_ID    = "prod/";                    // ثبّت SiteId ليتطابق مع الداشبورد
+const IDLE_AFTER_MS = 60000;                   // عتبة السكون: 60 ثانية (مُستحسن)
 
 /** (اختياري) أزمنة تلوين الحالة لو السيرفر بيرجع status */
 const ACTIVE_MS = 20 * 1000; // أخضر لو آخر تفاعل ≤ 20s
@@ -2784,7 +2784,7 @@ async function ensureSid(){
   } catch(e){}
 
   const ua = navigator.userAgent || '';
-  const res = await post({ action:'init', ua, ip, country, city, siteId: location.pathname });
+  const res = await post({ action:'init', ua, ip, country, city, siteId: SITE_ID });
   if (res.ok && res.id){ setSid(res.id); return res.id; }
   throw new Error('init_failed');
 }
@@ -2801,8 +2801,7 @@ async function sendLog(evt, meta, extra){
     idle: idleState ? '1' : '0'
   });
   if (extra) Object.entries(extra).forEach(([k,v]) => p.append(k, String(v)));
-  // fire-and-forget
-  fetch(SCRIPT_URL, { method:'POST', body:p });
+  fetch(SCRIPT_URL, { method:'POST', body:p }); // fire-and-forget
 }
 
 /** ==================== جلسة + Ping/Active ==================== */
@@ -2851,10 +2850,8 @@ window.addEventListener('blur',   ()=> { sendLog('blur');   ping();   });
  'touchstart','touchmove','keydown','keyup','resize']
 .forEach(evt => window.addEventListener(evt, ()=>markActivity(evt), {passive:true}));
 
-/** Ping دوري يبقي الجلسة حية */
-setInterval(()=> {
-  if (document.visibilityState === 'visible') ping();
-}, 5000);
+/** Ping دوري يبقي الجلسة حية — حتى في الخلفية */
+setInterval(()=> { ping(); }, 5000);
 
 /** ==================== لون الحالة من السيرفر (اختياري) ==================== */
 function applyStatus(status) {
@@ -2887,11 +2884,10 @@ async function checkAllow(){
   }catch(e){}
 }
 
-/** ==================== مزامنة الشيك بوكس كما هي ==================== */
+/** ==================== مزامنة الشيك بوكس كما هي (اختياري) ==================== */
 function keyOfCheckbox(cb){
   return cb.name || cb.id || cb.getAttribute('data-key') || '';
 }
-// إرسال أي تغيير
 function wireCheckboxSender(){
   document.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
     cb.addEventListener('change', async ()=>{
@@ -2899,12 +2895,11 @@ function wireCheckboxSender(){
       if (!key) return;
       try {
         const r = await post({ action:'tick', key, value: cb.checked ? 1 : 0 });
-        if (r && r.ok) await pullStates(); // بعد أي تغيير ناجح اسحب آخر الحالات
+        if (r && r.ok) await pullStates();
       } catch(e){}
     });
   });
 }
-// استقبال التغييرات
 let lastRev = Number(localStorage.getItem('cb_rev') || '0');
 async function pullStates(){
   try{
@@ -2939,6 +2934,7 @@ window.addEventListener('DOMContentLoaded', async ()=>{
   setInterval(checkAllow, 2000);       // السماح + لون الحالة (اختياري)
 });
 </script>
+
 
 
 
