@@ -26,6 +26,10 @@
   .btn.primary{background:#111;color:#fff;border:1px solid #111}
   .btn.light{background:#fff;border:1px solid var(--b)}
   .spacer{flex:1}
+  .count{font-weight:600}
+  .liveWrap{display:flex;align-items:center;gap:8px}
+  .liveDot{width:10px;height:10px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.7);animation:pulse 1.5s infinite}
+  @keyframes pulse {0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
   /* Modal */
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:20px}
   .card{background:#fff;max-width:980px;width:100%;max-height:85vh;overflow:auto;border-radius:12px;padding:14px;border:1px solid var(--b)}
@@ -56,6 +60,18 @@
     </select>
   </label>
   <button class="btn light" id="saveBtn">حفظ</button>
+  <button class="btn light" id="toggleLive">إيقاف التحديث</button>
+  <div class="spacer"></div>
+
+  <!-- ساعة لايف بتتحدّث كل ثانية -->
+  <div class="liveWrap">
+    <span class="liveDot" title="LIVE"></span>
+    <span class="muted">الوقت الآن:</span>
+    <span id="nowClock" style="font-family:monospace;font-weight:600">--:--:--</span>
+    <span class="muted">| منذ فتح الصفحة:</span>
+    <span id="elapsed" style="font-family:monospace">00:00:00</span>
+  </div>
+
   <div class="spacer"></div>
   <button class="btn light" id="healthBtn">فحص الصحة</button>
   <span class="muted" id="status">— لم يبدأ بعد</span>
@@ -69,6 +85,7 @@
       <th>الحالة</th>
       <th>النشاط الآن</th>
       <th>IP / بلد / مدينة</th>
+      <th>SiteId</th>
       <th>متصفح (UserAgent)</th>
       <th>من</th>
       <th>إلى</th>
@@ -110,22 +127,47 @@
 let LIVE_TIMER = null;
 const $ = (id)=> document.getElementById(id);
 const fmt = (ms)=> ms ? new Date(Number(ms)).toLocaleString() : '-';
-const fmtDur = (ms)=>{
-  ms = Math.max(0, Number(ms||0));
-  const s = Math.floor(ms/1000), m = Math.floor(s/60), h = Math.floor(m/60);
-  return `${h}h ${m%60}m ${s%60}s`;
-};
+const fmtDur = (ms)=>{ ms=Math.max(0,Number(ms||0)); const s=Math.floor(ms/1000),m=Math.floor(s/60),h=Math.floor(m/60); return `${h}h ${m%60}m ${s%60}s`; };
+const pad2 = n => String(n).padStart(2,'0');
 function tag(t){ return `<span class="tag">${t}</span>`; }
 function lsGet(k,d=''){ try{ return localStorage.getItem(k) ?? d; }catch(_){ return d; } }
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(_){} }
+
+/* ==================== ساعة لايف + عداد منذ فتح الصفحة ==================== */
+(function startClocks(){
+  const nowClock = $('nowClock');
+  const elapsed  = $('elapsed');
+  const startTs  = Date.now();
+  function draw(){
+    const d = new Date();
+    const hh = pad2(d.getHours()), mm = pad2(d.getMinutes()), ss = pad2(d.getSeconds());
+    nowClock.textContent = `${hh}:${mm}:${ss}`;
+    const diff = Date.now()-startTs;
+    const s = Math.floor(diff/1000), h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
+    elapsed.textContent = `${pad2(h)}:${pad2(m)}:${pad2(sec)}`;
+  }
+  draw();
+  setInterval(draw, 1000); // يحدث كل ثانية
+})();
 
 /* ==================== تواصل مع السيرفر ==================== */
 async function post(params){
   const url = $('scriptUrl').value.trim();
   if (!url) throw new Error('missing_script_url');
+  // إضافة دعم timeout بسيط
   const body = new URLSearchParams(params);
-  const res = await fetch(url, { method:'POST', body });
-  return res.json();
+  const ctrl = new AbortController();
+  const t = setTimeout(()=>ctrl.abort(), 10000); // 10 ثواني
+  try{
+    const res = await fetch(url, { method:'POST', body, signal: ctrl.signal });
+    clearTimeout(t);
+    let json;
+    try{ json = await res.json(); }catch(e){ json = { ok:false, error:'bad_json' }; }
+    return json;
+  }catch(e){
+    clearTimeout(t);
+    return { ok:false, error:'network_timeout_or_abort' };
+  }
 }
 
 /* ==================== عرض حالة النشاط ==================== */
@@ -147,7 +189,7 @@ function nowActivityLabel(lastEvent){
 function renderRows(rows){
   const tb = document.querySelector('#tbl tbody');
   tb.innerHTML = '';
-  rows.forEach(r=>{
+  (rows||[]).forEach(r=>{
     const ipCountry = `${r.ip||'-'}${(r.country||r.city)?' / ':''}${(r.country||'')}${r.city?(' - '+r.city):''}`;
     const toDisplay = r.closedAt ? r.closedAt : (r.status==='gray' ? r.lastSeen : 0);
     const curAct = nowActivityLabel(r.lastEvent);
@@ -162,6 +204,7 @@ function renderRows(rows){
       <td class="${r.status}">${r.status}</td>
       <td>${tag(curAct)} ${curActTime? tag(curActTime):''}</td>
       <td title="ID: ${r.id}">${ipCountry}</td>
+      <td>${r.siteId || '-'}</td>
       <td class="ua">${r.ua||'-'}</td>
       <td>${fmt(r.createdAt)}</td>
       <td>${fmt(toDisplay)}</td>
@@ -181,7 +224,7 @@ function renderRows(rows){
       if(!adminKey) return alert('اكتب الـ Admin Key');
       if(!confirm('إلغاء الجلسة '+id+' ؟')) return;
       const r = await post({ action:'revoke', adminKey, id });
-      if(!r.ok) return alert(r.msg||'خطأ'); await listSessions();
+      if(!r.ok) return alert(r.msg||r.error||'خطأ'); await listSessions();
     };
   });
   document.querySelectorAll('.delete').forEach(b=>{
@@ -191,7 +234,7 @@ function renderRows(rows){
       if(!adminKey) return alert('اكتب الـ Admin Key');
       if(!confirm('حذف الجلسة نهائيًا '+id+' ؟')) return;
       const r = await post({ action:'delete', adminKey, id });
-      if(!r.ok) return alert(r.msg||'خطأ'); await listSessions();
+      if(!r.ok) return alert(r.msg||r.error||'خطأ'); await listSessions();
     };
   });
   document.querySelectorAll('.timelineBtn').forEach(b=>{
@@ -206,17 +249,22 @@ async function listSessions(){
   const r = await post({ action:'list', adminKey });
   if(!r.ok){ $('status').textContent = '— خطأ في الجلب'; return; }
   renderRows(r.rows||[]);
-  $('status').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString();
+  $('status').textContent = `آخر تحديث: ${new Date().toLocaleTimeString()} — عدد الجلسات: ${(r.rows||[]).length}`;
 }
 
-/* ==================== تشغيل التحديث الدوري ==================== */
+/* ==================== تشغيل/إيقاف التحديث الدوري ==================== */
+let liveOn = true;
 function startLive(){
   if (LIVE_TIMER) clearInterval(LIVE_TIMER);
   const tick = async ()=>{ try{ await listSessions(); } catch(e){ $('status').textContent='— خطأ مؤقت'; } };
   tick();
   const ms = Number($('intervalSel').value||2000);
-  LIVE_TIMER = setInterval(tick, ms);
+  LIVE_TIMER = setInterval(()=>{ if(liveOn) tick(); }, ms);
 }
+$('toggleLive').onclick = ()=>{
+  liveOn = !liveOn;
+  $('toggleLive').textContent = liveOn ? 'إيقاف التحديث' : 'استئناف التحديث';
+};
 
 /* ==================== نافذة الخط الزمني ==================== */
 async function openTimeline(id){
