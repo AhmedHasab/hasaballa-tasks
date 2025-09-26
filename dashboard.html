@@ -30,7 +30,6 @@
   .liveWrap{display:flex;align-items:center;gap:8px}
   .liveDot{width:10px;height:10px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.7);animation:pulse 1.5s infinite}
   @keyframes pulse {0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
-  /* Modal */
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:20px}
   .card{background:#fff;max-width:980px;width:100%;max-height:85vh;overflow:auto;border-radius:12px;padding:14px;border:1px solid var(--b)}
   .card h3{margin:0 0 10px}
@@ -46,7 +45,9 @@
 <!-- الشريط العلوي -->
 <div class="row">
   <label>رابط السكربت:
-    <input id="scriptUrl" type="text" placeholder="https://script.google.com/macros/s/AKfycbwKcb_D2cfLucuutmvjFO788J3ofh0gHSDJC-rEeIw3OJpS9Orluf5LI7ghiDj5gTXC/exec/">
+    <!-- تأكد من /exec بدون سلاش أخير -->
+    <input id="scriptUrl" type="text"
+           value="https://script.google.com/macros/s/AKfycbwKcb_D2cfLucuutmvjFO788J3ofh0gHSDJC-rEeIw3OJpS9Orluf5LI7ghiDj5gTXC/exec">
   </label>
   <label>Admin Key:
     <input id="adminKey" type="text" value="HasaballaAdmin!2025">
@@ -63,7 +64,7 @@
   <button class="btn light" id="toggleLive">إيقاف التحديث</button>
   <div class="spacer"></div>
 
-  <!-- ساعة لايف بتتحدّث كل ثانية -->
+  <!-- ساعة لايف -->
   <div class="liveWrap">
     <span class="liveDot" title="LIVE"></span>
     <span class="muted">الوقت الآن:</span>
@@ -133,7 +134,7 @@ function tag(t){ return `<span class="tag">${t}</span>`; }
 function lsGet(k,d=''){ try{ return localStorage.getItem(k) ?? d; }catch(_){ return d; } }
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(_){} }
 
-/* ==================== ساعة لايف + عداد منذ فتح الصفحة ==================== */
+/* ==================== ساعة لايف ==================== */
 (function startClocks(){
   const nowClock = $('nowClock');
   const elapsed  = $('elapsed');
@@ -147,26 +148,27 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(_){} }
     elapsed.textContent = `${pad2(h)}:${pad2(m)}:${pad2(sec)}`;
   }
   draw();
-  setInterval(draw, 1000); // يحدث كل ثانية
+  setInterval(draw, 1000);
 })();
 
-/* ==================== تواصل مع السيرفر ==================== */
+/* ==================== تواصل مع السيرفر (مع تشخيص الأخطاء) ==================== */
 async function post(params){
-  const url = $('scriptUrl').value.trim();
-  if (!url) throw new Error('missing_script_url');
-  // إضافة دعم timeout بسيط
+  const url = $('scriptUrl').value.trim() || lsGet('dash_script_url','');
+  if (!url) return { ok:false, error:'missing_script_url' };
+
   const body = new URLSearchParams(params);
   const ctrl = new AbortController();
-  const t = setTimeout(()=>ctrl.abort(), 10000); // 10 ثواني
+  const t = setTimeout(()=>ctrl.abort(), 10000); // 10s timeout
   try{
     const res = await fetch(url, { method:'POST', body, signal: ctrl.signal });
     clearTimeout(t);
-    let json;
-    try{ json = await res.json(); }catch(e){ json = { ok:false, error:'bad_json' }; }
-    return json;
+    if (!res.ok) return { ok:false, error:`http_${res.status}` };
+    try { return await res.json(); }
+    catch { return { ok:false, error:'bad_json' }; }
   }catch(e){
     clearTimeout(t);
-    return { ok:false, error:'network_timeout_or_abort' };
+    const name = (e && e.name) || '';
+    return { ok:false, error: name === 'AbortError' ? 'timeout' : 'network_error' };
   }
 }
 
@@ -216,7 +218,6 @@ function renderRows(rows){
     tb.appendChild(tr);
   });
 
-  // أزرار تحكم
   document.querySelectorAll('.revoke').forEach(b=>{
     b.onclick = async ()=>{
       const id = b.dataset.id;
@@ -246,8 +247,20 @@ function renderRows(rows){
 async function listSessions(){
   const adminKey = $('adminKey').value.trim();
   if(!adminKey){ $('status').textContent = '— اكتب الـ Admin Key'; return; }
+
   const r = await post({ action:'list', adminKey });
-  if(!r.ok){ $('status').textContent = '— خطأ في الجلب'; return; }
+  if(!r.ok){
+    const msg =
+      r.error === 'missing_script_url' ? 'أدخل رابط السكربت واضغط "حفظ"' :
+      r.error === 'timeout'             ? 'انتهت المهلة (Timeout)' :
+      r.error === 'network_error'       ? 'مشكلة شبكة' :
+      r.error === 'bad_json'            ? 'ردّ غير صالح (bad_json)' :
+      (r.error && r.error.startsWith('http_')) ? ('HTTP ' + r.error.slice(5)) :
+      r.error || 'خطأ في الجلب';
+    $('status').textContent = '— ' + msg;
+    return;
+  }
+
   renderRows(r.rows||[]);
   $('status').textContent = `آخر تحديث: ${new Date().toLocaleTimeString()} — عدد الجلسات: ${(r.rows||[]).length}`;
 }
@@ -256,7 +269,7 @@ async function listSessions(){
 let liveOn = true;
 function startLive(){
   if (LIVE_TIMER) clearInterval(LIVE_TIMER);
-  const tick = async ()=>{ try{ await listSessions(); } catch(e){ $('status').textContent='— خطأ مؤقت'; } };
+  const tick = async ()=>{ await listSessions(); };
   tick();
   const ms = Number($('intervalSel').value||2000);
   LIVE_TIMER = setInterval(()=>{ if(liveOn) tick(); }, ms);
@@ -277,7 +290,7 @@ async function loadTimeline(id){
   try{
     const limit = Number($('limitSel').value||500);
     const r = await post({ action:'events', id, limit });
-    if(!r.ok) throw new Error('fetch_error');
+    if(!r.ok) throw new Error(r.error||'fetch_error');
     const lines = [];
     let lastState = null, lastTs = null;
 
@@ -291,7 +304,6 @@ async function loadTimeline(id){
       ].filter(Boolean).join(' | ');
       lines.push(`${t} — ${label}${flags? ' — ['+flags+']':''}${ev.meta? ' — '+ev.meta:''}`);
 
-      // مقاطع Active / Idle / Background تقريبية
       const state = ev.idle ? 'Idle' : (ev.evt==='hidden' ? 'Background' : 'Active');
       if (lastState===null){ lastState=state; lastTs=ev.ts; }
       else if (state!==lastState){
@@ -315,23 +327,33 @@ $('refreshTimeline').onclick = ()=>{
 
 /* ==================== فحص الصحة ==================== */
 $('healthBtn').onclick = async ()=>{
-  try{
-    const r = await post({ action:'health' });
-    if (r && r.ok) alert('✅ السيرفر يعمل. ts=' + r.ts);
-    else alert('❌ فشل فحص الصحة');
-  }catch(e){
-    alert('❌ لم يتم الاتصال: تحقق من رابط السكربت');
+  const r = await post({ action:'health' });
+  if (r && r.ok) alert('✅ السيرفر يعمل. ts=' + (r.ts||''));
+  else {
+    const msg =
+      r && r.error === 'missing_script_url' ? 'أدخل رابط السكربت واضغط "حفظ"' :
+      r && r.error === 'timeout'             ? 'انتهت المهلة (Timeout)' :
+      r && r.error === 'network_error'       ? 'مشكلة شبكة' :
+      r && r.error ? r.error : 'فشل فحص الصحة';
+    alert('❌ ' + msg);
   }
 };
 
 /* ==================== حفظ/استعادة الإعدادات ==================== */
 function loadPrefs(){
+  // أول تشغيل: خزّن قيمة الحقل كرابط افتراضي
+  if (!lsGet('dash_script_url','')) {
+    const v = $('scriptUrl').value.trim();
+    if (v) lsSet('dash_script_url', v);
+  }
   $('scriptUrl').value = lsGet('dash_script_url', $('scriptUrl').value);
   $('adminKey').value  = lsGet('dash_admin_key',  $('adminKey').value);
   $('intervalSel').value = lsGet('dash_interval', $('intervalSel').value || '2000');
 }
 $('saveBtn').onclick = ()=>{
-  lsSet('dash_script_url', $('scriptUrl').value.trim());
+  const url = $('scriptUrl').value.trim();
+  if (!url) { alert('أدخل رابط السكربت'); return; }
+  lsSet('dash_script_url', url);
   lsSet('dash_admin_key',  $('adminKey').value.trim());
   lsSet('dash_interval',   $('intervalSel').value);
   startLive();
