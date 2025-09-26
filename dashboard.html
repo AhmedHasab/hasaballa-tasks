@@ -147,7 +147,6 @@ function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(_){} }
 function normUrl(u){
   u = (u||'').trim();
   if (!u) return '';
-  // اشيل السلاشات الأخيرة
   return u.replace(/\/+$/,'');
 }
 function isEcho(u){ return /script\.googleusercontent\.com\/macros\/echo/i.test(u); }
@@ -161,13 +160,11 @@ async function callApi(params){
   let url = base, opts = { signal: ctrl.signal };
   try{
     if (isEcho(base)){
-      // GET مع بارامترات في الرابط
       const u = new URL(base);
       Object.entries(params||{}).forEach(([k,v])=>u.searchParams.append(k,String(v)));
       url = u.toString();
       opts.method = 'GET';
     }else{
-      // ‎/exec → POST
       const body = new URLSearchParams(params||{});
       opts.method = 'POST';
       opts.body   = body;
@@ -176,10 +173,7 @@ async function callApi(params){
     const res = await fetch(url, opts);
     clearTimeout(t);
 
-    if (!res.ok){
-      // 403 بيطلع رسالة CORS في الكونسول—هنا نظهرها نصًا للشرح
-      return { ok:false, error:`http_${res.status}` };
-    }
+    if (!res.ok) return { ok:false, error:`http_${res.status}` };
     try{ return await res.json(); }
     catch{ return { ok:false, error:'bad_json' }; }
 
@@ -283,7 +277,7 @@ function startLive(){
 }
 $('toggleLive').onclick = ()=>{ liveOn = !liveOn; $('toggleLive').textContent = liveOn ? 'إيقاف التحديث' : 'استئناف التحديث'; };
 
-/* الخط الزمني */
+/* الخط الزمني (يمرر adminKey) */
 async function openTimeline(id){
   $('mTitle').textContent = 'سجل النشاط — ' + id;
   $('mBody').textContent = '...';
@@ -293,7 +287,8 @@ async function openTimeline(id){
 async function loadTimeline(id){
   try{
     const limit = Number($('limitSel').value||500);
-    const r = await callApi({ action:'events', id, limit });
+    const adminKey = $('adminKey').value.trim();
+    const r = await callApi({ action:'events', id, limit, adminKey });
     if(!r.ok) throw new Error(r.error||'fetch_error');
     const lines = [];
     let lastState = null, lastTs = null;
@@ -321,9 +316,10 @@ $('refreshTimeline').onclick = ()=>{
   if (id) loadTimeline(id);
 };
 
-/* فحص الصحة */
+/* فحص الصحة (يمرر adminKey) */
 $('healthBtn').onclick = async ()=>{
-  const r = await callApi({ action:'health' });
+  const adminKey = $('adminKey').value.trim();
+  const r = await callApi({ action:'health', adminKey });
   if (r && r.ok) alert('✅ السيرفر يعمل. ts='+(r.ts||'')); else {
     const msg =
       r && r.error === 'missing_script_url' ? 'أدخل رابط السكربت واضغط "حفظ"' :
@@ -354,11 +350,18 @@ $('saveBtn').onclick = ()=>{
   startLive();
 };
 
-/* تشغيل */
+/* تشغيل + لافتات تحذير بسيطة */
+function bannerWarn(msg){
+  const d=document.createElement('div');
+  d.style.cssText='background:#fff3cd;border:1px solid #ffeeba;padding:8px 12px;margin:10px 0;border-radius:8px';
+  d.textContent=msg; document.body.insertBefore(d, document.body.firstChild);
+}
 document.addEventListener('DOMContentLoaded', ()=>{
   loadPrefs();
   startLive();
   $('intervalSel').addEventListener('change', startLive);
+  const url = normUrl($('scriptUrl').value);
+  if(/\/echo\?/i.test(url)) bannerWarn('⚠️ متصل ببيئة ECHO (تجريبي). استخدم /exec للإنتاج.');
 });
 </script>
 
