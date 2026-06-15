@@ -1,0 +1,1014 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🧠 Hasaballa AI Platform</title>
+<link rel="icon" type="image/png" href="photos/favicon.png">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  font-size: 26px;
+  line-height: 1.8;
+  padding: 20px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../photos/31.png'); /* ← لاحظ: المسار اختلف */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  opacity: 0.08;
+  z-index: -1;
+  pointer-events: none;
+}
+
+  h1, h2 {
+    font-size: 32px;
+    color: #333;
+  }
+  h2 {
+    margin-top: 50px;
+  }
+.task {
+  margin: 15px 0;
+}
+.task input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+.task.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+  .task-box.shadow-3d {
+  border-left: 6px solid #ff9800;
+  background: linear-gradient(145deg, #fffdf8, #f5e8cc);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+}
+
+.badge {
+  display: inline-block;
+  background-color: #ff9800;
+  color: white;
+  font-size: 14px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.task-box.shadow-3d.lime-green {
+  border-left: 6px solid #8bc34a;
+  background: linear-gradient(145deg, #f5fff0, #e4f7d2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: perspective(800px) rotateX(1deg) rotateY(-1deg);
+  transition: 0.3s ease;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.task-box.shadow-3d.lime-green:hover {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.4); /* أخضر ليموني */
+}
+
+  
+/* Level 1: subtask */
+.subtask {
+  margin-left: 40px;
+  padding-left: 20px;
+  border-left: 2px solid #ccc;
+}
+
+/* Level 2: subsubtask */
+.subsubtask {
+  margin-left: 80px;
+  padding-left: 20px;
+  border-left: 2px solid #aaa;
+}
+
+/* ✅ Level 3: subsubsubtask */
+.subsubsubtask {
+  margin-left: 120px;
+  padding-left: 20px;
+  border-left: 2px solid #888; /* لون أغمق شوية للتمييز */
+}
+
+  ul {
+    margin-left: 30px;
+  }
+
+
+
+/* يشطب أي label بعد checkbox مباشرة */
+input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+/* نمط عام لأي عنصر تضيف له كلاس completed من الجافاسكريبت */
+.completed {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+/* تغطّي الحالات اللي مافيها label: تشطب الـ container نفسه لو بيحتوي checkbox متعلّم */
+.task:has(> input[type="checkbox"]:checked),
+.subtask:has(> input[type="checkbox"]:checked),
+.subsubtask:has(> input[type="checkbox"]:checked),
+.subsubsubtask:has(> input[type="checkbox"]:checked),
+.task li:has(> input[type="checkbox"]:checked) {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.75;
+}
+
+  
+
+  
+</style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+console.log("✅ Firebase connected & DOM ready");
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq2nnCDmuCSnpgC75q7-DFz_OZIvwe0Y4",
+    authDomain: "hasaballa-ai.firebaseapp.com",
+    databaseURL: "https://hasaballa-ai-default-rtdb.firebaseio.com",
+    projectId: "hasaballa-ai",
+    storageBucket: "hasaballa-ai.appspot.com",
+    messagingSenderId: "786272460405",
+    appId: "1:786272460405:web:b2bc8cdba12407834d623c",
+    measurementId: "G-GVY2TS8MW4"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    firebase.database().ref("tasks").once("value").then(snapshot => {
+      const data = snapshot.val() || {};
+      checkboxes.forEach((checkbox, index) => {
+       const key = checkbox.getAttribute("data-id");
+
+       if (data[key] === true) {
+  checkbox.checked = true;
+  checkbox.parentElement.classList.add("completed");  // ✅ ضروري علشان الخط
+}
+
+        checkbox.addEventListener("change", () => {
+          const checked = checkbox.checked;
+          firebase.database().ref("tasks/" + key).set(checked);
+          if (checked) {
+            checkbox.parentElement.classList.add("completed");
+          } else {
+            checkbox.parentElement.classList.remove("completed");
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</head>
+<body>
+<h1>🧠 Platform: Hasaballa AI</h1>
+
+<h2>🛠️ - Description & How it Works</h2>
+<p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 1 TB in size 💾, without negatively affecting the platform’s speed or efficiency.</p>
+
+<h2>🎯 Platform Goals</h2>
+  
+<div class="intro-statement">
+  To produce unlimited videos at high speed — 
+  without any subscriptions, APIs, or internet connection —  
+  <br><br>
+  matching <strong>(at minimum)</strong> the quality shown in the following examples 👇
+  <br>
+  <em>(Please watch all links or preview videos fully — this is the lowest acceptable quality standard.)</em>
+</div>
+
+<ul>
+   <li><a href="https://tinyurl.com/yc467zpc " target="_blank">🔗 Link 1 </a></li>
+  <li><a href="https://drive.google.com/file/d/145S95Kgz5H9KZaZq5twCucbSCjbwqZSm/view?usp=sharing" target="_blank">🔗 Link 2 </a></li>
+  <li><a href="https://drive.google.com/file/d/1klPlXWHbzia8IzF7JCTRXzlzwtif6woF/view?usp=sharing" target="_blank">🔗 Link 3</a></li>
+  <li><a href="https://drive.google.com/file/d/1DwNZPoISitNV8PUKz7qbBBedJectcpYV/view?usp=sharing" target="_blank">🔗 Link 4</a></li>
+  <li><a href="https://drive.google.com/file/d/1ZAHGP_oUorGF5gTKxaYcnKQwqRg7Hhx9/view?usp=sharing" target="_blank">🔗 Link 5</a></li>
+  <li><a href="https://drive.google.com/file/d/1c5CoVZ-7lYvpsLZz1TwafGyZCzjReyeR/view?usp=sharing" target="_blank">🔗 Link 6</a></li>
+  <li><a href="https://drive.google.com/file/d/1JIGIl7Jx3YKKXAmszYjOFvh6Zraick7j/view?usp=sharing" target="_blank">🔗 Link 7</a></li>
+</ul>
+<h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
+
+<div style="
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 30px auto;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  max-width: 1300px;
+">
+
+    <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="700" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/103.mp4" type="video/mp4">
+    </video>
+    </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/1.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/3.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+     <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/4.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/5.mp4" type="video/mp4">
+    </video>
+    <video width="400" autoplay muted loop playsinline controls>
+      <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/6.mp4" type="video/mp4">
+    </video>
+  </div>
+
+</div>
+
+
+
+
+<h1>🧠 How to Use Hasaballa AI Platform</h1>
+
+<div class="section">
+  <h2>🟢 1. Smart Director – Automatic Mode (One Click – Full Auto Workflow)</h2>
+  <p>🔹 The user writes the full script in the Hasaballa GPT chat window (scenes, images, voices, animation...).<br>
+  🔹 Then clicks the 🎬 "Smart Director – Auto" button.<br>
+  🔹 The system automatically generates everything based on the script:</p>
+  <ul>
+    <li>🖼️ Image generation</li>
+    <li>🧍‍♂️ Character animation</li>
+    <li>🔊 Voice generation & cloning</li>
+    <li>👄 Lip sync</li>
+    <li>🎧 Background audio</li>
+    <li>🎞️ Final video with full timeline</li>
+  </ul>
+  <p>✅ No manual steps required, but users can review or tweak results afterward.</p>
+</div>
+
+<div class="section">
+  <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
+  <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
+  🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
+  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
+  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  <p>🔹 In each stage, the user decides:</p>
+  <ul>
+    <li>Generate image or skip</li>
+    <li>Generate voice or skip</li>
+    <li>Animate or not</li>
+    <li>Add background audio or skip</li>
+    <li>Activate lip sync or not</li>
+  </ul>
+  <p>🧩 Each generated element is automatically added to the final timeline.</p>
+  <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
+</div>
+
+<div class="section">
+  <h2>🔵 3. Use Each Tool Individually (Standalone Mode)</h2>
+  <p>🔹 Every tool (Generate Image, Clone Voice, Animate, Sync, Add Background Audio...) has its own button.<br>
+  🔹 The user can use any tool individually — for quick tasks or partial content creation.<br>
+  (Example: generate just an image, tweak a voice clip, test background sound...)</p>
+  <p>✅ Ideal for:</p>
+  <ul>
+    <li>Quick experiments</li>
+    <li>Building content step-by-step</li>
+    <li>Podcasts, teasers, visual tests</li>
+  </ul>
+  <p>❌ But in this case, you’ll need to assemble the final video manually — or import the results into the editor or timeline yourself.</p>
+</div>
+
+
+<div class="task">
+  <h2>⚠️ Platform Design Requirement:</h2><br>
+  The platform must be built in full compatibility with the upcoming <b>Hasaballa Engine</b> update, as outlined in <b>Task 19</b>.<br>
+  All tools, pipelines, and internal logic must be future-proof and designed to integrate seamlessly with Hasaballa Engine once released.
+</div>
+
+
+  
+
+<h2>✅ 📋 Hasaballa AI Tasks</h2>
+<div class="task"><input type="checkbox"data-id="task1"> 1️⃣ It will operate on a device running <strong>
+💻 Windows 11 Home 64-bit, with an AMD Ryzen™ 9 9955HX (3.50 GHz, Fire Range), RTX 5090 🎮 (24 GB GDDR7), 64 GB DDR5 RAM 🧠, and 4TB M.2 NVMe SSD ⚡ — plus a 16.0" WQXGA 300Hz display 🖥️.</div>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task1-a">
+  1-A ✅ Must be architected to fully support <b>Hasaballa Engine</b> integration (see Task 19).<br>
+  All tools, pipelines, and system resources must be designed to connect seamlessly with the upcoming Hasaballa Engine — without needing any structural changes later.<br><br>
+  This includes:<br>
+  - Modular tool design with accessible internal APIs<br>
+  - Background tasks (e.g., image, voice, animation) ready for Engine control<br>
+  - Clear separation of logic to avoid future rework<br><br>
+  🧠 <b>Note:</b> Hasaballa Engine is the platform’s core automation system — future updates depend on this integration being ready from day one.
+</div>
+
+  
+<div class="task"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
+<div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
+<br><br>
+
+
+  <div class="task"><input type="checkbox"data-id="task10"> 1️⃣0️⃣ <strong>Final video (1 to 15 mins) 🎞️</strong>.</div>
+
+
+<div class="task subtask"><input type="checkbox"data-id="task10-a"> 10-A 📽️ <strong>Export options</strong>: HD, Full HD, 720p, 1080p, 4K.</div>
+<div class="task subtask"><input type="checkbox"data-id="task10-b"> 10-B 🧱 Output as layered timeline (editable).</div>
+<div class="task subtask"><input type="checkbox"data-id="task10-c"> 10-C 👁️‍🗨️ <strong>Preview support.</strong></div>
+<div class="task subtask"><input type="checkbox"data-id="task10-d"> 10-D 💾<strong> Download support.</strong></div>
+<div class="task subtask"><input type="checkbox"data-id="task10-e"> 10-E 🔲<strong> Aspect ratios</strong>: 16:9, 9:16, 1:1  .</div>
+<div class="task subtask"><input type="checkbox"data-id="task10-f"> 10-F 💻 <strong>Full Video Editor Panel</strong> (CapCut-style Editing)<br> 
+
+
+
+🎛️ Add a complete video editor at the final stage (post-generation), with functionalities like:<br> 
+
+-✂️ Trim / split scenes<br> 
+
+-➕ Add external content (images, video, audio, text)<br> 
+
+-🎞️ Transitions & visual effects<br> 
+
+-🎨 Filters & overlays<br> 
+
+-🎵 Music background / sound FX<br> 
+
+-🔠 Subtitles (manual or AI-generated)<br> 
+
+-🖼️ Zoom / pan on static images<br> 
+
+-🔉 Volume control / fades<br> 
+
+-🧩 Drag & drop timeline<br> 
+
+-💡 Optional AI-suggestions for scene polish<br>
+
+ <div>
+<img 
+ src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/32.png?raw=true"
+  style="width:70%; display:block; margin:auto;" >
+</div> 
+
+📦<strong> Supports:</strong><br> 
+
+- All generated media from within the platform<br> 
+
+External uploads: JPG, PNG, MP3, WAV, MP4, etc.<br> 
+🧠 Detects skipped steps from Smart Director (Task 9) and adjusts the timeline accordingly — but only removes them if the user chooses.<br> 
+
+📌 This means the system must:<br> 
+
+- Detect which steps (e.g. image, animation, voice...) were skipped.<br> 
+
+Give the user the option to:<br> 
+
+-❌ Remove the skipped step entirely (clean timeline).<br> 
+
+-⬜ Keep an empty placeholder for manual editing later.<br> 
+
+- Ensure the final video timeline flows correctly either way.<br> 
+
+👉 Works in both automatic and manual <strong>Smart Director modes</strong>.</div>
+
+
+  <div class="task subsubtask">
+  <input type="checkbox" data-id="task10-f-1"> 
+  <label for="task10-f-1">10-F-1 📝 <b>Subtitles & Captions</b></label>
+  <ul>
+    <li><input type="checkbox" id="sub-manual"><label for="sub-manual"> Add subtitles manually or automatically (AI-generated)</label></li>
+    <li><input type="checkbox" id="sub-multi"><label for="sub-multi"> 🌍 Multi-language support (linked with dubbing 7-F-2)</label></li>
+    <li><input type="checkbox" id="sub-sync"><label for="sub-sync"> ⏱️ Automatic synchronization with audio/scene</label></li>
+    <li><input type="checkbox" id="sub-style"><label for="sub-style"> 🎛️ Style options (color, size, position, <b>Karaoke-style highlighting</b>)</label></li>
+  </ul>
+</div>
+
+<div class="task subsubtask">
+  <input type="checkbox" data-id="task10-f-2"> 
+  <label for="task10-f-2">10-F-2 🌍 <b>Translation & Multilingual Captions</b></label>
+  <ul>
+    <li><input type="checkbox" id="trans-auto"><label for="trans-auto"> 🔄 Automatic translation of texts into supported languages</label></li>
+    <li><input type="checkbox" id="trans-dub"><label for="trans-dub"> 🎤 Direct link with multilingual dubbing (Task 7-F-2)</label></li>
+    <li><input type="checkbox" id="trans-toggle"><label for="trans-toggle"> 💡 Option to enable/disable subtitles on screen</label></li>
+    <li><input type="checkbox" id="trans-layer"><label for="trans-layer"> 🧩 Save subtitles as an independent editable layer in the timeline</label></li>
+  </ul>
+</div>
+
+
+
+
+<div class="task subtask"><input type="checkbox"data-id="task10-g"> 10-G ⚙️ Works with <strong>Smart Director (auto/manual)</strong>.</div>
+
+    <p>⚙️ <strong>Note:</strong> The current 1️⃣1️⃣ Smart Editing and Timeline system must be designed to allow future enhancement as described in <strong>Task 20</strong> — including intelligent scene suggestions, smart clip replacement, and AI-powered post-editing workflows. No structural rewrite should be needed when Task 20 is implemented.</p>
+<div class="task"><input type="checkbox"data-id="task11"> 1️⃣1️⃣ <strong>Smart Edit Layer ✏️.</strong><br>
+Works automatically with Smart Director.</div>
+
+ <div>
+<img 
+ src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/33.png?raw=true"
+  style="width:70%; display:block; margin:auto;" >
+</div>
+
+
+<div class="task subtask"><input type="checkbox"data-id="task11-a"> 11-A 🕓 Use Arabic prompts (with timecodes) to edit the video — e.g.<br>
+(<strong>For example</strong>)🗣️ “In minute 1:42, replace/remove background visual/sound”
+→ the <strong>Smart Edit Layer</strong> should handle this by automatically generating new image/video/sound from the relevant modules or Pixabay as <strong>Smart Director</strong>.</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task11-b">
+  11-B 🛡️ <strong>Integration with Quality Guards</strong><br>
+  - Smart Edit Layer works after the video is generated.<br>
+  - Quality Guards (Image/Voice/Animation) prevent errors during generation.<br>
+  - Smart Edit Layer provides the second protection layer: fixing or replacing defective clips post-generation (based on user timecode prompts).<br>
+</div>
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task11-c"> 11-C ✏️ <strong>Timecoded Voice Speed Edit</strong><br>
+  <b>Function:</b> Post-generation speed changes via timecoded prompts. Non-destructive preview → Commit replaces original. Integrates with <b>7-Q</b>.
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Example:</b> “At <code>00:01:42</code>, set narrator speed to <code>1.12x</code> without altering pitch.”</li>
+    <li><b>Range:</b> 0.50–2.00 (default 1.00)</li>
+    <li><b>Tools:</b> Undo/Redo, A/B Compare (Before/After), Preview/Commit flow</li>
+    <li><b>Acceptance:</b> ≥99% correct timecode targeting; no audible artifacts at edit boundaries; <u>lip-sync must always be re-synchronized after speed edits</u>.</li>
+  </ul>
+</div>
+
+
+<div class="task subtask">
+  <input type="checkbox" data-id="task11-d"> 11-D 🎵 <strong>Timecoded Singing Pronunciation Fix (Word/Phoneme)</strong><br>
+  <b>Function:</b> Fix mispronounced words/phonemes inside generated singing <u>after</u> it exists. Selective re-synthesis only on edited parts. Non-destructive preview → Commit. Integrates with <b>7-L</b>.
+  <ul style="margin:6px 0 0 1.2em;">
+    <li><b>Example:</b> “From <code>00:00:18</code> to <code>00:00:23</code>, correct the pronunciation of <code>'...'</code> and set note duration to <code>1.05x</code>.”</li>
+    <li><b>Controls:</b> word/phoneme-level fix; optional pitch curve & duration tweaks for the targeted word only</li>
+    <li><b>Seamless:</b> keep global mix/EQ/comp unchanged; seamless joins with surrounding audio</li>
+    <li><b>Sync:</b> <u>every pronunciation/duration edit must re-synchronize lip-sync (visemes) and update timeline placement automatically</u></li>
+    <li><b>Acceptance:</b> no audible seams; cloned voice identity preserved; Undo/Redo + A/B Compare available</li>
+  </ul>
+</div>
+
+
+
+  
+<div class="task"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
+(Needs buttons to connect to the Internet).</div>
+
+<div class="task subtask"><input type="checkbox"data-id="task12-a"> 12-A 💰 Link to <strong>AdSense</strong> — show revenue from YouTube.</div>
+<div class="task subtask"><input type="checkbox"data-id="task12-b"> 12-B 📊 Link to <strong>YouTube Studio</strong> — track video performance and suggest improvements.</div>
+
+<div class="task"><input type="checkbox"data-id="task13"> 1️⃣3️⃣ <strong>Arabic Interface </strong>(Single Page Layout) 🌐.<br>
+✅ 100% RTL support, 📌 Large buttons — each with a simple label and tooltip.<br>
+(⚠️ The interface shown is in English for demonstration purposes only, but the final platform and all its interfaces must be in Arabic. 🗣️🇸🇦عربي)
+</div>
+ <div>
+<img 
+ src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/29.jpg?raw=true"
+  style="width:70%; display:block; margin:auto;" >
+</div>
+
+<div class="task"><input type="checkbox"data-id="task14"> 1️⃣4️⃣<strong> Auto-Update Button 🔄</strong>.<br>
+(Requires internet) — used to update the platform in future if needed.</div>
+
+<div class="task"><input type="checkbox"data-id="task15"> 1️⃣5️⃣<strong> Save Project & Continue Later 💾</strong>.</div>
+
+
+ <div class="task subsubtask">
+  <input type="checkbox" data-id="task15-auto-save">
+  15-A 💾 <strong>Auto-Save Every 30s (Platform-Wide)</strong>
+  <div style="margin-inline-start:1.8em;">
+    <ul style="margin:8px 0 0 0; padding-left:1em;">
+      <li>⏱️ Automatically save the project every <b>30 seconds</b> <i>(only if changes occurred)</i>.</li>
+      <li>🧯 <b>Crash-safe writes</b>: write to a temp file, then <b>atomic rename</b> to prevent corruption.</li>
+      <li>🚀 On reopen: if a newer autosave exists, show <em>“Resume from Autosave?”</em> with a brief change summary.</li>
+      <li>🗄️ Retention: keep the last <b>50</b> autosaves or the last <b>2 hours</b> (whichever is smaller); safely prune older ones.</li>
+      <li>📴 Offline-only: no cloud sync and no internet calls.</li>
+      <li>✅ <b>Acceptance</b>: maximum possible loss of work ≤ <b>30s</b>.</li>
+    </ul>
+  </div>
+</div> 
+  
+  
+  <div class="task"><input type="checkbox"data-id="task16"> 1️⃣6️⃣ Project Folder System — <strong>stores all files </strong>(images/audio/etc.) 📁.</div>
+
+<div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ <strong>Backup & Restore Function</strong> 🛡️.</div>
+
+
+
+  
+
+<br><br>
+
+<div class="task-box shadow-3d">
+  <div class="task-content">
+    <input type="checkbox" data-id="task19" disabled>
+    <strong>1️⃣9️⃣ Hasaballa Engine – The Smart Learning Core 🧠</strong>
+    <span class="badge">🔜 Coming Soon</span><br><br>
+
+    <strong>Hasaballa Engine</strong> is the foundational core that will allow the entire platform to evolve toward a self-improving, AI-driven ecosystem.  
+    It is not just a tool — it is a <strong>shadow model</strong> that silently observes and learns from everything happening inside the platform:<br><br>
+
+    🔹 Tracks the performance of every module (text, image, voice, animation...)<br>
+    🔹 Collects training data from every user interaction and output<br>
+    🔹 Learns from every scenario, image, voice, and animation generated<br><br>
+
+    In the future, the engine will be divided into multiple specialized sub-models:<br>
+    • <strong>Hasaballa Text</strong> – for script understanding and style adaptation<br>
+    • <strong>Hasaballa ImageGen</strong> – to replace image generation models like Stable Diffusion<br>
+    • <strong>Hasaballa Animator</strong> – for lip sync and animation<br>
+    • <strong>Hasaballa Voice</strong> – for voice generation, cloning & enhancement<br><br>
+
+    ✅ The ultimate goal is to <strong>replace external models</strong> like SDXL, SkyReels V2, and Tacotron, once the Hasaballa Engine reaches 90–95% quality.<br>
+    ✅ The engine will continue to improve passively as users create content.<br>
+    ✅ Once matured, it could power the entire platform completely offline.<br><br>
+
+    ⚙️ <strong>Status:</strong> Not active in version 1.0 – scheduled as a major upgrade after 6 months of usage.<br>
+    🧠 <strong>Integration:</strong> Deeply connected with all tools – learns from every step without requiring manual training.<br>
+    📌 <strong>Note:</strong> Sub-models may be released in the future as optional APIs or Pro features.
+  </div>
+</div>
+<br><br>
+<div class="task-box task coming-soon shadow-3d lime-green">
+  <div class="task-content">
+
+    <strong>2️⃣1️⃣ Behavioral Identity Engine – Character Behavior Intelligence 🎭</strong>
+    <span class="badge">🚀 Coming Very Soon</span><br><br>
+
+    <strong>Behavioral Identity Engine</strong> is a next-generation identity system that expands character consistency beyond traditional Face Identity and Voice Identity.
+
+    Instead of:
+
+    <br><br>
+
+    👤 Face Identity + 🎙️ Voice Identity
+
+    <br><br>
+
+    the platform introduces a third identity layer:
+
+    <br><br>
+
+    🧠 <strong>Character Identity = Face + Voice + Behavior</strong>
+
+    <br><br>
+
+    The goal is to preserve not only how a character looks and sounds, but also how the character naturally behaves.
+
+    <br><br>
+
+    📦 <strong>Character Pack Expansion</strong>
+
+    <br><br>
+
+    Current Character Packs contain:
+
+    <br>
+
+    • Reference Images<br>
+    • Reference Voices
+
+    <br><br>
+
+    Behavioral Identity Engine adds:
+
+    <br>
+
+    • Reference Behavior Videos
+
+    <br><br>
+
+    Resulting in:
+
+    <br><br>
+
+    <strong>Character Pack = Images + Voices + Behavior Videos</strong>
+
+    <br><br>
+
+    🎥 <strong>Reference Behavior Videos</strong>
+
+    <br><br>
+
+    Users may optionally upload one or more behavior reference videos showing:
+
+    <br>
+
+    • Natural speech<br>
+    • Interviews<br>
+    • Public appearances<br>
+    • Historical recordings<br>
+    • Casual conversations<br>
+    • Walking footage<br>
+    • Live reactions
+
+    <br><br>
+
+    The system analyzes behavioral patterns and generates a reusable:
+
+    <br><br>
+
+    🧠 <strong>Motion Profile</strong>
+
+    <br><br>
+
+    Motion Profile may include:
+
+    <br>
+
+    • Eye movement patterns<br>
+    • Facial expression tendencies<br>
+    • Gesture frequency<br>
+    • Head movement habits<br>
+    • Smile characteristics<br>
+    • Laugh characteristics<br>
+    • Body language behavior<br>
+    • Speaking rhythm<br>
+    • Communication style<br>
+    • Emotional reaction patterns
+
+    <br><br>
+
+    🎬 <strong>Smart Director Integration</strong>
+
+    <br><br>
+
+    The generated Motion Profile can be integrated with:
+
+    <br>
+
+    • Smart Director – Automatic Mode<br>
+    • Smart Director – Manual Mode<br>
+    • Image Animation Tool<br>
+    • Video Generation Tool
+
+    <br><br>
+
+    allowing generated characters to preserve:
+
+    <br>
+
+    ✅ Natural gestures<br>
+    ✅ Characteristic facial expressions<br>
+    ✅ Unique gaze behavior<br>
+    ✅ Personal speaking style<br>
+    ✅ Recognizable movement patterns<br>
+    ✅ Consistent emotional reactions
+
+    <br><br>
+
+    instead of relying solely on generic animation models.
+
+    <br><br>
+
+    📊 <strong>Suggested User Levels</strong>
+
+    <br><br>
+
+    🟢 <strong>Level 1</strong><br>
+    Reference Images Only<br>
+    Result: Visual Identity
+
+    <br><br>
+
+    🟡 <strong>Level 2</strong><br>
+    Reference Images + Reference Voice<br>
+    Result: Visual Identity + Voice Identity
+
+    <br><br>
+
+    🔴 <strong>Level 3</strong><br>
+    Reference Images + Reference Voice + Behavior Videos<br>
+    Result: Visual Identity + Voice Identity + Behavioral Identity
+
+    <br><br>
+
+    🎭 <strong>Universal Character Support</strong>
+
+    <br><br>
+
+    Behavioral Identity is not limited to humans.
+
+    The system can potentially support:
+
+    <br>
+
+    • Cartoon Characters<br>
+    • Clay Characters<br>
+    • Talking Animals<br>
+    • Historical Mascots<br>
+    • Fictional Personalities<br>
+    • Symbolic Characters<br>
+    • Humanized Objects<br>
+    • Humanized Locations<br>
+    • Humanized Countries<br>
+    • Humanized Concepts
+
+    <br><br>
+
+    📽️ <strong>Example Use Cases</strong>
+
+    <br><br>
+
+    ⚽ A football player appears in a virtual interview while preserving his real-world behavioral style.
+
+
+    <br><br>
+
+    🎭 Fictional comedy characters interact naturally while maintaining their recognizable behavioral patterns.
+
+    <br><br>
+
+    🧠 The realism comes from preserving behavior — not just appearance.
+
+    <br><br>
+
+    ⚙️ <strong>Status:</strong> Research & Future Development Stage<br>
+
+    🚀 <strong>Planned Release:</strong> With Platform Version 1.0 Stabilization<br>
+
+    🧩 <strong>Integration:</strong> Connected to Character Packs, Smart Director, Image Animation, Voice System, and Future Hasaballa Engine Modules.<br>
+
+    📌 <strong>Goal:</strong> Create truly recognizable digital personalities that preserve how a character thinks, reacts, communicates, and behaves across all generated content.
+
+<p>
+  📌 <strong>Reference Proposal Website:</strong>
+  <a href="https://ahmedhasab.github.io/Behavioral-Identity-Engine/" target="_blank">
+    Behavioral Identity Engine
+  </a>
+</p>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+const PASSWORD_HASH_HEX = "7eb59c7b0a3460bd12b8821d37d2a40a065bbaebf7c87effc3329ebf105a6aff";
+const REMEMBER_DAYS = 30;
+const REMEMBER_KEY  = "hasaballa_gate_until";
+
+try {
+  const until = parseInt(localStorage.getItem(REMEMBER_KEY) || "0", 10);
+  if (Date.now() < until) {
+    document.getElementById('lock-overlay').style.display='none';
+  }
+} catch(e){}
+
+async function sha256Hex(text) {
+  const enc = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function tryUnlock() {
+  const pw  = document.getElementById('pw').value;
+  const msg = document.getElementById('msg');
+  const rem = document.getElementById('remember').checked;
+  msg.textContent = '…checking';
+  try {
+    const hex = await sha256Hex(pw);
+    if (hex === PASSWORD_HASH_HEX) {
+      if (rem) {
+        const until = Date.now() + REMEMBER_DAYS*24*60*60*1000;
+        localStorage.setItem(REMEMBER_KEY, String(until));
+      }
+      document.getElementById('lock-overlay').style.display='none';
+      msg.textContent = '';
+    } else {
+      msg.textContent = 'Wrong password';
+    }
+  } catch(e){ msg.textContent = 'Error'; }
+}
+
+document.getElementById('unlockBtn').onclick = tryUnlock;
+document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='Enter') tryUnlock(); });
+document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REMEMBER_KEY); location.reload(); };
+</script>
+
+
+<script>
+/** ==================== الإعدادات ==================== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKcb_D2cfLucuutmvjFO788J3ofh0gHSDJC-rEeIw3OJpS9Orluf5LI7ghiDj5gTXC/exec"; // GAS Web App (/exec)
+const SID_KEY    = "session_id";       // مفتاح تخزين الـ Session
+const SITE_ID    = "prod/";            // ثابت ليتطابق مع الداشبورد
+const IDLE_AFTER_MS = 60000;           // عتبة السكون: 60 ثانية
+
+/** (اختياري) أزمنة تلوين الحالة لو السيرفر بيرجع status */
+const ACTIVE_MS = 20 * 1000;
+const OPEN_MS   = 30 * 1000;
+
+/** ==================== Helpers ==================== */
+function getSid(){ return localStorage.getItem(SID_KEY) || ""; }
+function setSid(id){ localStorage.setItem(SID_KEY, id); }
+function clearSid(){ localStorage.removeItem(SID_KEY); }
+
+/** شبكة مع كشف أخطاء */
+async function postRaw(params){
+  const res = await fetch(SCRIPT_URL, { method:'POST', body:new URLSearchParams(params) });
+  const ct  = (res.headers.get('content-type')||'').toLowerCase();
+  if (!res.ok) {
+    const txt = await res.text().catch(()=> '');
+    console.error('HTTP_FAIL', res.status, txt.slice(0,200));
+    throw new Error('HTTP_'+res.status);
+  }
+  if (!ct.includes('application/json')) {
+    const txt = await res.text().catch(()=> '');
+    console.error('NON_JSON', txt.slice(0,300));
+    throw new Error('NON_JSON');
+  }
+  return res.json();
+}
+
+/** إعادة محاولة تلقائية لو الـ SID بايظ */
+async function post(params){
+  try{
+    const r = await postRaw(params);
+    if (r && r.error === 'not_found') throw Object.assign(new Error('SID_NOT_FOUND'), {code:'SID_NOT_FOUND'});
+    return r;
+  }catch(e){
+    if (e && e.code === 'SID_NOT_FOUND') {
+      // امسح الـ SID وحاول تهيّئ من جديد ثم أعد المحاولة مرة واحدة
+      clearSid();
+      await ensureSid(true);
+      return postRaw(params);
+    }
+    throw e;
+  }
+}
+
+/** ==================== تهيئة Session مع تحقق من الصحة ==================== */
+async function ensureSid(forceReinit=false){
+  let id = getSid();
+
+  // لو عندنا SID قديم، نتحقق إنه صالح
+  if (id && !forceReinit){
+    try{
+      const chk = await postRaw({ action:'check', id });
+      if (chk && chk.ok && chk.allow !== false) return id; // صالح
+      // مرفوض/محذوف → نرميه وننشئ جديد
+      clearSid();
+    }catch(_){
+      // لو الرد 'not_found' أو فشل JSON… هنرميه ونرجّع ننشئ جديد
+      clearSid();
+    }
+  }
+
+  // أنشئ جلسة جديدة
+  let ip='', country='', city='';
+  try{
+    const g = await fetch('https://ipapi.co/json/').then(r=>r.json());
+    ip = g.ip || ''; country = g.country_name || g.country || ''; city = g.city || '';
+  }catch(_){}
+  const ua = navigator.userAgent || '';
+
+  const res = await postRaw({ action:'init', ua, ip, country, city, siteId: SITE_ID });
+  if (res && res.ok && res.id){
+    setSid(res.id);
+    console.log('INIT_OK', res.id);
+    return res.id;
+  }
+  console.error('INIT_BAD', res);
+  throw new Error('init_failed');
+}
+
+/** ==================== لوج ونبض الجلسة ==================== */
+let idleState = false, idleTimer = null, lastActTs = 0;
+let lastActiveSend = 0;
+const ACTIVE_THROTTLE_MS = 1000;
+function canSendActive(){ const n=Date.now(); if (n-lastActiveSend>=ACTIVE_THROTTLE_MS){ lastActiveSend=n; return true; } return false; }
+
+async function ping(){
+  const id = getSid();
+  if(!id) return;
+  try{ await post({ action:'ping', id }); }catch(e){ console.warn('ping fail', e.message); }
+}
+async function active(){
+  const id = getSid();
+  if(!id || !canSendActive()) return;
+  try{ await post({ action:'active', id }); }catch(e){ console.warn('active fail', e.message); }
+}
+
+async function sendLog(evt, meta, extra){
+  const id = getSid() || await ensureSid();
+  const p = { action:'log', id, evt, meta: meta || '',
+              visible: document.visibilityState === 'visible' ? '1':'0',
+              focused: document.hasFocus() ? '1':'0',
+              idle: idleState ? '1':'0' };
+  if (extra) Object.entries(extra).forEach(([k,v])=> p[k]=String(v));
+  try{ await post(p); }catch(e){ console.warn('log fail', evt, e.message); }
+}
+
+/** ==================== كشف النشاط/السكون ==================== */
+function markActivity(kind){
+  const n = Date.now();
+  if (n - lastActTs > 1000){ sendLog('activity', kind); lastActTs = n; }
+  if (idleState){ idleState=false; sendLog('idle_end'); }
+  resetIdleTimer();
+  active();
+}
+function resetIdleTimer(){
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(()=>{ idleState = true; sendLog('idle_start'); }, IDLE_AFTER_MS);
+}
+
+/** ==================== رؤية الصفحة والتركيز ==================== */
+document.addEventListener('visibilitychange', ()=>{ sendLog(document.visibilityState==='visible'?'visible':'hidden'); ping(); });
+window.addEventListener('focus',  ()=>{ sendLog('focus'); active(); });
+window.addEventListener('blur',   ()=>{ sendLog('blur');  ping();   });
+
+['mousemove','pointermove','mousedown','click','wheel','scroll','touchstart','touchmove','keydown','keyup','resize']
+  .forEach(evt => window.addEventListener(evt, ()=>markActivity(evt), {passive:true}));
+
+/** Ping دوري حتى في الخلفية */
+setInterval(()=>{ ping(); }, 5000);
+
+/** اختيارى: لون الحالة */
+function applyStatus(status){
+  const dot=document.getElementById('statusDot'), text=document.getElementById('statusText');
+  if (dot){ dot.classList.remove('green','yellow','gray'); dot.classList.add(status||'gray'); }
+  if (text){ text.textContent = status==='green'?'نشط الآن': status==='yellow'?'مفتوح بدون تفاعل':'غير متصل/في الخلفية'; }
+}
+async function checkAllow(){
+  const id = getSid(); if(!id) return;
+  try{
+    const r = await post({ action:'check', id });
+    if (r && r.ok){
+      if (r.allow === false){ clearSid(); location.reload(); return; }
+      if (r.status) applyStatus(r.status);
+    }
+  }catch(_){}
+}
+
+/** ==================== تشغيل ==================== */
+window.addEventListener('DOMContentLoaded', async ()=>{
+  try {
+    await ensureSid();         // يضمن وجود جلسة صالحة (ويعيد إنشائها لو كانت مفقودة)
+    sendLog('page_open');
+    resetIdleTimer();
+  } catch(e){
+    console.error('SESSION_INIT_ERROR', e);
+    alert('Tracking init failed — افتح Console للتفاصيل.');
+  }
+  setInterval(()=>{ if(document.visibilityState==='visible') try{post({action:'state',since:'0'})}catch(_){ } }, 200); // نفس سلوكك القديم (اختياري)
+  setInterval(checkAllow, 2000);
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
