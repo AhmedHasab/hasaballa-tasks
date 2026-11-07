@@ -1,0 +1,24 @@
+{
+  "name": "HASABALLA AI Platform - Version 2",
+  "short_name": "HASABALLA AI",
+  "description": "HASABALLA AI Version 2 implementation specification",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7fbff",
+  "theme_color": "#f7fbff",
+  "icons": [
+    {
+      "src": "./assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/brand.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
