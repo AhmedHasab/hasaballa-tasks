@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="HASABALLA AI Version 2 implementation roadmap and exact, original, categorized reference media."><title>HASABALLA AI - Version 2 | Nine Upgrade Priorities</title><link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest?v=2"><meta name="theme-color" content="#f7fbff"><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="HASABALLA AI Version 2 implementation roadmap and exact, original, categorized reference media."><title>HASABALLA AI - Version 2 | Nine Upgrade Priorities</title><link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest?v=2"><meta name="theme-color" content="#f7fbff"><script>(function(){var t="light";try{var s=localStorage.getItem("hasaballa-v2-color-theme");if(s==="dark"||s==="light")t=s;}catch(e){}document.documentElement.setAttribute("data-theme",t);})();</script><style>
 :root{--bg:#070e18;--top:#0c1623;--panel:#101e2f;--panel2:#14253a;--line:#29435c;--text:#eef5ff;--muted:#b2c5d9;--gold:#ffc36e;--cyan:#90e7ed;--green:#aff0b4}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.65}a{color:var(--cyan)}.top{position:sticky;top:0;z-index:20;background:rgba(8,17,29,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(15px)}.top-inner{max-width:1700px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 24px}.brand{color:white;text-decoration:none;font-weight:850;letter-spacing:.11em;white-space:nowrap}.brand b{display:inline-flex;width:36px;height:36px;background:linear-gradient(145deg,#ffca77,#f28a6b);border-radius:12px;align-items:center;justify-content:center;color:#111827;margin-right:8px}.top-label{color:var(--gold);border:1px solid #6b553d;border-radius:22px;padding:5px 12px;font-weight:800;font-size:12px;letter-spacing:.11em}.layout{max-width:1700px;margin:auto;display:grid;grid-template-columns:278px minmax(0,1fr)}.sidebar{position:sticky;top:63px;max-height:calc(100vh - 63px);overflow-y:auto;align-self:start;background:#091321;border-right:1px solid var(--line);padding:20px 14px}.sidebar h2{font-size:13px;letter-spacing:.13em;color:var(--gold);padding:0 12px}.sidebar nav{display:flex;flex-direction:column;gap:4px}.sidebar a{font-size:13px;text-decoration:none;color:#cfe1f5;display:flex;gap:10px;padding:10px;border-radius:11px}.sidebar a:hover,.sidebar a:focus{background:#1a3248}.sidebar a span{color:var(--gold);font-weight:850;width:24px}.sidebar p{font-size:12px;color:var(--muted);border-top:1px solid var(--line);margin-top:18px;padding:12px}.content{padding:24px 28px 70px;min-width:0}.hero{padding:38px 38px 34px;background:linear-gradient(130deg,#12334b,#0b1625 70%);border:1px solid var(--line);border-radius:24px;margin-bottom:22px}.eyebrow{color:var(--gold);font-size:12px;letter-spacing:.17em;font-weight:800;text-transform:uppercase}.hero h1{font-size:clamp(30px,4vw,56px);line-height:1.1;margin:12px 0}.hero p{max-width:930px;color:#cfdeeb;font-size:17px}.hero .facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.hero .facts span{border:1px solid #3a5870;border-radius:14px;padding:7px 12px;font-size:12px;color:#cbebf3}.priority{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-bottom:24px;scroll-margin-top:80px}.section-head{background:linear-gradient(120deg,#10233a,#0e1c2c);padding:28px 30px;border-bottom:1px solid var(--line)}.section-chip{display:flex;align-items:center;gap:10px;color:var(--cyan);text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:.06em}.section-chip span{color:var(--gold);background:#254057;border-radius:11px;padding:7px 10px}.section-chip em{font-style:normal}.section-head h2{font-size:clamp(25px,3vw,39px);line-height:1.17;margin:14px 0}.section-head p{font-size:16px;max-width:1020px;color:#bad0e5;margin:0}.explainer{font-size:16px;padding:20px 28px;background:#112a38;border-bottom:1px solid #345160;color:#d0f4f1}.detail-box,.sub-explanation{padding:19px 22px;border:1px solid var(--line);background:#14263a;border-radius:17px;margin:20px 26px}.detail-box h3{margin:0 0 8px;color:var(--gold);font-size:19px}.detail-box p{color:#d5e4f2;margin:5px 0;line-height:1.75}.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:18px 25px}.detail-grid .detail-box{margin:0}@media(min-width:1051px){.detail-grid>.detail-box:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc((100% - 12px)/2)}}.tool-matrix{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tool-row{padding:12px;border-radius:11px;background:#0d1b2a}.tool-row strong{font-size:14px;color:#d8eff8}.tool-row p{font-size:13px}.identity-flow{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:10px;padding:26px 22px}.identity-flow>div{border:1px solid #49718b;border-radius:15px;min-width:145px;flex:1;max-width:240px;background:#122f41;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 12px;gap:6px;text-align:center}.identity-flow span{color:#b8dbde;font-size:12px}.identity-flow strong{color:white;font-size:17px}.identity-flow b{align-self:center;color:var(--gold);font-size:24px}.identity-flow .flow-highlight{border-color:#997b55;background:#3b302b}.identity-flow .flow-result{border-color:#54836d;background:#193b37}.source-note{color:#9eb4ca;padding:10px 28px 27px;font-size:12px}.official-image{max-width:700px;margin:26px auto;padding:0 12px;text-align:center}.official-image img{max-width:100%;height:auto;object-fit:contain;border-radius:15px;background:#efe8da}.official-image p{font-size:12px;color:#b0c6dc}.subsection{margin:19px 25px 30px;border:1px solid #3a5269;border-radius:18px;overflow:hidden;background:#0c1a2a}.subsection h3{font-size:24px;margin:0;padding:20px 22px 0;color:#f4faff}.sub-lead{font-size:15px;color:#c5d7e7;margin:0;padding:5px 22px 18px}.sub-explanation{margin:16px 16px 20px;color:#d6e8f6}.media-group{padding:14px 18px;border-top:1px solid var(--line)}.media-group-title{display:flex;justify-content:space-between;align-items:center;gap:12px}.media-group-title h4{font-size:17px;color:var(--gold);margin:5px 0}.media-group-title span{border:1px solid #456278;padding:3px 10px;border-radius:50px;color:#bbdfe9;font-size:12px}.media-note{font-size:12px;color:#9fb8cc;margin:0 0 12px}.image-grid,.video-grid{display:grid;gap:14px}.image-grid{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}.video-grid{grid-template-columns:repeat(auto-fit,minmax(325px,1fr))}.image-grid>.media-image:only-child,.video-grid>.media-video:only-child{justify-self:center;width:min(100%,420px)}.image-grid>.center-last-card,.video-grid>.center-last-card{grid-column:1/-1;justify-self:center;width:min(100%,var(--centered-card-width))}.media-image,.media-video{margin:0;overflow:hidden;border-radius:14px;background:#07111e;border:1px solid #345066}.image-fit{display:flex;align-items:center;justify-content:center;width:100%;height:260px;padding:8px;background:#060d15}.image-fit img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}.media-image figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;padding:8px 12px;color:#d8ecf7;font-size:12px}.media-image figcaption span{color:#97c0cc}.media-video video{display:block;width:100%;height:320px;background:#000;object-fit:contain}.video-error-message{margin:0;padding:7px 12px;color:#ffd6a8;font-size:12px;background:#3c2d27}.media-video figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:12px;font-size:12px}.media-video figcaption strong{font-size:14px;color:#f2f8ff;margin-right:auto}.media-video figcaption span{color:#91b9c7}.media-video figcaption a{color:var(--cyan)}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:14px}.comparison>div{border:1px solid #38536a;background:#0b1b2d;border-radius:12px;padding:15px}.comparison strong{color:#b8edee}.footer{padding:22px 25px;text-align:center;color:#a7c1d4;border-top:1px solid var(--line);font-size:12px}.backtop{position:fixed;bottom:22px;right:18px;background:#284964;color:#fff;border:1px solid #548da0;border-radius:50%;width:43px;height:43px;display:flex;align-items:center;justify-content:center;text-decoration:none}img{color:var(--muted)}
 @media(max-width:1050px){.layout{grid-template-columns:1fr}.sidebar{position:relative;top:auto;max-height:none;border-right:0;border-bottom:1px solid var(--line)}.sidebar nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}.content{padding:20px 14px}.hero{padding:26px}.detail-grid{grid-template-columns:1fr}}
@@ -47,7 +47,118 @@ body>.layout,body>.top{z-index:1}.layout{position:relative}
 a{color:#006f91}
 ::selection{background:#c7ecfb;color:#14354e}
 @media(max-width:620px){body::before{background-size:80vw}.brand .brand-icon{width:33px;height:33px}}
-</style></head><body id="top"><header class="top"><div class="top-inner"><a class="brand" href="#top"><img class="brand-icon" src="assets/brand.svg?v=2" alt=""> HASABALLA AI</a><span class="top-label">VERSION 2 · DEVELOPMENT &amp; IMPROVEMENTS</span></div></header><div class="layout"><aside class="sidebar"><h2>IMPLEMENTATION ORDER</h2><nav aria-label="Nine upgrade priorities"><a href="#upgrades"><span>01</span>Platform-wide model &amp; tool upgrade</a><a href="#bie"><span>02</span>Behavioral Identity Engine</a><a href="#engine"><span>03</span>Hasaballa Engine · Task 19</a><a href="#autofix"><span>04</span>Auto Smart Fix · Task 20</a><a href="#motion"><span>05</span>Motion Graphics Studio</a><a href="#cartoon"><span>06</span>Cartoon &amp; 3D Animation</a><a href="#living"><span>07</span>Living Objects Studio</a><a href="#virtual"><span>08</span>Virtual Worlds &amp; VFX</a><a href="#transfer"><span>09</span>Advanced Performance Transfer</a></nav></aside><main class="content"><div class="hero"><div class="eyebrow">HASABALLA AI / Version 2</div><h1>Nine integrated upgrades.<br>One HASABALLA platform.</h1><p>Implementation requirements for the next version of the platform. All modules are to be integrated into the same desktop platform - not buttons that open external websites. Each studio's original uploaded image and video references appear only under its assigned section.</p><div class="facts"><span>Windows 11 Pro · 64-bit</span><span>Ryzen 9 9955HX · 16 cores / 32 threads</span><span>RTX 5090 Laptop · 24 GB-class VRAM</span><span>64 GB DDR5 · 5600 MT/s</span><span>4 TB NVMe SSD</span><span>Core production fully offline</span></div></div><section class="priority" id="upgrades"><header class="section-head"><div class="section-chip"><span>01</span> <em>First priority · Upgrade quality before version numbers</em></div><h2>Platform-Wide Tool & Model Upgrade</h2><p>Review all existing HASABALLA AI tools and all their subfeatures. Change a model or tool only when tests establish that a different option is better across quality, realism and use.</p></header>
+
+/* Theme version 3: deeper light surfaces, high contrast, user-selectable dark theme */
+:root{--bg:#dcebf6;--top:#edf6fd;--panel:#f6faff;--panel2:#e6f2fb;--line:#91b9d0;--text:#102a41;--muted:#34546c;--gold:#9e3700;--cyan:#005b79;--green:#076b50;color-scheme:light}
+body{background:linear-gradient(145deg,#d3e6f4 0%,#e6f2fb 42%,#cce4f3 100%);color:var(--text);font-weight:450}
+body::before{background-image:url("assets/brand.svg?v=3");background-size:min(75vw,690px);opacity:.11}
+.top{background:rgba(226,241,251,.96);border-color:#8cb4cd}
+.top-inner{gap:16px}
+.top-actions{display:flex;align-items:center;gap:12px}
+.theme-toggle{appearance:none;cursor:pointer;padding:8px 15px;background:#fff;border:2px solid #5397b9;border-radius:24px;color:#0e506c;font:700 13px/1.25 inherit;white-space:nowrap;box-shadow:0 2px 8px rgba(20,64,95,.10);transition:background .15s,color .15s,border-color .15s}
+.theme-toggle:hover{background:#d9eef9}
+.theme-toggle:focus-visible{outline:3px solid #f69b30;outline-offset:3px}
+.top-label{background:#fff5eb;border-color:#d5a57f;color:#974313}
+.sidebar{background:#e3f0fa;border-color:#90b8cf}
+.sidebar a{color:#173c57;font-weight:650}
+.sidebar p{color:#36566d}
+.sidebar a:hover,.sidebar a:focus{background:#c7e4f5;color:#073d60}
+.hero{background:linear-gradient(125deg,#e3f3ff,#cfe8f8);border-color:#8eb9d1}
+.hero h1,.section-head h2{color:#102a43}
+.hero p{color:#244964}
+.hero .facts span{background:#f3faff;border-color:#96bfd6;color:#214c69;font-weight:650}
+.priority{background:#f5faff;border-color:#a0c4d8}
+.section-head{background:linear-gradient(115deg,#dfedf9,#c9e4f6);border-color:#a0c4d8}
+.section-head p{color:#28506c}
+.section-chip{color:#075e7c}
+.section-chip span{background:#f5fbff;color:#9b390b}
+.explainer{background:#d4edf9;color:#194762;border-color:#8fbad2}
+.detail-box,.sub-explanation{background:#eef7fe;border-color:#a5c6dc}
+.detail-box h3,.media-group-title h4{color:#a13a08}
+.detail-box p,.sub-explanation{color:#1a3b54;font-weight:500}
+.subsection{background:#eaf5fd;border-color:#a0bfd2}
+.subsection h3{color:#133d5c}
+.sub-lead{color:#254d67;font-weight:520}
+.tool-row,.identity-flow>div{background:#e0f1fc;border-color:#93b9d0}
+.tool-row strong{color:#16415a}
+.identity-flow strong{color:#19405c}
+.identity-flow span{color:#315873}
+.media-image,.media-video{background:#e9f5fd;border-color:#7aaac6}
+.media-image figcaption,.media-video figcaption{background:#e8f4fc;color:#1b3e5a}
+.media-image figcaption span,.media-video figcaption span{color:#325c74}
+.media-note,.source-note,.official-image p{color:#365972}
+.comparison>div{background:#e4f2fb;border-color:#8fb8d1}
+.comparison strong{color:#005a7a}
+.footer{color:#3b5d76}
+.cross-studio-brief{background:linear-gradient(135deg,#d9edfb,#c7e4f5);border-color:#92bbd0}
+.cross-studio-brief h2{color:#17354f}.cross-studio-brief p{color:#274a66}.cross-studio-brief strong{color:#006681}
+a{color:#005e84}
+.detail-box,.sub-explanation,.cross-studio-brief,.comparison>div{position:relative;isolation:isolate}
+.detail-box::before,.sub-explanation::before,.cross-studio-brief::before,.comparison>div::before{content:"";position:absolute;inset:0;border-radius:inherit;background:url("assets/brand.svg?v=3") right 18px center/170px auto no-repeat;opacity:.085;pointer-events:none;z-index:0}
+.detail-box>*,.cross-studio-brief>*,.comparison>div>*{position:relative;z-index:1}
+.image-fit{position:relative;background:#d7eaf7}
+.image-fit::before{content:"";position:absolute;inset:0;background:url("assets/brand.svg?v=3") center/180px auto no-repeat;opacity:.14;pointer-events:none}
+.image-fit img{position:relative;z-index:1}
+.media-video video{background-color:#d2e8f6;background-image:url("assets/brand.svg?v=3");background-size:145px auto;background-position:center;background-repeat:no-repeat}
+.media-video figcaption strong{color:#173951}
+.top .brand{color:#133853}
+::selection{background:#91d4ef;color:#092b46}
+html[data-theme="dark"]{--bg:#142438;--top:#1b3047;--panel:#21364d;--panel2:#263d55;--line:#4b6b86;--text:#f5f9ff;--muted:#c8d9e8;--gold:#ffbf79;--cyan:#84dcf3;--green:#91dfba;color-scheme:dark}
+html[data-theme="dark"] body{background:linear-gradient(135deg,#142438,#1d3550 48%,#12283d);color:var(--text)}
+html[data-theme="dark"] body::before{opacity:.075}
+html[data-theme="dark"] .top{background:rgba(26,46,67,.97);border-color:#42627b}
+html[data-theme="dark"] .brand{color:#fff}
+html[data-theme="dark"] .top-label{background:#2b435d;border-color:#6983a0;color:#ffd1a1}
+html[data-theme="dark"] .theme-toggle{background:#314b64;border-color:#92c9e7;color:#f6fbff;box-shadow:none}
+html[data-theme="dark"] .theme-toggle:hover{background:#406481}
+html[data-theme="dark"] .sidebar{background:#1b3047;border-color:#496984}
+html[data-theme="dark"] .sidebar a{color:#e2f1ff}
+html[data-theme="dark"] .sidebar p{color:#c2d6e5}
+html[data-theme="dark"] .sidebar a:hover,html[data-theme="dark"] .sidebar a:focus{background:#31516e;color:#fff}
+html[data-theme="dark"] .sidebar a span,html[data-theme="dark"] .sidebar h2{color:#ffbf79}
+html[data-theme="dark"] .hero{background:linear-gradient(125deg,#26425e,#1c3047);border-color:#506f88}
+html[data-theme="dark"] .hero h1,html[data-theme="dark"] .section-head h2{color:#fff}
+html[data-theme="dark"] .hero p{color:#dbeafa}
+html[data-theme="dark"] .hero .facts span{background:#304c66;border-color:#7093ae;color:#f3faff}
+html[data-theme="dark"] .priority{background:#1e324a;border-color:#4e6c83}
+html[data-theme="dark"] .section-head{background:linear-gradient(115deg,#2b4863,#21374e);border-color:#4b6b85}
+html[data-theme="dark"] .section-head p{color:#d8e9f7}
+html[data-theme="dark"] .section-chip{color:#90e4f2}
+html[data-theme="dark"] .section-chip span{background:#385671;color:#ffcc8d}
+html[data-theme="dark"] .explainer{background:#29465b;border-color:#52778a;color:#e2f6fd}
+html[data-theme="dark"] .detail-box,html[data-theme="dark"] .sub-explanation{background:#294158;border-color:#52718d}
+html[data-theme="dark"] .detail-box h3,html[data-theme="dark"] .media-group-title h4{color:#ffc786}
+html[data-theme="dark"] .detail-box p,html[data-theme="dark"] .sub-explanation{color:#f0f8ff}
+html[data-theme="dark"] .subsection{background:#20364d;border-color:#52728d}
+html[data-theme="dark"] .subsection h3{color:#f8fbff}
+html[data-theme="dark"] .sub-lead{color:#dbebf8}
+html[data-theme="dark"] .tool-row,html[data-theme="dark"] .identity-flow>div{background:#2e4a62;border-color:#65869e}
+html[data-theme="dark"] .tool-row strong,html[data-theme="dark"] .identity-flow strong{color:#f3faff}
+html[data-theme="dark"] .identity-flow span{color:#cee8f1}
+html[data-theme="dark"] .identity-flow .flow-highlight{background:#473d3b;border-color:#97765a}
+html[data-theme="dark"] .identity-flow .flow-result{background:#284d46;border-color:#669483}
+html[data-theme="dark"] .media-image,html[data-theme="dark"] .media-video{background:#223c55;border-color:#577b95}
+html[data-theme="dark"] .media-image figcaption,html[data-theme="dark"] .media-video figcaption{background:#29445c;color:#f2f9ff}
+html[data-theme="dark"] .media-image figcaption span,html[data-theme="dark"] .media-video figcaption span{color:#d3e8f2}
+html[data-theme="dark"] .media-video figcaption strong{color:#fff}
+html[data-theme="dark"] .media-note,html[data-theme="dark"] .source-note,html[data-theme="dark"] .official-image p{color:#c5dcec}
+html[data-theme="dark"] .image-fit{background:#263d52}
+html[data-theme="dark"] .media-video video{background-color:#1b3047}
+html[data-theme="dark"] .comparison>div{background:#294359;border-color:#597e97}
+html[data-theme="dark"] .comparison strong{color:#c2f4f8}
+html[data-theme="dark"] .cross-studio-brief{background:linear-gradient(135deg,#294660,#1e384f);border-color:#5a7991}
+html[data-theme="dark"] .cross-studio-brief h2{color:#fff}
+html[data-theme="dark"] .cross-studio-brief p{color:#e0f0fc}
+html[data-theme="dark"] .cross-studio-brief strong{color:#a1e7f2}
+html[data-theme="dark"] .footer{color:#cbdde9}
+html[data-theme="dark"] .backtop{background:#3c5973;color:#fff;border-color:#7da7c5}
+html[data-theme="dark"] a{color:#9de6f6}
+html[data-theme="dark"] .top .brand{color:#fff}
+html[data-theme="dark"] .detail-box::before,html[data-theme="dark"] .sub-explanation::before,html[data-theme="dark"] .cross-studio-brief::before,html[data-theme="dark"] .comparison>div::before{opacity:.07}
+html[data-theme="dark"] .image-fit::before{opacity:.12}
+html[data-theme="dark"] ::selection{background:#377ca2;color:#fff}
+@media(max-width:690px){.top-inner{flex-wrap:wrap}.top-actions{width:100%;justify-content:space-between}.top-label{font-size:10px;letter-spacing:.02em}.theme-toggle{padding:7px 11px}.detail-box::before,.sub-explanation::before{background-size:115px auto}}
+</style></head><body id="top"><header class="top"><div class="top-inner"><a class="brand" href="#top"><img class="brand-icon" src="assets/brand.svg?v=2" alt=""> HASABALLA AI</a><div class="top-actions"><span class="top-label">VERSION 2 · DEVELOPMENT &amp; IMPROVEMENTS</span><button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">Dark mode</button></div></div></header><div class="layout"><aside class="sidebar"><h2>IMPLEMENTATION ORDER</h2><nav aria-label="Nine upgrade priorities"><a href="#upgrades"><span>01</span>Platform-wide model &amp; tool upgrade</a><a href="#bie"><span>02</span>Behavioral Identity Engine</a><a href="#engine"><span>03</span>Hasaballa Engine · Task 19</a><a href="#autofix"><span>04</span>Auto Smart Fix · Task 20</a><a href="#motion"><span>05</span>Motion Graphics Studio</a><a href="#cartoon"><span>06</span>Cartoon &amp; 3D Animation</a><a href="#living"><span>07</span>Living Objects Studio</a><a href="#virtual"><span>08</span>Virtual Worlds &amp; VFX</a><a href="#transfer"><span>09</span>Advanced Performance Transfer</a></nav></aside><main class="content"><div class="hero"><div class="eyebrow">HASABALLA AI / Version 2</div><h1>Nine integrated upgrades.<br>One HASABALLA platform.</h1><p>Implementation requirements for the next version of the platform. All modules are to be integrated into the same desktop platform - not buttons that open external websites. Each studio's original uploaded image and video references appear only under its assigned section.</p><div class="facts"><span>Windows 11 Pro · 64-bit</span><span>Ryzen 9 9955HX · 16 cores / 32 threads</span><span>RTX 5090 Laptop · 24 GB-class VRAM</span><span>64 GB DDR5 · 5600 MT/s</span><span>4 TB NVMe SSD</span><span>Core production fully offline</span></div></div><section class="priority" id="upgrades"><header class="section-head"><div class="section-chip"><span>01</span> <em>First priority · Upgrade quality before version numbers</em></div><h2>Platform-Wide Tool & Model Upgrade</h2><p>Review all existing HASABALLA AI tools and all their subfeatures. Change a model or tool only when tests establish that a different option is better across quality, realism and use.</p></header>
 <div class="explainer"><strong>The instruction is quality first - not novelty first.</strong> Review every existing HASABALLA AI tool and its subfunctions. Replace a current model or tool only when side-by-side tests prove the proposed alternative clearly better in realism, output quality, usability and performance. A newer release alone is not a reason to replace anything.</div>
 <div class="detail-box"><h3>Existing tools to review - original task numbers</h3><div class="tool-matrix"><div class="tool-row"><strong>Task 4 · Chat Window / Hasaballa GPT</strong><p>Chat and scriptwriting, understanding and editing stories and dialogues.</p></div><div class="tool-row"><strong>Task 5 · Ultra-realistic Image Generation</strong><p>Image generation and every related setting from the original specification.</p></div><div class="tool-row"><strong>Task 6 · Image Animation &amp; Lip Sync</strong><p>Animation, facial motion and lip synchronization, including all subtasks.</p></div><div class="tool-row"><strong>Task 7 · Voice Tools</strong><p>TTS, STT, the specified 21 Arabic dialects, voice library, voice cloning, emotions, pauses, dubbing and singing.</p></div><div class="tool-row"><strong>Task 8 · Integrated Sound Library</strong><p>Evaluate Pixabay or Freesound for the best available library integration and sound effects.</p></div><div class="tool-row"><strong>Task 9 · Smart Director</strong><p>Automatic and Manual modes, including their subordinate functions.</p></div><div class="tool-row"><strong>Task 10 · Final Video / HASABALLA AI Studio</strong><p>Full video production and editing workflow.</p></div><div class="tool-row"><strong>Task 11 · Smart Edit Layer</strong><p>Selective editing and related capabilities specified in the original task list.</p></div><div class="tool-row"><strong>Task 12 · AdSense &amp; YouTube Integration</strong><p>Improve only when a more effective, easier, better-tested integration exists.</p></div></div></div>
 <div class="detail-grid"><div class="detail-box "><h3>What the comparison must establish</h3><p>Keep the original tool if it performs better. Demonstrate real output comparisons, input controls, Arabic usability, speed and quality before changing any core component.</p></div><div class="detail-box "><h3>The original specification stays in force</h3><p>Preserve every existing tool’s subrequirements and workflow. Consult <a href="/hasaballa-tasks/Hasaballa-AI-RTX5090/" target="_blank" rel="noopener">the original HASABALLA AI roadmap</a> for the full feature definitions rather than silently removing or shortening them.</p></div></div>
@@ -177,4 +288,25 @@ document.addEventListener("DOMContentLoaded",()=>{
  document.addEventListener("visibilitychange",()=>{if(!document.hidden)videos.forEach(play);});
  window.addEventListener("pageshow",()=>videos.forEach(play));
 });
+</script><script>
+(function(){
+ const btn=document.getElementById("theme-toggle");
+ if(!btn)return;
+ const sync=()=>{
+  const dark=document.documentElement.getAttribute("data-theme")==="dark";
+  btn.textContent=dark?"Light mode":"Dark mode";
+  btn.setAttribute("aria-pressed",String(dark));
+  btn.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.setAttribute("content",dark?"#16263a":"#dfeef8");
+ };
+ btn.addEventListener("click",()=>{
+  const current=document.documentElement.getAttribute("data-theme");
+  const next=current==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("hasaballa-v2-color-theme",next);}catch(e){}
+  sync();
+ });
+ sync();
+})();
 </script></body></html>
