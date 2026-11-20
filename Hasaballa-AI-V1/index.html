@@ -458,7 +458,7 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
   🗣️ <b>Function:</b> Upload voice reference files for cloning each character’s voice.<br><br>
 
   <ul style="margin:6px 0 0 1.2em;">
-    <li><b>Minimum:</b> 1 reference voice per character (mandatory).</li>
+    <li><b>Optional:</b> voice references are not mandatory if a library voice or prerecorded voice is used; cloning a specific voice requires at least one appropriate reference recording.</li>
     <li><b>Optional:</b> up to 5 reference voices per character (e.g., childhood, youth, adult), but not required.</li>
     <li><b>Image↔Voice Linking:</b> each reference image <i>may</i> be linked to a specific reference voice. If no unique voice is linked, the system falls back to the character’s main voice.</li>
     <li><b>Weights:</b> optional weight (0–100%) can be assigned per image/voice pair, normalized per character.</li>
@@ -720,7 +720,7 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 (from chat window to final video).<br>
 
 🎬 Smart Director Buttons:<br></div>
-<strong>1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+<strong>1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate / Import Final Speech ➜ 5️⃣Generate Visuals ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
 
 <section class="unified-v1-module"><h2>🎧 Finished audio determines shot-by-shot scene duration</h2><article class="unified-v1-requirement" id="HA-021"><b class="unified-v1-id">HA-021</b><h3>Speech-first scene rhythm</h3><p>Generate or import the final speech BEFORE calculating shot timing. Default images = ceil(effective_audio_duration / 5 seconds), with ±20% adequacy warning, Auto-Fix/manual override, individual shots approximately 2–7 seconds as needed (1–15 manual). No repetitive freeze-frames, empty gaps, audio cut-off or shots longer than content. Every shot owns its unique camera/motion/prompt/identity timing.</p></article></section>
 <div class="task subsubtask">
@@ -742,7 +742,7 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
   
 <div class="task subsubtask"><input type="checkbox"data-id="task4-i-1"> 4-I-1 <strong>🧠 Auto Generation Button</strong>.<br>
 📦 Automatically analyzes everything written in the input box, sends it to all the internal tools, and generates the final video + timeline without any user interaction.</div>
-<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate / Import Final Speech ➜ 5️⃣Generate Visuals ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
 <div class="task subsubtask"><input type="checkbox"data-id="task4-i-2"> 4-I-2
 <strong>🛠️ Manual Generation Button</strong>.<br>
 
@@ -1090,8 +1090,8 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
 </div>
 
   <div class="task subtask">
-  <input type="checkbox" data-id="task5-m"> 5-M 🌍 <strong>Cultural & Historical Accuracy Extension</strong><br>
-  The Image Generation tool must authentically represent Arab and Middle Eastern life across different eras — from 
+  <input type="checkbox" data-id="task5-m"> 5-M 🌍 <strong>Worldwide Historical &amp; Geographical Accuracy, with Intensive Arab-Era Reference Packs</strong><br>
+  The Image Generation tool must authentically represent all world regions and historical periods. Mandatory intensive Arab and Middle Eastern reference packs cover eras from 
   <strong>Pharaonic Egypt (7000 BC)</strong> through <strong>Islamic dynasties (Umayyad, Abbasid, Mamluk, Ottoman)</strong>,
   to the <strong>20th century (1950s–1970s)</strong>, and finally the <strong>modern era (2000–2025)</strong>.
 </div>
@@ -2711,12 +2711,12 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 <div class="task subsubtask" style="margin-inline-start:2em;">
   <input type="checkbox" data-id="task7-p-3"> 7-P-3 🫁 <b>Exertion / Movement</b><br>
-  - Add natural panting/breath intensity and slight strain for running/crawling/combat while speaking.
+  - Generate realistic panting, breathing and vocal strain natively for running/crawling/combat while speaking, not merely an artificial after-effect.
 </div>
 
 <div class="task subsubtask" style="margin-inline-start:2em;">
   <input type="checkbox" data-id="task7-p-4"> 7-P-4 📢 <b>Shout / Whisper</b><br>
-  - Quick preset to push voice into shout (higher intensity) or whisper (low, airy) when scene demands.
+  - Generate authentic shouted or whispered voice performances when requested; retain accent, words and speaker identity, rather than relying solely on voice post-processing.
 </div>
 
 <div class="task subsubtask" style="margin-inline-start:2em;">
@@ -2730,7 +2730,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   <input type="checkbox" data-id="task7-q"> 7-Q ⚡ <strong>Voice Speed Control</strong> (Formant-Preserving)
   <ul>
     <li>Adjust the speed of any generated or cloned voice without changing pitch (formant-preserving time-stretch).</li>
-    <li>Default range: <b>0.75x → 1.25x</b>. Custom numeric input is supported (e.g., 1.12x).</li>
+    <li>Typical quick control: <b>0.75x → 1.25x</b>. Full adjustable range: <b>0.50x → 2.00x</b>. Custom numeric input is supported (e.g., 1.12x).</li>
     <li><b>Auto Lip-Sync Retiming:</b> visemes/phonemes are re-aligned to the new duration.</li>
     <li><b>Non-Destructive (Safe Draft):</b> changes produce a separate preview take while the original stays intact.</li>
     <li>Apply per line / per scene / per project, with a <b>Reset</b> button.</li>
@@ -2966,21 +2966,15 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   </div>
 
   <div class="flow-step">
-    <h3><strong>４</strong> Visual Generation</h3>
-    <p>🖼️ Generate all required visuals:</p>
-    <ul>
-      <li>🔁 Based on uploaded reference images</li>
-      <li>🏙️ Generate additional background scenes as needed (based on scenario)</li>
-    </ul>
+    <h3><strong>４</strong> Generate or Import Final Speech</h3>
+    <p>🔊 Establish the exact scene audio and master timings FIRST:</p>
+    <ul><li>🧬 Normal TTS with optional reference voice cloning</li><li>🎼 Selected voice-library output</li><li>🎙️ Optional Voice-First complete recording, bypassing TTS</li></ul>
   </div>
 
   <div class="flow-step">
-    <h3><strong>５</strong> Voice Generation</h3>
-    <p>🔊 Generate all character voice lines in the script using:</p>
-    <ul>
-      <li>🧬 Voice cloning if reference voices are provided</li>
-      <li>🎼 Voice library if no references exist</li>
-    </ul>
+    <h3><strong>５</strong> Visual Generation</h3>
+    <p>🖼️ Generate shot-specific visuals to fit exact approved voice duration and the full script:</p>
+    <ul><li>🔁 Preserve original character and place reference identities</li><li>🏙️ Generate accurate world-location and historic backgrounds with specific action/camera instructions</li></ul>
   </div>
 
   <div class="flow-step">
@@ -2988,7 +2982,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
     <p>🎧 Generate audio backgrounds for each scene:</p>
     <ul>
       <li>📂 From the platform's local sound library</li>
-      <li>🌐 Or automatically fetched from Pixabay based on scenario keywords</li>
+      <li>🌐 Optional Pixabay retrieval ONLY after the user explicitly enables Internet; core audio production uses the local offline library.</li>
     </ul>
   </div>
 
@@ -3009,7 +3003,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
   <div class="flow-step">
     <h3><strong>８</strong> Final Assembly</h3>
-    <p>🎞️ Render the entire output and display it in the built-in <strong>Timeline Editor</strong><br>
+    <p>🎞️ Transfer the completed project AND separate media elements into timecoded editable tracks inside <strong>Hasaballa AI Studio</strong><br>
     (📍 This is where Auto Smart Director hands off control).</p>
   </div>
 </section>
@@ -3050,7 +3044,7 @@ This task only applies in Automatic Mode.<br></div>
 <div class="task subtask"><input type="checkbox"data-id="task9-b"> 9-B 🛠️ <strong>Manual Mode:</strong><br> Full step-by-step control from chat to images, animation, voice, sound and lip sync — everything manual.
 
 <strong>Manual skipping</strong> is defined separately.<br>
-<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate / Import Final Speech ➜ 5️⃣Generate Visuals ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
 
 Lets the user go step-by-step through each tool manually, with full control over:<br>
 
