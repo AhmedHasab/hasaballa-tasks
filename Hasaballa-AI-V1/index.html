@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>🧠 Hasaballa AI Platform</title>
-<link rel="icon" type="image/png" href="photos/favicon.png">
+<link rel="icon" type="image/png" href="../photos/31.png">
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -45,7 +45,7 @@ body::before {
   margin-right: 10px;
 }
 .task.completed {
-  text-decoration: line-through;
+  text-decoration:none;
   color: gray;
 }
 
@@ -121,14 +121,14 @@ body::before {
 
 /* يشطب أي label بعد checkbox مباشرة */
 input[type="checkbox"]:checked + label {
-  text-decoration: line-through;
+  text-decoration:none;
   color: #777;
   opacity: 0.75;
 }
 
 /* نمط عام لأي عنصر تضيف له كلاس completed من الجافاسكريبت */
 .completed {
-  text-decoration: line-through;
+  text-decoration:none;
   color: #777;
   opacity: 0.75;
 }
@@ -139,7 +139,7 @@ input[type="checkbox"]:checked + label {
 .subsubtask:has(> input[type="checkbox"]:checked),
 .subsubsubtask:has(> input[type="checkbox"]:checked),
 .task li:has(> input[type="checkbox"]:checked) {
-  text-decoration: line-through;
+  text-decoration:none;
   color: #777;
   opacity: 0.75;
 }
@@ -147,6 +147,43 @@ input[type="checkbox"]:checked + label {
   
 
   
+
+/* Technical specification sections */
+.unified-v1-module {max-width:1300px;margin:30px auto;padding:20px;background:#eff7fa;border:1px solid #cbdce6;border-radius:14px;}
+.unified-v1-module>h2 {margin-top:0;font-size:28px;color:#173f59;}
+.unified-v1-requirement {background:#fff;border-left:6px solid #18748c;padding:14px 18px;margin:14px 0;border-radius:8px;font-size:19px;line-height:1.65;}
+.unified-v1-requirement h3 {font-size:23px;margin:6px 0;color:#20445a;}
+.unified-v1-requirement p {margin:0;}
+.unified-v1-id {font-size:15px;color:#06708c;}
+.unified-v1-document {background:#e7f4ff;border:3px solid #235e96;text-align:center;padding:22px;margin:22px auto;border-radius:12px;font-size:clamp(18px,2.3vw,30px);font-weight:bold;}
+.unified-v1-document a {text-decoration:underline;color:#063f7e;}
+.unified-v1-menu {display:flex;flex-wrap:wrap;gap:9px;padding:14px 0;}
+.unified-v1-menu a {background:white;border:1px solid #b5c9d8;border-radius:8px;padding:5px 10px;color:#16466f;font-size:16px;}
+.unified-v1-speed {background:#ffede9;border:4px solid #b92218;color:#681e15;border-radius:14px;text-align:center;padding:22px;margin:30px auto;max-width:1300px;font-size:22px;font-weight:bold;}
+.unified-v1-speed h2 {color:#a71911;margin-top:0;}
+.unified-v1-bie {max-width:1400px;margin:40px auto;padding:18px;background:#eef3ff;border:3px solid #4768a4;border-radius:14px;}
+.unified-v1-bie .section{background:white;border-radius:10px;padding:18px;margin:14px 0;}
+.unified-v1-bie .note{background:#fff7d6;border-left:6px solid #f59e0b;padding:15px;margin:13px 0;}
+.unified-v1-bie .video-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:15px 0;}
+.unified-v1-bie video{height:auto;max-width:100%;border-radius:6px;}
+.unified-v1-bie h1,.unified-v1-bie h2{color:#153e68;}
+.unified-v1-voice-table{border-collapse:collapse;width:100%;font-size:15px;}
+.unified-v1-voice-table th,.unified-v1-voice-table td{border:1px solid #cbd5e1;padding:8px;text-align:left;}
+.unified-v1-voice-table th{background:#18495c;color:#fff;}
+.unified-v1-next{display:block;margin:30px auto;padding:24px;background:#eaf9ef;border:2px solid #1e8249;border-radius:12px;text-align:center;font-size:25px;font-weight:bold;}
+@media(max-width:720px){body{font-size:18px;padding:10px}.unified-v1-requirement{font-size:17px}.unified-v1-speed{font-size:19px}.unified-v1-voice-table{font-size:12px}.unified-v1-bie{padding:7px}.unified-v1-menu a{font-size:14px}}
+
+
+/* Never strike, mute or hide a requirement merely because Firebase marked it as checked. */
+input[type="checkbox"]:checked + label,.task.completed,.completed,.task:has(> input[type="checkbox"]:checked),.subtask:has(> input[type="checkbox"]:checked),.subsubtask:has(> input[type="checkbox"]:checked),.subsubsubtask:has(> input[type="checkbox"]:checked),.task li:has(> input[type="checkbox"]:checked){text-decoration:none!important;color:inherit!important;opacity:1!important}
+.v1-pipeline{max-width:1400px;margin:24px auto 36px;padding:16px;background:#f4f8fa;border:2px solid #d0e1ea;border-radius:16px;text-align:center}
+.v1-pipeline img{display:block;width:100%;height:auto;margin-top:14px;border-radius:8px}
+.v1-pipeline figcaption{font-size:clamp(18px,2vw,27px);color:#163d57}
+.v1-benchmark-alert,.v1-quality-alert{margin:20px auto;padding:23px 28px;border-radius:14px;max-width:1400px;font-size:clamp(18px,2vw,27px);line-height:1.55;box-shadow:0 3px 15px #0001}
+.v1-benchmark-alert{border:5px solid #dc7b12;background:#fff4d6;color:#713d09}
+.v1-quality-alert{border:4px solid #137684;background:#eaf7f8;color:#124a55}
+.unified-v1-bie video{max-width:100%;height:auto}img{max-width:100%;height:auto}
+@media(max-width:750px){body{font-size:18px;padding:12px}.subtask,.subsubtask,.subsubsubtask{margin-left:8px;padding-left:8px}h1,h2{font-size:26px}}
 </style>
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -199,10 +236,27 @@ console.log("✅ Firebase connected & DOM ready");
 <body>
 <h1>🧠 Platform: Hasaballa AI</h1>
 
+<div class="unified-v1-document" id="official-v1-guide">📄 <span lang="ar" dir="rtl">هذا رابط وثيقة التسليم النهائية — اضغط على الرابط لفتح وثيقة التسليم</span><br>OFFICIAL FINAL V1 DELIVERY DOCUMENT — <a href="./Hasaballa_V1_Developer_Visual_Guide.pdf" target="_blank" rel="noopener">CLICK HERE TO OPEN THE COMPLETE DELIVERY DOCUMENT (PDF)</a></div>
+<nav class="unified-v1-menu">
+<a href="#HA-001">Offline &amp; worldwide scope</a>
+<a href="#HA-004">Before-project training</a>
+<a href="#bie-engine">BIE and 29 videos</a>
+<a href="#HA-013">Prerecorded audio</a>
+<a href="#HA-039">16:9 / 9:16 / 1:1</a>
+<a href="#HA-029">Worldwide historical accuracy</a>
+<a href="#HA-043">Commercial time</a>
+<a href="#HA-041">Hasaballa AI Studio</a>
+<a href="#v1-final-delivery">Final acceptance</a>
+</nav>
 <h2>🛠️ - Description & How it Works</h2>
 <p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 1 TB in size 💾, without negatively affecting the platform’s speed or efficiency.</p>
 
 <h2>🎯 Platform Goals</h2>
+<figure class="v1-pipeline" id="v1-pipeline-visual">
+<figcaption><b>🎬 Hasaballa AI V1 — Complete Production Pipeline (Official Visual Reference)</b></figcaption>
+<img src="./Hasaballa_V1_Production_Pipeline.png" alt="Complete V1 workflow: optional project training, Hasaballa GPT references and script, Smart Director, voice-first timing, image generation and verification, character motion with BIE, sound mixing, editable Studio handoff and selective Smart Edit.">
+<p class="v1-visual-note" style="font-size:18px;color:#37556a;margin:10px 0 2px"><b>Diagram clarification:</b> “Emergency Assistant” refers to optional Voice-First Production (Task 7-R). Final V1 acceptance strictly requires at least TWO complete demo videos (Task 10-I). Detailed numbered requirements take precedence over diagram shorthand.</p>
+</figure>
   
 <div class="intro-statement">
   To produce unlimited videos at high speed — 
@@ -229,6 +283,7 @@ console.log("✅ Firebase connected & DOM ready");
   <li><a href="https://drive.google.com/file/d/1jOCV38QZTkJaN1_pBM4hYdB8LELUfZ_t/view?usp=drive_link" target="_blank">🔗 Link 13</a></li>
   <li><a href="https://drive.google.com/file/d/1nv8T-b0Av0a3YMjitOudU1ZyJICM6_bh/view?usp=drive_link" target="_blank">🔗 Link 14</a></li>
 </ul>
+<section class="unified-v1-module" id="v1-complete-references"><h2>📽️ Complete cinematic acceptance video references</h2><p>Watch the COMPLETE videos WITH AUDIO. These are third-party quality references, not examples claimed to have been generated by this platform. Their quality is the absolute minimum, and the finished V1 aims to surpass them.</p><p><a href="https://drive.google.com/drive/folders/17DrmHZMXyqtFfjGc7GhnzmzapHjvhBOT" target="_blank" rel="noopener">🔗 Open the complete reference-video collection</a><br><a href="https://drive.google.com/file/d/1KJw_3MxxJVk1NJYJXHXHjCJrq1FgcWWY/view?usp=drivesdk" target="_blank" rel="noopener">🔗 The Last Dance in Kippur — complete third-party reference film</a></p></section>
 <h3 style="margin-top: 40px; text-align: center;">📽️ Preview clips from the full video:</h3>
 
 <div style="
@@ -278,6 +333,13 @@ console.log("✅ Firebase connected & DOM ready");
 
 
 
+
+<div class="unified-v1-speed"><h2>⏱️ NON-NEGOTIABLE COMMERCIAL PRODUCTION PERFORMANCE</h2>
+7-minute video ≤ 45 minutes | 15-minute video ≤ 90 minutes, including ALL steps and delivery into editable Hasaballa AI Studio.<br>
+The reference videos above are the MINIMUM quality standard. No compromise on real 4K, natural motion, identity or historical fidelity. 24–48 hours is commercially unacceptable.</div>
+<p><b>Universal production:</b> Projects may take place in any country and any historical period. Mandatory intensive Arabic-era reference knowledge is part of that global scope, alongside optional reference preparation for individual projects.</p>
+<aside id="HA-043" class="v1-benchmark-alert"><b>⏱️ MANDATORY COMMERCIAL PERFORMANCE — NO QUALITY TRADE-OFF</b><br>7-minute full video ≤ 45 minutes (≈85 images); 15-minute full video ≤ 90 minutes (≈170 images). Parse 15 scenes in 6–10 seconds; image 10–18 seconds, animation 12–20 seconds, 10–15 spoken words 8–14 seconds. Includes audio, visuals, motion, lip-sync, SFX and placement into editable Hasaballa AI Studio tracks. 24–48h generation is commercially unacceptable. Measure actual stage breakdowns, QA/regeneration and CPU/GPU routing; a single optimization does not prove compliance.</aside>
+<aside id="HA-050" class="v1-quality-alert"><b>🎯 NON-NEGOTIABLE CINEMATIC MINIMUM</b><br>Reference videos are the absolute minimum; V1 targets superior photorealism, genuine non-pixelated 4K detail, accurate real people, immutable recurring locations, worldwide historical/geographical authenticity, realistic physical interactions, professional voices and precisely timed lips. No visible AI artifacts or distorted objects; do not trade accuracy for speed.</aside>
 <h1>🧠 How to Use Hasaballa AI Platform</h1>
 
 <div class="section">
@@ -300,15 +362,15 @@ console.log("✅ Firebase connected & DOM ready");
   <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
   <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
   🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
-  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
-  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  🔹 <strong>Enter directly at ANY chosen stage</strong> — never forced to start at the beginning. Import finished voice, images or animation, skip any stage and move automatically to the next selected stage within Smart Director.<br>
+  🔹 Preview each stage; approve, reject, edit or regenerate only that stage before continuing. Manual overrides remain saved.</p>
   <p>🔹 In each stage, the user decides:</p>
   <ul>
-    <li>Generate image or skip</li>
-    <li>Generate voice or skip</li>
+    <li>Generate images, import existing images, or skip</li>
+    <li>Generate a voice, import ready-made speech, or skip</li>
     <li>Animate or not</li>
     <li>Add background audio or skip</li>
-    <li>Activate lip sync or not</li>
+    <li>Enable lip sync or not; preview, approve/reject, edit or selectively regenerate stage output</li>
   </ul>
   <p>🧩 Each generated element is automatically added to the final timeline.</p>
   <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
@@ -354,13 +416,14 @@ console.log("✅ Firebase connected & DOM ready");
 </div>
 
   
-<div class="task"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
+<div class="task" id="HA-001"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent. All core models and assets must be commercially usable without subscription, credit charges, required online activation, or paid cloud/API inference.</div>
 <div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
 
-  <h1>🧠 Hasaballa GPT — Master Control Panel</h1>
+  <div class="task subtask" id="HA-009"><input type="checkbox" data-id="unified-HA-009"> <b>3-A 🧩 Standalone tools: full quality and multi-item batches</b><br>Independent tools must perform to EXACTLY the same standards for quality, capabilities, accuracy and time as Smart Director. Support batched prompts, images, audio and paired lip-sync/animation jobs; no compulsory per-item clicks. Results can be imported and edited.</div>
+<h1>🧠 Hasaballa GPT — Master Control Panel</h1>
 <div>
 <img 
-  src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/Hasballa%20Gpt.jpg?raw=true" 
+  src="./Hasaballa_GPT_Character_References.png" alt="Hasaballa GPT project input design reference with the optional project-specific training button, expandable per-character image, audio and BIE video slots, native aspect ratios and Automatic/Manual Director controls" 
   style="width:80%; display:block; margin:auto;" >
 </div>
 
@@ -370,6 +433,7 @@ console.log("✅ Firebase connected & DOM ready");
 Quick Explanation:<br> 
 chat window must be connected to one of the most powerful fully offline and completely free AI models, supports all Arabic dialects, full script, text to image, text to video,real Image to Image Ai.</div>
 
+<div class="task subtask" id="HA-004"><input type="checkbox" data-id="unified-HA-004"> <b>4-0 📁 Optional project-specific training — FIRST project-input button</b><br>Before EVERY project, allow optional file-picker selection of up to <b>1,000 genuine reference images</b> of its exact country, locality and era: historical buildings, homes, streets, natural scenery, people, civilian/police/military dress, weapons, vehicles, animals, trees, vegetation, equipment and culture. Current-project references override contradictory earlier memories. Persist reusable geographic/era knowledge for later compatible projects. Entirely local, not mandatory foundation-model retraining.<br><b>Control:</b> its own FIRST optional button in Hasaballa GPT; choose up to 1,000 genuine reference photos of country, locality, era, buildings, people, uniforms, vehicles, animals, vegetation, objects and landscapes. Store reusable era/region knowledge. This is NOT the character reference-images button.</div>
 <div class="task subtask"><input type="checkbox"data-id="task4-a"> 4-A <strong>🪟 Display Window.</strong><br>
 📺 Function: <br> This is where the messages between the user and the offline AI model appear.<br> ✅ It is essential that the chat window be connected to one of the most powerful fully offline and completely free AI models, such as:<br>
 
@@ -387,16 +451,16 @@ It shows the full conversation, responses, and logs of the video/script generati
 🎙️ Function: Allows the user to input voice commands or narration using speech-to-text.
 Useful for dictating long scenarios or asking questions hands-free.</div>
 
-<div class="task subtask">
+<div class="task subtask" id="HA-010">
   <input type="checkbox" data-id="task4-d">
-  4-D <strong>🖼️ Insert Reference Images.</strong><br>
+  4-D <strong>🖼️ Insert Reference Images — mapped to named characters.</strong><br>
   <b>Function:</b> Upload reference images for characters. The system uses them to maintain identity consistency across scenes.<br><br>
 
   <ul style="margin:6px 0 0 1.2em;">
-    <li><b>Minimum:</b> 8 total images (≥ 8 characters recommended).</li>
+    <li><b>Supported Characters:</b> support eight or more characters simultaneously and expand dynamically using <b>+ Add Character</b> for 10, 20, 30 or more people. Photos are only required for characters needing image references; no arbitrary eight-image upload obligation.</li>
     <li><b>Per Character:</b> up to <b>5</b> reference images covering different ages/angles (e.g., childhood, youth, profile).</li>
     <li><b>Weighting:</b> each reference image has a <b>priority weight (0–100%)</b>. Weights are normalized per character.</li>
-    <li><b>Character Pack:</b> images + (linked) reference voice(s) are grouped as a reusable <b>Character Pack</b>.</li>
+    <li><b>Character Pack:</b> explicitly tag images by character name/ID and link with THAT character’s own optional audio and BIE video references as a single reusable Character Pack; never mix characters.</li>
     <li><b>Import/Export:</b> Character Packs must be importable/exportable (local JSON file) for reuse across projects.</li>
   </ul>
 </div>
@@ -404,13 +468,13 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
 
 <div class="task subtask">
   <input type="checkbox" data-id="task4-e">
-  4-E <strong>🔉 Insert Reference Audio.</strong><br>
+  4-E <strong>🔉 Insert Reference Audio (per named character).</strong><br>Each expandable character card has its own optional reference audio file picker, explicitly linked to a unique character ID.<br>
   🗣️ <b>Function:</b> Upload voice reference files for cloning each character’s voice.<br><br>
 
   <ul style="margin:6px 0 0 1.2em;">
-    <li><b>Minimum:</b> 1 reference voice per character (mandatory).</li>
+    <li><b>Optional:</b> voice references are not mandatory if a library voice or prerecorded voice is used; cloning a specific voice requires at least one appropriate reference recording.</li>
     <li><b>Optional:</b> up to 5 reference voices per character (e.g., childhood, youth, adult), but not required.</li>
-    <li><b>Image↔Voice Linking:</b> each reference image <i>may</i> be linked to a specific reference voice. If no unique voice is linked, the system falls back to the character’s main voice.</li>
+    <li><b>Image↔Voice↔BIE Linking:</b> each file must have an explicit named character ID; optionally link to age-specific versions. If an age-specific voice is not present, fall back to THAT character’s main voice, never another character’s voice.</li>
     <li><b>Weights:</b> optional weight (0–100%) can be assigned per image/voice pair, normalized per character.</li>
     <li><b>Usage:</b> voices are used by the cloning tool to synthesize the character’s real voice during generation.</li>
     <li><b>Auto Mode:</b> in <strong>Auto Director Mode</strong>, the system automatically maps the correct voice to each scene based on script analysis (see 4-F-2).</li>
@@ -420,6 +484,643 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
 </div>
 
 
+<div class="task subtask" id="HA-011"><input type="checkbox" data-id="unified-HA-011"> <b>4-E-1 🎥 BIE Reference Video Upload, assigned to each character</b><br>Optionally accept approximately <b>2–4 reference videos for any one or all characters</b>; learn unique gait, posture, sitting/standing, gestures, eye movement, blinking, gaze, face/brow/jaw, smiles, laughter, speech delivery, reaction and movement. Reuse in JSON character profiles contextually, preserving original face/voice/outfit and accurate lip-sync. Do not animate inactive characters unnecessarily. Includes human and stylized/fictional characters.<br><b>Input UI:</b> a repeatable Character Card for EVERY named person, with separate reference-images, reference-audio and BIE-videos upload fields. The <b>+ Add Character</b> control must scale to 10, 20, 30 or more people. Show each imported file's character name/ID; allow assignment/reassignment before generation. Recommended 2–4 BIE videos per character, independently optional. Never mix character references; store behavioral data in reusable Character JSON.</div>
+<div class="task subtask"><input type="checkbox" data-id="task-4-e-2"> <b>4-E-2 🎙️ Prerecorded Narration / Dialogue Upload</b><br>Distinct optional input button for a COMPLETE up-to-25-minute voice recording, original playback or per-character conversion as chosen. See the four Voice-First Production cases in 7-R; standard TTS remains available.</div>
+<section class="unified-v1-bie" id="bie-engine"><h2>🎭 Behavioral Identity Engine (BIE) — complete requirements, 13 groups and 29 reference videos</h2><p>Optional character-specific behavior reference videos with reusable saved motion signatures, alongside the original reference demonstrations and the complete Ultimate Goal.</p><div class="section">
+
+<h1>🎭 Behavioral Identity Engine</h1>
+
+<h2 style="text-align:center;">
+Behavioral Identity Engine — V1 behavioral realism
+</h2>
+
+
+
+
+
+
+
+<h2>🎯 Why This Matters</h2>
+
+<p>
+Hasaballa AI produces historical and contemporary projects worldwide, including:
+</p>
+
+<ul>
+<li>Historical documentaries</li>
+<li>Contemporary and current affairs documentaries</li>
+<li>Biographies</li>
+<li>Crime reconstructions</li>
+<li>Political events</li>
+<li>Wars and military stories</li>
+<li>Current affairs explanations</li>
+<li>Educational storytelling videos</li>
+</ul>
+
+<p>
+In many of these productions, the audience already knows the real person being portrayed.
+</p>
+
+<p>
+Because of that:
+</p>
+
+<ul>
+<li>Visual accuracy alone is not enough.</li>
+<li>Voice accuracy alone is not enough.</li>
+<li>Even having a perfectly cloned face and voice may still feel artificial if the character does not behave like the real person.</li>
+</ul>
+
+<h2>🧠 The Missing Layer: Behavioral Identity</h2>
+
+<p>
+Every individual has unique characteristics that go beyond appearance and voice.
+</p>
+
+<ul>
+<li>Eye movements</li>
+<li>Facial expressions</li>
+<li>Eyebrow movements</li>
+<li>Head motion</li>
+<li>Hand gestures</li>
+<li>Body posture</li>
+<li>Walking style</li>
+<li>Smile patterns</li>
+<li>Laughing style</li>
+<li>Speech rhythm</li>
+<li>Pauses and timing</li>
+<li>Emotional reactions</li>
+<li>Conversation habits</li>
+<li>Repeated gestures and mannerisms</li>
+</ul>
+
+<p>
+These subtle behaviors are often what make a person instantly recognizable.
+In many cases, they are more recognizable than the face itself.
+</p>
+<br>
+<br>
+<p>
+To further illustrate the concept of Behavioral Identity, there are many globally recognized personalities whose identities are not defined solely by their appearance or voice, but also by highly distinctive behavioral patterns, gestures, expressions, movements, and mannerisms.
+
+Examples include <b>Michael Jackson, Charlie Chaplin, Mr. Bean, Jackie Chan, Cristiano Ronaldo and Muhammad Ali.</b> Their expressions and personal movement are globally recognizable. The engine supports all real-world geographies and cultures, including Arab histories. However, these internationally recognized figures serve as useful examples of how Behavioral Identity can become a critical component of character realism and recognition.
+</p>
+    
+<h2>🎬 Examples Included In This Website</h2>
+
+<p>
+The attached reference videos demonstrate this concept.
+</p>
+
+<p>
+Across the examples, you will notice that different people have:
+</p>
+
+<ul>
+<li>Distinct eye behavior</li>
+<li>Unique facial expressions</li>
+<li>Characteristic head movements</li>
+<li>Consistent hand gestures</li>
+<li>Specific speaking patterns</li>
+<li>Personal laughter styles</li>
+<li>Recognizable emotional reactions</li>
+</ul>
+
+<p>
+Some individuals communicate heavily through eyebrow movement.
+Others rely heavily on hand gestures.
+Others have unique eye-contact behavior, gaze patterns, or body posture.
+</p>
+
+<p>
+Several examples also show virtual or AI-generated characters that still maintain a believable personality through motion, expression, and performance.
+</p>
+
+<div class="note">
+
+<b>
+The purpose of these examples is NOT to evaluate image quality alone.
+<br><br>
+The purpose is to evaluate Behavioral Realism.
+</b>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>📌 Example Group 1</h2>
+
+<p>
+Notice eye behavior, facial expressions, head movement, speaking style, mouth motion, and hand gestures.
+These characteristics form a recognizable behavioral signature.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_1_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_2_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_3_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_4_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_9_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_15_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 2</h2>
+
+<p>
+This individual demonstrates a distinctive combination of hand gestures and head movement patterns.
+</p>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_5_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 3</h2>
+
+<p>
+The same person appears in a different environment. Notice how behavioral identity remains recognizable despite context changes.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_13_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+
+
+
+  <h2>📌 Example Group 4</h2>
+
+<p>
+Observe eye focus, gaze direction, concentration behavior, eye widening, and attention patterns. These details contribute significantly to behavioral realism.
+</p>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_21_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 5</h2>
+
+<p>
+This individual exhibits several highly recognizable personal habits. Evaluate hand gestures, facial expressions, gaze behavior, emotional reactions, and laughter patterns separately in each video.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_10_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_11_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_12_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_18_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_25_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 6</h2>
+
+<p>
+This individual communicates heavily through eyebrow movement. Observe how eyebrow behavior becomes a central component of emotional expression and communication.
+</p>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_19_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 7</h2>
+
+<p>
+Although this example is humorous, the facial performance is highly expressive. Observe how expressions alone can convey personality, emotion, and intent.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_26_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 8</h2>
+
+<p>
+Pay attention to facial expressions, gaze behavior, speaking style, and walking motion. These examples demonstrate how personality is reflected through movement.
+</p>
+
+<div class="video-row">
+
+<video width="40%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_28_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="40%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_29_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 9</h2>
+
+<p>
+Observe speaking rhythm, facial expressions, pauses, timing, and communication style.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_27_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 10</h2>
+
+<p>
+Please evaluate facial expressions, gaze direction, hand gestures, and pronunciation style. This example demonstrates that behavioral identity extends far beyond lip synchronization.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_16_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_20_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 11</h2>
+
+<p>
+These examples portray a geographic location represented as a talking virtual character. Despite being artificial, the character remains believable through behavior, expression, laughter, eye movement, and gestures.
+</p>
+
+<div class="video-row">
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_6_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_7_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="35%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_8_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 12</h2>
+
+<p>
+Observe how the football player maintains recognizable expressions, gaze behavior, speaking patterns, and personality traits even during stylized transformations.
+</p>
+
+<div class="video-row">
+
+<video width="35%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_14_compressed_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 13</h2>
+
+<p>
+These virtual comedy characters demonstrate realistic speech, facial performance, head movement, gaze behavior, and hand gestures despite being entirely fictional.
+</p>
+
+<div class="video-row">
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_17_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_22_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_23_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_24_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h1>🎭 Character Behavioral Identity System</h1>
+
+<h2>Behavioral Identity Engine</h2>
+
+<p>
+The engine extends character identity beyond Face Identity and Voice Identity by introducing a third layer:
+</p>
+
+<div class="note">
+
+<h3>Character Identity</h3>
+
+<p>
+Face + Voice + Behavior
+</p>
+
+</div>
+
+<p>
+Instead of:
+</p>
+
+<div class="note">
+
+<p>
+Face + Voice
+</p>
+
+</div>
+
+<h2>📦 Character Pack Structure</h2>
+
+<p>
+A Character Pack contains:
+</p>
+
+<ul>
+<li>Reference Images</li>
+<li>Reference Voices</li>
+</ul>
+
+<p>
+The complete Character Pack also includes:
+</p>
+
+<ul>
+<li>Reference Behavior Videos</li>
+</ul>
+
+<p>
+Resulting in:
+</p>
+
+<div class="note">
+
+<p>
+Character Pack = Images + Voices + Behavior Videos
+</p>
+
+</div>
+
+<h2>🎥 Reference Behavior Videos</h2>
+
+<p>
+The user may optionally upload one or more videos showing:
+</p>
+
+<ul>
+<li>Natural speech</li>
+<li>Interviews</li>
+<li>Public appearances</li>
+<li>Historical recordings</li>
+<li>Casual conversations</li>
+<li>Walking footage</li>
+</ul>
+
+<p>
+The system analyzes behavioral information and saves a reusable Motion Profile for that character.
+</p>
+
+<h2>🧠 Motion Profile Analysis</h2>
+
+<ul>
+<li>Eye movement patterns</li>
+<li>Facial expression tendencies</li>
+<li>Gesture frequency</li>
+<li>Head movement habits</li>
+<li>Smile characteristics</li>
+<li>Laugh characteristics</li>
+<li>Body language</li>
+<li>Speaking rhythm</li>
+<li>Communication style</li>
+</ul>
+
+
+
+  <h2>🧠 Smart Director Integration</h2>
+
+<p>
+A Motion Profile is applied by:
+</p>
+
+<ul>
+<li>Smart Director – Automatic Mode</li>
+<li>Smart Director – Manual Mode</li>
+<li>Image Animation Tool</li>
+<li>Video Generation Tool</li>
+</ul>
+
+<p>
+so that generated characters follow:
+</p>
+
+<ul>
+<li>Their natural gestures</li>
+<li>Their typical facial expressions</li>
+<li>Their characteristic gaze behavior</li>
+<li>Their personal speaking style</li>
+<li>Their recognizable movement patterns</li>
+<li>Their unique emotional reactions</li>
+</ul>
+
+<p>
+instead of relying solely on generic animation behavior.
+</p>
+
+<hr>
+
+<h2>📊 Character Identity Modes</h2>
+
+<h3>Level 1</h3>
+
+<p>
+Reference Images Only
+</p>
+
+<div class="note">
+<strong>Result:</strong><br>
+Visual Identity
+</div>
+
+<h3>Level 2</h3>
+
+<p>
+Reference Images + Reference Voice
+</p>
+
+<div class="note">
+<strong>Result:</strong><br>
+Visual Identity + Voice Identity
+</div>
+
+<h3>Level 3</h3>
+
+<p>
+Reference Images + Reference Voice + Reference Behavior Videos
+</p>
+
+<div class="note">
+<strong>Result:</strong><br>
+Visual Identity + Voice Identity + Behavioral Identity
+</div>
+
+<hr>
+
+<h1>🎭 Universal Character Support</h1>
+
+<p>
+Behavioral identity is also required for non-human characters. As demonstrated in (see <b>Example Groups 11 and 13 above</b>), realistic behavioral identity is not limited to humans and may also apply to virtual, symbolic, and fictional characters.
+</p>
+
+<p>
+The Behavioral Identity system also supports:
+</p>
+
+<ul>
+<li>Cartoon characters</li>
+<li>Clay characters</li>
+<li>Talking animals</li>
+<li>Historical mascots</li>
+<li>Fictional personalities</li>
+<li>Symbolic characters</li>
+<li>Humanized objects</li>
+<li>Humanized locations</li>
+<li>Humanized countries</li>
+<li>Humanized concepts</li>
+</ul>
+
+<p>
+Examples of this can be seen in the attached references where:
+</p>
+
+<ul>
+<li>
+A football player appears in a virtual interview (see <b>Example Group 12 above</b>).</li>
+<li>A geographic location is represented as a talking character(see <b>Example Group 11 above</b>).</li>
+<li>Fictional comedy characters interact naturally(see <b>Example Group 13 above</b>).</li>
+</ul>
+
+<p>
+The generated personalities remain believable because behavior is preserved, not only appearance.
+</p>
+</div>
+<div class="section">
+<h1>🎯 Ultimate Goal</h1>
+
+<div class="note">
+
+<p>
+The goal is not only to reproduce how a character looks and sounds.
+</p>
+
+<p>
+The goal is to reproduce how the character behaves, reacts, gestures, smiles, laughs, gazes, speaks, and moves in a historically accurate and recognizable way.
+</p>
+
+</div>
+
+<p>
+By extending identity beyond appearance and voice, Hasaballa AI could potentially become one of the few AI platforms capable of preserving:
+</p>
+
+<ul>
+<li>Visual Identity</li>
+<li>Voice Identity</li>
+<li>Behavioral Identity</li>
+</ul>
+
+<p>
+This capability could become one of the most unique, advanced, and differentiating features of the Hasaballa AI Platform, while striving for the highest possible levels of realism, consistency, behavioral accuracy, quality, and scalability.
+</p>
+
+</div></section>
 <div class="task subtask"><input type="checkbox"data-id="task4-f"> 4-F <strong>✍️ Text & Command Input Box.</strong><br>
 (The number of characters allowed to be entered in the field must not be less than 15,000 characters).<br>
 📝 Function:<br>
@@ -431,7 +1132,7 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
 
 🤖 The <strong>AI understands</strong> and parses the scenario, dividing it into 🎬 scenes, 🌆 backgrounds, 🔊 sounds, and 👄 syncing instructions — and passes them to the 🧠 Smart Director (Manual and Automatic generations) for execution.</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-f-1"> 4-F-1 ✍️ The user can write the full script in <strong>Arabic (all dialects)</strong> or English — including all 🎬 scenes, 🌆 visual backgrounds, and 🔊 sound elements.<br>
+<div class="task subsubtask" id="HA-006"><input type="checkbox"data-id="task4-f-1"> 4-F-1 ✍️ The user can write the full script in <strong>Arabic (all dialects)</strong> or English — including all 🎬 scenes, 🌆 visual backgrounds, and 🔊 sound elements.<br>
 Then, the 🧠 Smart Director (Manual or Automatic generation modes) starts processing everything based on the written input.<br>
 
 Supported capabilities:<br>
@@ -479,7 +1180,7 @@ In this case, The system should ignore all other reference voices, even if refer
 - Fully integrates with the Smart Director (automatic & manual modes).<br>
 - The system must intelligently select or skip voice usage depending on text meaning.</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-f-6"> 4-F-3 <strong>🎛️ Multilayered Background Audio Detection.</strong><br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-3"> 4-F-3 <strong>🎛️ Multilayered Background Audio Detection.</strong><br>
 When the user writes in the Chat Window that multiple background sounds are present in a scene (e.g., music + applause + speech), the system must:<br>
 - Detect each background sound type individually.
 - Assign each one to a separate audio track in the timeline.
@@ -650,11 +1351,12 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 
 
   
+<div class="task subsubtask" id="HA-005"><input type="checkbox" data-id="unified-HA-005"> <b>4-F-8 🛡️ No token-limit truncation, loss or ignored prompt instructions</b><br>Input ≥15,000 characters; extract scene, original character and location, period, object, physical action, exact text, camera, movement, audio, speech, emotion and timestamps. No relevant instruction may disappear between stages. Explicit user commands override automatic settings, including stationary-camera instructions; track all downstream execution.<br><b>Non-negotiable:</b> never silently cut, delete, shorten, omit or rewrite mandatory instructions because of model token limits. Never require manual script splitting. If internal lossless staged processing is technically unavoidable, retain the complete original verbatim and verify every instruction and cross-scene constraint reaches the correct downstream tools. Explicitly report any processing failure rather than outputting an incomplete result.</div>
 <div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G <strong>⬆️ Expand Input Box</strong>.<br>
 🔽 Function: Enlarges the input box for easier writing of long scripts or commands.</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task4-h"> 4-H <strong>📐 Image or Video Dimensions</strong>.<br>
-⚙️ Function: Choose output dimensions depending on the platform:<br>
+<div class="task subtask" id="HA-039"><input type="checkbox"data-id="task4-h"> 4-H <strong>📐 Native Output Dimensions — choose any one, two or all three</strong>.<br>
+⚙️ Select 16:9, 9:16 and/or 1:1 at project input. ONE click generates the selected versions sequentially, each natively composed/generated from scratch using the same script, story, timing and references. Stretching/cropping a master video is not the primary method. See separate optional intelligent reframing (10-H).<br>
 
 🟥 16:9 → YouTube<br>
 
@@ -666,9 +1368,9 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 (from chat window to final video).<br>
 
 🎬 Smart Director Buttons:<br></div>
-<strong>1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+<strong>1️⃣Scenario input ➜ 2️⃣Press Auto Director ➜ 3️⃣Analyze ➜ 4️⃣Generate / Import Final Speech ➜ 5️⃣Generate Visuals ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
 
-<div class="task subsubtask">
+<div class="task subsubtask" id="HA-021">
   <input type="checkbox" data-id="task4-i-0">
   4-I-0 <strong>🎚️ Voice-First Planning</strong><br>
   • The system must always generate/import the scene audio first (narration or dialogue).<br>
@@ -687,11 +1389,11 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
   
 <div class="task subsubtask"><input type="checkbox"data-id="task4-i-1"> 4-I-1 <strong>🧠 Auto Generation Button</strong>.<br>
 📦 Automatically analyzes everything written in the input box, sends it to all the internal tools, and generates the final video + timeline without any user interaction.</div>
-<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate / Import Final Speech ➜ 5️⃣Generate Visuals ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
 <div class="task subsubtask"><input type="checkbox"data-id="task4-i-2"> 4-I-2
 <strong>🛠️ Manual Generation Button</strong>.<br>
 
-Lets the user go step-by-step through each tool manually, with full control over:<br>
+Lets the user enter the workflow DIRECTLY at any stage, import existing files, skip or selectively rerun a stage, and advance automatically to the next chosen stage, with persistent manual overrides and full control over:<br>
 
 - Image generation <br>
 
@@ -798,8 +1500,8 @@ These are stored automatically and can be reopened later for editing or regenera
     </div>
 
     <div class="step">
-      <strong>3. Reference Images (8)</strong><br>
-      Upload or select up to 8 reference faces to lock the look of specific characters.<br>
+      <strong>3. Reference Images — Dynamic Character Slots</strong><br>
+      Upload or select up to five face references for each of any number of project characters, including 10, 20 and 30+ people; slots are created dynamically using + Add Character.<br>
       The system will use these faces to render people in the generated scene.
     </div>
 
@@ -855,7 +1557,7 @@ These are stored automatically and can be reopened later for editing or regenera
 
 <div class="task subtask"><input type="checkbox"data-id="task5-a"> 5-A <strong>🎥 Cinematic lighting</strong>.</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task5-a-1"> 5-A-1 
+<div class="task subsubtask" id="HA-022"><input type="checkbox"data-id="task5-a-1"> 5-A-1 
 <strong>🖼️ Image Generation Tool – High-Quality Visual Output</strong><br>
 <strong>Performance:</strong><br>
 Generates <strong>high-resolution character visuals</strong> and cinematic scenes using advanced image diffusion techniques.<br>
@@ -869,7 +1571,7 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 <strong>🖼️ Text to Image.</strong>
 </div>
 
-<div class="task subsubtask"><input type="checkbox" data-id="task5-a-3"> 5-A-3  
+<div class="task subsubtask" id="HA-026"><input type="checkbox" data-id="task5-a-3"> 5-A-3  
 <strong>🎨 Real image to Image (AI)</strong>
 </div>
 
@@ -878,7 +1580,7 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 </div>
 
 
-<div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B <strong>👥 Reference images</strong> (for multiple characters, minimum of 8 — all can appear in one video, so identity consistency is critical).</div>
+<div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B <strong>👥 Reference images</strong> (support at least eight different characters concurrently and dynamically expand to 10, 20, 30+ with explicit per-character reference mapping, without identity switching).</div>
 
   <div class="task subsubtask">
   <label>
@@ -920,7 +1622,7 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 
 - 🧠 The decision to use the voice or not is made during script writing inside the Chat Window — based on the context and structure of the text (<strong>see Task 4-F-2</strong>).<br>
 - The <strong>Smart Director</strong> simply follows this logic during generation (<strong>automatic or manual</strong>).<br></div>
-<div class="task subtask"><input type="checkbox"data-id="task5-c"> 5-C <strong>🔒 Identity lock button.</strong><br> - must match reference image with 99.9% (ideally 100%) accuracy.</div>
+<div class="task subtask" id="HA-023"><input type="checkbox"data-id="task5-c"> 5-C <strong>🔒 Identity lock button.</strong><br> - must match reference image with 99.9% (ideally 100%) accuracy.</div>
 
     <div class="task subsubtask" style="margin-inline-start:2em;">
   <input type="checkbox" data-id="task5-c-1">
@@ -947,7 +1649,7 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
   <div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E <strong>📂 Dropdown list</strong> for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F <strong>🏆 Minimum visual quality</strong> must match examples in the above video links.</div>
-<div class="task subtask"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 100% correct Arabic text</strong> in generated images.</div>
+<div class="task subtask" id="HA-027"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 Exact Arabic AND English text</strong> generated naturally in the image, with proper characters, orthography, perspective, lighting and material geometry. Preserve the user-provided wording and flag suspected original spelling errors instead of silently rewriting.</div>
 
 <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
 
@@ -959,6 +1661,7 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 </div>
 
 
+<div class="task subtask" id="HA-028"><input type="checkbox" data-id="unified-HA-028"> <b>5-P 📰 Complete newspapers, movie posters, books and visual inserts</b><br>Authentic whole newspaper page with masthead, logo, complete headline/article, proper photographs/body content and handling while folded, held, pinned or lying on a table. Correct movie posters (original insertion or newly generated with real references), covers, billboards, shop/building/road signs, blackboards, framed pictures and all text/images with real geometric continuity.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-h"> 5-H <strong>🔽 Skip This Step Button</strong><br> 
 Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must:<br> 
@@ -1029,10 +1732,10 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
   </div>
 </div>
 
-  <div class="task subtask">
-  <input type="checkbox" data-id="task5-m"> 5-M 🌍 <strong>Cultural & Historical Accuracy Extension</strong><br>
-  The Image Generation tool must authentically represent Arab and Middle Eastern life across different eras — from 
-  <strong>Pharaonic Egypt (7000 BC)</strong> through <strong>Islamic dynasties (Umayyad, Abbasid, Mamluk, Ottoman)</strong>,
+  <div class="task subtask" id="HA-029">
+  <input type="checkbox" data-id="task5-m"> 5-M 🌍 <strong>Worldwide Historical &amp; Geographical Accuracy, with Intensive Arab-Era Reference Packs</strong><br>
+  The Image Generation tool must authentically represent all world regions and historical periods. Mandatory intensive Arab and Middle Eastern reference packs cover eras from 
+  <strong>prehistoric Egypt (circa 7000 BCE) and the Pharaonic dynastic periods (from circa 3100 BCE)</strong> through <strong>Islamic dynasties (Umayyad, Abbasid, Mamluk, Ottoman)</strong>,
   to the <strong>20th century (1950s–1970s)</strong>, and finally the <strong>modern era (2000–2025)</strong>.
 </div>
 
@@ -1086,6 +1789,8 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
 
 
 
+<div class="task subtask" id="HA-024"><input type="checkbox" data-id="unified-HA-024"> <b>5-N 🏠 Exactly repeat recurring places across scenes</b><br>A house, apartment, farm, street, room, landscape, phone booth and props must remain exactly the same from every camera angle and repeated scene; changing camera motion or weather must not change their architecture, object layout, walls, doors or historical environment.</div>
+<div class="task subtask" id="HA-025"><input type="checkbox" data-id="unified-HA-025"> <b>5-O 🧬 Fix anatomy and objects at the root — zero distortions</b><br>Zero accepted malformed faces, ears, hands, fingers, limbs, body posture, wrong gaze, unnatural hand grip, intersecting/merged objects, translucent flesh, clothing glitches, invented characters or era contamination. Automated defect gates, visual checking and selective repairs target causes, not cosmetically hide recurring failures.</div>
 <h1>🧠 Image Animation – How It Works</h1>
 
   <img src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/refs/heads/main/photos/animation.png" style="width:70%; display:block; margin:auto;" >
@@ -1187,7 +1892,7 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
 <div class="task subtask"><input type="checkbox"data-id="task6-a"> 6-A <strong>🧍‍♀️ Full-body animation</strong> (eyes, facial expressions, shoulders, hands, legs, etc.).</div>
 
 
-  <div class="task subsubtask">
+  <div class="task subsubtask" id="HA-030">
   <input type="checkbox" data-id="task6-a-1"> 6-A-1 🏃‍♂️ <b>Full-Body Dynamic and Realistic Motion</b>  <br>
    - Supports complex and realistic <b>whole-body movement</b>: running, walking, fighting, escaping, cinematic battle actions.  <br>
    - Includes synchronization of: <br> 
@@ -1292,7 +1997,7 @@ Seamless lip sync and cinematic animation style, compatible with any background 
 </div>
 
 
-<div class="task subsubtask">
+<div class="task subsubtask" id="HA-032">
   <input type="checkbox" data-id="task6-a-4">
   <label for="task6-a-4">6-A-4 🎥 <b>Camera Motion Control</b></label>
   <ul>
@@ -1394,7 +2099,7 @@ Seamless lip sync and cinematic animation style, compatible with any background 
       <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/50.mp4" type="video/mp4">
     </video></div></div>
 
-  <div class="task subsubtask"><input type="checkbox"data-id="task6-b-1"> 6-B-1 🖥️ <b>Animate video within screen/TV</b> inside the background image.</div>
+  <div class="task subsubtask" id="HA-033"><input type="checkbox"data-id="task6-b-1"> 6-B-1 🖥️ <b>Generate or insert video inside a TV, phone, tablet or other screen — TWO independent methods:</b> (1) generate the exact on-screen animated scene from the user’s complete prompt; (2) insert the user’s imported existing video. Preserve screen tracking, perspective, movement, lighting, edges, orientation and the surrounding scene.</div>
 
 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 40px;">
   <h3 style="text-align: center;">📽️ For example: preview scenes</h3>
@@ -1404,7 +2109,8 @@ Seamless lip sync and cinematic animation style, compatible with any background 
 </div>
 
   
-  <div class="task subtask"><input type="checkbox"data-id="task6-c"> 6-C <strong>👄 Lip sync</strong> must be as good as DreamFace or better than the sample reference videos.</div>
+  
+<div class="task subtask" id="HA-034"><input type="checkbox"data-id="task6-c"> 6-C <strong>👄 Lip sync</strong> must be as good as DreamFace or better than the sample reference videos.</div>
 > The Chat Window <strong>(Hasaballa GPT)</strong> is the primary controller for deciding when and how lip sync is triggered(In the automatic and manual smart output mode).<br>
 - It analyzes the written script and automatically assigns isTalking:<br> 
 true to the correct reference image — based on scene type and text context.<br>
@@ -1715,6 +2421,10 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 
   
+<div class="task subtask" id="HA-031"><input type="checkbox" data-id="unified-HA-031"> <b>6-Q 🚗 Correct period vehicles and realistic vehicle physics</b><br>Cars, tanks, aircraft and all vehicles must preserve shape, era, windows, wheels, components and proportions through movement, rotation, 360-degree camera views, collisions and explosions. Plausible physics without emerging people, shape shifts or cartoon motion.</div>
+<div class="task subtask" id="HA-035"><input type="checkbox" data-id="unified-HA-035"> <b>6-R 👥 Visible/offscreen narrators and silent listeners</b><br>Switch naturally between on-screen storyteller, off-screen narration, dialogue and listeners in the SAME scene; other characters may react or gaze but must never speak silently or move lips to a different speaker's words.</div>
+<div class="task subtask" id="HA-036"><input type="checkbox" data-id="unified-HA-036"> <b>6-S ☎️ One continuous call, varied cinematic shots</b><br>Render the ENTIRE 30–40-second referenced call without losing speech; vary booth interior/exterior, left/right camera, speaker/listener and remote speaker views exactly as described. Same booth, street and Marwan identity throughout; never synchronize his mouth to remote caller speech.</div>
+<div class="task subtask" id="HA-048"><input type="checkbox" data-id="unified-HA-048"> <b>6-T 🎬 Multi-event speaker and camera timeline</b><br>Within one shot support rapid role changes, simultaneous conversation groups, overlapping/interrupting speech, listener reactions, off-screen lines, independent body/gaze/camera events and accurate per-utterance start/end tracking. Use identical speaker-event mapping for normal TTS and Voice-First routes.</div>
 <div class="task"><input type="checkbox"data-id="task7"> 7️⃣ <strong>Reference voices / voice enhancement / Voice cloning / voice generation 🔊</strong>.</div>
 
  <div>
@@ -1724,9 +2434,9 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 </div>
 
 
-<div class="task subtask"><input type="checkbox"data-id="task7-a"> 7-A <strong>🎙️ Reference voices</strong> for multiple characters, <br> 
-Support adding <strong>reference voices</strong> for multiple characters (<strong>minimum 8</strong>).<br>
-- Each <strong>reference image</strong> should be linked to a unique voice — forming a complete Character Pack (Image + Voice).<br>
+<div class="task subtask"><input type="checkbox"data-id="task7-a"> 7-A <strong>🎙️ Optional Character-ID-mapped Reference Voices</strong> for multiple characters, <br> 
+Support reference voices for at least eight named characters and as many more as the project needs (10, 20, 30+), with a separate expandable voice slot per character.<br>
+- Each character’s images should be explicitly mapped to that same character’s optional voice(s) and behavioral reference video(s), forming a reusable Character Pack with no cross-character mixing.<br>
 - This ensures identity consistency in multi-character videos (especially <strong>Dialogue Mode</strong>).<br>
 <strong>🧠 Note</strong>:<br>
 - This mechanism was explained in <strong>Task 4-F-2-2</strong> and detailed further in <strong>Task 4-E</strong> – Intelligent Reference Voice Mapping.<br>
@@ -1735,7 +2445,7 @@ Support adding <strong>reference voices</strong> for multiple characters (<stron
 <div class="task subtask"><input type="checkbox"data-id="task7-b"> 7-B <strong>🎙️ Studio-like audio enhancement</strong> (remove noise, increase clarity).</div>
 <div class="task subtask"><input type="checkbox"data-id="task7-c"> 7-C <strong>🧬 Voice cloning</strong> — must match reference audio 100%.</div> 
   
-  <div class="task subtask"><input type="checkbox"data-id="task7-d"> 7-D <strong>😮‍💨 Natural breathing</strong>, pauses, emotional tone shifts.
+  <div class="task subtask" id="HA-016"><input type="checkbox"data-id="task7-d"> 7-D <strong>😮‍💨 Natural breathing</strong>, pauses, emotional tone shifts.
   The system must support:
   <ul>
     <li>🎭 Emotional tones: sadness, anger, joy, hesitation, fear, determination…</li>
@@ -1757,7 +2467,8 @@ These effects must be:<br>
 "Make this part sound like it’s being said through a mic on stage."  
 </div>
 
-<div class="task subtask">
+<section class="unified-v1-module"><h2>🎙️ Local Arabic dialect-to-model routing priorities</h2><p>Rank 1 is preferred, then Rank 2, Rank 3. Empty cells are deliberately unassigned; Fish Audio and S2-Pro are one model. This 16-variant testing matrix NEVER removes the other original dialects, and model selection requires actual commercial-use licences and quality verification.</p><div style="overflow-x:auto"><table class="unified-v1-voice-table"><thead><tr><th>Dialect</th><th>Rank 1</th><th>Rank 2</th><th>Rank 3</th></tr></thead><tbody><tr><td>MSA</td><td>—</td><td>Fish Audio M/F</td><td>Lahgtna F</td></tr><tr><td>Cairene</td><td>—</td><td>Lahgtna M/F</td><td>Fish Audio M/F</td></tr><tr><td>Sa’idi</td><td>—</td><td>—</td><td>Lahgtna F</td></tr><tr><td>Fellahi</td><td>—</td><td>—</td><td>Lahgtna M/F</td></tr><tr><td>Broken Egyptian</td><td>Lahgtna M/F</td><td>Habibi M/F</td><td>Fish Audio M/F</td></tr><tr><td>Sinai Bedouin</td><td>Habibi M/F</td><td>Fish Audio M/F</td><td>Lahgtna F / OmniVoice M</td></tr><tr><td>Matrouh Bedouin</td><td>Lahgtna F / OmniVoice M</td><td>Habibi M</td><td>—</td></tr><tr><td>Yemeni</td><td>Fish Audio M / OmniVoice F</td><td>Habibi F / OmniVoice M</td><td>—</td></tr><tr><td>Lebanese</td><td>Habibi F / Lahgtna M</td><td>Lahgtna F / OmniVoice F</td><td>Fish Audio M / Habibi M</td></tr><tr><td>Syrian</td><td>Lahgtna F / OmniVoice M</td><td>Fish Audio M / Lahgtna M / OmniVoice F</td><td>—</td></tr><tr><td>Iraqi</td><td>Fish Audio F / Lahgtna M</td><td>Fish Audio M / Habibi F / OmniVoice M/F</td><td>—</td></tr><tr><td>Gulf</td><td>Lahgtna M / OmniVoice F</td><td>Habibi M/F / Lahgtna F / OmniVoice M</td><td>—</td></tr><tr><td>Libyan</td><td>Lahgtna M/F</td><td>Habibi F / OmniVoice M</td><td>Fish Audio F / OmniVoice F</td></tr><tr><td>Sudanese</td><td>Habibi F / Lahgtna M/F</td><td>Habibi M</td><td>Fish Audio M/F</td></tr><tr><td>Algerian</td><td>Habibi F / Lahgtna M/F / OmniVoice M</td><td>Habibi M / OmniVoice F</td><td>—</td></tr><tr><td>Moroccan Darija</td><td>Lahgtna F / OmniVoice M</td><td>Habibi M/F / Lahgtna M</td><td>OmniVoice F</td></tr></tbody></table></div><p><b>Other originally required dialects:</b> Saudi — Habibi Hijazi primary / OmniVoice backup; Tunisian — OmniVoice primary / Habibi backup; Nubian — OmniVoice; Alexandrian — no verified model assigned. Other baseline dialects preserve their previously documented ranking, never a fabricated one. All 21 original dialects plus Sinai/Matrouh distinction remain required.</p></section>
+<div class="task subtask" id="HA-014">
   <input type="checkbox" data-id="task7-e"> 7-E <strong>🇸🇦 عربي All Arabic dialects</strong> must be supported naturally and precisely.<br>
   The platform must fully support voice generation and cloning in the following dialects:
   <ul>
@@ -1788,7 +2499,7 @@ These effects must be:<br>
   - The Smart Director should choose the correct dialect automatically based on script or manual selection.
 </div>
 
-<div class="task subtask"><input type="checkbox"data-id="task7-f"> 7-F <strong>🗣️ Voice generation</strong> (non-cloned) from included voice library.</div> 
+<div class="task subtask" id="HA-012"><input type="checkbox"data-id="task7-f"> 7-F <strong>🗣️ Voice generation</strong> (non-cloned) from included voice library.</div> 
 
 <div class="task subsubtask"><input type="checkbox"data-id="task7-f-1"> 7-F-1 
 🗣️<strong> Voice Generation & Cloning Tool – Studio-Grade Audio</strong><br>
@@ -1801,7 +2512,7 @@ High-definition 48kHz audio output, supporting multiple characters, dialects, an
 </div>
 
 
-<div class="task subsubtask">
+<div class="task subsubtask" id="HA-018">
   <input type="checkbox" data-id="task7-f-2"> 7-F-2 🌍 <b>Multilingual Dubbing</b><br>
   Enable automatic <b>dubbing</b> of generated or cloned voices into the world’s most used languages:<br>
   <ul>
@@ -1895,7 +2606,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 </div>
 
 
-  <div class="task subtask">
+  <div class="task subtask" id="HA-019">
   <input type="checkbox" data-id="task7-l"> 7-L 🎶 <b>Singing Voice Generation</b><br>
   Transform cloned or generated voices into <b>singing performances</b>:<br>
   <ul>
@@ -1967,7 +2678,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   - lip-sync alignment passes visual inspection with exported timings.
 </div>
 
-  <div class="task subtask">
+  <div class="task subtask" id="HA-015">
   <input type="checkbox" data-id="task7-o"> 7-O ✅ <strong>Automatic Voice Quality Assurance</strong><br>
   - Runs silently in the backend; user does not need to configure anything.<br>
   - Ensures final audio is clean and clear, free from background hiss, buzzing, or digital artifacts.<br>
@@ -1976,7 +2687,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 </div>
 
 
-  <div class="task subtask">
+  <div class="task subtask" id="HA-017">
   <input type="checkbox" data-id="task7-p"> 7-P 🎙️ <strong>Dialogue Context Effects</strong><br>
   - <b>Must be implemented in backend.</b><br>
   - Effects apply only when selected by the user or auto-detected from Chat Window script tags.<br>
@@ -1995,12 +2706,12 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 <div class="task subsubtask" style="margin-inline-start:2em;">
   <input type="checkbox" data-id="task7-p-3"> 7-P-3 🫁 <b>Exertion / Movement</b><br>
-  - Add natural panting/breath intensity and slight strain for running/crawling/combat while speaking.
+  - Generate realistic panting, breathing and vocal strain natively for running/crawling/combat while speaking, not merely an artificial after-effect.
 </div>
 
 <div class="task subsubtask" style="margin-inline-start:2em;">
   <input type="checkbox" data-id="task7-p-4"> 7-P-4 📢 <b>Shout / Whisper</b><br>
-  - Quick preset to push voice into shout (higher intensity) or whisper (low, airy) when scene demands.
+  - Generate authentic shouted or whispered voice performances when requested; retain accent, words and speaker identity, rather than relying solely on voice post-processing.
 </div>
 
 <div class="task subsubtask" style="margin-inline-start:2em;">
@@ -2014,7 +2725,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   <input type="checkbox" data-id="task7-q"> 7-Q ⚡ <strong>Voice Speed Control</strong> (Formant-Preserving)
   <ul>
     <li>Adjust the speed of any generated or cloned voice without changing pitch (formant-preserving time-stretch).</li>
-    <li>Default range: <b>0.75x → 1.25x</b>. Custom numeric input is supported (e.g., 1.12x).</li>
+    <li>Typical quick control: <b>0.75x → 1.25x</b>. Full adjustable range: <b>0.50x → 2.00x</b>. Custom numeric input is supported (e.g., 1.12x).</li>
     <li><b>Auto Lip-Sync Retiming:</b> visemes/phonemes are re-aligned to the new duration.</li>
     <li><b>Non-Destructive (Safe Draft):</b> changes produce a separate preview take while the original stays intact.</li>
     <li>Apply per line / per scene / per project, with a <b>Reset</b> button.</li>
@@ -2044,6 +2755,8 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 
   
+<div class="task subtask" id="HA-013"><input type="checkbox" data-id="unified-HA-013"> <b>7-R 🎙️ Voice-First Production — optional, four supported cases</b><br>Accept a finished audio file of up to <b>25 minutes</b> at project input and bypass TTS while automatically completing all other production. Four modes: (1) one narrator, (2) male narrator performing multiple roles plus optional separate female file, (3) one male narrator performing ALL male and female roles in one file, (4) completed multi-voice recording with NO cloning. At every mode allow unchanged original speech OR optional gender/age/child voice conversion and individually cloned reference voices on each mapped character segment. Script/character mapping, not the original reader's gender, controls roles. Preserve spoken words, dialect, pronunciation, emotion, performance, overlaps, interruptions, off-screen lines and exact timing; approved audio controls visuals.</div>
+<div class="task subtask" id="HA-020"><input type="checkbox" data-id="unified-HA-020"> <b>7-S 📝 Offline speech-to-text, caption and dubbing timing</b><br>Local STT, transcription, dictation and translation in Arabic dialects and English with correct RTL joining, exact words and timestamps; fully editable font, scale, color and vertical placement, distinguish main narration vs secondary speech where feasible.</div>
 <div class="task"><input type="checkbox"data-id="task8"> 8️⃣ <strong>Integrated sound library + Pixabay search 🎼</strong>.</div>
 <div class="task subtask"><input type="checkbox"data-id="task8-a"> 8-A 🎧 Include <strong>the most used sound</strong> effects/backgrounds directly in the platform.</div>
 
@@ -2078,7 +2791,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   
   <div class="task subtask"><input type="checkbox"data-id="task8-b"> 8-B <strong>🔍 Search Pixabay audio</strong> via built-in search button (requires internet).</div>
 
-<div class="task subtask"><input type="checkbox"data-id="task8-c"> 8-C <strong>🎛️ Audio Layering Execution</strong> (Based on Chat Input).<br> 
+<div class="task subtask" id="HA-038"><input type="checkbox"data-id="task8-c"> 8-C <strong>🎛️ Audio Layering Execution</strong> (Based on Chat Input).<br> 
 The background audio engine must support multiple overlapping audio tracks (e.g., music + applause + prayer) based on structured commands parsed from the script written in the Chat Window.<br> 
 
 🧠 This includes:<br> 
@@ -2147,9 +2860,9 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   - support seamless looping for ambience/music beds with auto crossfade at loop points.
 </div>
 
-  <div class="task subtask"><input type="checkbox" data-id="task8-h">
+  <div class="task subtask" id="HA-037"><input type="checkbox" data-id="task8-h">
   8-H ✅ <strong>Royalty-Free Guarantee</strong><br>
-  - All integrated/Pixabay sounds must be 100% copyright-safe for YouTube/Facebook monetization.
+  - Every sound must carry verified rights for the intended commercial use, with applicable licence conditions and attribution enforced where required; do not promise absolute copyright immunity without verification.
 </div>
 
   <div class="task subtask"><input type="checkbox" data-id="task8-i">
@@ -2179,7 +2892,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
   <div class="task subtask"><input type="checkbox" data-id="task8-l">
   8-L 🔒 <strong>Offline Packs & Caching</strong><br>
-  - The platform must always include a built-in offline library of the most important FX (street, nature, prayer, crowds, etc.).<br>
+  - The platform must always include a full locally cached sound-effects library with verified commercial-use rights, covering street, nature, crowd, action and regional/era backgrounds.<br>
   - If internet is available, extra sounds can be fetched from Pixabay only when needed (not downloaded all at once).<br>
   - Any FX/music used in a project must be cached locally, so if the same sound is needed again it loads instantly without re-searching or re-downloading.
  </div>
@@ -2208,15 +2921,15 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
   <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
   🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
-  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
-  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  🔹 <strong>Enter directly at ANY chosen stage</strong> — never forced to start at the beginning. Import finished voice, images or animation, skip any stage and move automatically to the next selected stage within Smart Director.<br>
+  🔹 Preview each stage; approve, reject, edit or regenerate only that stage before continuing. Manual overrides remain saved.</p>
   <p>🔹 In each stage, the user decides:</p>
   <ul>
-    <li>Generate image or skip</li>
-    <li>Generate voice or skip</li>
+    <li>Generate images, import existing images, or skip</li>
+    <li>Generate a voice, import ready-made speech, or skip</li>
     <li>Animate or not</li>
     <li>Add background audio or skip</li>
-    <li>Activate lip sync or not</li>
+    <li>Enable lip sync or not; preview, approve/reject, edit or selectively regenerate stage output</li>
   </ul>
   <p>🧩 Each generated element is automatically added to the final timeline.</p>
   <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
@@ -2224,7 +2937,9 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 </div>
 
-<div class="task subtask"><input type="checkbox"data-id="task9-a"> 9-A <strong>⚡ Automatic Mode</strong>:<br> From writing the script in the chat window (with visual/sound prompts and text-to-image/video prompts) to the final video — all automatically.<br>
+
+
+<div class="task subtask" id="HA-007"><input type="checkbox"data-id="task9-a"> 9-A <strong>⚡ Automatic Mode</strong>:<br> From writing the script in the chat window (with visual/sound prompts and text-to-image/video prompts) to the final video — all automatically.<br>
 
   <section class="auto-director-flow">
   <h3>🎬 Auto Smart Director – Full Execution Flow</h3>
@@ -2245,21 +2960,15 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   </div>
 
   <div class="flow-step">
-    <h3><strong>４</strong> Visual Generation</h3>
-    <p>🖼️ Generate all required visuals:</p>
-    <ul>
-      <li>🔁 Based on uploaded reference images</li>
-      <li>🏙️ Generate additional background scenes as needed (based on scenario)</li>
-    </ul>
+    <h3><strong>４</strong> Generate or Import Final Speech</h3>
+    <p>🔊 Establish the exact scene audio and master timings FIRST:</p>
+    <ul><li>🧬 Normal TTS with optional reference voice cloning</li><li>🎼 Selected voice-library output</li><li>🎙️ Optional Voice-First complete recording, bypassing TTS</li></ul>
   </div>
 
   <div class="flow-step">
-    <h3><strong>５</strong> Voice Generation</h3>
-    <p>🔊 Generate all character voice lines in the script using:</p>
-    <ul>
-      <li>🧬 Voice cloning if reference voices are provided</li>
-      <li>🎼 Voice library if no references exist</li>
-    </ul>
+    <h3><strong>５</strong> Visual Generation</h3>
+    <p>🖼️ Generate shot-specific visuals to fit exact approved voice duration and the full script:</p>
+    <ul><li>🔁 Preserve original character and place reference identities</li><li>🏙️ Generate accurate world-location and historic backgrounds with specific action/camera instructions</li></ul>
   </div>
 
   <div class="flow-step">
@@ -2267,7 +2976,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
     <p>🎧 Generate audio backgrounds for each scene:</p>
     <ul>
       <li>📂 From the platform's local sound library</li>
-      <li>🌐 Or automatically fetched from Pixabay based on scenario keywords</li>
+      <li>🌐 Optional Pixabay retrieval ONLY after the user explicitly enables Internet; core audio production uses the local offline library.</li>
     </ul>
   </div>
 
@@ -2288,7 +2997,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
   <div class="flow-step">
     <h3><strong>８</strong> Final Assembly</h3>
-    <p>🎞️ Render the entire output and display it in the built-in <strong>Timeline Editor</strong><br>
+    <p>🎞️ Transfer the completed project AND separate media elements into timecoded editable tracks inside <strong>Hasaballa AI Studio</strong><br>
     (📍 This is where Auto Smart Director hands off control).</p>
   </div>
 </section>
@@ -2326,12 +3035,12 @@ Ensure high-quality output even with partial steps.<br>
 
 ⚙️<strong> Important</strong>:<br>
 This task only applies in Automatic Mode.<br></div>
-<div class="task subtask"><input type="checkbox"data-id="task9-b"> 9-B 🛠️ <strong>Manual Mode:</strong><br> Full step-by-step control from chat to images, animation, voice, sound and lip sync — everything manual.
+<div class="task subtask"><input type="checkbox"data-id="task9-b"> 9-B 🛠️ <strong>Manual Mode — enter at any production stage:</strong><br> Full hands-on control at the user-selected stage, NOT an obligatory sequence beginning at the first stage. Import inputs, approve/reject/edit/regenerate outputs and continue without manually transferring media between tools.
 
 <strong>Manual skipping</strong> is defined separately.<br>
-<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate Visuals ➜ 5️⃣Generate Voices ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
+<strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate / Import Final Speech ➜ 5️⃣Generate Visuals ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
 
-Lets the user go step-by-step through each tool manually, with full control over:<br>
+Lets the user enter the workflow DIRECTLY at any stage, import existing files, skip or selectively rerun a stage, and advance automatically to the next chosen stage, with persistent manual overrides and full control over:<br>
 
 - Image generation <br>
 
@@ -2347,6 +3056,7 @@ Lets the user go step-by-step through each tool manually, with full control over
 The manual Smart Director must include a visual progress bar or step tracker (<strong>Task Timeline</strong>), showing the current tool in use, completed stages, and remaining tasks. This helps the user follow the video generation flow step-by-step.</div>
 
   
+<div class="task subtask" id="HA-008"><input type="checkbox" data-id="unified-HA-008"> <b>9-B-2 🛠️ Enter Manual Mode at ANY stage, not only from the beginning</b><br>Inspect and manually control/skip/import/replace/approve every production stage with visible stage progress, previews and persistent overrides; same internal generation engines and results as Automatic.<br><b>Mandatory:</b> choose any stage as the entry point (voice, image, motion, lip-sync, ambience, assembly), import ready-made outputs, skip any unneeded stage, preview, approve/reject/edit/regenerate only a chosen stage, and continue to next selected stage automatically without manually transferring files. All overrides persist through reopening/reruns.</div>
 <div class="task subtask">
   <input type="checkbox" data-id="task9-c">
   9-C ✅ <strong>Smart Director – Acceptance Criteria (Auto & Manual)</strong>
@@ -2421,6 +3131,7 @@ The manual Smart Director must include a visual progress bar or step tracker (<s
 </div>
 
   
+<div class="task subtask" id="HA-045"><input type="checkbox" data-id="unified-HA-045"> <b>9-D 🧪 Run both originally supplied complete scenarios</b><br>Locate and execute BOTH original scenarios supplied to development, including the separately delivered action/motion scenario. Preserve every prompt and asset and deliver complete sound-enabled Smart Director results, not isolated demonstration clips.</div>
 <div class="task"><input type="checkbox"data-id="task10"> 1️⃣0️⃣ <strong>Final video (1 to 15 mins) 🎞️</strong>.</div>
 
 
@@ -2429,7 +3140,7 @@ The manual Smart Director must include a visual progress bar or step tracker (<s
 <div class="task subtask"><input type="checkbox"data-id="task10-c"> 10-C 👁️‍🗨️ <strong>Preview support.</strong></div>
 <div class="task subtask"><input type="checkbox"data-id="task10-d"> 10-D 💾<strong> Download support.</strong></div>
 <div class="task subtask"><input type="checkbox"data-id="task10-e"> 10-E 🔲<strong> Aspect ratios</strong>: 16:9, 9:16, 1:1  .</div>
-<div class="task subtask"><input type="checkbox"data-id="task10-f"> 10-F 💻 <strong>Full Video Editor Panel</strong> (CapCut-style Editing)<br> 
+<div class="task subtask" id="HA-041"><input type="checkbox"data-id="task10-f"> 10-F 💻 <strong>Full Video Editor Panel</strong> (CapCut-style Editing)<br><b>ACTUAL HASABALLA AI STUDIO INTEGRATION:</b> connect both Smart Director modes directly to Hasaballa AI Studio, which already exists in the platform folder, preserving all editor features below. Deliver separate editable video, narration, transformed dialogue, sound effects, music, dubbing, subtitles and text tracks with exact timing, never only a flattened movie.<br> 
 
 
 
@@ -2508,6 +3219,9 @@ Give the user the option to:<br>
 
 
 
+<div class="task subtask" id="HA-040"><input type="checkbox" data-id="unified-HA-040"> <b>10-H 📐 Separate intelligent reframing, never a substitute for native ratios</b><br>An additional optional method intelligently transforms an existing finished aspect ratio to another, continuously tracking important people, movement, objects and text to keep them inside the new frame with suitable re-centering. Never substitutes for HA-039 native rendering.</div>
+<div class="task subtask" id="HA-046"><input type="checkbox" data-id="unified-HA-046"> <b>10-I 🎞️ TWO complete cinematic production acceptance demos</b><br>Provide at least TWO COMPLETE end-to-end films made INSIDE Smart Director, fully assembled with separate Studio media, not external samples. Fully compare their IMAGE AND AUDIO to original references, whose quality is an ABSOLUTE MINIMUM; target surpassing them. The 34.8-minute experiment was not a quality pass: sampled scenes had slideshow shots, repetition, movement/voice/lip/era/identity errors. The Last Dance in Kippur is a third-party reference, NOT a platform production.</div>
+<div class="task subtask" id="HA-047"><input type="checkbox" data-id="unified-HA-047"> <b>10-J 📊 Verifiable deliverables, defect fixes and delivery date</b><br>Provide engineering evidence and measured quality for all required functions; agreed schedule, dependencies, responsible technical contributors, acceptance criteria, substantial testing buffer and weekly PC-access windows. An update or code change alone does not prove a requirement has passed; record genuine root cause and measured improvements.</div>
 <div class="task subtask"><input type="checkbox"data-id="task10-g"> 10-G ⚙️ Works with <strong>Smart Director (auto/manual)</strong>.</div>
 
     <p>⚙️ <strong>Note:</strong> The current 1️⃣1️⃣ Smart Editing and Timeline system must be designed to allow future enhancement as described in <strong>Task 20</strong> — including intelligent scene suggestions, smart clip replacement, and AI-powered post-editing workflows. No structural rewrite should be needed when Task 20 is implemented.</p>
@@ -2559,14 +3273,15 @@ Works automatically with Smart Director.</div>
 
 
   
-<div class="task"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
+<div class="task subtask" id="HA-042"><input type="checkbox" data-id="unified-HA-042"> <b>11-E 🛠️ Smart Edit must repair selected defects without full regeneration</b><br>Timecoded Arabic commands selectively replace or correct EXACT object, image region, person, animation, background, music, audio word/phrase/sentence or singing phoneme without redoing entire video. Preview/commit, Undo/Redo, A/B, uninterrupted voice identity/dialect/emotion/cadence, clean audio joins, retimed lips and changed Studio tracks ONLY. Future Task 20 Auto Smart Fix is separate.</div>
+<div class="task" id="HA-049"><input type="checkbox"data-id="task12"> 1️⃣2️⃣ Integration with <strong>Google AdSense & YouTube </strong>💻. <br>
 (Needs buttons to connect to the Internet).</div>
 
 <div class="task subtask"><input type="checkbox"data-id="task12-a"> 12-A 💰 Link to <strong>AdSense</strong> — show revenue from YouTube.</div>
 <div class="task subtask"><input type="checkbox"data-id="task12-b"> 12-B 📊 Link to <strong>YouTube Studio</strong> — track video performance and suggest improvements.</div>
 
-<div class="task"><input type="checkbox"data-id="task13"> 1️⃣3️⃣ <strong>Arabic Interface </strong>(Single Page Layout) 🌐.<br>
-✅ 100% RTL support, 📌 Large buttons — each with a simple label and tooltip.<br>
+<div class="task" id="HA-002"><input type="checkbox"data-id="task13"> 1️⃣3️⃣ <strong>Arabic Interface </strong>(Single Page Layout) 🌐.<br>
+✅ 100% RTL support with natural native Arabic, 📌 large buttons with clear labels and tooltips. Arabic and English prompts must execute with equal semantic accuracy in Auto, Manual and standalone tools, with no silent instruction loss.<br>
 (⚠️ The interface shown is in English for demonstration purposes only, but the final platform and all its interfaces must be in Arabic. 🗣️🇸🇦عربي)
 </div>
  <div>
@@ -2575,13 +3290,13 @@ Works automatically with Smart Director.</div>
   style="width:70%; display:block; margin:auto;" >
 </div>
 
-<div class="task"><input type="checkbox"data-id="task14"> 1️⃣4️⃣<strong> Auto-Update Button 🔄</strong>.<br>
+<div class="task"><input type="checkbox"data-id="task14"> 1️⃣4️⃣<strong> Auto-Update Button 🔄</strong> — requires explicit user activation of Internet access.<br>
 (Requires internet) — used to update the platform in future if needed.</div>
 
 <div class="task"><input type="checkbox"data-id="task15"> 1️⃣5️⃣<strong> Save Project & Continue Later 💾</strong>.</div>
 
 
- <div class="task subsubtask">
+ <div class="task subsubtask" id="HA-044">
   <input type="checkbox" data-id="task15-auto-save">
   15-A 💾 <strong>Auto-Save Every 30s (Platform-Wide)</strong>
   <div style="margin-inline-start:1.8em;">
@@ -2601,7 +3316,7 @@ Works automatically with Smart Director.</div>
 
 <div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ <strong>Backup & Restore Function</strong> 🛡️.</div>
 
-<div class="task"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ <strong>Full source code ownership</strong> (for exclusive platform rights) 🔐.</div>
+<div class="task" id="HA-003"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ <strong>Full source code ownership</strong> (for exclusive platform rights) 🔐. Deliver complete source, assets and dependencies with exclusive rights, a maintainable modular offline architecture, replaceable models, and no conflicting duplicate execution pathways. Maintain compatibility with future Hasaballa Engine without delaying V1.</div>
 
 <div class="task-box task coming-soon shadow-3d">
   <div class="task-content">
@@ -2667,6 +3382,7 @@ Works automatically with Smart Director.</div>
 <hr style="margin-top: 60px;">
 
 <p style="font-size: 20px; margin-top: 40px;">
+<div id="v1-final-delivery" class="unified-v1-speed">✅ FINAL V1 ACCEPTANCE: all fifty requirements must be validated with complete real outputs, including no fewer than TWO finished Smart Director films, exact reference comparisons with audio, genuine 4K visuals, and complete editable Studio handoff.</div>
 <h1>⚠️ Additional Note</h1>
 
 ❗ I don’t need too <strong>many models</strong> for image generation, animation, etc. 
@@ -2674,29 +3390,8 @@ Works automatically with Smart Director.</div>
 (<strong>the best possible</strong>), and it reaches the minimum visual/audio quality
 shown in the sample videos.<br> 
 
-<h1>💬 Final Thought</h1>
-
-I know this platform is a massive and demanding project.<br> 
-It needs a <strong>smart, talented, and hardworking developer</strong> to bring it to
-life.<br> 
-But it’s also just the beginning of what I see as a long-term
-collaboration.<br> 
-🌱 I have big dreams for this platform — not just to build it, but to turn
-it into a full creative studio powered by AI.<br> 
-💵And I understand it requires a big budget — but I want to take the
-first serious step with a maximum budget of <strong>$8,000 USD</strong>.<br> 
-🙏 I know this doesn’t reflect the true value of your effort, but it’s what
-I can afford now.<br> 
-🙌 Still, <strong>I promise</strong>:<br> 
-Whoever builds this with me will be my go-to developer for everything
-moving forward.<br> 
-Because I’m committed to <strong>growing</strong> this into something powerful and
-sustainable.<br> 
-Ahmed Hasaballa<br> 
-July 2025<br>
-</p>
-
-<div id="lock-overlay" style="position:fixed;inset:0;background:#0b0b0f;display:flex;align-items:center;justify-content:center;z-index:99999;">
+<h1>🎥 Hasaballa AI V1 — complete integrated production</h1><p>Every module and every quality, realism, geographic, audio, offline and performance requirement on this page jointly defines the complete first-release platform. No separate tool or isolated model success is a substitute for delivering the entire tested pipeline.</p>
+<a class="unified-v1-next" href="https://ahmedhasab.github.io/hasaballa-tasks/Hasaballa-AI-V2.html" target="_blank" rel="noopener">🚀 Hasaballa AI V2 — separate future version</a><div class="unified-v1-document" id="official-v1-guide-footer">📄 <span lang="ar" dir="rtl">هذا رابط وثيقة التسليم النهائية — اضغط على الرابط لفتح وثيقة التسليم</span><br>OFFICIAL FINAL V1 DELIVERY DOCUMENT — <a href="./Hasaballa_V1_Developer_Visual_Guide.pdf" target="_blank" rel="noopener">CLICK HERE TO OPEN THE COMPLETE DELIVERY DOCUMENT (PDF)</a></div><div id="lock-overlay" style="position:fixed;inset:0;background:#0b0b0f;display:flex;align-items:center;justify-content:center;z-index:99999;">
   <div style="background:#111;border:1px solid #333;border-radius:14px;padding:20px;max-width:360px;width:90%;color:#fff;font-family:Arial,Helvetica,sans-serif">
     <h3 style="margin:0 0 10px">Protected</h3>
     <p style="margin:0 0 12px;color:#bbb">Enter password to continue</p>
