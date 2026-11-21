@@ -1375,7 +1375,7 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
   <input type="checkbox" data-id="task4-i-0">
   4-I-0 <strong>🎚️ Voice-First Planning</strong><br>
   • The system must always generate/import the scene audio first (narration or dialogue).<br>
-  • Based on the effective audio duration (after silence removal), the system automatically decides the number of images/visuals needed for the scene.<br>
+  • Based on the effective audio duration, the system automatically decides the number of images/visuals needed for the scene.<br>
   • Formula: <code>images_per_scene = ceil( voice_duration_sec / seconds_per_image )</code>, default = 5s per image.<br>
   • Adequacy Check: If images are too many or too few (±20% tolerance), the system shows warnings and offers:<br>
     – 🔧 Auto-Fix (adjust automatically)<br>
