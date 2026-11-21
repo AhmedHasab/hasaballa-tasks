@@ -1650,7 +1650,11 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
   <div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E <strong>📂 Dropdown list</strong> for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F <strong>🏆 Minimum visual quality</strong> must match examples in the above video links.</div>
-<div class="task subtask" id="HA-027"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 Exact Arabic AND English text</strong> generated naturally in the image, with proper characters, orthography, perspective, lighting and material geometry. Preserve the user-provided wording and flag suspected original spelling errors instead of silently rewriting. <strong>AND Especially 100% correct Arabic text in generated images.</strong> </div>
+<div class="task subtask" id="HA-027"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 Exact Arabic AND English text</strong> generated naturally in the image, with proper characters, orthography, perspective, lighting and material geometry. Preserve the user-provided wording and flag suspected original spelling errors instead of silently rewriting. <strong>AND Especially 100% correct Arabic text in generated images.</strong> <br> The arabic text must be intrinsic to generated scene, visually seamless with correct perspective,
+lighting, shadows, texture and occlusion; exact user wording, 100% spelling/grammar,
+correct connected Arabic letters/RTL, no missing/changed words. Validate backend;
+flag input errors rather than rewrite exact user text. Later overlay is optional additional
+tool, never a replacement </div>
 
 <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
 
@@ -1662,7 +1666,11 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 </div>
 
 
-<div class="task subtask" id="HA-028"><input type="checkbox" data-id="unified-HA-028"> <b>5-P 📰 Complete newspapers, movie posters, books and visual inserts</b><br>Authentic whole newspaper page with masthead, logo, complete headline/article, proper photographs/body content and handling while folded, held, pinned or lying on a table. Correct movie posters (original insertion or newly generated with real references), covers, billboards, shop/building/road signs, blackboards, framed pictures and all text/images with real geometric continuity. <strong>AND Especially 100% correct Arabic text in generated images.</strong></div>
+<div class="task subtask" id="HA-028"><input type="checkbox" data-id="unified-HA-028"> <b>5-P 📰 Complete newspapers, movie posters, books and visual inserts</b><br>Authentic whole newspaper page with masthead, logo, complete headline/article, proper photographs/body content and handling while folded, held, pinned or lying on a table. Correct movie posters (original insertion or newly generated with real references), covers, billboards, shop/building/road signs, blackboards, framed pictures and all text/images with real geometric continuity. <strong>AND Especially 100% correct Arabic text in generated images.</strong><br> The arabic text must be intrinsic to generated scene, visually seamless with correct perspective,
+lighting, shadows, texture and occlusion; exact user wording, 100% spelling/grammar,
+correct connected Arabic letters/RTL, no missing/changed words. Validate backend;
+flag input errors rather than rewrite exact user text. Later overlay is optional additional
+tool, never a replacement</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-h"> 5-H <strong>🔽 Skip This Step Button</strong><br> 
 Add a clear "⏭️ Skip this step" button to this stage. <br> 
 🔹 If the user chooses to skip this stage, the system must:<br> 
@@ -1779,7 +1787,12 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
 <div class="task subsubtask" style="margin-inline-start:2em;">
   <input type="checkbox" data-id="task5-m-7">
   5-M-7 🔤 <strong>Arabic Text Guarantee</strong><br>
-  - All text inside images (signs, newspapers, posters) must be 100% correct Arabic, with an optional manual correction step.
+  - All text inside images (signs, newspapers, posters) must be 100% correct Arabic, with an optional manual correction step.<br>
+  -<b> Text must be intrinsic to generated scene, visually seamless with correct perspective,
+lighting, shadows, texture and occlusion; exact user wording, 100% spelling/grammar,
+correct connected Arabic letters/RTL, no missing/changed words. Validate backend;
+flag input errors rather than rewrite exact user text. Later overlay is optional additional
+tool, never a replacement</b>
 </div>
 
 <div class="task subsubtask" style="margin-inline-start:2em;">
