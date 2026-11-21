@@ -361,15 +361,15 @@ The reference videos above are the MINIMUM quality standard. No compromise on re
   <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
   <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
   🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
-  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
-  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  🔹 <strong>Enter directly at ANY chosen stage</strong> — never forced to start at the beginning. Import finished voice, images or animation, skip any stage and move automatically to the next selected stage within Smart Director.<br>
+  🔹 Preview each stage; approve, reject, edit or regenerate only that stage before continuing. Manual overrides remain saved.</p>
   <p>🔹 In each stage, the user decides:</p>
   <ul>
-    <li>Generate image or skip</li>
-    <li>Generate voice or skip</li>
+    <li>Generate images, import existing images, or skip</li>
+    <li>Generate a voice, import ready-made speech, or skip</li>
     <li>Animate or not</li>
     <li>Add background audio or skip</li>
-    <li>Activate lip sync or not</li>
+    <li>Enable lip sync or not; preview, approve/reject, edit or selectively regenerate stage output</li>
   </ul>
   <p>🧩 Each generated element is automatically added to the final timeline.</p>
   <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
@@ -452,14 +452,14 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
 
 <div class="task subtask" id="HA-010">
   <input type="checkbox" data-id="task4-d">
-  4-D <strong>🖼️ Insert Reference Images.</strong><br>
+  4-D <strong>🖼️ Insert Reference Images — mapped to named characters.</strong><br>
   <b>Function:</b> Upload reference images for characters. The system uses them to maintain identity consistency across scenes.<br><br>
 
   <ul style="margin:6px 0 0 1.2em;">
-    <li><b>Minimum:</b> 8 total images (≥ 8 characters recommended).</li>
+    <li><b>Supported Characters:</b> support eight or more characters simultaneously and expand dynamically using <b>+ Add Character</b> for 10, 20, 30 or more people. Photos are only required for characters needing image references; no arbitrary eight-image upload obligation.</li>
     <li><b>Per Character:</b> up to <b>5</b> reference images covering different ages/angles (e.g., childhood, youth, profile).</li>
     <li><b>Weighting:</b> each reference image has a <b>priority weight (0–100%)</b>. Weights are normalized per character.</li>
-    <li><b>Character Pack:</b> images + (linked) reference voice(s) are grouped as a reusable <b>Character Pack</b>.</li>
+    <li><b>Character Pack:</b> explicitly tag images by character name/ID and link with THAT character’s own optional audio and BIE video references as a single reusable Character Pack; never mix characters.</li>
     <li><b>Import/Export:</b> Character Packs must be importable/exportable (local JSON file) for reuse across projects.</li>
   </ul>
 </div>
@@ -473,7 +473,7 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
   <ul style="margin:6px 0 0 1.2em;">
     <li><b>Optional:</b> voice references are not mandatory if a library voice or prerecorded voice is used; cloning a specific voice requires at least one appropriate reference recording.</li>
     <li><b>Optional:</b> up to 5 reference voices per character (e.g., childhood, youth, adult), but not required.</li>
-    <li><b>Image↔Voice Linking:</b> each reference image <i>may</i> be linked to a specific reference voice. If no unique voice is linked, the system falls back to the character’s main voice.</li>
+    <li><b>Image↔Voice↔BIE Linking:</b> each file must have an explicit named character ID; optionally link to age-specific versions. If an age-specific voice is not present, fall back to THAT character’s main voice, never another character’s voice.</li>
     <li><b>Weights:</b> optional weight (0–100%) can be assigned per image/voice pair, normalized per character.</li>
     <li><b>Usage:</b> voices are used by the cloning tool to synthesize the character’s real voice during generation.</li>
     <li><b>Auto Mode:</b> in <strong>Auto Director Mode</strong>, the system automatically maps the correct voice to each scene based on script analysis (see 4-F-2).</li>
@@ -1354,8 +1354,8 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 <div class="task subtask"><input type="checkbox"data-id="task4-g"> 4-G <strong>⬆️ Expand Input Box</strong>.<br>
 🔽 Function: Enlarges the input box for easier writing of long scripts or commands.</div>
 
-<div class="task subtask" id="HA-039"><input type="checkbox"data-id="task4-h"> 4-H <strong>📐 Image or Video Dimensions</strong>.<br>
-⚙️ Function: Choose output dimensions depending on the platform:<br>
+<div class="task subtask" id="HA-039"><input type="checkbox"data-id="task4-h"> 4-H <strong>📐 Native Output Dimensions — choose any one, two or all three</strong>.<br>
+⚙️ Select 16:9, 9:16 and/or 1:1 at project input. ONE click generates the selected versions sequentially, each natively composed/generated from scratch using the same script, story, timing and references. Stretching/cropping a master video is not the primary method. See separate optional intelligent reframing (10-H).<br>
 
 🟥 16:9 → YouTube<br>
 
@@ -1392,7 +1392,7 @@ In Hasaballa GPT, the chat interface includes two optional control buttons:<br>
 <div class="task subsubtask"><input type="checkbox"data-id="task4-i-2"> 4-I-2
 <strong>🛠️ Manual Generation Button</strong>.<br>
 
-Lets the user go step-by-step through each tool manually, with full control over:<br>
+Lets the user enter the workflow DIRECTLY at any stage, import existing files, skip or selectively rerun a stage, and advance automatically to the next chosen stage, with persistent manual overrides and full control over:<br>
 
 - Image generation <br>
 
@@ -1499,8 +1499,8 @@ These are stored automatically and can be reopened later for editing or regenera
     </div>
 
     <div class="step">
-      <strong>3. Reference Images (8)</strong><br>
-      Upload or select up to 8 reference faces to lock the look of specific characters.<br>
+      <strong>3. Reference Images — Dynamic Character Slots</strong><br>
+      Upload or select up to five face references for each of any number of project characters, including 10, 20 and 30+ people; slots are created dynamically using + Add Character.<br>
       The system will use these faces to render people in the generated scene.
     </div>
 
@@ -1648,7 +1648,7 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
   <div class="task subtask"><input type="checkbox"data-id="task5-d"> 5-D <strong>🔁 Ability to update/change</strong> reference image at any time across scenes.</div>
 <div class="task subtask"><input type="checkbox"data-id="task5-e"> 5-E <strong>📂 Dropdown list</strong> for character reference images. </div>
 <div class="task subtask"><input type="checkbox"data-id="task5-f"> 5-F <strong>🏆 Minimum visual quality</strong> must match examples in the above video links.</div>
-<div class="task subtask" id="HA-027"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 100% correct Arabic text</strong> in generated images.</div>
+<div class="task subtask" id="HA-027"><input type="checkbox"data-id="task5-g"> 5-G <strong>📝 Exact Arabic AND English text</strong> generated naturally in the image, with proper characters, orthography, perspective, lighting and material geometry. Preserve the user-provided wording and flag suspected original spelling errors instead of silently rewriting.</div>
 
 <h3 style="margin-top: 40px; text-align: center;">📽️ For example: preview scenes</h3>
 
@@ -1734,7 +1734,7 @@ Images will be reviewed for facial accuracy (≥ 99%), lighting, Arabic text pre
   <div class="task subtask" id="HA-029">
   <input type="checkbox" data-id="task5-m"> 5-M 🌍 <strong>Worldwide Historical &amp; Geographical Accuracy, with Intensive Arab-Era Reference Packs</strong><br>
   The Image Generation tool must authentically represent all world regions and historical periods. Mandatory intensive Arab and Middle Eastern reference packs cover eras from 
-  <strong>Pharaonic Egypt (7000 BC)</strong> through <strong>Islamic dynasties (Umayyad, Abbasid, Mamluk, Ottoman)</strong>,
+  <strong>prehistoric Egypt (circa 7000 BCE) and the Pharaonic dynastic periods (from circa 3100 BCE)</strong> through <strong>Islamic dynasties (Umayyad, Abbasid, Mamluk, Ottoman)</strong>,
   to the <strong>20th century (1950s–1970s)</strong>, and finally the <strong>modern era (2000–2025)</strong>.
 </div>
 
@@ -2098,7 +2098,7 @@ Seamless lip sync and cinematic animation style, compatible with any background 
       <source src="https://raw.githubusercontent.com/AhmedHasab/hasaballa-tasks/main/videos/50.mp4" type="video/mp4">
     </video></div></div>
 
-  <div class="task subsubtask" id="HA-033"><input type="checkbox"data-id="task6-b-1"> 6-B-1 🖥️ <b>Animate video within screen/TV</b> inside the background image.</div>
+  <div class="task subsubtask" id="HA-033"><input type="checkbox"data-id="task6-b-1"> 6-B-1 🖥️ <b>Generate or insert video inside a TV, phone, tablet or other screen — TWO independent methods:</b> (1) generate the exact on-screen animated scene from the user’s complete prompt; (2) insert the user’s imported existing video. Preserve screen tracking, perspective, movement, lighting, edges, orientation and the surrounding scene.</div>
 
 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 40px;">
   <h3 style="text-align: center;">📽️ For example: preview scenes</h3>
@@ -2433,8 +2433,8 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 </div>
 
 
-<div class="task subtask"><input type="checkbox"data-id="task7-a"> 7-A <strong>🎙️ Reference voices</strong> for multiple characters, <br> 
-Support adding <strong>reference voices</strong> for multiple characters (<strong>minimum 8</strong>).<br>
+<div class="task subtask"><input type="checkbox"data-id="task7-a"> 7-A <strong>🎙️ Optional Character-ID-mapped Reference Voices</strong> for multiple characters, <br> 
+Support reference voices for at least eight named characters and as many more as the project needs (10, 20, 30+), with a separate expandable voice slot per character.<br>
 - Each <strong>reference image</strong> should be linked to a unique voice — forming a complete Character Pack (Image + Voice).<br>
 - This ensures identity consistency in multi-character videos (especially <strong>Dialogue Mode</strong>).<br>
 <strong>🧠 Note</strong>:<br>
@@ -2861,7 +2861,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
   <div class="task subtask" id="HA-037"><input type="checkbox" data-id="task8-h">
   8-H ✅ <strong>Royalty-Free Guarantee</strong><br>
-  - All integrated/Pixabay sounds must be 100% copyright-safe for YouTube/Facebook monetization.
+  - Every sound must carry verified rights for the intended commercial use, with applicable licence conditions and attribution enforced where required; do not promise absolute copyright immunity without verification.
 </div>
 
   <div class="task subtask"><input type="checkbox" data-id="task8-i">
@@ -2891,7 +2891,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
   <div class="task subtask"><input type="checkbox" data-id="task8-l">
   8-L 🔒 <strong>Offline Packs & Caching</strong><br>
-  - The platform must always include a built-in offline library of the most important FX (street, nature, prayer, crowds, etc.).<br>
+  - The platform must always include a full locally cached sound-effects library with verified commercial-use rights, covering street, nature, crowd, action and regional/era backgrounds.<br>
   - If internet is available, extra sounds can be fetched from Pixabay only when needed (not downloaded all at once).<br>
   - Any FX/music used in a project must be cached locally, so if the same sound is needed again it loads instantly without re-searching or re-downloading.
  </div>
@@ -2920,15 +2920,15 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
   <h2>🟡 2. Smart Director – Manual Mode (Full Hands-on Control)</h2>
   <p>🔹 The user writes the script in the Hasaballa GPT chat window.<br>
   🔹 Then clicks the 🛠️ "Smart Director – Manual" button.<br>
-  🔹 The system breaks the script into production stages, and moves step-by-step manually based on what’s written.<br>
-  (Example: it may skip image generation if not needed, or jump straight to voice.)</p>
+  🔹 <strong>Enter directly at ANY chosen stage</strong> — never forced to start at the beginning. Import finished voice, images or animation, skip any stage and move automatically to the next selected stage within Smart Director.<br>
+  🔹 Preview each stage; approve, reject, edit or regenerate only that stage before continuing. Manual overrides remain saved.</p>
   <p>🔹 In each stage, the user decides:</p>
   <ul>
-    <li>Generate image or skip</li>
-    <li>Generate voice or skip</li>
+    <li>Generate images, import existing images, or skip</li>
+    <li>Generate a voice, import ready-made speech, or skip</li>
     <li>Animate or not</li>
     <li>Add background audio or skip</li>
-    <li>Activate lip sync or not</li>
+    <li>Enable lip sync or not; preview, approve/reject, edit or selectively regenerate stage output</li>
   </ul>
   <p>🧩 Each generated element is automatically added to the final timeline.</p>
   <p>✅ Best for advanced users and video creators who want precise control — without needing external editing software.</p>
@@ -2936,8 +2936,8 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 </div>
 
-<div class="task subtask" id="HA-008"><input type="checkbox" data-id="unified-HA-008"> <b>9-B-2 🛠️ Enter Manual Mode at ANY stage, not only from the beginning</b><br>Inspect and manually control/skip/import/replace/approve every production stage with visible stage progress, previews and persistent overrides; same internal generation engines and results as Automatic.<br><b>Mandatory:</b> choose any stage as the entry point (voice, image, motion, lip-sync, ambience, assembly), import ready-made outputs, skip any unneeded stage, preview, approve/reject/edit/regenerate only a chosen stage, and continue to next selected stage automatically without manually transferring files. All overrides persist through reopening/reruns.</div>
-<div class="task subtask" id="HA-045"><input type="checkbox" data-id="unified-HA-045"> <b>9-D 🧪 Run both originally supplied complete scenarios</b><br>Locate and execute BOTH original scenarios supplied to development, including the separately delivered action/motion scenario. Preserve every prompt and asset and deliver complete sound-enabled Smart Director results, not isolated demonstration clips.</div>
+
+
 <div class="task subtask" id="HA-007"><input type="checkbox"data-id="task9-a"> 9-A <strong>⚡ Automatic Mode</strong>:<br> From writing the script in the chat window (with visual/sound prompts and text-to-image/video prompts) to the final video — all automatically.<br>
 
   <section class="auto-director-flow">
@@ -3034,12 +3034,12 @@ Ensure high-quality output even with partial steps.<br>
 
 ⚙️<strong> Important</strong>:<br>
 This task only applies in Automatic Mode.<br></div>
-<div class="task subtask"><input type="checkbox"data-id="task9-b"> 9-B 🛠️ <strong>Manual Mode:</strong><br> Full step-by-step control from chat to images, animation, voice, sound and lip sync — everything manual.
+<div class="task subtask"><input type="checkbox"data-id="task9-b"> 9-B 🛠️ <strong>Manual Mode — enter at any production stage:</strong><br> Full hands-on control at the user-selected stage, NOT an obligatory sequence beginning at the first stage. Import inputs, approve/reject/edit/regenerate outputs and continue without manually transferring media between tools.
 
 <strong>Manual skipping</strong> is defined separately.<br>
 <strong>1️⃣Scenario input ➜ 2️⃣Press Manual Director ➜ 3️⃣Analyze ➜ 4️⃣Generate / Import Final Speech ➜ 5️⃣Generate Visuals ➜ 6️⃣Add Soundscape ➜ 7️⃣Animate & Lip Sync ➜ 8️⃣Send to Timeline Editor<br></strong>
 
-Lets the user go step-by-step through each tool manually, with full control over:<br>
+Lets the user enter the workflow DIRECTLY at any stage, import existing files, skip or selectively rerun a stage, and advance automatically to the next chosen stage, with persistent manual overrides and full control over:<br>
 
 - Image generation <br>
 
@@ -3055,6 +3055,7 @@ Lets the user go step-by-step through each tool manually, with full control over
 The manual Smart Director must include a visual progress bar or step tracker (<strong>Task Timeline</strong>), showing the current tool in use, completed stages, and remaining tasks. This helps the user follow the video generation flow step-by-step.</div>
 
   
+<div class="task subtask" id="HA-008"><input type="checkbox" data-id="unified-HA-008"> <b>9-B-2 🛠️ Enter Manual Mode at ANY stage, not only from the beginning</b><br>Inspect and manually control/skip/import/replace/approve every production stage with visible stage progress, previews and persistent overrides; same internal generation engines and results as Automatic.<br><b>Mandatory:</b> choose any stage as the entry point (voice, image, motion, lip-sync, ambience, assembly), import ready-made outputs, skip any unneeded stage, preview, approve/reject/edit/regenerate only a chosen stage, and continue to next selected stage automatically without manually transferring files. All overrides persist through reopening/reruns.</div>
 <div class="task subtask">
   <input type="checkbox" data-id="task9-c">
   9-C ✅ <strong>Smart Director – Acceptance Criteria (Auto & Manual)</strong>
@@ -3129,6 +3130,7 @@ The manual Smart Director must include a visual progress bar or step tracker (<s
 </div>
 
   
+<div class="task subtask" id="HA-045"><input type="checkbox" data-id="unified-HA-045"> <b>9-D 🧪 Run both originally supplied complete scenarios</b><br>Locate and execute BOTH original scenarios supplied to development, including the separately delivered action/motion scenario. Preserve every prompt and asset and deliver complete sound-enabled Smart Director results, not isolated demonstration clips.</div>
 <div class="task"><input type="checkbox"data-id="task10"> 1️⃣0️⃣ <strong>Final video (1 to 15 mins) 🎞️</strong>.</div>
 
 
@@ -3137,7 +3139,7 @@ The manual Smart Director must include a visual progress bar or step tracker (<s
 <div class="task subtask"><input type="checkbox"data-id="task10-c"> 10-C 👁️‍🗨️ <strong>Preview support.</strong></div>
 <div class="task subtask"><input type="checkbox"data-id="task10-d"> 10-D 💾<strong> Download support.</strong></div>
 <div class="task subtask"><input type="checkbox"data-id="task10-e"> 10-E 🔲<strong> Aspect ratios</strong>: 16:9, 9:16, 1:1  .</div>
-<div class="task subtask" id="HA-041"><input type="checkbox"data-id="task10-f"> 10-F 💻 <strong>Full Video Editor Panel</strong> (CapCut-style Editing)<br> 
+<div class="task subtask" id="HA-041"><input type="checkbox"data-id="task10-f"> 10-F 💻 <strong>Full Video Editor Panel</strong> (CapCut-style Editing)<br><b>ACTUAL HASABALLA AI STUDIO INTEGRATION:</b> connect both Smart Director modes directly to Hasaballa AI Studio, which already exists in the platform folder, preserving all editor features below. Deliver separate editable video, narration, transformed dialogue, sound effects, music, dubbing, subtitles and text tracks with exact timing, never only a flattened movie.<br> 
 
 
 
