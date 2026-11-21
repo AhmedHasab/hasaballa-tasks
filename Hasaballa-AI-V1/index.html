@@ -45,7 +45,7 @@ body::before {
   margin-right: 10px;
 }
 .task.completed {
-  text-decoration: line-through;
+  text-decoration:none;
   color: gray;
 }
 
@@ -121,14 +121,14 @@ body::before {
 
 /* يشطب أي label بعد checkbox مباشرة */
 input[type="checkbox"]:checked + label {
-  text-decoration: line-through;
+  text-decoration:none;
   color: #777;
   opacity: 0.75;
 }
 
 /* نمط عام لأي عنصر تضيف له كلاس completed من الجافاسكريبت */
 .completed {
-  text-decoration: line-through;
+  text-decoration:none;
   color: #777;
   opacity: 0.75;
 }
@@ -139,7 +139,7 @@ input[type="checkbox"]:checked + label {
 .subsubtask:has(> input[type="checkbox"]:checked),
 .subsubsubtask:has(> input[type="checkbox"]:checked),
 .task li:has(> input[type="checkbox"]:checked) {
-  text-decoration: line-through;
+  text-decoration:none;
   color: #777;
   opacity: 0.75;
 }
