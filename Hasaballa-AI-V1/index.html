@@ -1629,7 +1629,31 @@ The generated images must be 100% realistic.
 
     <div class="task subsubtask" style="margin-inline-start:2em;">
   <input type="checkbox" data-id="task5-c-1">
-  5-C-1 🧪 <strong>Auto-Quality Guard (Negative + Seed)</strong>
+  5-C-1 🧷 <strong>Original identity vs continuity</strong><br>
+ - Two separate checks: accurately match original real-person reference identity (my
+target: 100%) and persist exact same identity across shots, angles, age-appropriate
+appearances, body motion, expression, outfit, pose and lighting unless instructed to
+change. Cross-generated similarity alone is insufficient. A single frontal reference may
+be all that exists; infer new views faithfully, and report actual minimum necessary
+references. Reference weights and age-stage mapping must remain controllable, not
+silently change identity between unrelated scenes. Identity scoring: target 0.75 on the
+team’s measurement system, not 0.55. Report the scale, calibration and new scores
+against the earlier 0.42–0.44 scores. Measure original-reference match and cross-shot
+consistency separately; verify visually across views and scenes. This score is not a
+substitute for the 100% visual identity target.
+</div>
+
+   <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-2">
+  5-C-2 🧷 <strong> Recurring location identity</strong><br>
+ - Same house, farm, street, London phone booth and other recurring locations must
+remain identical in architecture, layout, surrounding environment and props from
+beginning to end, even when camera, lighting, framing or action changes.
+</div>
+  
+  <div class="task subsubtask" style="margin-inline-start:2em;">
+  <input type="checkbox" data-id="task5-c-3">
+  5-C-3 🧪 <strong>Auto-Quality Guard (Negative + Seed)</strong>
   <div style="margin-inline-start:1.8em;">
     - system must automatically use internal negative prompts to avoid defects (hands, eyes, text).<br>
     - system must lock and reuse seeds to ensure identity consistency across all scenes.<br>
@@ -1639,8 +1663,8 @@ The generated images must be 100% realistic.
 </div>
 
   <div class="task subsubtask" style="margin-inline-start:2em;">
-  <input type="checkbox" data-id="task5-c-2">
-  5-C-2 🧷 <strong>Outfit/Style Lock</strong>
+  <input type="checkbox" data-id="task5-c-4">
+  5-C-4 🧷 <strong>Outfit/Style Lock</strong>
   <div style="margin-inline-start:1.8em;">
     - lock costume/era/hair/makeup as part of the identity profile.<br>
     - must remain stable across all generated scenes unless user explicitly changes it.<br>
