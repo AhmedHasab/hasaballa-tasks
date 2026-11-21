@@ -173,6 +173,17 @@ input[type="checkbox"]:checked + label {
 .unified-v1-next{display:block;margin:30px auto;padding:24px;background:#eaf9ef;border:2px solid #1e8249;border-radius:12px;text-align:center;font-size:25px;font-weight:bold;}
 @media(max-width:720px){body{font-size:18px;padding:10px}.unified-v1-requirement{font-size:17px}.unified-v1-speed{font-size:19px}.unified-v1-voice-table{font-size:12px}.unified-v1-bie{padding:7px}.unified-v1-menu a{font-size:14px}}
 
+
+/* Never strike, mute or hide a requirement merely because Firebase marked it as checked. */
+input[type="checkbox"]:checked + label,.task.completed,.completed,.task:has(> input[type="checkbox"]:checked),.subtask:has(> input[type="checkbox"]:checked),.subsubtask:has(> input[type="checkbox"]:checked),.subsubsubtask:has(> input[type="checkbox"]:checked),.task li:has(> input[type="checkbox"]:checked){text-decoration:none!important;color:inherit!important;opacity:1!important}
+.v1-pipeline{max-width:1400px;margin:24px auto 36px;padding:16px;background:#f4f8fa;border:2px solid #d0e1ea;border-radius:16px;text-align:center}
+.v1-pipeline img{display:block;width:100%;height:auto;margin-top:14px;border-radius:8px}
+.v1-pipeline figcaption{font-size:clamp(18px,2vw,27px);color:#163d57}
+.v1-benchmark-alert,.v1-quality-alert{margin:20px auto;padding:23px 28px;border-radius:14px;max-width:1400px;font-size:clamp(18px,2vw,27px);line-height:1.55;box-shadow:0 3px 15px #0001}
+.v1-benchmark-alert{border:5px solid #dc7b12;background:#fff4d6;color:#713d09}
+.v1-quality-alert{border:4px solid #137684;background:#eaf7f8;color:#124a55}
+.unified-v1-bie video{max-width:100%;height:auto}img{max-width:100%;height:auto}
+@media(max-width:750px){body{font-size:18px;padding:12px}.subtask,.subsubtask,.subsubsubtask{margin-left:8px;padding-left:8px}h1,h2{font-size:26px}}
 </style>
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -227,20 +238,24 @@ console.log("✅ Firebase connected & DOM ready");
 
 <div class="unified-v1-document" id="official-v1-guide">📄 <span lang="ar" dir="rtl">هذا رابط وثيقة التسليم النهائية — اضغط على الرابط لفتح وثيقة التسليم</span><br>OFFICIAL FINAL V1 DELIVERY DOCUMENT — <a href="./Hasaballa_V1_Developer_Visual_Guide.pdf" target="_blank" rel="noopener">CLICK HERE TO OPEN THE COMPLETE DELIVERY DOCUMENT (PDF)</a></div>
 <nav class="unified-v1-menu">
-<a href="#v1-foundations">Offline &amp; worldwide scope</a>
-<a href="#v1-project-training">Before-project training</a>
+<a href="#HA-001">Offline &amp; worldwide scope</a>
+<a href="#HA-004">Before-project training</a>
 <a href="#bie-engine">BIE and 29 videos</a>
-<a href="#v1-voice-first">Prerecorded audio</a>
-<a href="#v1-ratios">16:9 / 9:16 / 1:1</a>
-<a href="#v1-worldwide">Worldwide historical accuracy</a>
-<a href="#v1-commercial-speed">Commercial time</a>
-<a href="#v1-studio">Hasaballa AI Studio</a>
+<a href="#HA-013">Prerecorded audio</a>
+<a href="#HA-039">16:9 / 9:16 / 1:1</a>
+<a href="#HA-029">Worldwide historical accuracy</a>
+<a href="#HA-043">Commercial time</a>
+<a href="#HA-041">Hasaballa AI Studio</a>
 <a href="#v1-final-delivery">Final acceptance</a>
 </nav>
 <h2>🛠️ - Description & How it Works</h2>
 <p>The Hasaballa AI platform will run fully offline 📴 — even if it’s 1 TB in size 💾, without negatively affecting the platform’s speed or efficiency.</p>
 
 <h2>🎯 Platform Goals</h2>
+<figure class="v1-pipeline" id="v1-pipeline-visual">
+<figcaption><b>🎬 Hasaballa AI V1 — Complete Production Pipeline (Official Visual Reference)</b></figcaption>
+<img src="./Hasaballa_V1_Production_Pipeline.png" alt="Complete V1 workflow: optional project training, Hasaballa GPT references and script, Smart Director, voice-first timing, image generation and verification, character motion with BIE, sound mixing, editable Studio handoff and selective Smart Edit.">
+</figure>
   
 <div class="intro-statement">
   To produce unlimited videos at high speed — 
@@ -407,7 +422,7 @@ The reference videos above are the MINIMUM quality standard. No compromise on re
 <h1>🧠 Hasaballa GPT — Master Control Panel</h1>
 <div>
 <img 
-  src="https://github.com/AhmedHasab/hasaballa-tasks/blob/main/photos/Hasballa%20Gpt.jpg?raw=true" 
+  src="./Hasaballa_GPT_Character_References.png" alt="Hasaballa GPT project input design reference with the optional project-specific training button, expandable per-character image, audio and BIE video slots, native aspect ratios and Automatic/Manual Director controls" 
   style="width:80%; display:block; margin:auto;" >
 </div>
 
@@ -470,6 +485,641 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
 
 <div class="task subtask" id="HA-011"><input type="checkbox" data-id="unified-HA-011"> <b>4-E-1 🎥 BIE Reference Video Upload, assigned to each character</b><br>Optionally accept approximately <b>2–4 reference videos for any one or all characters</b>; learn unique gait, posture, sitting/standing, gestures, eye movement, blinking, gaze, face/brow/jaw, smiles, laughter, speech delivery, reaction and movement. Reuse in JSON character profiles contextually, preserving original face/voice/outfit and accurate lip-sync. Do not animate inactive characters unnecessarily. Includes human and stylized/fictional characters.<br><b>Input UI:</b> a repeatable Character Card for EVERY named person, with separate reference-images, reference-audio and BIE-videos upload fields. The <b>+ Add Character</b> control must scale to 10, 20, 30 or more people. Show each imported file's character name/ID; allow assignment/reassignment before generation. Recommended 2–4 BIE videos per character, independently optional. Never mix character references; store behavioral data in reusable Character JSON.</div>
 <div class="task subtask"><input type="checkbox" data-id="task-4-e-2"> <b>4-E-2 🎙️ Prerecorded Narration / Dialogue Upload</b><br>Distinct optional input button for a COMPLETE up-to-25-minute voice recording, original playback or per-character conversion as chosen. See the four Voice-First Production cases in 7-R; standard TTS remains available.</div>
+<section class="unified-v1-bie" id="bie-engine"><h2>🎭 Behavioral Identity Engine (BIE) — complete requirements, 13 groups and 29 reference videos</h2><p>Optional character-specific behavior reference videos with reusable saved motion signatures, alongside the original reference demonstrations and the complete Ultimate Goal.</p><div class="section">
+
+<h1>🎭 Behavioral Identity Engine</h1>
+
+<h2 style="text-align:center;">
+Behavioral Identity Engine — V1 behavioral realism
+</h2>
+
+
+
+
+
+
+
+<h2>🎯 Why This Matters</h2>
+
+<p>
+Hasaballa AI produces historical and contemporary projects worldwide, including:
+</p>
+
+<ul>
+<li>Historical documentaries</li>
+<li>Contemporary and current affairs documentaries</li>
+<li>Biographies</li>
+<li>Crime reconstructions</li>
+<li>Political events</li>
+<li>Wars and military stories</li>
+<li>Current affairs explanations</li>
+<li>Educational storytelling videos</li>
+</ul>
+
+<p>
+In many of these productions, the audience already knows the real person being portrayed.
+</p>
+
+<p>
+Because of that:
+</p>
+
+<ul>
+<li>Visual accuracy alone is not enough.</li>
+<li>Voice accuracy alone is not enough.</li>
+<li>Even having a perfectly cloned face and voice may still feel artificial if the character does not behave like the real person.</li>
+</ul>
+
+<h2>🧠 The Missing Layer: Behavioral Identity</h2>
+
+<p>
+Every individual has unique characteristics that go beyond appearance and voice.
+</p>
+
+<ul>
+<li>Eye movements</li>
+<li>Facial expressions</li>
+<li>Eyebrow movements</li>
+<li>Head motion</li>
+<li>Hand gestures</li>
+<li>Body posture</li>
+<li>Walking style</li>
+<li>Smile patterns</li>
+<li>Laughing style</li>
+<li>Speech rhythm</li>
+<li>Pauses and timing</li>
+<li>Emotional reactions</li>
+<li>Conversation habits</li>
+<li>Repeated gestures and mannerisms</li>
+</ul>
+
+<p>
+These subtle behaviors are often what make a person instantly recognizable.
+In many cases, they are more recognizable than the face itself.
+</p>
+<br>
+<br>
+<p>
+To further illustrate the concept of Behavioral Identity, there are many globally recognized personalities whose identities are not defined solely by their appearance or voice, but also by highly distinctive behavioral patterns, gestures, expressions, movements, and mannerisms.
+
+Examples include <b>Michael Jackson, Charlie Chaplin, Mr. Bean, Jackie Chan, Cristiano Ronaldo and Muhammad Ali.</b> Their expressions and personal movement are globally recognizable. The engine supports all real-world geographies and cultures, including Arab histories. However, these internationally recognized figures serve as useful examples of how Behavioral Identity can become a critical component of character realism and recognition.
+</p>
+    
+<h2>🎬 Examples Included In This Website</h2>
+
+<p>
+The attached reference videos demonstrate this concept.
+</p>
+
+<p>
+Across the examples, you will notice that different people have:
+</p>
+
+<ul>
+<li>Distinct eye behavior</li>
+<li>Unique facial expressions</li>
+<li>Characteristic head movements</li>
+<li>Consistent hand gestures</li>
+<li>Specific speaking patterns</li>
+<li>Personal laughter styles</li>
+<li>Recognizable emotional reactions</li>
+</ul>
+
+<p>
+Some individuals communicate heavily through eyebrow movement.
+Others rely heavily on hand gestures.
+Others have unique eye-contact behavior, gaze patterns, or body posture.
+</p>
+
+<p>
+Several examples also show virtual or AI-generated characters that still maintain a believable personality through motion, expression, and performance.
+</p>
+
+<div class="note">
+
+<b>
+The purpose of these examples is NOT to evaluate image quality alone.
+<br><br>
+The purpose is to evaluate Behavioral Realism.
+</b>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>📌 Example Group 1</h2>
+
+<p>
+Notice eye behavior, facial expressions, head movement, speaking style, mouth motion, and hand gestures.
+These characteristics form a recognizable behavioral signature.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_1_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_2_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_3_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_4_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_9_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_15_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 2</h2>
+
+<p>
+This individual demonstrates a distinctive combination of hand gestures and head movement patterns.
+</p>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_5_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 3</h2>
+
+<p>
+The same person appears in a different environment. Notice how behavioral identity remains recognizable despite context changes.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_13_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+
+
+
+  <h2>📌 Example Group 4</h2>
+
+<p>
+Observe eye focus, gaze direction, concentration behavior, eye widening, and attention patterns. These details contribute significantly to behavioral realism.
+</p>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_21_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 5</h2>
+
+<p>
+This individual exhibits several highly recognizable personal habits. Evaluate hand gestures, facial expressions, gaze behavior, emotional reactions, and laughter patterns separately in each video.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_10_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_11_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_12_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_18_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_25_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 6</h2>
+
+<p>
+This individual communicates heavily through eyebrow movement. Observe how eyebrow behavior becomes a central component of emotional expression and communication.
+</p>
+
+<div class="video-row">
+
+<video width="65%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_19_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 7</h2>
+
+<p>
+Although this example is humorous, the facial performance is highly expressive. Observe how expressions alone can convey personality, emotion, and intent.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_26_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 8</h2>
+
+<p>
+Pay attention to facial expressions, gaze behavior, speaking style, and walking motion. These examples demonstrate how personality is reflected through movement.
+</p>
+
+<div class="video-row">
+
+<video width="40%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_28_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="40%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_29_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 9</h2>
+
+<p>
+Observe speaking rhythm, facial expressions, pauses, timing, and communication style.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_27_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 10</h2>
+
+<p>
+Please evaluate facial expressions, gaze direction, hand gestures, and pronunciation style. This example demonstrates that behavioral identity extends far beyond lip synchronization.
+</p>
+
+<div class="video-row">
+
+<video width="45%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_16_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_20_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 11</h2>
+
+<p>
+These examples portray a geographic location represented as a talking virtual character. Despite being artificial, the character remains believable through behavior, expression, laughter, eye movement, and gestures.
+</p>
+
+<div class="video-row">
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_6_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_7_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="35%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_8_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 12</h2>
+
+<p>
+Observe how the football player maintains recognizable expressions, gaze behavior, speaking patterns, and personality traits even during stylized transformations.
+</p>
+
+<div class="video-row">
+
+<video width="35%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_14_compressed_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h2>📌 Example Group 13</h2>
+
+<p>
+These virtual comedy characters demonstrate realistic speech, facial performance, head movement, gaze behavior, and hand gestures despite being entirely fictional.
+</p>
+
+<div class="video-row">
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_17_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_22_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="video-row">
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_23_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+<video width="30%" autoplay muted loop controls>
+<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_24_compressed_compressed.mp4" type="video/mp4">
+</video>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h1>🎭 Character Behavioral Identity System</h1>
+
+<h2>Behavioral Identity Engine</h2>
+
+<p>
+The engine extends character identity beyond Face Identity and Voice Identity by introducing a third layer:
+</p>
+
+<div class="note">
+
+<h3>Character Identity</h3>
+
+<p>
+Face + Voice + Behavior
+</p>
+
+</div>
+
+<p>
+Instead of:
+</p>
+
+<div class="note">
+
+<p>
+Face + Voice
+</p>
+
+</div>
+
+<h2>📦 Character Pack Structure</h2>
+
+<p>
+A Character Pack contains:
+</p>
+
+<ul>
+<li>Reference Images</li>
+<li>Reference Voices</li>
+</ul>
+
+<p>
+The complete Character Pack also includes:
+</p>
+
+<ul>
+<li>Reference Behavior Videos</li>
+</ul>
+
+<p>
+Resulting in:
+</p>
+
+<div class="note">
+
+<p>
+Character Pack = Images + Voices + Behavior Videos
+</p>
+
+</div>
+
+<h2>🎥 Reference Behavior Videos</h2>
+
+<p>
+The user may optionally upload one or more videos showing:
+</p>
+
+<ul>
+<li>Natural speech</li>
+<li>Interviews</li>
+<li>Public appearances</li>
+<li>Historical recordings</li>
+<li>Casual conversations</li>
+<li>Walking footage</li>
+</ul>
+
+<p>
+The system analyzes behavioral information and saves a reusable Motion Profile for that character.
+</p>
+
+<h2>🧠 Motion Profile Analysis</h2>
+
+<ul>
+<li>Eye movement patterns</li>
+<li>Facial expression tendencies</li>
+<li>Gesture frequency</li>
+<li>Head movement habits</li>
+<li>Smile characteristics</li>
+<li>Laugh characteristics</li>
+<li>Body language</li>
+<li>Speaking rhythm</li>
+<li>Communication style</li>
+</ul>
+
+
+
+  <h2>🧠 Smart Director Integration</h2>
+
+<p>
+A Motion Profile is applied by:
+</p>
+
+<ul>
+<li>Smart Director – Automatic Mode</li>
+<li>Smart Director – Manual Mode</li>
+<li>Image Animation Tool</li>
+<li>Video Generation Tool</li>
+</ul>
+
+<p>
+so that generated characters follow:
+</p>
+
+<ul>
+<li>Their natural gestures</li>
+<li>Their typical facial expressions</li>
+<li>Their characteristic gaze behavior</li>
+<li>Their personal speaking style</li>
+<li>Their recognizable movement patterns</li>
+<li>Their unique emotional reactions</li>
+</ul>
+
+<p>
+instead of relying solely on generic animation behavior.
+</p>
+
+<hr>
+
+<h2>📊 Character Identity Modes</h2>
+
+<h3>Level 1</h3>
+
+<p>
+Reference Images Only
+</p>
+
+<div class="note">
+<strong>Result:</strong><br>
+Visual Identity
+</div>
+
+<h3>Level 2</h3>
+
+<p>
+Reference Images + Reference Voice
+</p>
+
+<div class="note">
+<strong>Result:</strong><br>
+Visual Identity + Voice Identity
+</div>
+
+<h3>Level 3</h3>
+
+<p>
+Reference Images + Reference Voice + Reference Behavior Videos
+</p>
+
+<div class="note">
+<strong>Result:</strong><br>
+Visual Identity + Voice Identity + Behavioral Identity
+</div>
+
+<hr>
+
+<h1>🎭 Universal Character Support</h1>
+
+<p>
+Behavioral identity is also required for non-human characters. As demonstrated in (see <b>Example Groups 11 and 13 above</b>), realistic behavioral identity is not limited to humans and may also apply to virtual, symbolic, and fictional characters.
+</p>
+
+<p>
+The Behavioral Identity system also supports:
+</p>
+
+<ul>
+<li>Cartoon characters</li>
+<li>Clay characters</li>
+<li>Talking animals</li>
+<li>Historical mascots</li>
+<li>Fictional personalities</li>
+<li>Symbolic characters</li>
+<li>Humanized objects</li>
+<li>Humanized locations</li>
+<li>Humanized countries</li>
+<li>Humanized concepts</li>
+</ul>
+
+<p>
+Examples of this can be seen in the attached references where:
+</p>
+
+<ul>
+<li>
+A football player appears in a virtual interview (see <b>Example Group 12 above</b>).</li>
+<li>A geographic location is represented as a talking character(see <b>Example Group 11 above</b>).</li>
+<li>Fictional comedy characters interact naturally(see <b>Example Group 13 above</b>).</li>
+</ul>
+
+<p>
+The generated personalities remain believable because behavior is preserved, not only appearance.
+</p>
+</div>
+<div class="section">
+<h1>🎯 Ultimate Goal</h1>
+
+<div class="note">
+
+<p>
+The goal is not only to reproduce how a character looks and sounds.
+</p>
+
+<p>
+The goal is to reproduce how the character behaves, reacts, gestures, smiles, laughs, gazes, speaks, and moves in a historically accurate and recognizable way.
+</p>
+
+</div>
+
+<p>
+By extending identity beyond appearance and voice, Hasaballa AI could potentially become one of the few AI platforms capable of preserving:
+</p>
+
+<ul>
+<li>Visual Identity</li>
+<li>Voice Identity</li>
+<li>Behavioral Identity</li>
+</ul>
+
+<p>
+This capability could become one of the most unique, advanced, and differentiating features of the Hasaballa AI Platform, while striving for the highest possible levels of realism, consistency, behavioral accuracy, quality, and scalability.
+</p>
+
+</div></section>
 <div class="task subtask"><input type="checkbox"data-id="task4-f"> 4-F <strong>✍️ Text & Command Input Box.</strong><br>
 (The number of characters allowed to be entered in the field must not be less than 15,000 characters).<br>
 📝 Function:<br>
@@ -1458,641 +2108,7 @@ Seamless lip sync and cinematic animation style, compatible with any background 
 </div>
 
   
-  <section class="unified-v1-bie" id="bie-engine"><h2>🎭 Behavioral Identity Engine (BIE) — complete requirements, 13 groups and 29 reference videos</h2><p>Optional character-specific behavior reference videos with reusable saved motion signatures, alongside the original reference demonstrations and the complete Ultimate Goal.</p><div class="section">
-
-<h1>🎭 Behavioral Identity Engine</h1>
-
-<h2 style="text-align:center;">
-Behavioral Identity Engine — V1 behavioral realism
-</h2>
-
-
-
-
-
-
-
-<h2>🎯 Why This Matters</h2>
-
-<p>
-Hasaballa AI produces historical and contemporary projects worldwide, including:
-</p>
-
-<ul>
-<li>Historical documentaries</li>
-<li>Contemporary and current affairs documentaries</li>
-<li>Biographies</li>
-<li>Crime reconstructions</li>
-<li>Political events</li>
-<li>Wars and military stories</li>
-<li>Current affairs explanations</li>
-<li>Educational storytelling videos</li>
-</ul>
-
-<p>
-In many of these productions, the audience already knows the real person being portrayed.
-</p>
-
-<p>
-Because of that:
-</p>
-
-<ul>
-<li>Visual accuracy alone is not enough.</li>
-<li>Voice accuracy alone is not enough.</li>
-<li>Even having a perfectly cloned face and voice may still feel artificial if the character does not behave like the real person.</li>
-</ul>
-
-<h2>🧠 The Missing Layer: Behavioral Identity</h2>
-
-<p>
-Every individual has unique characteristics that go beyond appearance and voice.
-</p>
-
-<ul>
-<li>Eye movements</li>
-<li>Facial expressions</li>
-<li>Eyebrow movements</li>
-<li>Head motion</li>
-<li>Hand gestures</li>
-<li>Body posture</li>
-<li>Walking style</li>
-<li>Smile patterns</li>
-<li>Laughing style</li>
-<li>Speech rhythm</li>
-<li>Pauses and timing</li>
-<li>Emotional reactions</li>
-<li>Conversation habits</li>
-<li>Repeated gestures and mannerisms</li>
-</ul>
-
-<p>
-These subtle behaviors are often what make a person instantly recognizable.
-In many cases, they are more recognizable than the face itself.
-</p>
-<br>
-<br>
-<p>
-To further illustrate the concept of Behavioral Identity, there are many globally recognized personalities whose identities are not defined solely by their appearance or voice, but also by highly distinctive behavioral patterns, gestures, expressions, movements, and mannerisms.
-
-Examples include <b>Michael Jackson, Charlie Chaplin, Mr. Bean, Jackie Chan, Cristiano Ronaldo and Muhammad Ali.</b> Their expressions and personal movement are globally recognizable. The engine supports all real-world geographies and cultures, including Arab histories. However, these internationally recognized figures serve as useful examples of how Behavioral Identity can become a critical component of character realism and recognition.
-</p>
-    
-<h2>🎬 Examples Included In This Website</h2>
-
-<p>
-The attached reference videos demonstrate this concept.
-</p>
-
-<p>
-Across the examples, you will notice that different people have:
-</p>
-
-<ul>
-<li>Distinct eye behavior</li>
-<li>Unique facial expressions</li>
-<li>Characteristic head movements</li>
-<li>Consistent hand gestures</li>
-<li>Specific speaking patterns</li>
-<li>Personal laughter styles</li>
-<li>Recognizable emotional reactions</li>
-</ul>
-
-<p>
-Some individuals communicate heavily through eyebrow movement.
-Others rely heavily on hand gestures.
-Others have unique eye-contact behavior, gaze patterns, or body posture.
-</p>
-
-<p>
-Several examples also show virtual or AI-generated characters that still maintain a believable personality through motion, expression, and performance.
-</p>
-
-<div class="note">
-
-<b>
-The purpose of these examples is NOT to evaluate image quality alone.
-<br><br>
-The purpose is to evaluate Behavioral Realism.
-</b>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>📌 Example Group 1</h2>
-
-<p>
-Notice eye behavior, facial expressions, head movement, speaking style, mouth motion, and hand gestures.
-These characteristics form a recognizable behavioral signature.
-</p>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_1_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_2_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_3_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_4_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_9_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_15_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 2</h2>
-
-<p>
-This individual demonstrates a distinctive combination of hand gestures and head movement patterns.
-</p>
-
-<div class="video-row">
-
-<video width="65%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_5_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 3</h2>
-
-<p>
-The same person appears in a different environment. Notice how behavioral identity remains recognizable despite context changes.
-</p>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_13_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-
-
-
-  <h2>📌 Example Group 4</h2>
-
-<p>
-Observe eye focus, gaze direction, concentration behavior, eye widening, and attention patterns. These details contribute significantly to behavioral realism.
-</p>
-
-<div class="video-row">
-
-<video width="65%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_21_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 5</h2>
-
-<p>
-This individual exhibits several highly recognizable personal habits. Evaluate hand gestures, facial expressions, gaze behavior, emotional reactions, and laughter patterns separately in each video.
-</p>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_10_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_11_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_12_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_18_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<div class="video-row">
-
-<video width="65%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_25_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 6</h2>
-
-<p>
-This individual communicates heavily through eyebrow movement. Observe how eyebrow behavior becomes a central component of emotional expression and communication.
-</p>
-
-<div class="video-row">
-
-<video width="65%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_19_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 7</h2>
-
-<p>
-Although this example is humorous, the facial performance is highly expressive. Observe how expressions alone can convey personality, emotion, and intent.
-</p>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_26_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 8</h2>
-
-<p>
-Pay attention to facial expressions, gaze behavior, speaking style, and walking motion. These examples demonstrate how personality is reflected through movement.
-</p>
-
-<div class="video-row">
-
-<video width="40%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_28_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="40%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_29_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 9</h2>
-
-<p>
-Observe speaking rhythm, facial expressions, pauses, timing, and communication style.
-</p>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_27_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 10</h2>
-
-<p>
-Please evaluate facial expressions, gaze direction, hand gestures, and pronunciation style. This example demonstrates that behavioral identity extends far beyond lip synchronization.
-</p>
-
-<div class="video-row">
-
-<video width="45%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_16_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="30%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_20_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 11</h2>
-
-<p>
-These examples portray a geographic location represented as a talking virtual character. Despite being artificial, the character remains believable through behavior, expression, laughter, eye movement, and gestures.
-</p>
-
-<div class="video-row">
-
-<video width="30%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_6_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="30%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_7_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<div class="video-row">
-
-<video width="35%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_8_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 12</h2>
-
-<p>
-Observe how the football player maintains recognizable expressions, gaze behavior, speaking patterns, and personality traits even during stylized transformations.
-</p>
-
-<div class="video-row">
-
-<video width="35%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_14_compressed_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h2>📌 Example Group 13</h2>
-
-<p>
-These virtual comedy characters demonstrate realistic speech, facial performance, head movement, gaze behavior, and hand gestures despite being entirely fictional.
-</p>
-
-<div class="video-row">
-
-<video width="30%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_17_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="30%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_22_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<div class="video-row">
-
-<video width="30%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_23_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-<video width="30%" autoplay muted loop controls>
-<source src="https://ahmedhasab.github.io/Behavioral-Identity-Engine/Video_24_compressed_compressed.mp4" type="video/mp4">
-</video>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h1>🎭 Character Behavioral Identity System</h1>
-
-<h2>Behavioral Identity Engine</h2>
-
-<p>
-The engine extends character identity beyond Face Identity and Voice Identity by introducing a third layer:
-</p>
-
-<div class="note">
-
-<h3>Character Identity</h3>
-
-<p>
-Face + Voice + Behavior
-</p>
-
-</div>
-
-<p>
-Instead of:
-</p>
-
-<div class="note">
-
-<p>
-Face + Voice
-</p>
-
-</div>
-
-<h2>📦 Character Pack Structure</h2>
-
-<p>
-A Character Pack contains:
-</p>
-
-<ul>
-<li>Reference Images</li>
-<li>Reference Voices</li>
-</ul>
-
-<p>
-The complete Character Pack also includes:
-</p>
-
-<ul>
-<li>Reference Behavior Videos</li>
-</ul>
-
-<p>
-Resulting in:
-</p>
-
-<div class="note">
-
-<p>
-Character Pack = Images + Voices + Behavior Videos
-</p>
-
-</div>
-
-<h2>🎥 Reference Behavior Videos</h2>
-
-<p>
-The user may optionally upload one or more videos showing:
-</p>
-
-<ul>
-<li>Natural speech</li>
-<li>Interviews</li>
-<li>Public appearances</li>
-<li>Historical recordings</li>
-<li>Casual conversations</li>
-<li>Walking footage</li>
-</ul>
-
-<p>
-The system analyzes behavioral information and saves a reusable Motion Profile for that character.
-</p>
-
-<h2>🧠 Motion Profile Analysis</h2>
-
-<ul>
-<li>Eye movement patterns</li>
-<li>Facial expression tendencies</li>
-<li>Gesture frequency</li>
-<li>Head movement habits</li>
-<li>Smile characteristics</li>
-<li>Laugh characteristics</li>
-<li>Body language</li>
-<li>Speaking rhythm</li>
-<li>Communication style</li>
-</ul>
-
-
-
-  <h2>🧠 Smart Director Integration</h2>
-
-<p>
-A Motion Profile is applied by:
-</p>
-
-<ul>
-<li>Smart Director – Automatic Mode</li>
-<li>Smart Director – Manual Mode</li>
-<li>Image Animation Tool</li>
-<li>Video Generation Tool</li>
-</ul>
-
-<p>
-so that generated characters follow:
-</p>
-
-<ul>
-<li>Their natural gestures</li>
-<li>Their typical facial expressions</li>
-<li>Their characteristic gaze behavior</li>
-<li>Their personal speaking style</li>
-<li>Their recognizable movement patterns</li>
-<li>Their unique emotional reactions</li>
-</ul>
-
-<p>
-instead of relying solely on generic animation behavior.
-</p>
-
-<hr>
-
-<h2>📊 Character Identity Modes</h2>
-
-<h3>Level 1</h3>
-
-<p>
-Reference Images Only
-</p>
-
-<div class="note">
-<strong>Result:</strong><br>
-Visual Identity
-</div>
-
-<h3>Level 2</h3>
-
-<p>
-Reference Images + Reference Voice
-</p>
-
-<div class="note">
-<strong>Result:</strong><br>
-Visual Identity + Voice Identity
-</div>
-
-<h3>Level 3</h3>
-
-<p>
-Reference Images + Reference Voice + Reference Behavior Videos
-</p>
-
-<div class="note">
-<strong>Result:</strong><br>
-Visual Identity + Voice Identity + Behavioral Identity
-</div>
-
-<hr>
-
-<h1>🎭 Universal Character Support</h1>
-
-<p>
-Behavioral identity is also required for non-human characters. As demonstrated in (see <b>Example Groups 11 and 13 above</b>), realistic behavioral identity is not limited to humans and may also apply to virtual, symbolic, and fictional characters.
-</p>
-
-<p>
-The Behavioral Identity system also supports:
-</p>
-
-<ul>
-<li>Cartoon characters</li>
-<li>Clay characters</li>
-<li>Talking animals</li>
-<li>Historical mascots</li>
-<li>Fictional personalities</li>
-<li>Symbolic characters</li>
-<li>Humanized objects</li>
-<li>Humanized locations</li>
-<li>Humanized countries</li>
-<li>Humanized concepts</li>
-</ul>
-
-<p>
-Examples of this can be seen in the attached references where:
-</p>
-
-<ul>
-<li>
-A football player appears in a virtual interview (see <b>Example Group 12 above</b>).</li>
-<li>A geographic location is represented as a talking character(see <b>Example Group 11 above</b>).</li>
-<li>Fictional comedy characters interact naturally(see <b>Example Group 13 above</b>).</li>
-</ul>
-
-<p>
-The generated personalities remain believable because behavior is preserved, not only appearance.
-</p>
-</div>
-<div class="section">
-<h1>🎯 Ultimate Goal</h1>
-
-<div class="note">
-
-<p>
-The goal is not only to reproduce how a character looks and sounds.
-</p>
-
-<p>
-The goal is to reproduce how the character behaves, reacts, gestures, smiles, laughs, gazes, speaks, and moves in a historically accurate and recognizable way.
-</p>
-
-</div>
-
-<p>
-By extending identity beyond appearance and voice, Hasaballa AI could potentially become one of the few AI platforms capable of preserving:
-</p>
-
-<ul>
-<li>Visual Identity</li>
-<li>Voice Identity</li>
-<li>Behavioral Identity</li>
-</ul>
-
-<p>
-This capability could become one of the most unique, advanced, and differentiating features of the Hasaballa AI Platform, while striving for the highest possible levels of realism, consistency, behavioral accuracy, quality, and scalability.
-</p>
-
-</div></section>
+  
 <div class="task subtask" id="HA-034"><input type="checkbox"data-id="task6-c"> 6-C <strong>👄 Lip sync</strong> must be as good as DreamFace or better than the sample reference videos.</div>
 > The Chat Window <strong>(Hasaballa GPT)</strong> is the primary controller for deciding when and how lip sync is triggered(In the automatic and manual smart output mode).<br>
 - It analyzes the written script and automatically assigns isTalking:<br> 
