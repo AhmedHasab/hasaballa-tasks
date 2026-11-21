@@ -415,7 +415,7 @@ The reference videos above are the MINIMUM quality standard. No compromise on re
 </div>
 
   
-<div class="task" id="HA-001"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent.</div>
+<div class="task" id="HA-001"><input type="checkbox"data-id="task2"> 2️⃣ <strong>🚫 No internet, no cloud, no credits</strong>, no subscriptions — completely independent. All core models and assets must be commercially usable without subscription, credit charges, required online activation, or paid cloud/API inference.</div>
 <div class="task"><input type="checkbox"data-id="task3"> 3️⃣ 🧩 Platform Components (<strong>100% Arabic interface 🇸🇦 عربي</strong>).</div>
 
   <div class="task subtask" id="HA-009"><input type="checkbox" data-id="unified-HA-009"> <b>3-A 🧩 Standalone tools: full quality and multi-item batches</b><br>Independent tools must perform to EXACTLY the same standards for quality, capabilities, accuracy and time as Smart Director. Support batched prompts, images, audio and paired lip-sync/animation jobs; no compulsory per-item clicks. Results can be imported and edited.</div>
@@ -467,7 +467,7 @@ Useful for dictating long scenarios or asking questions hands-free.</div>
 
 <div class="task subtask">
   <input type="checkbox" data-id="task4-e">
-  4-E <strong>🔉 Insert Reference Audio.</strong><br>
+  4-E <strong>🔉 Insert Reference Audio (per named character).</strong><br>Each expandable character card has its own optional reference audio file picker, explicitly linked to a unique character ID.<br>
   🗣️ <b>Function:</b> Upload voice reference files for cloning each character’s voice.<br><br>
 
   <ul style="margin:6px 0 0 1.2em;">
@@ -1179,7 +1179,7 @@ In this case, The system should ignore all other reference voices, even if refer
 - Fully integrates with the Smart Director (automatic & manual modes).<br>
 - The system must intelligently select or skip voice usage depending on text meaning.</div>
 
-<div class="task subsubtask"><input type="checkbox"data-id="task4-f-6"> 4-F-3 <strong>🎛️ Multilayered Background Audio Detection.</strong><br>
+<div class="task subsubtask"><input type="checkbox"data-id="task4-f-3"> 4-F-3 <strong>🎛️ Multilayered Background Audio Detection.</strong><br>
 When the user writes in the Chat Window that multiple background sounds are present in a scene (e.g., music + applause + speech), the system must:<br>
 - Detect each background sound type individually.
 - Assign each one to a separate audio track in the timeline.
@@ -1579,7 +1579,7 @@ Supports ultra-detailed 4K image synthesis, consistent with film-grade visuals. 
 </div>
 
 
-<div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B <strong>👥 Reference images</strong> (for multiple characters, minimum of 8 — all can appear in one video, so identity consistency is critical).</div>
+<div class="task subtask"><input type="checkbox"data-id="task5-b"> 5-B <strong>👥 Reference images</strong> (support at least eight different characters concurrently and dynamically expand to 10, 20, 30+ with explicit per-character reference mapping, without identity switching).</div>
 
   <div class="task subsubtask">
   <label>
@@ -2435,7 +2435,7 @@ Add a clear "⏭️ Skip this step" button to this stage. <br>
 
 <div class="task subtask"><input type="checkbox"data-id="task7-a"> 7-A <strong>🎙️ Optional Character-ID-mapped Reference Voices</strong> for multiple characters, <br> 
 Support reference voices for at least eight named characters and as many more as the project needs (10, 20, 30+), with a separate expandable voice slot per character.<br>
-- Each <strong>reference image</strong> should be linked to a unique voice — forming a complete Character Pack (Image + Voice).<br>
+- Each character’s images should be explicitly mapped to that same character’s optional voice(s) and behavioral reference video(s), forming a reusable Character Pack with no cross-character mixing.<br>
 - This ensures identity consistency in multi-character videos (especially <strong>Dialogue Mode</strong>).<br>
 <strong>🧠 Note</strong>:<br>
 - This mechanism was explained in <strong>Task 4-F-2-2</strong> and detailed further in <strong>Task 4-E</strong> – Intelligent Reference Voice Mapping.<br>
@@ -3280,7 +3280,7 @@ Works automatically with Smart Director.</div>
 <div class="task subtask"><input type="checkbox"data-id="task12-b"> 12-B 📊 Link to <strong>YouTube Studio</strong> — track video performance and suggest improvements.</div>
 
 <div class="task" id="HA-002"><input type="checkbox"data-id="task13"> 1️⃣3️⃣ <strong>Arabic Interface </strong>(Single Page Layout) 🌐.<br>
-✅ 100% RTL support, 📌 Large buttons — each with a simple label and tooltip.<br>
+✅ 100% RTL support with natural native Arabic, 📌 large buttons with clear labels and tooltips. Arabic and English prompts must execute with equal semantic accuracy in Auto, Manual and standalone tools, with no silent instruction loss.<br>
 (⚠️ The interface shown is in English for demonstration purposes only, but the final platform and all its interfaces must be in Arabic. 🗣️🇸🇦عربي)
 </div>
  <div>
@@ -3289,7 +3289,7 @@ Works automatically with Smart Director.</div>
   style="width:70%; display:block; margin:auto;" >
 </div>
 
-<div class="task"><input type="checkbox"data-id="task14"> 1️⃣4️⃣<strong> Auto-Update Button 🔄</strong>.<br>
+<div class="task"><input type="checkbox"data-id="task14"> 1️⃣4️⃣<strong> Auto-Update Button 🔄</strong> — requires explicit user activation of Internet access.<br>
 (Requires internet) — used to update the platform in future if needed.</div>
 
 <div class="task"><input type="checkbox"data-id="task15"> 1️⃣5️⃣<strong> Save Project & Continue Later 💾</strong>.</div>
@@ -3315,7 +3315,7 @@ Works automatically with Smart Director.</div>
 
 <div class="task"><input type="checkbox"data-id="task17"> 1️⃣7️⃣ <strong>Backup & Restore Function</strong> 🛡️.</div>
 
-<div class="task" id="HA-003"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ <strong>Full source code ownership</strong> (for exclusive platform rights) 🔐.</div>
+<div class="task" id="HA-003"><input type="checkbox"data-id="task18"> 1️⃣8️⃣ <strong>Full source code ownership</strong> (for exclusive platform rights) 🔐. Deliver complete source, assets and dependencies with exclusive rights, a maintainable modular offline architecture, replaceable models, and no conflicting duplicate execution pathways. Maintain compatibility with future Hasaballa Engine without delaying V1.</div>
 
 <div class="task-box task coming-soon shadow-3d">
   <div class="task-content">
@@ -3390,7 +3390,7 @@ Works automatically with Smart Director.</div>
 shown in the sample videos.<br> 
 
 <h1>🎥 Hasaballa AI V1 — complete integrated production</h1><p>Every module and every quality, realism, geographic, audio, offline and performance requirement on this page jointly defines the complete first-release platform. No separate tool or isolated model success is a substitute for delivering the entire tested pipeline.</p>
-<a class="unified-v1-next" href="https://ahmedhasab.github.io/hasaballa-tasks/Hasaballa-AI-V2.html" target="_blank" rel="noopener">🚀 Hasaballa AI V2 — separate future version</a><div class="unified-v1-document" id="official-v1-guide">📄 <span lang="ar" dir="rtl">هذا رابط وثيقة التسليم النهائية — اضغط على الرابط لفتح وثيقة التسليم</span><br>OFFICIAL FINAL V1 DELIVERY DOCUMENT — <a href="./Hasaballa_V1_Developer_Visual_Guide.pdf" target="_blank" rel="noopener">CLICK HERE TO OPEN THE COMPLETE DELIVERY DOCUMENT (PDF)</a></div><div id="lock-overlay" style="position:fixed;inset:0;background:#0b0b0f;display:flex;align-items:center;justify-content:center;z-index:99999;">
+<a class="unified-v1-next" href="https://ahmedhasab.github.io/hasaballa-tasks/Hasaballa-AI-V2.html" target="_blank" rel="noopener">🚀 Hasaballa AI V2 — separate future version</a><div class="unified-v1-document" id="official-v1-guide-footer">📄 <span lang="ar" dir="rtl">هذا رابط وثيقة التسليم النهائية — اضغط على الرابط لفتح وثيقة التسليم</span><br>OFFICIAL FINAL V1 DELIVERY DOCUMENT — <a href="./Hasaballa_V1_Developer_Visual_Guide.pdf" target="_blank" rel="noopener">CLICK HERE TO OPEN THE COMPLETE DELIVERY DOCUMENT (PDF)</a></div><div id="lock-overlay" style="position:fixed;inset:0;background:#0b0b0f;display:flex;align-items:center;justify-content:center;z-index:99999;">
   <div style="background:#111;border:1px solid #333;border-radius:14px;padding:20px;max-width:360px;width:90%;color:#fff;font-family:Arial,Helvetica,sans-serif">
     <h3 style="margin:0 0 10px">Protected</h3>
     <p style="margin:0 0 12px;color:#bbb">Enter password to continue</p>
