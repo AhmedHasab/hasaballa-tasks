@@ -3464,19 +3464,7 @@ shown in the sample videos.<br>
 
 <h1>🎥 Hasaballa AI V1 — complete integrated production</h1><p>Every module and every quality, realism, geographic, audio, offline and performance requirement on this page jointly defines the complete first-release platform. No separate tool or isolated model success is a substitute for delivering the entire tested pipeline.</p>
 
-  <div style="background:#111;border:1px solid #333;border-radius:14px;padding:20px;max-width:360px;width:90%;color:#fff;font-family:Arial,Helvetica,sans-serif">
-    <h3 style="margin:0 0 10px">Protected</h3>
-    <p style="margin:0 0 12px;color:#bbb">Enter password to continue</p>
-    <input id="pw" type="password" placeholder="Password" style="width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#0e0e12;color:#fff">
-    <label style="display:flex;align-items:center;gap:8px;margin-top:10px;">
-      <input id="remember" type="checkbox" checked>
-      <span style="color:#bbb;font-size:12px;">Remember me (30 days)</span>
-    </label>
-    <button id="unlockBtn" style="margin-top:12px;width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#1e1e27;color:#fff;cursor:pointer">Unlock</button>
-    <p id="msg" style="color:#f66;font-size:12px;min-height:16px;margin-top:8px"></p>
-    <button id="lockBtn" style="margin-top:6px;width:100%;padding:8px;border-radius:10px;border:1px solid #444;background:#191922;color:#ddd;cursor:pointer">Lock (Logout)</button>
-  </div>
-</div>
+
 
   
 <script>
@@ -3487,48 +3475,6 @@ shown in the sample videos.<br>
   });
 </script>
 
-<script>
-const PASSWORD_HASH_HEX = "7eb59c7b0a3460bd12b8821d37d2a40a065bbaebf7c87effc3329ebf105a6aff";
-const REMEMBER_DAYS = 30;
-const REMEMBER_KEY  = "hasaballa_gate_until";
-
-try {
-  const until = parseInt(localStorage.getItem(REMEMBER_KEY) || "0", 10);
-  if (Date.now() < until) {
-    document.getElementById('lock-overlay').style.display='none';
-  }
-} catch(e){}
-
-async function sha256Hex(text) {
-  const enc = new TextEncoder().encode(text);
-  const buf = await crypto.subtle.digest('SHA-256', enc);
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-async function tryUnlock() {
-  const pw  = document.getElementById('pw').value;
-  const msg = document.getElementById('msg');
-  const rem = document.getElementById('remember').checked;
-  msg.textContent = '…checking';
-  try {
-    const hex = await sha256Hex(pw);
-    if (hex === PASSWORD_HASH_HEX) {
-      if (rem) {
-        const until = Date.now() + REMEMBER_DAYS*24*60*60*1000;
-        localStorage.setItem(REMEMBER_KEY, String(until));
-      }
-      document.getElementById('lock-overlay').style.display='none';
-      msg.textContent = '';
-    } else {
-      msg.textContent = 'Wrong password';
-    }
-  } catch(e){ msg.textContent = 'Error'; }
-}
-
-document.getElementById('unlockBtn').onclick = tryUnlock;
-document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='Enter') tryUnlock(); });
-document.getElementById('lockBtn').onclick = () => { localStorage.removeItem(REMEMBER_KEY); location.reload(); };
-</script>
 
 
 <script>
