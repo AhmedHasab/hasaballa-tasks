@@ -231,7 +231,189 @@ console.log("✅ Firebase connected & DOM ready");
     });
   });
 </script>
+<!-- HASABALLA AI - CONTENT PROTECTION -->
 
+<meta name="robots"
+      content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+
+<style id="hasaballa-protection-css">
+
+html, body, body * {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
+
+img, video, audio {
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+}
+
+::selection {
+    background: transparent !important;
+}
+
+/* Disable printing and PDF printing */
+@media print {
+
+    html, body {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+}
+
+</style>
+
+<script id="hasaballa-protection-js">
+
+(function () {
+
+    "use strict";
+
+    function block(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+    }
+
+    /* Block mouse actions, copying and dragging */
+
+    [
+        "contextmenu",
+        "copy",
+        "cut",
+        "selectstart",
+        "dragstart",
+        "dragover",
+        "drop"
+    ].forEach(function (name) {
+
+        window.addEventListener(name, block, {
+            capture: true,
+            passive: false
+        });
+
+    });
+
+    /* Block keyboard shortcuts */
+
+    window.addEventListener("keydown", function (e) {
+
+        const key = String(e.key || "").toLowerCase();
+        const ctrl = e.ctrlKey || e.metaKey;
+
+        if (
+            ctrl &&
+            ["a", "c", "x", "s", "p", "u"].includes(key)
+        ) {
+            return block(e);
+        }
+
+        if (
+            ctrl && e.shiftKey &&
+            ["i", "j", "c", "s", "p", "u"].includes(key)
+        ) {
+            return block(e);
+        }
+
+        if (
+            e.metaKey && e.altKey &&
+            ["i", "j", "u"].includes(key)
+        ) {
+            return block(e);
+        }
+
+        if (
+            key === "f12" ||
+            key === "printscreen"
+        ) {
+            return block(e);
+        }
+
+    }, true);
+
+    /* Disable scripted printing */
+
+    window.print = function () {
+        return false;
+    };
+
+    /* Protect images and media controls */
+
+    function protectMedia() {
+
+        document.querySelectorAll("img, video, audio")
+            .forEach(function (element) {
+
+                element.setAttribute("draggable", "false");
+
+            });
+
+        document.querySelectorAll("video, audio")
+            .forEach(function (media) {
+
+                media.setAttribute(
+                    "controlsList",
+                    "nodownload noremoteplayback"
+                );
+
+                media.setAttribute(
+                    "disablePictureInPicture", ""
+                );
+
+                media.setAttribute(
+                    "disableRemotePlayback", ""
+                );
+
+            });
+
+    }
+
+    /* Keep task checkboxes read-only */
+
+    function protectTasks() {
+
+        document.querySelectorAll(
+            "input[type='checkbox']"
+        ).forEach(function (checkbox) {
+
+            checkbox.disabled = true;
+
+        });
+
+    }
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            protectMedia();
+            protectTasks();
+
+            const observer = new MutationObserver(
+                function () {
+                    protectMedia();
+                    protectTasks();
+                }
+            );
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+        }
+    );
+
+})();
+
+</script>
+
+<!-- END OF HASABALLA AI CONTENT PROTECTION -->
 </head>
 <body>
 <h1>🧠 Platform: Hasaballa AI</h1>
